@@ -7,8 +7,13 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const isHome = window.location.pathname === '/';
+      setIsScrolled(!isHome || window.scrollY > 50);
     };
+
+    // Initial state based on current page & scroll
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -20,7 +25,7 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="#" className={`flex items-center gap-3 md:gap-4 text-2xl md:text-3xl font-serif font-bold ${isScrolled ? 'text-navy' : 'text-white'}`}>
+        <a href="/" className={`flex items-center gap-3 md:gap-4 text-2xl md:text-3xl font-serif font-bold ${isScrolled ? 'text-navy' : 'text-white'}`}>
           <img
             src="/logo_zondertekst_zonderachtergrond.png"
             alt="Web aan Zee"
@@ -35,10 +40,10 @@ const Header: React.FC = () => {
         </a>
 
         <nav className="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
-          <a href="#werkwijze" className="hover:text-gold transition-colors">Werkwijze</a>
-          <a href="#resultaten" className="hover:text-gold transition-colors">Resultaten</a>
-          <a href="#prijzen" className="hover:text-gold transition-colors">Prijzen</a>
-          <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
+          <a href="/#werkwijze" className="hover:text-gold transition-colors">Werkwijze</a>
+          <a href="/#resultaten" className="hover:text-gold transition-colors">Resultaten</a>
+          <a href="/#prijzen" className="hover:text-gold transition-colors">Prijzen</a>
+          <a href="/#contact" className="hover:text-gold transition-colors">Contact</a>
         </nav>
 
         <a 

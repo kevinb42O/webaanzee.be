@@ -45,8 +45,8 @@ const App: React.FC = () => {
                 <ul className="space-y-3 text-sm">
                   <li><a href="#werkwijze" className="hover:text-gold transition-colors">Werkwijze</a></li>
                   <li><a href="#prijzen" className="hover:text-gold transition-colors">Tarieven</a></li>
-                  <li><a href="#" className="hover:text-gold transition-colors">Privacybeleid</a></li>
-                  <li><a href="#" className="hover:text-gold transition-colors">Cookiebeleid</a></li>
+                  <li><a href="/privacy.html#privacy" className="hover:text-gold transition-colors">Privacybeleid</a></li>
+                  <li><a href="/privacy.html#cookies" className="hover:text-gold transition-colors">Cookiebeleid</a></li>
                 </ul>
               </div>
             </div>
