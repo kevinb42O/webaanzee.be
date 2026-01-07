@@ -1,0 +1,8 @@
+
+{
+  "name": "Web aan Zee",
+  "description": "Een professionele website voor lokale ondernemers aan de Belgische kust, gericht op betrouwbaarheid, vakmanschap en resultaat.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
