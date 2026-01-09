@@ -93,3 +93,53 @@ export const IconLinkedIn = ({ className, ...props }: IconProps) => (
     <path d="M10 20h3v-6.3c0-1.2.9-2.2 2.1-2.2 1.1 0 1.9.8 1.9 2.2V20h3v-7.1C20 10 18.6 8.5 16.3 8.5c-1.6 0-2.6.8-3.2 1.6V9h-3v11z" />
   </svg>
 );
+
+export const IconTrendUp = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={18}
+    height={18}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={cx('w-4 h-4', className)}
+    {...props}
+  >
+    <path d="M4 17l6-6 4 4 6-8" />
+    <path d="M14 7h6v6" />
+  </svg>
+);
+
+export const IconStar = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={20}
+    height={20}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={cx('w-5 h-5', className)}
+    {...props}
+  >
+    <path d="M12 3.5l2.3 4.7 5.2.8-3.8 3.8.9 5.3L12 15.8l-4.6 2.3.9-5.3-3.8-3.8 5.2-.8z" />
+  </svg>
+);
+
+export const IconLocation = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={20}
+    height={20}
+    fill="currentColor"
+    stroke="none"
+    className={cx('w-5 h-5', className)}
+    {...props}
+  >
+    <path d="M12 3.5a6 6 0 00-6 6c0 3.7 3.6 7.6 5.3 9.3.4.4 1 .4 1.4 0C14.4 17 18 13.2 18 9.5a6 6 0 00-6-6z" />
+    <circle cx="12" cy="9.5" r="2.2" />
+  </svg>
+);

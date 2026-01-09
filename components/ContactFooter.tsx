@@ -99,33 +99,33 @@ const ContactFooter: React.FC = () => {
 
   return (
     <>
-    <section className="py-20 px-6 bg-white">
+    <section className="py-20 px-6 bg-[#f8fafc]">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-5xl font-serif text-navy mb-6">Klaar voor meer klanten?</h2>
         <p className="text-lg text-navy/60 mb-3 leading-relaxed">
           Neem vandaag nog vrijblijvend contact op.<br className="hidden md:block" />
           Bel, mail of WhatsApp. Ik luister even en zeg u eerlijk wat zinvol is.
         </p>
-        <p className="text-xs md:text-sm font-bold text-gold mb-12">
+        <p className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-[#fef9c3] text-[#854d0e] text-xs md:text-sm font-semibold mb-12 mx-auto">
           ⚡ Snelle reactie gegarandeerd - Geen verkooppraat, gewoon eerlijk advies op maat
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           <a 
             href="tel:0494816714" 
-            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-200"
           >
             <div className="w-14 h-14 bg-gold/90 rounded-full flex items-center justify-center mb-5 text-navy group-hover:scale-105 transition-transform">
               <IconPhone className="w-5 h-5" />
             </div>
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-navy/60 mb-2">Telefoon</span>
-            <span className="text-xl font-bold">Bel Kevin</span>
+            <span className="text-xl font-bold text-navy">Bel Kevin</span>
           </a>
 
           <button
             type="button"
             onClick={openModal}
-            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-200"
             aria-haspopup="dialog"
             aria-expanded={isModalOpen}
           >
@@ -133,14 +133,14 @@ const ContactFooter: React.FC = () => {
               <IconMail className="w-5 h-5" />
             </div>
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-navy/60 mb-2">Mail me</span>
-            <span className="text-lg font-bold break-all">kevin@<br/>webaanzee.be</span>
+            <span className="text-base md:text-lg font-bold text-navy">kevin@webaanzee.be</span>
           </button>
 
           <a 
             href="https://wa.me/32494816714" 
             target="_blank"
             rel="noreferrer"
-            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+            className="group flex flex-col items-center p-8 md:p-10 bg-white border border-slate-200 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-200"
             aria-label="Stuur een WhatsApp-bericht"
           >
             <div className="w-14 h-14 bg-gold/90 rounded-full flex items-center justify-center mb-5 text-navy group-hover:scale-105 transition-transform">
@@ -153,7 +153,7 @@ const ContactFooter: React.FC = () => {
 
         <div className="mt-20 space-y-4">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-gold">Actief in de Regio</p>
-          <div className="flex flex-wrap justify-center gap-6 text-navy font-serif text-lg">
+          <div className="flex flex-wrap justify-center gap-6 text-navy font-serif text-xl md:text-2xl font-semibold">
             <span>Wenduine</span>
             <span className="text-gold">•</span>
             <span>De Haan</span>
@@ -166,34 +166,9 @@ const ContactFooter: React.FC = () => {
           </div>
 
           <div className="pt-8">
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
-              <div className="p-6 text-left">
-                <p className="text-sm font-bold uppercase tracking-widest text-navy/70">Gevestigd in Blankenberge</p>
-                <p className="text-navy/60 mt-1">
-                  <a
-                    href="https://wa.me/32494816714"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-bold text-navy underline decoration-gold underline-offset-4 inline-flex items-center gap-2"
-                    aria-label="Contacteer mij via WhatsApp"
-                  >
-                    Contacteer mij
-                    <IconWhatsapp className="w-5 h-5 text-green-600" />
-                  </a>{' '}
-                  en ik kom tot bij u in de zaak voor een{' '}
-                  <span className="font-bold text-navy underline decoration-gold underline-offset-4">gratis offerte</span>.
-                </p>
-              </div>
-              <div className="relative w-full h-0 pb-[56.25%]">
-                <iframe
-                  title="Werkregio Blankenberge"
-                  className="absolute inset-0 w-full h-full"
-                  src="https://www.google.com/maps?ll=51.3136,3.1327&z=14&t=m&hl=nl&output=embed"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </div>
+            <p className="text-sm md:text-base text-navy/70 text-center max-w-xl mx-auto">
+              Gevestigd in <span className="font-semibold text-navy">Blankenberge</span> — Actief in Wenduine, De Haan, Zeebrugge, Brugge.
+            </p>
           </div>
         </div>
       </div>
@@ -217,7 +192,7 @@ const ContactFooter: React.FC = () => {
         >
           <div className="flex items-start justify-between gap-4 mb-6">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-navy/60">Mailformulier</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Mailformulier</p>
               <h3 className="text-2xl md:text-3xl font-serif text-navy mt-1">Stuur mij direct een bericht</h3>
               <p className="text-sm text-navy/60 mt-2">Ik antwoord meestal binnen 1 werkdag. Geen verkooppraat, wel eerlijk advies.</p>
             </div>
@@ -261,7 +236,7 @@ const ContactFooter: React.FC = () => {
             </div>
 
             <label className="flex flex-col text-left gap-2 text-sm text-navy/80">
-              <span>Telefoon (optioneel)</span>
+              <span>Telefoonnummer</span>
               <input
                 type="tel"
                 name="telefoon"
@@ -287,20 +262,13 @@ const ContactFooter: React.FC = () => {
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
               <div className="text-xs text-navy/60">* verplichte velden. Uw bericht wordt via uw mailprogramma verzonden.</div>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="px-4 py-2 rounded-xl border border-slate-200 text-navy/80 hover:border-gold/70 hover:text-navy transition-colors"
-                >
-                  Kopieer tekst
-                </button>
+              <div className="w-full md:w-auto flex justify-end">
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-navy text-white font-semibold shadow-sm hover:bg-navy/90 transition-colors disabled:opacity-60"
+                  className="w-full md:w-auto px-5 py-2 rounded-xl bg-navy text-white font-semibold shadow-sm hover:bg-navy/90 transition-colors disabled:opacity-60"
                   disabled={status.type === 'sending'}
                 >
-                  {status.type === 'sending' ? 'Even geduld...' : 'Verstuur via e-mail'}
+                  {status.type === 'sending' ? 'Even geduld...' : 'Verstuur bericht'}
                 </button>
               </div>
             </div>

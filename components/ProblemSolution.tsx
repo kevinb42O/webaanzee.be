@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { IconTimesCircle, IconCamera, IconPencil, IconMobile } from './Icons';
+import { IconTimesCircle, IconCamera, IconPencil, IconMobile, IconCheck } from './Icons';
 
 const ProblemSolution: React.FC = () => {
   return (
@@ -12,20 +12,20 @@ const ProblemSolution: React.FC = () => {
               Wordt u al gevonden door nieuwe klanten?
             </h2>
             <div className="h-1 w-20 bg-gold"></div>
-            <p className="text-xl text-navy/80 leading-relaxed italic">
-              "Uw klanten zoeken u op hun smartphone. Vindt Google u niet? Dan gaat de klant naar de buurman."
+            <p className="text-xl text-navy/70 leading-relaxed">
+              Uw klanten zoeken u op hun smartphone. Vindt Google u niet? Dan gaat de klant naar de buurman.
             </p>
             <p className="text-navy/70 leading-relaxed">
               Als lokale ondernemer aan de kust leeft u van uw reputatie. Maar in de wereld van vandaag begint die reputatie vaak online. Een verouderde site of — erger nog — geen site, kost u elke dag omzet. 
             </p>
             <ul className="space-y-4 pt-4">
               {[
-                "Uw website werkt vaak niet goed op een iPhone of tablet.",
-                "U heeft geen tijd voor technisch gedoe en code.",
-                "U wilt iemand die gewoon langskomt en het regelt. Snel en zonder gedoe."
+                "Een website die perfect werkt op elke smartphone of tablet.",
+                "U verliest geen kostbare tijd aan technisch gedoe.",
+                "Ik kom persoonlijk langs en regel alles van A tot Z."
               ].map((text, idx) => (
                 <li key={idx} className="flex items-start space-x-3">
-                  <IconTimesCircle className="text-red-500 mt-1" />
+                  <IconCheck className="text-gold mt-1" />
                   <span className="font-medium">{text}</span>
                 </li>
               ))}
@@ -33,34 +33,32 @@ const ProblemSolution: React.FC = () => {
           </div>
 
           <div className="bg-navy rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full -mr-16 -mt-16"></div>
-            
             <h3 className="text-2xl font-serif text-gold mb-8">Wat ik voor u regel:</h3>
             
             <div className="space-y-10">
               <div className="flex items-start space-x-6">
-                <div className="bg-gold/20 p-4 rounded-xl">
-                  <IconCamera className="text-gold" />
+                <div className="bg-gold/20 p-4 rounded-xl border border-gold/30">
+                  <IconCamera className="text-[#eab308]" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1">Beeldmateriaal (optioneel)</h4>
-                  <p className="text-white/70 text-sm">Heeft u al foto’s? Perfect. Nog geen? We starten met wat er is en upgraden kan eventueel later.</p>
+                  <h4 className="text-lg font-bold mb-1">Sterk Beeldmateriaal</h4>
+                  <p className="text-white/70 text-sm">Heeft u al foto’s? Perfect. Nog geen? Geen probleem. Ik selecteer professionele beelden die perfect bij uw huisstijl passen.</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-6">
-                <div className="bg-gold/20 p-4 rounded-xl">
-                  <IconPencil className="text-gold" />
+                <div className="bg-gold/20 p-4 rounded-xl border border-gold/30">
+                  <IconPencil className="text-[#eab308]" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1">Tekst die klanten begrijpen</h4>
+                  <h4 className="text-lg font-bold mb-1">Teksten die overtuigen</h4>
                   <p className="text-white/70 text-sm">Geen moeilijke marketingtaal. Gewoon duidelijke Vlaamse tekst die aanzet tot contact.</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-6">
-                <div className="bg-gold/20 p-4 rounded-xl">
-                  <IconMobile className="text-gold" />
+                <div className="bg-gold/20 p-4 rounded-xl border border-gold/30">
+                  <IconMobile className="text-[#eab308]" />
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Alles geregeld, zonder gedoe</h4>

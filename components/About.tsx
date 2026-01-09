@@ -1,14 +1,13 @@
 
 import React from 'react';
+import { IconLocation } from './Icons';
 
 const About: React.FC = () => {
   return (
     <section className="py-24 px-6 bg-navy text-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-gold/20 rounded-2xl transition-all group-hover:bg-gold/30"></div>
-            {/* Studiofoto placeholder */}
+          <div className="relative rounded-xl overflow-hidden shadow-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]">
             <img 
               src="/studiofoto.png" 
               alt="Kevin B. - Uw Lokale Vakman" 
@@ -16,43 +15,53 @@ const About: React.FC = () => {
               decoding="async"
               width="800"
               height="1000"
-              className="rounded-xl shadow-2xl relative z-10 w-full object-cover aspect-[4/5]"
+              className="relative z-10 w-full object-cover aspect-[4/5]"
             />
-            <div className="absolute bottom-8 right-8 bg-gold p-6 rounded-lg shadow-xl z-20 hidden md:block">
-              <p className="text-navy font-serif font-bold text-2xl">Kevin B.</p>
-              <p className="text-navy/70 text-sm font-bold uppercase tracking-tight">Uw Lokale Vakman</p>
-            </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-8 text-[#cbd5e1]">
             <div className="space-y-4">
-              <span className="text-gold font-bold uppercase tracking-widest text-sm">Persoonlijke Aanpak</span>
-              <h2 className="text-4xl md:text-5xl font-serif">Uw lokale partner.</h2>
+              <span className="text-gold font-bold uppercase tracking-[2px] text-sm">Persoonlijke Aanpak</span>
+              <h2 className="text-4xl md:text-5xl font-serif text-white">
+                Uw digitale partner
+                <br className="hidden md:block" />
+                aan de kust.
+              </h2>
             </div>
             
-            <div className="space-y-6 text-white/80 leading-relaxed text-lg">
+            <div className="space-y-6 leading-relaxed text-lg">
               <p>
-                Ik ben Kevin Bourguignon. Geen eigenaar van een duur marketingbureau in Brussel, maar een vakman uit de buurt. Ik spreek uw taal en ken de lokale markt.
+                Geen onpersoonlijk agentschap, maar een vakman uit de buurt. Ik spreek uw taal, ken de regio en sta altijd klaar voor een koffie en een goed gesprek.
               </p>
               <p>
                 Als webdesigner met oog voor beeld en presentatie weet ik hoe uw zaak vertrouwen uitstraalt. Ik maak een website die niet alleen mooi is, maar ook klanten oplevert.
               </p>
-              <p className="font-serif italic text-gold text-2xl">
-                "Ik geloof in snelle service en afspraken nakomen. Geen woorden maar daden."
+              <p className="font-serif text-gold text-2xl">
+                Snelle service, harde afspraken. Geen woorden maar daden.
               </p>
               <p>
-                Geen uurtje-factuurtje gedoe of technisch jargon. Gewoon een goede website voor een eerlijke prijs, volledig ontzorgd.
+                Geen uurtje-factuurtje of technisch jargon. Gewoon een goede website voor een eerlijke prijs, volledig ontzorgd.
               </p>
             </div>
 
-            <div className="pt-8 grid grid-cols-2 gap-8 border-t border-white/10">
-              <div>
-                <p className="text-3xl font-serif font-bold text-gold">5-Sterren</p>
-                <p className="text-sm text-white/50 uppercase tracking-widest">Service & Aanpak</p>
+            <div className="mt-10 pt-10 border-t border-white/10 grid grid-cols-2 gap-8">
+              <div className="flex flex-col items-start gap-2">
+                <div className="flex flex-row items-center">
+                  <span className="text-gold text-xl leading-none" aria-hidden="true">★★★★★</span>
+                </div>
+                <div>
+                  <p className="text-base md:text-lg font-bold text-white">5-Sterren Service</p>
+                  <p className="mt-1 text-sm text-white/60">Persoonlijke aanpak</p>
+                </div>
               </div>
-              <div>
-                <p className="text-3xl font-serif font-bold text-gold">Lokaal</p>
-                <p className="text-sm text-white/50 uppercase tracking-widest">Altijd dichtbij</p>
+              <div className="flex flex-col items-start gap-2">
+                <div className="flex flex-row items-center">
+                  <IconLocation className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-base md:text-lg font-bold text-white">Altijd dichtbij</p>
+                  <p className="mt-1 text-sm text-white/60">Regio Kust &amp; Brugge</p>
+                </div>
               </div>
             </div>
           </div>

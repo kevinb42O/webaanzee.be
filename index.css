@@ -11,3 +11,29 @@ html {
   background-size: cover;
   background-position: center;
 }
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-10 py-4 rounded-md font-bold text-lg transition-all w-full sm:w-auto;
+  color: #020617;
+  background-image: linear-gradient(to bottom, #f4d86a, #d4af37);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  border-bottom: 2px solid #b8860b;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(to bottom, #ffe58a, #e0ba3f);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-10 py-4 rounded-md font-bold text-lg border-2 transition-all w-full sm:w-auto;
+  border-color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
