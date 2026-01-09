@@ -19,7 +19,7 @@ const Offer: React.FC = () => {
               Meest gekozen
             </div>
 
-            <div className="p-8 pt-10">
+            <div className="p-8 pt-10 flex flex-col h-full">
               <h3 className="text-xl font-serif font-bold text-navy mb-2">Het "Kust-Pakket"</h3>
               <p className="text-navy/60 text-sm mb-6">Ideaal voor de kleine zaak die snel online wil staan.</p>
               
@@ -29,7 +29,7 @@ const Offer: React.FC = () => {
                 <span className="text-navy/50 font-semibold ml-2 text-sm">eenmalig</span>
               </div>
 
-              <ul className="space-y-4 mb-10 text-sm">
+              <ul className="space-y-4 text-sm">
                 {[
                   { title: "Website op één pagina", desc: "Professioneel en overzichtelijk", icon: "laptop" },
                   { title: "Mobiel-vriendelijk", desc: "Perfect op iPhone en Android", icon: "mobile-alt" },
@@ -47,19 +47,21 @@ const Offer: React.FC = () => {
                 ))}
               </ul>
 
-              <div className="pt-6 border-t border-slate-100 mb-8">
-                <p className="text-center text-xs font-medium text-navy/70 leading-relaxed bg-slate-50 p-3 rounded-lg">
-                  <span className="font-bold text-navy">Hosting &amp; Support: €50/maand</span>
-                  <span className="text-navy/60"> — Hosting, beveiliging en kleine updates (max. 3 per maand).</span>
-                </p>
-              </div>
+              <div className="mt-auto">
+                <div className="pt-6 border-t border-slate-100 mb-8 mt-8">
+                  <p className="text-center text-xs font-medium text-navy/70 leading-relaxed bg-slate-50 p-3 rounded-lg">
+                    <span className="font-bold text-navy">Hosting &amp; Support: €50/maand</span>
+                    <span className="text-navy/60"> — Hosting, beveiliging en kleine updates (max. 3 per maand).</span>
+                  </p>
+                </div>
 
-              <a 
-                href="#contact" 
-                className="block w-full text-center bg-navy hover:bg-navy-light text-white font-bold py-4 rounded-xl transition-all shadow-lg"
-              >
-                Start Kust-Pakket
-              </a>
+                <a 
+                  href="#contact" 
+                  className="block w-full text-center bg-navy hover:bg-navy-light text-white font-bold py-4 rounded-xl transition-all shadow-lg"
+                >
+                  Start Kust-Pakket
+                </a>
+              </div>
             </div>
           </div>
 
@@ -74,7 +76,7 @@ const Offer: React.FC = () => {
               <span className="text-navy/50 font-semibold ml-2 text-sm">eenmalig</span>
             </div>
 
-            <ul className="space-y-4 mb-auto text-sm">
+            <ul className="space-y-4 text-sm">
               {[
                 { title: "Meerdere pagina's", desc: "Home, Over Ons, Menu/Service, Contact" },
                 { title: "Uitgebreide beeldstrategie", desc: "Met uw eigen foto's en zorgvuldig geselecteerde beelden" },
@@ -92,7 +94,7 @@ const Offer: React.FC = () => {
               ))}
             </ul>
 
-            <div className="mt-12">
+            <div className="mt-auto pt-8">
               <a 
                 href="#contact" 
                 className="block w-full text-center bg-navy hover:bg-navy-light text-white font-bold py-4 rounded-xl transition-all shadow-lg"
