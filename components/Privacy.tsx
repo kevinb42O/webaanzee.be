@@ -17,7 +17,12 @@ const Privacy: React.FC = () => {
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Wie is verantwoordelijke?</h3>
             <p>
-              Web aan Zee is een eenmanszaak van Kevin Bourguignon, gevestigd in Blankenberge (België).
+              <span className="font-bold">
+                <span className="text-navy">Web</span>
+                <span className="text-gold">aan</span>
+                <span className="text-navy">zee</span>
+              </span>{' '}
+              is een eenmanszaak van Kevin Bourguignon, gevestigd in Blankenberge (België).
               U kan mij bereiken via <a href="mailto:kevin@webaanzee.be" className="underline decoration-gold underline-offset-2">kevin@webaanzee.be</a>.
             </p>
           </div>

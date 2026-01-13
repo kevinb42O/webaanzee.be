@@ -21,8 +21,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'serif'],
-        sans: ['Lato', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        script: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
     },
   },

@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
 
+# Sitemap location
 Sitemap: https://www.webaanzee.be/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+
+# Bing specific  
+User-agent: Bingbot
+Allow: /

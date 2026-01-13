@@ -143,3 +143,21 @@ export const IconLocation = ({ className, ...props }: IconProps) => (
     <circle cx="12" cy="9.5" r="2.2" />
   </svg>
 );
+
+export const IconShield = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={20}
+    height={20}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={cx('w-5 h-5', className)}
+    {...props}
+  >
+    <path d="M12 3L4 7v5c0 4.5 3.4 8.6 8 9.5 4.6-.9 8-5 8-9.5V7l-8-4z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
