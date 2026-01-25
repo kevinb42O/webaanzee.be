@@ -9,13 +9,18 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     id: "maandelijks",
-    question: "Wat is inbegrepen in de €50/maand?",
-    answer: "Alles. Hosting, domeinnaam, SSL-beveiliging, dagelijkse back-ups en tot 3 gratis kleine updates per maand. U hoeft zich nergens zorgen over te maken."
+    question: "Wat is inbegrepen in de €20/maand?",
+    answer: "Alles. Hosting, domeinnaam, SSL-beveiliging, dagelijkse back-ups en tot 5 gratis kleine updates per maand. U hoeft zich nergens zorgen over te maken."
+  },
+  {
+    id: "visitekaart",
+    question: "Wat is een Digitale Visitekaart?",
+    answer: "Een digitale visitekaart is een online profiel dat al uw belangrijke contactgegevens en sociale media links op één plek bundelt. Het is een moderne, milieuvriendelijke manier om uw netwerk uit te breiden en online gevonden te worden. U kunt eenvoudig een QR-code delen die mensen direct naar uw profiel leidt."
   },
   {
     id: "aanpassen",
     question: "Kan ik zelf teksten of foto's aanpassen?",
-    answer: "Zeker. U krijgt toegang tot een simpel beheersysteem, of u stuurt mij een mailtje en ik pas het gratis aan (inbegrepen in service)."
+    answer: "Zeker. U krijgt toegang tot een simpel beheersysteem, of u stuurt mij een mailtje en ik pas het gratis aan (tot 5 aanpassingen per maand inbegrepen in de service)."
   },
   {
     id: "domein",

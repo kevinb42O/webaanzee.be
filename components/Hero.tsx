@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { IconCheck } from './Icons';
 import selfieNoBackground from '../selfieNObackgroundV3.png';
+import SandDune from './SandDune';
 
 const Hero: React.FC = () => {
   return (
@@ -26,81 +26,52 @@ const Hero: React.FC = () => {
             Uw zaak professioneel online.
           </h1>
           
-          {/* Elegant Script Subline */}
-          <p className="text-elegant text-xl sm:text-2xl md:text-4xl text-gold-gradient mb-8 md:mb-12">
-            Zonder gedoe.
+          <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed md:leading-relaxed max-w-xl mb-8 md:mb-10">
+            Een snelle, professionele website die lokaal gevonden wordt. Geen gedoe, geen verrassingen. Alles wat u nodig heeft, binnen 7 dagen online.
           </p>
 
-          {/* Value Proposition */}
-          <p className="text-base md:text-xl lg:text-2xl text-white/90 leading-relaxed font-medium tracking-wide mb-3 md:mb-4 px-2 md:px-0">
-            Website + beter gevonden op Google.<br />
-            <span className="text-gold-gradient font-semibold">Ik regel alles.</span>
-          </p>
-          
-          <p className="text-white/60 leading-relaxed text-sm md:text-lg mb-8 md:mb-10 max-w-lg mx-auto md:mx-0 px-2 md:px-0">
-            U hoeft niks technisch te kennen. Ik leg het uit zoals het is.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="px-4 md:px-0 w-full md:w-auto mb-8 md:mb-10">
-            <div className="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
-              <a 
-                href="#contact" 
-                className="btn-primary btn-sheen w-full sm:w-auto text-center"
-              >
-                Gratis kennismakingsgesprek
-              </a>
-              <a 
-                href="#werkwijze" 
-                className="btn-secondary w-full sm:w-auto text-center"
-              >
-                Mijn werkwijze
-              </a>
+          {/* Bullet points */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-left text-white/90 font-medium mb-10 text-sm md:text-base">
+            <div className="flex items-center gap-2.5">
+              <IconCheck className="w-5 h-5 text-amber-400" />
+              <span>Binnen 7 dagen online</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <IconCheck className="w-5 h-5 text-amber-400" />
+              <span>Lokaal vindbaar in Google</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <IconCheck className="w-5 h-5 text-amber-400" />
+              <span>Simpel en snel contact</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <IconCheck className="w-5 h-5 text-amber-400" />
+              <span>Perfect op elk apparaat</span>
             </div>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="text-white/70">
-            <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2.5 text-xs md:text-sm font-medium">
-              <span className="flex items-center gap-2">
-                <IconCheck className="text-gold w-4 h-4" />
-                Regio Kust & Brugge
-              </span>
-              <span className="flex items-center gap-2">
-                <IconCheck className="text-gold w-4 h-4" />
-                Snel bereikbaar
-              </span>
-              <span className="flex items-center gap-2">
-                <IconCheck className="text-gold w-4 h-4" />
-                Heldere uitleg
-              </span>
-            </div>
-          </div>
+          {/* CTA Button */}
+          <a 
+            href="#contact" 
+            className="inline-block bg-amber-500 text-slate-900 font-bold tracking-wide px-8 py-4 rounded-full shadow-lg shadow-amber-500/20 transition-all duration-300 hover:bg-amber-400 hover:shadow-xl hover:shadow-amber-400/30 transform hover:-translate-y-1"
+          >
+            Start hier uw project
+          </a>
         </div>
 
-        {/* Right Side - Portrait with Premium Effects */}
-        <div className="relative mt-8 md:mt-0 flex justify-center portrait-glow animate-levitate">
-          {/* Ambient glow behind portrait */}
-          <div className="absolute inset-0 -inset-x-16 -inset-y-16 bg-gradient-radial from-indigo-500/20 via-purple-600/10 to-transparent blur-3xl pointer-events-none animate-glow-pulse"></div>
-          
-          <div className="relative w-64 sm:w-72 md:w-[400px] lg:w-[440px] max-w-[460px] overflow-visible flex items-end justify-center">
-            {/* Gold ring glow effect */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-t from-gold/20 via-gold/5 to-transparent blur-2xl pointer-events-none animate-glow-pulse"></div>
-            
-            <img 
-              src={selfieNoBackground}
-              alt="Kevin van Webaanzee, webdesigner" 
-              loading="lazy"
-              decoding="async"
-              width="800"
-              height="600"
-              className="w-full h-auto object-contain relative z-10 drop-shadow-2xl"
-              style={{
-                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))'
-              }}
-            />
-          </div>
+        {/* Right Image */}
+        <div className="hidden md:block flex-shrink-0">
+          <img 
+            src={selfieNoBackground}
+            alt="Kevin Bourguignon, webdesigner bij Webaanzee" 
+            width={400} 
+            height={400} 
+            className="w-80 h-80 lg:w-[400px] lg:h-[400px] object-contain"
+          />
         </div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 z-[3]">
+        <SandDune />
       </div>
     </section>
   );

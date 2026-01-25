@@ -12,7 +12,59 @@ const Offer: React.FC = () => {
           <p className="text-navy/60 max-w-xl mx-auto">Vakmanschap tegen een transparante prijs, speciaal ontworpen voor lokale zelfstandigen.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
+          {/* Digital Business Card Package */}
+          <div className="bg-white rounded-3xl shadow-2xl ring-1 ring-slate-200 flex flex-col h-full overflow-hidden">
+            <div className="p-8 flex flex-col flex-1">
+              <h3 className="text-xl font-serif font-bold text-slate-900 mb-2 mt-8">Digitale Visitekaart</h3>
+              <p className="text-slate-500 text-sm mb-6">Een modern, digitaal visitekaartje om online gevonden te worden.</p>
+              
+              <div className="mb-10 flex items-baseline justify-center gap-1">
+                <span className="text-base text-slate-400 font-medium mr-1">Vanaf</span>
+                <span className="text-xl text-slate-500 font-medium">€</span>
+                <span className="text-5xl font-serif text-slate-900">250</span>
+                <span className="text-slate-500 font-sans ml-1">eenmalig</span>
+              </div>
+
+              <ul className="space-y-4 text-sm">
+                {[
+                  { title: "Eén pagina profiel", desc: "Al uw info op één plek" },
+                  { title: "Contact & Socials", desc: "Deel uw gegevens en socials" },
+                  { title: "QR-code", desc: "Eenvoudig delen via QR" },
+                  { title: "Eigen Domeinnaam", desc: "Uw eigen .be adres" },
+                  { title: "Supersnel & Mobiel", desc: "Perfect op elk apparaat" }
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start space-x-3">
+                    <IconCheck className="text-amber-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800">{item.title}</span>
+                      <p className="text-slate-400 text-xs mt-0.5">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hosting section with subtle background */}
+            <div className="mt-auto bg-slate-50 px-8 py-6">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <IconShield className="w-5 h-5 text-amber-500" />
+                <p className="text-sm text-slate-600">
+                  <span className="font-semibold text-slate-700">€50/jaar</span>
+                  <span className="mx-1">—</span>
+                  <span>Jaarlijkse hosting &amp; onderhoud</span>
+                </p>
+              </div>
+
+              <a 
+                href="#contact" 
+                className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-semibold text-lg py-4 rounded-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                Start Digitale Visitekaart
+              </a>
+            </div>
+          </div>
+
           {/* Onepage Package */}
           <div className="bg-white rounded-3xl shadow-2xl ring-1 ring-amber-400/50 flex flex-col h-full overflow-hidden">
             <div className="p-8 flex flex-col flex-1">
@@ -55,7 +107,7 @@ const Offer: React.FC = () => {
               <div className="flex items-center justify-center gap-2 mb-4">
                 <IconShield className="w-5 h-5 text-amber-500" />
                 <p className="text-sm text-slate-600">
-                  <span className="font-semibold text-slate-700">€50/maand</span>
+                  <span className="font-semibold text-slate-700">€20/maand</span>
                   <span className="mx-1">—</span>
                   <span>Premium hosting &amp; onderhoud</span>
                 </p>
@@ -107,7 +159,7 @@ const Offer: React.FC = () => {
               <div className="flex items-center justify-center gap-2 mb-4">
                 <IconShield className="w-5 h-5 text-amber-500" />
                 <p className="text-sm text-slate-600">
-                  <span className="font-semibold text-slate-700">€50/maand</span>
+                  <span className="font-semibold text-slate-700">€20/maand</span>
                   <span className="mx-1">—</span>
                   <span>Premium hosting &amp; onderhoud</span>
                 </p>

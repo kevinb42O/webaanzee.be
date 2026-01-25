@@ -8,7 +8,6 @@ import Offer from './components/Offer';
 import FAQ from './components/FAQ';
 import About from './components/About';
 import ContactFooter from './components/ContactFooter';
-import { IconInstagram, IconFacebook, IconLinkedIn, IconMail, IconLocation, IconTrendUp } from './components/Icons';
 
 const App: React.FC = () => {
   return (
