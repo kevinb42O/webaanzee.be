@@ -60,13 +60,13 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right Image */}
-        <div className="hidden md:block flex-shrink-0">
+        <div className="flex-shrink-0">
           <img 
             src={selfieNoBackground}
             alt="Kevin Bourguignon, webdesigner bij Webaanzee" 
             width={400} 
             height={400} 
-            className="w-80 h-80 lg:w-[400px] lg:h-[400px] object-contain"
+            className="w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] object-contain"
           />
         </div>
       </div>
