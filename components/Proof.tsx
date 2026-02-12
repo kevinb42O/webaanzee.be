@@ -1,30 +1,54 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from 'recharts';
-import { IconQuote, IconTrendUp } from './Icons';
+import { StarRating } from './Icons';
+
+// Case study data types
+interface CaseStudy {
+  id: string;
+  title: string;
+  website: string;
+  location: string;
+  type: string;
+  icon: string;
+  accentColor: string;
+  chartData: { name: string; views: number; period: string; highlight?: string }[];
+  stats: { impressions: number; clicks: number; ctr: string; avgPosition: string };
+  quote: string;
+  author: string;
+  role: string;
+  rating: number;
+  subtitle?: string;
+  tagline?: string;
+  highlights?: { emoji: string; label: string; text: string }[];
+  quote2?: string;
+  author2?: string;
+  role2?: string;
+  description?: string[];
+}
 
 // Case study data with enhanced metrics
-const caseStudies = [
+const caseStudies: CaseStudy[] = [
   {
     id: 'vishandel',
     title: 'vishandelolivierenkelly.be',
-    website: 'https://vishandelolivierenkelly.be',
+    website: 'https://www.vishandelolivierenkelly.be',
     location: 'Blankenberge',
     type: 'Nieuwe website',
     icon: '🐟',
     accentColor: '#0ea5e9',
     chartData: [
-      { name: 'Oude site', views: 420, period: 'Dec 2024' },
+      { name: 'Geen website', views: 0, period: 'Dec 2024' },
       { name: 'Bouw', views: 980, period: 'Jan 2025' },
-      { name: 'Na launch', views: 2100, highlight: '+400%', period: 'Feb 2025' },
+      { name: 'Na launch', views: 4510, highlight: '+974%', period: 'Feb 2026' },
     ],
     stats: {
-      impressions: 2100,
-      clicks: 160,
-      ctr: '7.6%',
-      avgPosition: '4.2',
+      impressions: 4510,
+      clicks: 297,
+      ctr: '6.6%',
+      avgPosition: '2.9',
     },
-    quote: "We wisten dat we een website nodig hadden, maar zagen op tegen alle technische rompslomp. Kevin nam alles uit handen: de teksten en de technische opstart waardoor we nu veel gemakkelijker worden gevonden op Google. We zien nu wekelijks nieuwe gezichten in de winkel die ons via Google hebben gevonden. Dit systeem werkt.",
+    quote: "Kevin nam alles uit handen: de teksten en de technische opstart. We zien nu wekelijks nieuwe gezichten in de winkel die ons via Google hebben gevonden. Dit systeem werkt.",
     author: 'Olivier & Kelly',
     role: 'Eigenaren Vishandel',
     rating: 5,
@@ -48,10 +72,50 @@ const caseStudies = [
       ctr: '8.8%',
       avgPosition: '6.1',
     },
-    quote: "Ik had al een website, maar ik merkte dat ik online kansen liet liggen. Kevin heeft niet geprobeerd me een compleet nieuwe site aan te smeren, maar gaf concreet en eerlijk webadvies. Hij wees me precies op de punten waar ik vindbaarheid verloor. Dankzij zijn webadvies is praktijk iTransform nu veel beter vindbaar in de regio Brugge. Geen ingewikkeld technisch jargon, maar heldere taal en resultaat.",
+    quote: "Kevin gaf concreet en eerlijk webadvies. Hij wees me precies op de punten waar ik vindbaarheid verloor. Geen ingewikkeld technisch jargon, maar heldere taal en resultaat.",
     author: 'Praktijk iTransform',
     role: 'Therapeutische praktijk',
     rating: 5,
+  },
+  {
+    id: 'hondaanzee',
+    title: 'hondaanzee.be',
+    website: 'https://hondaanzee.be',
+    location: 'Belgische Kust',
+    type: 'Showcase — eigen project',
+    icon: '🐕',
+    accentColor: '#22c55e',
+    subtitle: 'Van 0 naar 14.000 bezoekers in 12 dagen',
+    tagline: "Hoe we in recordtijd de nummer 1 positie in Google veroverden op de 'Big Players'.",
+    description: [
+      'Het begon met een simpele frustratie: er was nergens één duidelijke plek waar hondenbaasjes konden zien waar ze welkom waren aan de kust. Verspreide info, verouderde sites, tegenstrijdige regels. Dat moest beter.',
+      'Dus bouwde ik Hondaanzee.be. Niet als experiment, maar als een volwaardig digitaal platform — met interactieve kaarten, realtime filters en een community-functie. Technisch gebouwd op dezelfde principes die ik voor mijn klanten hanteer: razendsnel (100% Core Web Vitals), geoptimaliseerd tot op de pixel (WebP, Vercel) en een SEO-architectuur die Google niet naast zich neer kan leggen.',
+      'Het resultaat was onmiddellijk. Binnen dag één stroomden de eerste bezoekers binnen. Na één week stond de teller al op duizenden. Na 12 dagen: meer dan 14.000 unieke bezoekers, een gemiddelde Google-positie van 1.2 en een CTR van 61% — twintig keer het marktgemiddelde.',
+    ],
+    highlights: [
+      { emoji: '🚀', label: 'Bezoekers', text: '13.700+ in de eerste twee weken' },
+      { emoji: '🥇', label: 'Positie', text: '#1 in Google (boven officiële instanties)' },
+      { emoji: '⚡', label: 'Tech', text: '100% Score op Google Core Web Vitals' },
+      { emoji: '📰', label: 'Media', text: 'Opgepikt door Het Nieuwsblad & KW' },
+    ],
+    chartData: [
+      { name: 'Launch', views: 0, period: 'Dag 1' },
+      { name: 'Week 1', views: 5200, period: 'Week 1' },
+      { name: 'Na 12 dagen', views: 13700, highlight: '+13.700', period: 'Week 2' },
+    ],
+    stats: {
+      impressions: 22450,
+      clicks: 13700,
+      ctr: '61.0%',
+      avgPosition: '1.2',
+    },
+    quote: 'Website van Kevin (36) met gids voor honden aan kust blijkt schot in de roos: "Duizenden bezoekers na één week"',
+    author: 'Het Nieuwsblad',
+    role: 'Belgische pers',
+    rating: 5,
+    quote2: 'Kevin (36) ontwikkelt unieke website voor hondenbaasjes aan zee: "Alle info handig op één plaats"',
+    author2: 'Krant van West-Vlaanderen (KW)',
+    role2: 'Regionale pers',
   },
 ];
 
@@ -106,22 +170,6 @@ const formatNumber = (num: number): string => {
   }
   return num.toString();
 };
-
-// Star rating component
-const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
-  <div className="flex gap-0.5">
-    {[...Array(5)].map((_, i) => (
-      <svg
-        key={i}
-        className={`w-4 h-4 ${i < rating ? 'text-gold' : 'text-white/20'}`}
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))}
-  </div>
-);
 
 const Proof: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -178,90 +226,38 @@ const Proof: React.FC = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 md:py-32 px-6 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden"
+      className="relative py-28 md:py-36 px-6 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden"
     >
-      {/* Premium background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-navy/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gold/3 to-transparent rounded-full" />
-        {/* Subtle grid pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230f172a' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
-
       <div className="max-w-7xl mx-auto relative">
-        {/* Premium header with animated entrance */}
+        {/* Premium header */}
         <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-navy/60">Live resultaten</span>
-          </div>
-          
-          <h2 id="resultaten-heading" className="text-4xl md:text-6xl font-serif text-navy mb-6 tracking-tight">
-            Bewezen <span className="relative inline-block">
-              <span className="relative z-10">resultaat</span>
-              <svg className="absolute -bottom-2 left-0 w-full h-3 text-gold/30" viewBox="0 0 200 12" preserveAspectRatio="none">
-                <path d="M0,6 Q50,0 100,6 T200,6" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round"/>
-              </svg>
-            </span>
+          <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-600 mb-4">Echte cijfers</span>
+          <h2 id="resultaten-heading" className="text-4xl md:text-6xl font-serif text-navy mb-6 tracking-[-0.02em]">
+            Bewezen resultaat
           </h2>
-          <p className="text-lg md:text-xl text-navy/50 max-w-2xl mx-auto leading-relaxed">
-            Echte cijfers van echte klanten. Geen beloftes, maar meetbaar succes.
+          <p className="text-lg md:text-xl text-navy/40 max-w-2xl mx-auto leading-relaxed">
+            Geen praatjes. Cijfers uit Google Search Console van echte klanten.
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <span className="group flex items-center gap-2 px-5 py-2.5 bg-white rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:border-gold/30 transition-all duration-300">
-              <IconTrendUp className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-semibold text-navy">Meer zichtbaarheid</span>
-            </span>
-            <span className="group flex items-center gap-2 px-5 py-2.5 bg-white rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:border-gold/30 transition-all duration-300">
-              <svg className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              <span className="text-sm font-semibold text-navy">Meer bezoekers</span>
-            </span>
-            <span className="group flex items-center gap-2 px-5 py-2.5 bg-white rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:border-gold/30 transition-all duration-300">
-              <svg className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm font-semibold text-navy">Meer omzet</span>
-            </span>
-          </div>
         </div>
 
-        {/* Premium case selector - Segmented Control */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1 bg-slate-100 rounded-full">
+        {/* Premium case selector */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex p-1.5 bg-white rounded-2xl shadow-premium border border-slate-100">
             {caseStudies.map((caseItem, index) => (
               <button
                 key={caseItem.id}
                 onClick={() => goToCase(index)}
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                className={`relative flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300 ease-out ${
+                className={`relative flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 ease-out ${
                   index === activeIndex
-                    ? 'bg-white text-slate-900 shadow-sm font-bold'
-                    : 'bg-transparent text-slate-500 font-medium hover:text-slate-700'
+                    ? 'bg-slate-900 text-white shadow-lg font-bold'
+                    : 'bg-transparent text-slate-400 font-medium hover:text-slate-600'
                 }`}
                 aria-label={`Bekijk case: ${caseItem.title}`}
               >
                 <span className="text-lg">{caseItem.icon}</span>
-                <span className="hidden md:inline">{caseItem.title}</span>
-                {index === activeIndex && (
-                  <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-gold"></span>
-                  </span>
-                )}
+                <span className="hidden md:inline text-sm">{caseItem.title}</span>
               </button>
             ))}
           </div>
@@ -273,45 +269,25 @@ const Proof: React.FC = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Glow effect behind card */}
-          <div 
-            className="absolute inset-0 rounded-3xl transition-all duration-700"
-            style={{
-              background: `radial-gradient(ellipse at center, ${currentCase.accentColor}15 0%, transparent 70%)`,
-              transform: 'scale(1.02)',
-            }}
-          />
-          
-          <div className="relative bg-slate-50 rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
-            {/* Subtle CSS grid pattern texture overlay */}
-            <div 
-              className="absolute inset-0 opacity-[0.4] pointer-events-none z-0"
-              style={{
-                backgroundImage: `linear-gradient(to right, rgb(148 163 184 / 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgb(148 163 184 / 0.1) 1px, transparent 1px)`,
-                backgroundSize: '20px 20px'
-              }}
-            />
-            {/* Progress bar at top */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-slate-100 z-20">
+          <div className="relative bg-white rounded-3xl shadow-premium-lg overflow-hidden border border-slate-100">
+            {/* Progress bar at top - gold gradient */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-slate-100 z-20">
               <div 
-                className="h-full bg-gradient-to-r from-gold to-gold/80 transition-all duration-75 ease-linear"
+                className="h-full bg-gradient-to-r from-amber-400 to-amber-500 transition-all duration-75 ease-linear"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
             <div className="relative z-10 grid lg:grid-cols-5">
               {/* Left panel - Chart & Stats */}
-              <div className="lg:col-span-3 p-8 md:p-12 lg:p-16">
+              <div className="lg:col-span-3 p-5 sm:p-8 md:p-12 lg:p-16">
                 <div className={`transition-all duration-500 ${isAnimating ? 'opacity-0 scale-98 translate-y-4' : 'opacity-100 scale-100 translate-y-0'}`}>
                   {/* Header badges */}
                   <div className="flex flex-wrap items-center gap-3 mb-8">
                     <div className="relative group">
                       <div className="relative bg-amber-50 text-amber-700 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-2 border border-amber-200">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                        </span>
-                        LIVE CASE
+                        <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                        CASE STUDY
                       </div>
                     </div>
                     <div className="px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-300 transition-colors duration-300">
@@ -325,12 +301,12 @@ const Proof: React.FC = () => {
                       {currentCase.icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-navy">
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-navy">
                         <a 
                           href={currentCase.website} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="hover:text-gold transition-colors duration-300 inline-flex items-center gap-2 group"
+                          className="hover:text-gold transition-colors duration-300 inline-flex items-center gap-2 group break-all"
                         >
                           {currentCase.title}
                           <svg className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -345,8 +321,29 @@ const Proof: React.FC = () => {
                         </svg>
                         {currentCase.location}
                       </p>
+                      {currentCase.subtitle && (
+                        <p className="text-lg font-bold text-navy mt-3">{currentCase.subtitle}</p>
+                      )}
+                      {currentCase.tagline && (
+                        <p className="text-sm text-navy/50 mt-1 italic">{currentCase.tagline}</p>
+                      )}
                     </div>
                   </div>
+
+                  {/* Highlight badges for special cases */}
+                  {currentCase.highlights && currentCase.highlights.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+                      {currentCase.highlights.map((h, i) => (
+                        <div key={i} className="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+                          <span className="text-lg flex-shrink-0">{h.emoji}</span>
+                          <div>
+                            <p className="text-xs font-bold uppercase tracking-wider text-navy/60">{h.label}</p>
+                            <p className="text-sm text-navy/80 font-medium">{h.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   
                   {/* Premium chart - Elevated Stage */}
                   <div className="relative mb-10">
@@ -360,8 +357,8 @@ const Proof: React.FC = () => {
                           <span>Groei</span>
                         </div>
                       </div>
-                      <ResponsiveContainer width="100%" height={280} key={`chart-container-${currentCase.id}-${activeIndex}`}>
-                        <BarChart data={currentCase.chartData} margin={{ top: 30, right: 30, left: 30, bottom: 10 }} barCategoryGap="25%">
+                      <ResponsiveContainer width="100%" height={220} className="md:!h-[280px]" key={`chart-container-${currentCase.id}-${activeIndex}`}>
+                        <BarChart data={currentCase.chartData} margin={{ top: 20, right: 10, left: 10, bottom: 10 }} barCategoryGap="25%">
                           <defs>
                             {/* Dark bar gradient: from-slate-800 to-slate-700 */}
                             <linearGradient id={`barGradient-${currentCase.id}`} x1="0" y1="1" x2="0" y2="0">
@@ -373,9 +370,6 @@ const Proof: React.FC = () => {
                               <stop offset="0%" stopColor="#f59e0b" stopOpacity={1}/>
                               <stop offset="100%" stopColor="#fcd34d" stopOpacity={1}/>
                             </linearGradient>
-                            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                              <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.15"/>
-                            </filter>
                           </defs>
                           <CartesianGrid stroke="rgba(15, 23, 42, 0.06)" strokeDasharray="4 4" vertical={false} />
                           <XAxis 
@@ -402,7 +396,6 @@ const Proof: React.FC = () => {
                             radius={[16, 16, 0, 0]} 
                             maxBarSize={60}
                             isAnimationActive={false}
-                            filter="url(#shadow)"
                           >
                             {currentCase.chartData.map((entry, index) => (
                               <Cell 
@@ -433,7 +426,7 @@ const Proof: React.FC = () => {
 
                   {/* Premium stats grid - Solid Tiles */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default">
+                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
                       <div className="absolute top-3 right-3 w-8 h-8 bg-gold/10 rounded-lg flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                         <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -445,7 +438,7 @@ const Proof: React.FC = () => {
                       <p className="text-xs text-navy/40 mt-1">per 28 dagen</p>
                     </div>
                     
-                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default">
+                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
                       <div className="absolute top-3 right-3 w-8 h-8 bg-gold/10 rounded-lg flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                         <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
@@ -456,7 +449,7 @@ const Proof: React.FC = () => {
                       <p className="text-xs text-navy/40 mt-1">per 28 dagen</p>
                     </div>
                     
-                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default">
+                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
                       <div className="absolute top-3 right-3 w-8 h-8 bg-gold/10 rounded-lg flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                         <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -467,7 +460,7 @@ const Proof: React.FC = () => {
                       <p className="text-xs text-navy/40 mt-1">click-through rate</p>
                     </div>
                     
-                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default">
+                    <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
                       <div className="absolute top-3 right-3 w-8 h-8 bg-gold/10 rounded-lg flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                         <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -482,7 +475,7 @@ const Proof: React.FC = () => {
               </div>
 
               {/* Right panel - Premium Testimonial */}
-              <div className="lg:col-span-2 p-8 md:p-12 lg:p-16 text-white flex flex-col justify-center relative overflow-hidden" style={{ background: 'radial-gradient(ellipse at top right, #1e293b 0%, #0f172a 100%)' }}>
+              <div className="lg:col-span-2 p-6 pb-20 md:p-12 lg:p-16 lg:pb-16 text-white flex flex-col justify-center relative overflow-hidden" style={{ background: 'radial-gradient(ellipse at top right, #1e293b 0%, #0f172a 100%)' }}>
                 {/* Subtle radial lighting effect */}
                 <div className="absolute top-0 right-0 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-600/10 rounded-full blur-2xl" />
@@ -491,38 +484,100 @@ const Proof: React.FC = () => {
                   {/* Huge decorative quote mark behind text */}
                   <div className="absolute -top-8 -left-6 text-9xl text-white font-serif leading-none select-none pointer-events-none" style={{ opacity: 0.05 }}>"</div>
                   
-                  {/* Star rating */}
-                  <div className="relative">
-                    <StarRating rating={currentCase.rating} />
-                    <p className="text-xs text-white/40 mt-1">Klantbeoordeling</p>
-                  </div>
-
-                  <p className="relative text-lg md:text-xl font-light leading-relaxed text-white/90">
-                    "{currentCase.quote}"
-                  </p>
-                  
-                  <footer className="relative pt-8 border-t border-white/10">
-                    <div className="flex items-center gap-4">
-                      <div 
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-xl"
-                        style={{ backgroundColor: `${currentCase.accentColor}30` }}
-                      >
-                        {currentCase.icon}
+                  {/* Description paragraphs for storyteller cases */}
+                  {currentCase.description && currentCase.description.length > 0 ? (
+                    <>
+                      <div className="relative">
+                        <p className="text-xs font-bold uppercase tracking-[0.15em] text-gold/80 mb-1">Het verhaal</p>
                       </div>
-                      <div>
-                        <p className="font-bold text-gold text-lg">{currentCase.author}</p>
-                        <p className="text-white/50 text-sm">{currentCase.role}</p>
+                      <div className="relative space-y-4">
+                        {currentCase.description.map((paragraph, i) => (
+                          <p key={`desc-${currentCase.id}-${i}`} className="text-sm md:text-base font-light leading-relaxed text-white/80">
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Star rating */}
+                      <div className="relative">
+                        <StarRating rating={currentCase.rating} activeColor="text-gold" />
+                        <p className="text-xs text-white/40 mt-1">{currentCase.quote2 ? 'Media-aandacht' : 'Klantbeoordeling'}</p>
+                      </div>
+
+                      <p className="relative text-base md:text-xl font-light leading-relaxed text-white/90">
+                        "{currentCase.quote}"
+                      </p>
+                      
+                      <footer className="relative pt-8 border-t border-white/10">
+                        <div className="flex items-center gap-4">
+                          <div 
+                            className="w-12 h-12 rounded-full flex items-center justify-center text-xl"
+                            style={{ backgroundColor: `${currentCase.accentColor}30` }}
+                          >
+                            {currentCase.icon}
+                          </div>
+                          <div>
+                            <p className="font-bold text-gold text-lg">{currentCase.author}</p>
+                            <p className="text-white/50 text-sm">{currentCase.role}</p>
+                          </div>
+                        </div>
+                      </footer>
+
+                      {/* Verified badge */}
+                      <div className="flex items-center gap-2 pt-4">
+                        <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-xs text-white/50">Geverifieerde review</span>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Press quotes (shown for cases with description) */}
+                  {currentCase.description && currentCase.description.length > 0 && (
+                    <div className="relative space-y-4 pt-6 border-t border-white/10">
+                      <div className="flex items-center gap-2 mb-2">
+                        <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                        <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/40">In de pers</p>
+                      </div>
+                      <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                        <p className="text-sm font-light leading-relaxed text-white/80 italic">
+                          "{currentCase.quote}"
+                        </p>
+                        <p className="text-xs font-semibold text-gold mt-2">{currentCase.author} <span className="text-white/40">— {currentCase.role}</span></p>
+                      </div>
+                      {currentCase.quote2 && (
+                        <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                          <p className="text-sm font-light leading-relaxed text-white/80 italic">
+                            "{currentCase.quote2}"
+                          </p>
+                          <p className="text-xs font-semibold text-gold mt-2">{currentCase.author2} <span className="text-white/40">— {currentCase.role2}</span></p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Second press quote for non-description cases */}
+                  {!currentCase.description && currentCase.quote2 && (
+                    <div className="relative mt-6 pt-6 border-t border-white/10">
+                      <p className="text-base font-light leading-relaxed text-white/80 italic">
+                        "{currentCase.quote2}"
+                      </p>
+                      <div className="flex items-center gap-2 mt-3">
+                        <span className="text-sm font-semibold text-gold">{currentCase.author2}</span>
+                        {currentCase.role2 && (
+                          <>
+                            <span className="text-white/30">•</span>
+                            <span className="text-sm text-white/50">{currentCase.role2}</span>
+                          </>
+                        )}
                       </div>
                     </div>
-                  </footer>
-
-                  {/* Verified badge */}
-                  <div className="flex items-center gap-2 pt-4">
-                    <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-xs text-white/50">Geverifieerde review</span>
-                  </div>
+                  )}
                 </blockquote>
 
                 {/* Premium navigation */}

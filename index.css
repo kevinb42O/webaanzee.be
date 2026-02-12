@@ -8,9 +8,15 @@ html {
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Premium Background with Noise Texture */
+/* ============================================
+   PREMIUM BACKGROUNDS & TEXTURES
+   ============================================ */
+
+/* Hero Background with Noise Texture */
 .bg-coast {
   background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('/hero-coast.jpg');
   background-size: cover;
@@ -28,7 +34,27 @@ body {
   z-index: 1;
 }
 
-/* Glassmorphism Card */
+/* Dot grid decorative pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle noise overlay for sections */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   GLASSMORPHISM SYSTEM
+   ============================================ */
+
 .glass-card {
   background: rgba(15, 23, 42, 0.5);
   backdrop-filter: blur(12px);
@@ -39,150 +65,222 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Glassmorphism Header */
 .glass-header {
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Portrait Glow Effect */
-.portrait-glow {
-  position: relative;
-}
+/* ============================================
+   PREMIUM BUTTON SYSTEM
+   ============================================ */
 
-.portrait-glow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(99, 102, 241, 0.15) 0%,
-    rgba(139, 92, 246, 0.1) 30%,
-    rgba(15, 23, 42, 0) 70%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Premium Gold Ring */
-.gold-ring {
-  position: relative;
-  padding: 3px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #d4af37 0%, rgba(212, 175, 55, 0.3) 50%, #d4af37 100%);
-  box-shadow: 
-    0 0 40px rgba(212, 175, 55, 0.3),
-    0 0 80px rgba(212, 175, 55, 0.15);
-}
-
-.gold-ring::after {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Premium Primary Button - Brighter Gold */
 .btn-primary {
-  @apply inline-flex items-center justify-center px-10 py-4 rounded-lg font-semibold text-lg transition-all w-full sm:w-auto relative overflow-hidden;
+  @apply inline-flex items-center justify-center px-10 py-4 rounded-xl font-bold text-lg transition-all duration-300 w-full sm:w-auto relative overflow-hidden;
   color: #020617;
-  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 50%, #f59e0b 100%);
+  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 50%, #f59e0b 100%);
   box-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 -2px 0 rgba(0, 0, 0, 0.1) inset,
-    0 12px 30px rgba(0, 0, 0, 0.35),
-    0 4px 16px rgba(251, 191, 36, 0.35);
+    0 4px 14px rgba(251, 191, 36, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.3) inset;
   border: none;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
 }
 
 .btn-primary::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
-  border-radius: 8px 8px 100% 100%;
-  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
   box-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 -2px 0 rgba(0, 0, 0, 0.1) inset,
-    0 16px 40px rgba(0, 0, 0, 0.4),
-    0 8px 24px rgba(251, 191, 36, 0.45);
+    0 8px 30px rgba(251, 191, 36, 0.45),
+    0 4px 12px rgba(251, 191, 36, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.3) inset;
   transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.4) inset,
-    0 -2px 0 rgba(0, 0, 0, 0.15) inset,
-    0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
 }
 
-/* Premium Ghost Button */
 .btn-secondary {
-  @apply inline-flex items-center justify-center px-10 py-4 rounded-lg font-semibold text-lg transition-all w-full sm:w-auto relative;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  @apply inline-flex items-center justify-center px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 w-full sm:w-auto relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  background: transparent;
-  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.15),
-    0 0 40px rgba(255, 255, 255, 0.05);
-  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
 }
 
 .btn-secondary:active {
   transform: translateY(0);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Script/Elegant Text */
-.text-elegant {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
-}
+/* ============================================
+   GRADIENT TEXT SYSTEM
+   ============================================ */
 
-/* Metallic Gold Text Gradient */
 .text-gold-gradient {
-  background: linear-gradient(to right, #fde68a, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #fde68a, #fbbf24, #f59e0b, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Animated shimmer for premium text */
+.text-shimmer {
+  background: linear-gradient(
+    110deg,
+    #fde68a 0%,
+    #fbbf24 30%,
+    #fde68a 50%,
+    #f59e0b 70%,
+    #fde68a 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}
+
+/* ============================================
+   GRADIENT BORDER SYSTEM
+   ============================================ */
+
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1.5rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.05) 50%, rgba(148, 163, 184, 0.1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Premium glow border */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.08));
+  filter: blur(16px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ============================================
+   PREMIUM CARD SYSTEM
+   ============================================ */
+
+/* Card with top accent line */
+.card-accent-top {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+}
+
+/* Card inner glow on hover */
+.card-glow:hover {
+  box-shadow: 
+    0 20px 50px -12px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(251, 191, 36, 0.15);
+}
+
+/* ============================================
+   PREMIUM SHADOWS
+   ============================================ */
+
+.shadow-premium {
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 16px 32px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-premium-lg {
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 8px 16px rgba(0, 0, 0, 0.04),
+    0 24px 48px rgba(0, 0, 0, 0.08),
+    0 48px 96px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-gold {
+  box-shadow: 
+    0 4px 14px rgba(251, 191, 36, 0.1),
+    0 20px 40px rgba(251, 191, 36, 0.08);
 }
 
 /* ============================================
    PREMIUM ANIMATIONS - 60fps Optimized
    ============================================ */
 
-/* Fade Up Animation */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -191,9 +289,29 @@ body {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   will-change: transform, opacity;
+}
+
+/* Subtle float animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow for highlight elements */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.3); }
+  50% { box-shadow: 0 0 20px 4px rgba(251, 191, 36, 0.15); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }
 
 /* Staggered delays */
@@ -204,67 +322,45 @@ body {
 .animate-delay-400 { animation-delay: 400ms; }
 .animate-delay-500 { animation-delay: 500ms; }
 
-/* Levitate Animation for Portrait */
-@keyframes levitate {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
+/* ============================================
+   SECTION DIVIDER
+   ============================================ */
 
-.animate-levitate {
-  animation: levitate 6s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* Glow Pulse Animation */
-@keyframes glow-pulse {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.65;
-  }
-}
-
-.animate-glow-pulse {
-  animation: glow-pulse 4s ease-in-out infinite;
-  will-change: opacity;
-}
-
-/* Button Sheen Effect */
-@keyframes sheen {
-  0% {
-    transform: translateX(-100%) skewX(-15deg);
-  }
-  100% {
-    transform: translateX(200%) skewX(-15deg);
-  }
-}
-
-.btn-sheen {
+.section-divider {
   position: relative;
-  overflow: hidden;
 }
 
-.btn-sheen::after {
+.section-divider::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transform: translateX(-100%) skewX(-15deg);
-  animation: sheen 4s ease-in-out infinite;
-  animation-delay: 1s;
-  pointer-events: none;
-  will-change: transform;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
 }
+
+/* ============================================
+   ACCESSIBILITY: Focus Indicators
+   ============================================ */
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+details > summary:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   SELECTION STYLING
+   ============================================ */
+
+::selection {
+  background: rgba(251, 191, 36, 0.25);
+  color: inherit;
+}
+
+

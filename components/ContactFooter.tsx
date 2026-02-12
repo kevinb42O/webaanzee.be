@@ -1,5 +1,5 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import { IconPhone, IconMail, IconWhatsapp } from './Icons';
 
 const ContactFooter: React.FC = () => {
@@ -19,6 +19,7 @@ const ContactFooter: React.FC = () => {
   const [errors, setErrors] = useState<{ [K in keyof typeof form]?: string }>({});
 
   const hasMailProgram = useMemo(() => Boolean(globalThis?.window), []);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!hasMailProgram) return;
@@ -43,6 +44,33 @@ const ContactFooter: React.FC = () => {
       globalThis.removeEventListener?.('keydown', onKeyDown);
     };
   }, [hasMailProgram, isModalOpen]);
+
+  // Focus trap for modal accessibility
+  useEffect(() => {
+    if (!isModalOpen || !modalRef.current) return;
+    const modal = modalRef.current;
+    const focusable = modal.querySelectorAll<HTMLElement>(
+      'input, textarea, button, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    requestAnimationFrame(() => first?.focus());
+
+    const trapFocus = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    modal.addEventListener('keydown', trapFocus);
+    return () => modal.removeEventListener('keydown', trapFocus);
+  }, [isModalOpen]);
 
   const validate = () => {
     const nextErrors: typeof errors = {};
@@ -99,22 +127,17 @@ const ContactFooter: React.FC = () => {
 
   return (
     <>
-    <section className="relative py-24 md:py-32 px-6 bg-slate-50 overflow-hidden">
-      {/* Subtle dot pattern background */}
-      <div 
-        className="absolute inset-0 opacity-[0.4]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184 / 0.4) 1px, transparent 0)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
+    <section className="relative py-28 md:py-36 px-6 bg-gradient-to-b from-white via-slate-50 to-slate-50 overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-50/50 rounded-full blur-[150px] pointer-events-none -translate-y-1/3"></div>
       
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         {/* Premium Headline */}
-        <h2 id="contact-heading" className="text-5xl md:text-7xl font-serif font-semibold tracking-tight text-slate-900">
+        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-600 mb-6">Neem contact op</span>
+        <h2 id="contact-heading" className="text-5xl md:text-7xl font-serif font-semibold tracking-[-0.03em] text-slate-900">
           Klaar voor meer klanten?
         </h2>
-        <p className="text-lg md:text-xl font-sans text-slate-600 mt-6 mb-16 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl font-sans text-slate-500 mt-6 mb-20 leading-relaxed max-w-2xl mx-auto">
           Neem vandaag nog vrijblijvend contact op. Direct contact, geen wachtlijsten. Bel, mail of WhatsApp — ik zeg u eerlijk wat zinvol is.
         </p>
 
@@ -123,13 +146,14 @@ const ContactFooter: React.FC = () => {
           {/* Phone Card */}
           <a 
             href="tel:0494816714" 
-            className="group flex flex-col items-center p-10 md:p-12 bg-white border border-slate-200 rounded-2xl shadow-md shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/10"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
           >
-            <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-amber-100 transition-colors">
-              <IconPhone className="w-8 h-8 text-amber-500" />
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <IconPhone className="w-7 h-7 text-amber-600" />
             </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">Telefoon</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Telefoon</span>
             <span className="text-2xl font-sans font-bold text-slate-900">Bel Kevin</span>
+            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">0494 81 67 14</span>
           </a>
 
           {/* WhatsApp Card */}
@@ -137,63 +161,65 @@ const ContactFooter: React.FC = () => {
             href="https://wa.me/32494816714" 
             target="_blank"
             rel="noreferrer"
-            className="group flex flex-col items-center p-10 md:p-12 bg-white border border-slate-200 rounded-2xl shadow-md shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/10"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
             aria-label="Stuur een WhatsApp-bericht"
           >
-            <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-amber-100 transition-colors">
-              <IconWhatsapp className="w-8 h-8 text-amber-500" />
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <IconWhatsapp className="w-7 h-7 text-amber-600" />
             </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">WhatsApp</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">WhatsApp</span>
             <span className="text-2xl font-sans font-bold text-slate-900">Stuur een bericht</span>
+            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Direct antwoord</span>
           </a>
 
           {/* Email Card */}
           <button
             type="button"
             onClick={openModal}
-            className="group flex flex-col items-center p-10 md:p-12 bg-white border border-slate-200 rounded-2xl shadow-md shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/10"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
             aria-haspopup="dialog"
             aria-expanded={isModalOpen}
           >
-            <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-amber-100 transition-colors">
-              <IconMail className="w-8 h-8 text-amber-500" />
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <IconMail className="w-7 h-7 text-amber-600" />
             </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">E-mail</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">E-mail</span>
             <span className="text-lg font-sans font-bold text-slate-900 break-all">kevin@webaanzee.be</span>
+            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Stuur een mail</span>
           </button>
         </div>
 
-        {/* Location / Footer Bar with visual separation */}
-        <div className="border-t border-slate-200 pt-12">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-600 mb-6">
+        {/* Location / Footer Bar */}
+        <div className="border-t border-slate-200/80 pt-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-600 mb-6">
             Servicegebied
           </p>
           
-          {/* Cities with gold diamond separators */}
-          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-3 font-sans text-sm font-medium text-slate-500">
-            <span>Wenduine</span>
-            <span className="text-amber-500 text-xs">♦</span>
-            <span>De Haan</span>
-            <span className="text-amber-500 text-xs">♦</span>
-            <span>Zeebrugge</span>
-            <span className="text-amber-500 text-xs">♦</span>
-            <span>Brugge</span>
-            <span className="text-amber-500 text-xs">♦</span>
-            <span>Blankenberge</span>
+          {/* Cities with elegant separators */}
+          <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-sans text-sm font-medium text-slate-400">
+            {['Wenduine', 'De Haan', 'Zeebrugge', 'Brugge', 'Blankenberge'].map((city, i, arr) => (
+              <React.Fragment key={city}>
+                <span className="hover:text-slate-600 transition-colors">{city}</span>
+                {i < arr.length - 1 && <span className="text-amber-400/60 text-[8px]">◆</span>}
+              </React.Fragment>
+            ))}
           </div>
 
-          <p className="mt-8 text-sm text-slate-500">
-            Gevestigd in <span className="font-medium text-slate-700">Blankenberge</span>
+          <p className="mt-8 text-sm text-slate-400">
+            Gevestigd in <span className="font-semibold text-slate-600">Blankenberge</span>
           </p>
         </div>
       </div>
     </section>
 
     {/* High-End Footer */}
-    <footer className="bg-[#0B0F19] py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+    <footer className="relative bg-[#0B0F19] py-16 md:py-20 px-6 overflow-hidden">
+      {/* Subtle top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent"></div>
+      
+      <div className="max-w-7xl mx-auto relative">
         {/* Main Footer Grid */}
-        <div className="grid md:grid-cols-3 gap-16 mb-12">
+        <div className="grid md:grid-cols-3 gap-16 mb-16">
           {/* Column 1: Brand Identity */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
@@ -210,7 +236,7 @@ const ContactFooter: React.FC = () => {
               </h3>
             </div>
             <p className="text-slate-400 leading-relaxed">
-              Digitale ambacht aan de Belgische kust. Geen bandwerk, maar websites met karakter die uw zaak laten groeien.
+              Digitale ambacht aan de Belgische kust. Geen bandwerk, maar websites die klanten opleveren.
             </p>
           </div>
 
@@ -377,11 +403,12 @@ const ContactFooter: React.FC = () => {
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') closeModal();
           }}
-          className="absolute inset-0 bg-navy/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-navy/70 backdrop-blur-md"
         ></button>
         <dialog
+          ref={modalRef}
           open
-          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 md:p-10 border border-slate-200"
+          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-premium-lg p-8 md:p-10 border border-slate-100"
           aria-label="Stuur een bericht"
         >
           <div className="flex items-start justify-between gap-4 mb-6">

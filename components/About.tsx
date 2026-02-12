@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { IconLocation } from './Icons';
+import { IconLocation, StarRating } from './Icons';
 
 const About: React.FC = () => {
   const [parallaxOffset, setParallaxOffset] = useState(0);
@@ -8,7 +8,6 @@ const About: React.FC = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
@@ -20,7 +19,6 @@ const About: React.FC = () => {
   useEffect(() => {
     if (prefersReducedMotion) return;
 
-    // Disable on mobile for performance
     const isMobile = window.innerWidth < 768;
     if (isMobile) return;
 
@@ -29,68 +27,70 @@ const About: React.FC = () => {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate parallax only when section is in view
       if (rect.top < windowHeight && rect.bottom > 0) {
         const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-        const offset = (scrollProgress - 0.5) * 150; // Noticeable 150px max movement
+        const offset = (scrollProgress - 0.5) * 150;
         setParallaxOffset(offset);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial calculation
+    handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prefersReducedMotion]);
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-6 bg-navy text-white overflow-hidden" aria-labelledby="over-ons-heading">
+    <section ref={sectionRef} className="relative py-32 md:py-40 px-6 bg-navy text-white overflow-hidden" aria-labelledby="over-ons-heading">
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.015]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
       }} />
       
+      {/* Radial light accents */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
+      
       <div className="relative max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Image with modern layered magazine aesthetic */}
-          <div 
-            className="relative"
-          >
+          <div className="relative">
             {/* Offset backdrop layer */}
             <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/5" />
+            
+            {/* Gradient edge glow */}
+            <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-br from-amber-500/20 via-transparent to-transparent pointer-events-none z-10"></div>
             
             {/* Main image container */}
             <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/50">
               <img 
                 src="/studiofoto.png" 
-                alt="Kevin B. - Uw Lokale Vakman" 
+                alt="Kevin Bourguignon, webdesigner bij Webaanzee, in zijn studio in Blankenberge" 
                 loading="lazy"
                 decoding="async"
                 width="800"
                 height="1000"
                 className="relative w-full object-cover aspect-[4/5] contrast-[1.05] brightness-[1.05]"
                 style={{
-                  transform: prefersReducedMotion ? 'none' : `translateY(${parallaxOffset}px) scale(1.25)`,
+                  transform: prefersReducedMotion ? 'none' : `translateY(${parallaxOffset}px) scale(1.08)`,
                 }}
               />
             </div>
           </div>
 
           {/* Content */}
-          <div 
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div className="space-y-6">
-              {/* Kicker - smaller, bold, wide tracking, gold */}
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500">Persoonlijke Aanpak</span>
-              <h2 id="over-ons-heading" className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.1]">
-                Uw digitale partner
+              {/* Kicker */}
+              <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-500">Persoonlijke Aanpak</span>
+              <h2 id="over-ons-heading" className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.08] tracking-[-0.02em]">
+                Eén aanspreekpunt.
                 <br />
-                <span className="text-white/70">aan de kust.</span>
+                <span className="text-white/50">Geen agentschap.</span>
               </h2>
             </div>
             
-            {/* Body text - light gray with relaxed line height */}
+            {/* Body text */}
             <div className="space-y-6 leading-relaxed text-lg md:text-xl text-slate-300">
               <p>
                 Geen onpersoonlijk agentschap, maar een vakman uit de buurt. Ik spreek uw taal, ken de regio en sta altijd klaar voor een koffie en een goed gesprek.
@@ -100,42 +100,41 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            {/* Quote Block - Editorial Centerpiece */}
-            <blockquote className="relative bg-slate-800/50 rounded-lg p-6 overflow-hidden">
+            {/* Quote Block - Premium */}
+            <blockquote className="relative rounded-xl p-6 overflow-hidden border border-white/[0.06]" style={{ background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%)' }}>
+              {/* Gold accent line left */}
+              <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600"></div>
               {/* Large watermark quote icon */}
-              <span className="absolute -top-4 -left-2 text-[120px] font-serif text-slate-700/30 leading-none select-none pointer-events-none">"</span>
-              <p className="relative z-10 font-serif text-amber-500 text-xl md:text-2xl italic">
-                "Snelle service, eerlijke afspraken. Geen woorden maar daden."
+              <span className="absolute -top-4 -left-2 text-[80px] font-serif text-slate-700/15 leading-none select-none pointer-events-none">"</span>
+              <p className="relative z-10 pl-4 font-serif text-amber-400/90 text-xl md:text-2xl italic leading-relaxed">
+                "Kevin nam alles uit handen. We zien nu wekelijks nieuwe gezichten in de winkel."
               </p>
+              <footer className="relative z-10 pl-4 mt-3 text-sm text-white/40">
+                — Olivier &amp; Kelly, Vishandel Blankenberge
+              </footer>
             </blockquote>
 
-            <p className="text-lg text-slate-300 leading-relaxed">
-              Geen uurtje-factuurtje of technisch jargon. Gewoon een goede website voor een eerlijke prijs, volledig ontzorgd.
+            <p className="text-lg text-slate-400 leading-relaxed">
+              Geen uurtje-factuurtje of technisch jargon. Gewoon een goede website voor een eerlijke prijs, met iemand die u kan bellen.
             </p>
 
-            {/* Trust Signals - Horizontal aligned */}
-            <div className="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center gap-10">
+            {/* Trust Signals */}
+            <div className="mt-12 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center gap-10">
               {/* 5-Star Service */}
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-6 h-6 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
+                <StarRating rating={5} size="w-5 h-5" />
                 <div>
-                  <p className="font-bold text-white">5-Sterren Service</p>
-                  <p className="text-sm text-slate-400">Persoonlijke aanpak</p>
+                  <p className="font-bold text-white text-sm">5-Sterren Service</p>
+                  <p className="text-xs text-slate-500">Persoonlijke aanpak</p>
                 </div>
               </div>
               
               {/* Location */}
               <div className="flex items-center gap-4">
-                <IconLocation className="w-6 h-6 text-amber-400 flex-shrink-0" />
+                <IconLocation className="w-5 h-5 text-amber-400 flex-shrink-0" />
                 <div>
-                  <p className="font-bold text-white">Altijd dichtbij</p>
-                  <p className="text-sm text-slate-400">Regio Kust &amp; Brugge</p>
+                  <p className="font-bold text-white text-sm">Altijd dichtbij</p>
+                  <p className="text-xs text-slate-500">Regio Kust &amp; Brugge</p>
                 </div>
               </div>
             </div>

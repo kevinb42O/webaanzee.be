@@ -1,14 +1,13 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
-import Proof from './components/Proof';
+const Proof = lazy(() => import('./components/Proof'));
 import Offer from './components/Offer';
 import FAQ from './components/FAQ';
 import About from './components/About';
 import ContactFooter from './components/ContactFooter';
-import { IconInstagram, IconFacebook, IconLinkedIn, IconMail, IconLocation, IconTrendUp } from './components/Icons';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +19,9 @@ const App: React.FC = () => {
           <ProblemSolution />
         </section>
         <section id="resultaten" aria-labelledby="resultaten-heading">
-          <Proof />
+          <Suspense fallback={<div className="py-32" />}>
+            <Proof />
+          </Suspense>
         </section>
         <section id="prijzen" aria-labelledby="prijzen-heading">
           <Offer />

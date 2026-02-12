@@ -9,6 +9,9 @@ const Header: React.FC = () => {
     <header
       className="sticky top-0 z-50 px-6 py-3 md:py-4 glass-header text-white transition-all duration-300"
     >
+      {/* Subtle bottom accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent"></div>
+      
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 md:gap-4 text-xl md:text-3xl font-serif font-bold">

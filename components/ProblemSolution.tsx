@@ -33,64 +33,62 @@ const ProblemSolution: React.FC = () => {
   const features = [
     {
       icon: IconCamera,
-      title: "Sterk Beeldmateriaal",
-      description: "Heeft u al foto's? Perfect. Nog geen? Geen probleem. Ik selecteer professionele beelden die perfect bij uw huisstijl passen."
+      title: "Design dat verkoopt",
+      description: "Geen standaard template, maar een premium ontwerp gericht op conversie. Bezoekers worden klanten."
     },
     {
       icon: IconPencil,
-      title: "Teksten die overtuigen",
-      description: "Geen moeilijke marketingtaal. Gewoon duidelijke Vlaamse tekst die aanzet tot contact."
+      title: "Technische Dominantie",
+      description: "Razendsnelle laadtijden en een 100/100 score bij Google. De techniek die nodig is om de concurrentie te verslaan."
     },
     {
       icon: IconMobile,
-      title: "Alles geregeld, zonder gedoe",
-      description: "Domeinnaam, e-mail en website. Ik regel de techniek van A tot Z en zorg dat u beter gevonden wordt op Google."
+      title: "Lokale SEO Expert",
+      description: "Ik positioneer uw zaak specifiek voor uw regio. Zodat u gevonden wordt door mensen die écht in de buurt zijn."
     }
   ];
 
   const checklistItems = [
-    "Een website die perfect werkt op elke smartphone of tablet.",
-    "U verliest geen kostbare tijd aan technisch gedoe.",
-    "Ik kom persoonlijk langs en regel alles van A tot Z."
+    "Uw website werkt perfect op elke smartphone en tablet.",
+    "U hoeft geen minuut te verspillen aan technisch gedoe.",
+    "Bewezen strategie die bezoekers omzet in klanten."
   ];
 
   return (
     <section 
       ref={sectionRef}
-      className="relative py-28 md:py-32 px-6 bg-slate-50 overflow-hidden group/section"
+      className="relative py-28 md:py-36 px-6 bg-slate-50 overflow-hidden noise-overlay"
     >
-      {/* Subtle dot pattern background */}
-      <div 
-        className="absolute inset-0 opacity-[0.4]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184 / 0.4) 1px, transparent 0)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
+      {/* Subtle dot pattern */}
+      <div className="absolute inset-0 bg-dot-pattern opacity-40 pointer-events-none"></div>
       
+      {/* Radial gradient accent - pushed down to avoid showing through wave */}
+      <div className="absolute top-[200px] right-0 w-[600px] h-[600px] bg-amber-100/30 rounded-full blur-[150px] pointer-events-none translate-x-1/4"></div>
+
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           {/* Left Content */}
           <div className="space-y-8">
-            {/* Main Headline - Display Serif | Delay: 0ms */}
+            {/* Kicker */}
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-600">Het probleem</span>
+            
+            {/* Main Headline */}
             <div>
-              <h2 id="werkwijze-heading" className="text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.15] tracking-tight mb-4">
-                Wordt u al gevonden door nieuwe klanten?
+              <h2 id="werkwijze-heading" className="text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.12] tracking-[-0.02em] mb-6">
+                Uw concurrent steelt uw klanten via <span className="inline-flex tracking-[-0.02em]"><span style={{color:'#4285F4'}}>G</span><span style={{color:'#EA4335'}}>o</span><span style={{color:'#FBBC05'}}>o</span><span style={{color:'#4285F4'}}>g</span><span style={{color:'#34A853'}}>l</span><span style={{color:'#EA4335'}}>e</span></span>.
               </h2>
-              {/* Gradient bar - gold to transparent */}
-              <div className="h-1.5 w-24 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-transparent" />
             </div>
             
-            {/* Body Text - Sans-Serif with relaxed leading | Delay: 300ms */}
+            {/* Body Text */}
             <p className="text-xl text-slate-700 leading-relaxed font-normal">
-              Uw klanten zoeken u op hun smartphone. Vindt Google u niet? Dan gaat de klant naar de buurman.
+              Terwijl u dit leest, zoeken mensen naar uw diensten. Komen ze bij u terecht, of bij de concurrent die wél op #1 staat?
             </p>
-            <p className="text-slate-600 leading-relaxed text-base md:text-lg">
-              Als lokale ondernemer aan de kust leeft u van uw reputatie. Maar in de wereld van vandaag begint die reputatie vaak online. Een verouderde site of - erger nog - geen site, kost u elke dag omzet.
+            <p className="text-slate-500 leading-relaxed text-base md:text-lg">
+              Als lokale ondernemer leeft u van uw reputatie. Maar vandaag beslist de klant op zijn smartphone, nog voor hij uw zaak binnenstapt. Een verouderde site of — erger nog — geen site, kost u elke dag omzet. Ik zorg ervoor dat u die eerste positie pakt.
             </p>
             
-            {/* Checklist with Gold Checkmarks | Staggered: 500ms, 700ms, 900ms */}
+            {/* Checklist with Gold Checkmarks */}
             <ul className="space-y-5 pt-2">
               {checklistItems.map((text, idx) => (
                 <li 
@@ -104,37 +102,43 @@ const ProblemSolution: React.FC = () => {
             </ul>
           </div>
 
-          {/* Right Side - Premium Feature Card | Delay: 200ms */}
+          {/* Right Side - Premium Feature Card */}
           <div className="relative">
-            {/* Card with gradient background, heavy shadow, and subtle border */}
+            {/* Floating glow behind card */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-amber-200/20 via-transparent to-slate-400/10 rounded-[2rem] blur-2xl pointer-events-none"></div>
+            
+            {/* Card with gradient top accent */}
             <div 
-              className="relative rounded-3xl p-8 md:p-10 lg:p-12 text-white overflow-hidden border border-white/10"
+              className="relative rounded-3xl p-8 md:p-10 lg:p-12 text-white overflow-hidden"
               style={{
-                background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
-                boxShadow: '0 25px 50px -12px rgba(51, 65, 85, 0.25), 0 40px 80px -20px rgba(15, 23, 42, 0.3)'
+                background: 'linear-gradient(170deg, #1e293b 0%, #0f172a 60%, #0c1222 100%)',
+                boxShadow: '0 25px 60px -12px rgba(15, 23, 42, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)'
               }}
             >
-              {/* Subtle inner glow */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              {/* Gradient top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
+              
+              {/* Inner glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] bg-amber-500/[0.04] rounded-full blur-[80px] pointer-events-none" />
               
               {/* Card Headline - Gold Gradient Text */}
               <h3 className="text-2xl md:text-[1.75rem] font-serif font-semibold mb-10 text-gold-gradient">
-                Wat ik voor u regel:
+                Wat u krijgt:
               </h3>
               
               {/* Feature Items */}
               <div className="space-y-8">
                 {features.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-5">
-                    {/* Icon Container - Transparent circle with gold border */}
-                    <div className="flex-shrink-0 w-14 h-14 rounded-full border-2 border-amber-400/60 flex items-center justify-center bg-transparent">
-                      <feature.icon className="w-6 h-6 text-amber-400" />
+                  <div key={idx} className="flex items-start gap-5 group">
+                    {/* Icon Container */}
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center group-hover:bg-white/[0.1] group-hover:border-amber-500/20 transition-all duration-300">
+                      <feature.icon className="w-5 h-5 text-amber-400" />
                     </div>
                     
                     {/* Text Content */}
                     <div className="pt-1">
                       <h4 className="text-lg font-semibold text-white mb-1.5">{feature.title}</h4>
-                      <p className="text-white/65 text-sm leading-relaxed">{feature.description}</p>
+                      <p className="text-white/50 text-sm leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                 ))}
