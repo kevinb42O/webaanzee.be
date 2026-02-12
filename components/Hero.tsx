@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { IconCheck } from './Icons';
+import { scrollToSection } from '../utils/scrollToSection';
 import selfieNoBackground from '../selfieNObackgroundV3.png';
 
 const Hero: React.FC = () => {
@@ -47,13 +48,15 @@ const Hero: React.FC = () => {
           <div className="px-4 md:px-0 w-full md:w-auto mb-4 md:mb-5">
             <div className="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
               <a 
-                href="#contact" 
+                href="/" 
+                onClick={(e) => scrollToSection(e, 'contact')}
                 className="btn-primary w-full sm:w-auto text-center"
               >
                 Gratis kennismakingsgesprek
               </a>
               <a 
-                href="#werkwijze" 
+                href="/" 
+                onClick={(e) => scrollToSection(e, 'werkwijze')}
                 className="btn-secondary w-full sm:w-auto text-center"
               >
                 Mijn werkwijze
@@ -64,7 +67,7 @@ const Hero: React.FC = () => {
           {/* Social Proof Link */}
           <p className="text-white/40 text-sm md:text-base mb-10 md:mb-12 px-4 md:px-0">
             Of bekijk eerst{' '}
-            <a href="#resultaten" className="text-amber-400 hover:text-amber-300 underline underline-offset-2 decoration-amber-400/40 transition-colors font-medium">
+            <a href="/" onClick={(e) => scrollToSection(e, 'resultaten')} className="text-amber-400 hover:text-amber-300 underline underline-offset-2 decoration-amber-400/40 transition-colors font-medium cursor-pointer">
               mijn laatste resultaat: 13.700 bezoekers in 12 dagen
             </a>{' '}
             ↓

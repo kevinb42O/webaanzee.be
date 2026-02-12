@@ -1,4 +1,5 @@
 import React from 'react';
+import { scrollToSection } from '../utils/scrollToSection';
 
 interface FAQItem {
   id: string;
@@ -103,7 +104,7 @@ const FAQ: React.FC = () => {
         <div className="text-center mt-12">
           <p className="text-slate-400 text-sm">
             Uw vraag er niet bij?{' '}
-            <a href="#contact" className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300">Stel ze gerust</a>
+            <a href="/" onClick={(e) => scrollToSection(e, 'contact')} className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300 cursor-pointer">Stel ze gerust</a>
           </p>
         </div>
       </div>

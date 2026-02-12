@@ -1,9 +1,15 @@
 
 import React, { useState } from 'react';
 import { IconPhone } from './Icons';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    scrollToSection(e, id);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -31,11 +37,11 @@ const Header: React.FC = () => {
           </a>
 
           <nav className="hidden lg:flex items-center space-x-6 text-[11px] lg:text-xs font-medium uppercase tracking-[0.2em]">
-            <a href="/#werkwijze" className="text-gray-300 hover:text-white transition-colors duration-200">Werkwijze</a>
-            <a href="/#resultaten" className="text-gray-300 hover:text-white transition-colors duration-200">Resultaten</a>
-            <a href="/#prijzen" className="text-gray-300 hover:text-white transition-colors duration-200">Prijzen</a>
-            <a href="/#faq" className="text-gray-300 hover:text-white transition-colors duration-200">FAQ</a>
-            <a href="/#contact" className="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+            <a href="/" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Werkwijze</a>
+            <a href="/" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Resultaten</a>
+            <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Prijzen</a>
+            <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
+            <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a>
           </nav>
 
           {/* CTA Button - Always visible */}
@@ -70,11 +76,11 @@ const Header: React.FC = () => {
         {mobileMenuOpen && (
           <nav className="lg:hidden mt-4 pb-4 border-t border-white/10 pt-4">
             <div className="flex flex-col space-y-4 text-sm font-medium">
-              <a href="/#werkwijze" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Werkwijze</a>
-              <a href="/#resultaten" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Resultaten</a>
-              <a href="/#prijzen" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Prijzen</a>
-              <a href="/#faq" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">FAQ</a>
-              <a href="/#contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Contact</a>
+              <a href="/" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Werkwijze</a>
+              <a href="/" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Resultaten</a>
+              <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Prijzen</a>
+              <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">FAQ</a>
+              <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a>
               <a 
                 href="tel:0494816714" 
                 onClick={() => setMobileMenuOpen(false)}

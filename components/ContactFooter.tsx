@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useMemo, useState } from 'react';
 import { IconPhone, IconMail, IconWhatsapp } from './Icons';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const ContactFooter: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -248,32 +249,36 @@ const ContactFooter: React.FC = () => {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="#over-ons" 
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200"
+                  href="/" 
+                  onClick={(e) => scrollToSection(e, 'over-ons')}
+                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
                 >
                   Over Webaanzee
                 </a>
               </li>
               <li>
                 <a 
-                  href="#werkwijze" 
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200"
+                  href="/" 
+                  onClick={(e) => scrollToSection(e, 'werkwijze')}
+                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
                 >
                   Werkwijze
                 </a>
               </li>
               <li>
                 <a 
-                  href="#prijzen" 
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200"
+                  href="/" 
+                  onClick={(e) => scrollToSection(e, 'prijzen')}
+                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
                 >
                   Wat ik aanbied
                 </a>
               </li>
               <li>
                 <a 
-                  href="#contact" 
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200"
+                  href="/" 
+                  onClick={(e) => scrollToSection(e, 'contact')}
+                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
                 >
                   Contact
                 </a>
@@ -384,8 +389,9 @@ const ContactFooter: React.FC = () => {
               Privacy
             </a>
             <a 
-              href="#cookies" 
-              className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              href="/" 
+              onClick={(e) => scrollToSection(e, 'cookies')}
+              className="text-xs text-slate-500 hover:text-slate-300 transition-colors cursor-pointer"
             >
               Cookies
             </a>

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { IconCheck, IconShield } from './Icons';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const Offer: React.FC = () => {
   return (
@@ -63,7 +64,8 @@ const Offer: React.FC = () => {
               </div>
 
               <a 
-                href="#contact" 
+                href="/" 
+                onClick={(e) => scrollToSection(e, 'contact')}
                 className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 Start mijn visitekaart
@@ -126,7 +128,8 @@ const Offer: React.FC = () => {
               </div>
 
               <a 
-                href="#contact" 
+                href="/" 
+                onClick={(e) => scrollToSection(e, 'contact')}
                 className="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:-translate-y-0.5"
               >
                 Kies het Kust-Pakket
@@ -178,7 +181,8 @@ const Offer: React.FC = () => {
               </div>
 
               <a 
-                href="#contact" 
+                href="/" 
+                onClick={(e) => scrollToSection(e, 'contact')}
                 className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 Kies het Groei-Pakket
@@ -190,7 +194,7 @@ const Offer: React.FC = () => {
         {/* Trust note under pricing */}
         <p className="text-center text-sm text-slate-400 mt-12 max-w-lg mx-auto">
           Alle prijzen zijn exclusief BTW. Twijfelt u welk pakket bij u past?{' '}
-          <a href="#contact" className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300">Bel me</a> en ik adviseer u eerlijk.
+          <a href="/" onClick={(e) => scrollToSection(e, 'contact')} className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300 cursor-pointer">Bel me</a> en ik adviseer u eerlijk.
         </p>
       </div>
     </section>
