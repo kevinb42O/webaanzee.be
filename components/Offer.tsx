@@ -194,7 +194,7 @@ const Offer: React.FC = () => {
         {/* Trust note under pricing */}
         <p className="text-center text-sm text-slate-400 mt-12 max-w-lg mx-auto">
           Alle prijzen zijn exclusief BTW. Twijfelt u welk pakket bij u past?{' '}
-          <a href="/" onClick={(e) => scrollToSection(e, 'contact')} className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300 cursor-pointer">Bel me</a> en ik adviseer u eerlijk.
+          <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="text-amber-600 font-medium hover:text-amber-700 transition-colors underline underline-offset-2 decoration-amber-300 cursor-pointer">Bel me</a> en ik adviseer u eerlijk.
         </p>
       </div>
     </section>

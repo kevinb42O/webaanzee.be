@@ -64,7 +64,7 @@ const About: React.FC = () => {
             {/* Main image container */}
             <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/50">
               <img 
-                src="/studiofoto.png" 
+                src="/studiofoto.webp" 
                 alt="Kevin Bourguignon, webdesigner bij Webaanzee, in zijn studio in Blankenberge" 
                 loading="lazy"
                 decoding="async"

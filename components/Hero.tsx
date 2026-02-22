@@ -2,11 +2,25 @@
 import React from 'react';
 import { IconCheck } from './Icons';
 import { scrollToSection } from '../utils/scrollToSection';
-import selfieNoBackground from '../selfieNObackgroundV3.png';
+const selfieNoBackground = '/selfie.webp';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 md:pt-28 pb-32 sm:pb-36 md:pb-44 lg:pb-48 bg-coast overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-24 md:pt-28 pb-32 sm:pb-36 md:pb-44 lg:pb-48 overflow-hidden bg-navy">
+      {/* Hero background image — real <img> for LCP discovery */}
+      <img 
+        src="/blankenberge-new.webp" 
+        alt="" 
+        role="presentation"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      />
+      {/* Dark overlay matching original bg-coast gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy/85 to-navy/75 pointer-events-none" style={{ zIndex: 1 }}></div>
+      {/* Noise texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-coast-noise" style={{ zIndex: 1 }}></div>
       {/* Mesh gradient overlays for depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy/50 via-transparent to-purple-900/20 pointer-events-none z-[2]"></div>
       <div className="absolute inset-0 bg-navy/30 pointer-events-none z-[2]"></div>
@@ -48,14 +62,14 @@ const Hero: React.FC = () => {
           <div className="px-4 md:px-0 w-full md:w-auto mb-4 md:mb-5">
             <div className="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
               <a 
-                href="/" 
+                href="#contact" 
                 onClick={(e) => scrollToSection(e, 'contact')}
                 className="btn-primary w-full sm:w-auto text-center"
               >
                 Gratis kennismakingsgesprek
               </a>
               <a 
-                href="/" 
+                href="#werkwijze" 
                 onClick={(e) => scrollToSection(e, 'werkwijze')}
                 className="btn-secondary w-full sm:w-auto text-center"
               >
@@ -67,7 +81,7 @@ const Hero: React.FC = () => {
           {/* Social Proof Link */}
           <p className="text-white/40 text-sm md:text-base mb-10 md:mb-12 px-4 md:px-0">
             Of bekijk eerst{' '}
-            <a href="/" onClick={(e) => scrollToSection(e, 'resultaten')} className="text-amber-400 hover:text-amber-300 underline underline-offset-2 decoration-amber-400/40 transition-colors font-medium cursor-pointer">
+            <a href="#resultaten" onClick={(e) => scrollToSection(e, 'resultaten')} className="text-amber-400 hover:text-amber-300 underline underline-offset-2 decoration-amber-400/40 transition-colors font-medium cursor-pointer">
               mijn laatste resultaat: 13.700 bezoekers in 12 dagen
             </a>{' '}
             ↓
@@ -107,6 +121,8 @@ const Hero: React.FC = () => {
               src={selfieNoBackground}
               alt="Kevin van Webaanzee, webdesigner" 
               decoding="async"
+              loading="eager"
+              fetchPriority="high"
               width="800"
               height="600"
               className="w-full h-auto object-contain relative z-10"

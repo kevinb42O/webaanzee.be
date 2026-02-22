@@ -225,7 +225,7 @@ const ContactFooter: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-3">
               <img
-                src="/logo_zondertekst_zonderachtergrond.png"
+                src="/logo.webp"
                 alt="Webaanzee"
                 width="36"
                 height="36"

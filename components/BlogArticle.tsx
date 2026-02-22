@@ -10,7 +10,7 @@ const BlogArticle: React.FC = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 md:gap-4 text-xl md:text-3xl font-serif font-bold">
             <img
-              src="/logo_zondertekst_zonderachtergrond.png"
+              src="/logo.webp"
               alt="Webaanzee"
               width="44"
               height="44"
@@ -362,10 +362,11 @@ const BlogArticle: React.FC = () => {
           {/* Author box */}
           <div className="mt-12 bg-slate-50 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-center border border-slate-100">
             <img
-              src="/logo_zondertekst_zonderachtergrond.png"
+              src="/logo.webp"
               alt="Kevin Bourguignon"
               width="80"
               height="80"
+              loading="lazy"
               className="w-20 h-20 rounded-full object-contain bg-white p-2 border border-slate-200 shadow-sm"
             />
             <div>

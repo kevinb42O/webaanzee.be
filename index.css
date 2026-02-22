@@ -16,22 +16,15 @@ body {
    PREMIUM BACKGROUNDS & TEXTURES
    ============================================ */
 
-/* Hero Background with Noise Texture */
-.bg-coast {
-  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('/hero-coast.jpg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
+/* Hero Background Noise Texture */
+.bg-coast-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-.bg-coast::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 1;
+/* Legacy bg-coast kept for compatibility */
+.bg-coast {
+  background-color: #0f172a;
+  position: relative;
 }
 
 /* Dot grid decorative pattern */
@@ -300,9 +293,10 @@ body {
   animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   will-change: transform, opacity;
+  contain: layout style;
 }
 
-/* Subtle float animation for decorative elements */
+/* Subtle float animation for decorative elements — GPU composited */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
@@ -310,16 +304,18 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Pulse glow for highlight elements */
+/* Pulse glow for highlight elements — GPU composited */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.3); }
-  50% { box-shadow: 0 0 20px 4px rgba(251, 191, 36, 0.15); }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0; }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 /* Staggered delays */

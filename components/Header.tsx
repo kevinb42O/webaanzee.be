@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 md:gap-4 text-xl md:text-3xl font-serif font-bold">
             <img
-              src="/logo_zondertekst_zonderachtergrond.png"
+              src="/logo.webp"
               alt="Webaanzee"
               width="44"
               height="44"
@@ -37,18 +37,18 @@ const Header: React.FC = () => {
           </a>
 
           <nav className="hidden lg:flex items-center space-x-6 text-[11px] lg:text-xs font-medium uppercase tracking-[0.2em]">
-            <a href="/" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Werkwijze</a>
-            <a href="/" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Resultaten</a>
-            <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Prijzen</a>
-            <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
-            <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a>
+            <a href="#werkwijze" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Werkwijze</a>
+            <a href="#resultaten" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Resultaten</a>
+            <a href="#prijzen" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Prijzen</a>
+            <a href="#faq" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
+            <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a>
             <a href="/blog/waarom-website-nodig-2026.html" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
           </nav>
 
           {/* CTA Buttons - Always visible */}
           <div className="flex items-center gap-2">
             <a 
-              href="/" 
+              href="#seo-analyse" 
               onClick={(e) => handleNav(e, 'seo-analyse')}
               className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 transition-all duration-200 whitespace-nowrap cursor-pointer"
             >
@@ -85,13 +85,13 @@ const Header: React.FC = () => {
         {mobileMenuOpen && (
           <nav className="lg:hidden mt-4 pb-4 border-t border-white/10 pt-4">
             <div className="flex flex-col space-y-4 text-sm font-medium">
-              <a href="/" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Werkwijze</a>
-              <a href="/" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Resultaten</a>
-              <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Prijzen</a>
-              <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">FAQ</a>
-              <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a>
+              <a href="#werkwijze" onClick={(e) => handleNav(e, 'werkwijze')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Werkwijze</a>
+              <a href="#resultaten" onClick={(e) => handleNav(e, 'resultaten')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Resultaten</a>
+              <a href="#prijzen" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Prijzen</a>
+              <a href="#faq" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">FAQ</a>
+              <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a>
               <a href="/blog/waarom-website-nodig-2026.html" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Blog</a>
-              <a href="/" onClick={(e) => handleNav(e, 'seo-analyse')} className="inline-flex items-center gap-2 text-emerald-400 font-semibold mt-2 cursor-pointer">
+              <a href="#seo-analyse" onClick={(e) => handleNav(e, 'seo-analyse')} className="inline-flex items-center gap-2 text-emerald-400 font-semibold mt-2 cursor-pointer">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                 <span>Gratis SEO-analyse</span>
               </a>
