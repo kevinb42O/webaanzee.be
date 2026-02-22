@@ -42,10 +42,19 @@ const Header: React.FC = () => {
             <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Prijzen</a>
             <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
             <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a>
+            <a href="/blog/waarom-website-nodig-2026.html" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
           </nav>
 
-          {/* CTA Button - Always visible */}
+          {/* CTA Buttons - Always visible */}
           <div className="flex items-center gap-2">
+            <a 
+              href="/" 
+              onClick={(e) => handleNav(e, 'seo-analyse')}
+              className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 transition-all duration-200 whitespace-nowrap cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+              <span>Gratis SEO-analyse</span>
+            </a>
             <a 
               href="tel:0494816714" 
               className="btn-primary !px-3 !py-1.5 lg:!px-5 lg:!py-2 !text-xs lg:!text-sm flex items-center space-x-1.5 lg:space-x-2 whitespace-nowrap"
@@ -81,6 +90,11 @@ const Header: React.FC = () => {
               <a href="/" onClick={(e) => handleNav(e, 'prijzen')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Prijzen</a>
               <a href="/" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">FAQ</a>
               <a href="/" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a>
+              <a href="/blog/waarom-website-nodig-2026.html" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Blog</a>
+              <a href="/" onClick={(e) => handleNav(e, 'seo-analyse')} className="inline-flex items-center gap-2 text-emerald-400 font-semibold mt-2 cursor-pointer">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+                <span>Gratis SEO-analyse</span>
+              </a>
               <a 
                 href="tel:0494816714" 
                 onClick={() => setMobileMenuOpen(false)}

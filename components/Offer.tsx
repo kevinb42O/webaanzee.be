@@ -66,7 +66,7 @@ const Offer: React.FC = () => {
               <a 
                 href="/" 
                 onClick={(e) => scrollToSection(e, 'contact')}
-                className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Start mijn visitekaart
               </a>
@@ -130,7 +130,7 @@ const Offer: React.FC = () => {
               <a 
                 href="/" 
                 onClick={(e) => scrollToSection(e, 'contact')}
-                className="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:-translate-y-0.5"
+                className="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30"
               >
                 Kies het Kust-Pakket
               </a>
@@ -183,7 +183,7 @@ const Offer: React.FC = () => {
               <a 
                 href="/" 
                 onClick={(e) => scrollToSection(e, 'contact')}
-                className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-base py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Kies het Groei-Pakket
               </a>

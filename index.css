@@ -86,6 +86,7 @@ body {
     0 1px 0 rgba(255, 255, 255, 0.3) inset;
   border: none;
   letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary::before {
@@ -97,17 +98,19 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-  box-shadow: 
-    0 8px 30px rgba(251, 191, 36, 0.45),
-    0 4px 12px rgba(251, 191, 36, 0.2),
-    0 1px 0 rgba(255, 255, 255, 0.3) inset;
-  transform: translateY(-2px);
-}
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    box-shadow: 
+      0 8px 30px rgba(251, 191, 36, 0.45),
+      0 4px 12px rgba(251, 191, 36, 0.2),
+      0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    transform: translateY(-2px);
+  }
 
-.btn-primary:hover::before {
-  opacity: 1;
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
 }
 
 .btn-primary:active {
@@ -122,13 +125,16 @@ body {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
 }
 
 .btn-secondary:active {
@@ -241,11 +247,13 @@ body {
   background: linear-gradient(90deg, transparent, #fbbf24, transparent);
 }
 
-/* Card inner glow on hover */
-.card-glow:hover {
-  box-shadow: 
-    0 20px 50px -12px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(251, 191, 36, 0.15);
+/* Card inner glow on hover — only for devices with a pointer */
+@media (hover: hover) and (pointer: fine) {
+  .card-glow:hover {
+    box-shadow: 
+      0 20px 50px -12px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(251, 191, 36, 0.15);
+  }
 }
 
 /* ============================================
@@ -339,6 +347,22 @@ body {
   width: 120px;
   height: 1px;
   background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+}
+
+/* ============================================
+   iOS SAFARI TOUCH FIX
+   Prevent double-tap-to-click on touch devices
+   ============================================ */
+
+a,
+button,
+[role="button"],
+input,
+textarea,
+select,
+details > summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ============================================

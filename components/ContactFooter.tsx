@@ -147,14 +147,14 @@ const ContactFooter: React.FC = () => {
           {/* Phone Card */}
           <a 
             href="tel:0494816714" 
-            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 card-glow cursor-pointer"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <IconPhone className="w-7 h-7 text-amber-600" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Telefoon</span>
             <span className="text-2xl font-sans font-bold text-slate-900">Bel Kevin</span>
-            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">0494 81 67 14</span>
+            <span className="text-sm text-slate-400 mt-2">0494 81 67 14</span>
           </a>
 
           {/* WhatsApp Card */}
@@ -162,31 +162,31 @@ const ContactFooter: React.FC = () => {
             href="https://wa.me/32494816714" 
             target="_blank"
             rel="noreferrer"
-            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 card-glow cursor-pointer"
             aria-label="Stuur een WhatsApp-bericht"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <IconWhatsapp className="w-7 h-7 text-amber-600" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">WhatsApp</span>
             <span className="text-2xl font-sans font-bold text-slate-900">Stuur een bericht</span>
-            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Direct antwoord</span>
+            <span className="text-sm text-slate-400 mt-2">Direct antwoord</span>
           </a>
 
           {/* Email Card */}
           <button
             type="button"
             onClick={openModal}
-            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 hover:-translate-y-3 hover:shadow-gold card-glow"
+            className="group relative flex flex-col items-center p-10 md:p-12 bg-white rounded-2xl shadow-premium gradient-border transition-all duration-500 card-glow cursor-pointer"
             aria-haspopup="dialog"
             aria-expanded={isModalOpen}
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100/80 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <IconMail className="w-7 h-7 text-amber-600" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">E-mail</span>
             <span className="text-lg font-sans font-bold text-slate-900 break-all">kevin@webaanzee.be</span>
-            <span className="text-sm text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Stuur een mail</span>
+            <span className="text-sm text-slate-400 mt-2">Stuur een mail</span>
           </button>
         </div>
 
@@ -251,7 +251,7 @@ const ContactFooter: React.FC = () => {
                 <a 
                   href="/" 
                   onClick={(e) => scrollToSection(e, 'over-ons')}
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200 cursor-pointer"
                 >
                   Over Webaanzee
                 </a>
@@ -260,7 +260,7 @@ const ContactFooter: React.FC = () => {
                 <a 
                   href="/" 
                   onClick={(e) => scrollToSection(e, 'werkwijze')}
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200 cursor-pointer"
                 >
                   Werkwijze
                 </a>
@@ -269,7 +269,7 @@ const ContactFooter: React.FC = () => {
                 <a 
                   href="/" 
                   onClick={(e) => scrollToSection(e, 'prijzen')}
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200 cursor-pointer"
                 >
                   Wat ik aanbied
                 </a>
@@ -278,15 +278,23 @@ const ContactFooter: React.FC = () => {
                 <a 
                   href="/" 
                   onClick={(e) => scrollToSection(e, 'contact')}
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200 cursor-pointer"
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200 cursor-pointer"
                 >
                   Contact
                 </a>
               </li>
               <li>
                 <a 
+                  href="/blog/waarom-website-nodig-2026.html" 
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200"
+                >
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a 
                   href="/privacy.html" 
-                  className="text-slate-300 hover:text-white hover:translate-x-2 inline-block transition-all duration-200"
+                  className="text-slate-300 hover:text-white inline-block transition-colors duration-200"
                 >
                   Privacy
                 </a>
@@ -334,7 +342,7 @@ const ContactFooter: React.FC = () => {
                 href="https://www.instagram.com/bourguignon_visualart/" 
                 target="_blank" 
                 rel="noreferrer"
-                className="text-slate-400 hover:text-white hover:scale-110 transition-all duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -345,7 +353,7 @@ const ContactFooter: React.FC = () => {
                 href="https://www.facebook.com/webaanzee.be" 
                 target="_blank" 
                 rel="noreferrer"
-                className="text-slate-400 hover:text-white hover:scale-110 transition-all duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -356,7 +364,7 @@ const ContactFooter: React.FC = () => {
                 href="https://wa.me/32494816714" 
                 target="_blank" 
                 rel="noreferrer"
-                className="text-slate-400 hover:text-white hover:scale-110 transition-all duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200"
                 aria-label="WhatsApp"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -365,7 +373,7 @@ const ContactFooter: React.FC = () => {
               </a>
               <a 
                 href="tel:0494816714" 
-                className="text-slate-400 hover:text-white hover:scale-110 transition-all duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200"
                 aria-label="Telefoon"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

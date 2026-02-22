@@ -5,9 +5,11 @@ import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
 const Proof = lazy(() => import('./components/Proof'));
 import Offer from './components/Offer';
+import SEOAnalyse from './components/SEOAnalyse';
 import FAQ from './components/FAQ';
 import About from './components/About';
 import ContactFooter from './components/ContactFooter';
+import WhatsAppFloat from './components/WhatsAppFloat';
 
 const App: React.FC = () => {
   return (
@@ -26,6 +28,9 @@ const App: React.FC = () => {
         <section id="prijzen" aria-labelledby="prijzen-heading">
           <Offer />
         </section>
+        <section id="seo-analyse" aria-labelledby="seo-analyse-heading">
+          <SEOAnalyse />
+        </section>
         <section id="faq" aria-labelledby="faq-heading">
           <FAQ />
         </section>
@@ -36,6 +41,7 @@ const App: React.FC = () => {
           <ContactFooter />
         </section>
       </main>
+      <WhatsAppFloat />
     </div>
   );
 };

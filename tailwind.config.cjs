@@ -5,6 +5,7 @@ module.exports = {
     './index.tsx',
     './App.tsx',
     './components/**/*.{ts,tsx}',
+    './blog/**/*.{html,tsx}',
   ],
   theme: {
     extend: {
