@@ -235,7 +235,7 @@ const Proof: React.FC = () => {
           <h2 id="resultaten-heading" className="text-4xl md:text-6xl font-serif text-navy mb-6 tracking-[-0.02em]">
             Bewezen resultaat
           </h2>
-          <p className="text-lg md:text-xl text-navy/40 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Geen praatjes. Cijfers uit Google Search Console van echte klanten.
           </p>
         </div>
@@ -314,7 +314,7 @@ const Proof: React.FC = () => {
                           </svg>
                         </a>
                       </h3>
-                      <p className="text-navy/40 mt-1 flex items-center gap-2">
+                      <p className="text-slate-600 mt-1 flex items-center gap-2">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -349,8 +349,8 @@ const Proof: React.FC = () => {
                   <div className="relative mb-10">
                     <div className="relative bg-white rounded-xl shadow-sm border border-slate-100 p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-navy/40">Google Zichtbaarheid</h4>
-                        <div className="flex items-center gap-2 text-xs text-navy/40">
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-slate-600">Google Zichtbaarheid</h4>
+                        <div className="flex items-center gap-2 text-xs text-slate-600">
                           <span className="w-3 h-3 bg-navy rounded" />
                           <span>Periode</span>
                           <span className="w-3 h-3 bg-gold rounded ml-2" />
@@ -415,7 +415,7 @@ const Proof: React.FC = () => {
                           </Bar>
                         </BarChart>
                       </ResponsiveContainer>
-                      <p className="text-center text-xs text-navy/40 mt-4 flex items-center justify-center gap-2">
+                      <p className="text-center text-xs text-slate-600 mt-4 flex items-center justify-center gap-2">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
@@ -433,9 +433,9 @@ const Proof: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-navy/40 mb-2">Impressies</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-2">Impressies</p>
                       <p className="text-3xl md:text-4xl font-semibold text-navy tabular-nums tracking-tight">{formatNumber(animatedImpressions)}</p>
-                      <p className="text-xs text-navy/40 mt-1">per 28 dagen</p>
+                      <p className="text-xs text-slate-600 mt-1">per 28 dagen</p>
                     </div>
                     
                     <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
@@ -444,9 +444,9 @@ const Proof: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                         </svg>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-navy/40 mb-2">Kliks</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-2">Kliks</p>
                       <p className="text-3xl md:text-4xl font-semibold text-navy tabular-nums tracking-tight">{animatedClicks}</p>
-                      <p className="text-xs text-navy/40 mt-1">per 28 dagen</p>
+                      <p className="text-xs text-slate-600 mt-1">per 28 dagen</p>
                     </div>
                     
                     <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
@@ -455,9 +455,9 @@ const Proof: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-navy/40 mb-2">CTR</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-2">CTR</p>
                       <p className="text-3xl md:text-4xl font-semibold text-gold tabular-nums tracking-tight">{currentCase.stats.ctr}</p>
-                      <p className="text-xs text-navy/40 mt-1">click-through rate</p>
+                      <p className="text-xs text-slate-600 mt-1">click-through rate</p>
                     </div>
                     
                     <div className="group relative p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-default">
@@ -466,9 +466,9 @@ const Proof: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                         </svg>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-navy/40 mb-2">Gem. positie</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-2">Gem. positie</p>
                       <p className="text-3xl md:text-4xl font-semibold text-navy tabular-nums tracking-tight">{currentCase.stats.avgPosition}</p>
-                      <p className="text-xs text-navy/40 mt-1">in zoekresultaten</p>
+                      <p className="text-xs text-slate-600 mt-1">in zoekresultaten</p>
                     </div>
                   </div>
                 </div>
