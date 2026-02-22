@@ -157,7 +157,7 @@ const BlogArticle: React.FC = () => {
             <blockquote>
               <p className="!text-slate-700">
                 "Uw Facebook-pagina is een gehuurde ruimte. Uw website is uw eigen pand. 
-                Bouw op grond dat van u is."
+                Bouw op grond die van u is."
               </p>
             </blockquote>
 
@@ -276,7 +276,7 @@ const BlogArticle: React.FC = () => {
             <h3>🤝 Vertrouwen uitstralen</h3>
             <p>
               Binnen 0,05 seconden vormt een bezoeker een mening over uw site. Professioneel design, 
-              échte foto's, duidelijke contactgegevens en een SSL-certificaat (het groene slotje) — 
+              échte foto's, duidelijke contactgegevens en een beveiligde verbinding (SSL-certificaat, het slotje in de adresbalk) — 
               dat is wat bezoekers overtuigt om te bellen, te mailen of langs te komen.
             </p>
 
