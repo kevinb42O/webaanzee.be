@@ -1,5 +1,6 @@
 
 import React, { lazy, Suspense } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
@@ -42,6 +43,7 @@ const App: React.FC = () => {
         </section>
       </main>
       <WhatsAppFloat />
+      <Analytics />
     </div>
   );
 };
