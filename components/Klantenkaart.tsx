@@ -82,7 +82,7 @@ const Klantenkaart: React.FC = () => {
               Hoeveel vaste klanten lopen er maandelijks bij u de deur uit zonder dat u hun naam of e-mailadres kent? En hoeveel papieren stempelkaarten belanden in de prullenbak?
             </p>
             <p className="text-base md:text-lg text-white/45 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 md:mb-12">
-              Stop met raden en start met meten. Met onze digitale stempelkaart krijgt elke klant een digitale portemonnee — een PWA die eruitziet als een echte app, maar draait in de browser. Geen gedwongen downloads, geen plastic pasjes, geen wurgcontracten. Werkt op élke smartphone (iPhone, Samsung, Huawei, alles) en op élke tablet achter uw kassa. 100% GDPR-conform en onmogelijk te hacken of te misbruiken.
+              Stop met raden en start met meten. Met onze digitale klantenkaart krijgt elke klant een digitale portemonnee — een Progressive Web App (PWA) die eruitziet als een echte app, maar draait in de browser. Geen gedwongen downloads, geen plastic pasjes, geen wurgcontracten. Werkt op élke smartphone (iPhone, Samsung, Huawei, alles) en op élke tablet achter uw kassa. 100% GDPR-conform en onmogelijk te hacken of te misbruiken.
             </p>
 
             {/* CTAs */}
@@ -121,7 +121,7 @@ const Klantenkaart: React.FC = () => {
             <div className="absolute -inset-8 bg-amber-500/[0.06] rounded-full blur-[80px] pointer-events-none" />
             <img
               src="/spaarkaart.webp"
-              alt="Digitale stempelkaart systeem — premium QR-systeem voor horeca op elke smartphone en tablet"
+              alt="Digitale klantenkaart systeem — premium QR-systeem voor horeca op elke smartphone en tablet"
               width={550}
               height={511}
               className="relative rounded-3xl shadow-2xl w-full h-auto"
@@ -177,7 +177,7 @@ const Klantenkaart: React.FC = () => {
               Zo simpel als scannen,<br className="hidden sm:block" /> zo krachtig als een CRM.
             </h2>
             <p className="text-navy/50 max-w-2xl mx-auto text-lg leading-relaxed">
-              Uw klant scant een QR-code op uw toog, logt in via een Magic Link of Google, en heeft meteen een digitale stempelkaart in uw huisstijl. Bij elk volgend bezoek genereert uw tablet een unieke QR-code die de klant scant. Drie stappen, nul frictie.
+              Uw klant scant een QR-code op uw toog, logt in via een Magic Link of Google, en heeft meteen een digitale klantenkaart in uw huisstijl. Bij elk volgend bezoek genereert uw tablet een unieke QR-code die de klant scant. Drie stappen, nul frictie.
             </p>
           </div>
 
@@ -186,17 +186,17 @@ const Klantenkaart: React.FC = () => {
               {
                 step: '01',
                 title: 'Klant scant de QR-code op tafel',
-                desc: 'Een luxe QR-bordje staat op uw toog of tafel. De klant opent gewoon zijn camera — geen App Store, geen download. De code leidt naar uw digitale stempelkaart die direct opent in de browser.',
+                desc: 'Een luxe QR-bordje staat op uw toog of tafel. De klant opent gewoon zijn camera — geen App Store, geen download. De code leidt naar uw digitale klantenkaart die direct opent in de browser.',  
               },
               {
                 step: '02',
                 title: 'Magic Link of Google-login',
-                desc: 'De klant logt in met \u00e9\u00e9n tik via een Magic Link (e-mail, geen wachtwoord nodig) of zijn Google-account. Meteen verschijnt een stijlvolle stempelkaart in uw huisstijl — uw logo, uw kleuren. De klant kan het als icoon op zijn startscherm zetten, net als een echte app.',
+                desc: 'De klant logt in met \u00e9\u00e9n tik via een Magic Link (e-mail, geen wachtwoord nodig) of zijn Google-account. Meteen verschijnt een stijlvolle klantenkaart in uw huisstijl — uw logo, uw kleuren. De klant kan het als icoon op zijn startscherm zetten, net als een echte app.',
               },
               {
                 step: '03',
                 title: 'Uw tablet genereert een unieke QR',
-                desc: 'Na de bestelling genereert uw iPad of tablet een unieke, tijdgebonden QR-code. De klant scant deze met zijn stempelkaart en het punt wordt direct toegevoegd. Een geluidssignaal bevestigt de scan. Klaar \u2014 de volgende klant kan al aanschuiven.',
+                desc: 'Na de bestelling genereert uw iPad of tablet een unieke, tijdgebonden QR-code. De klant scant deze met zijn klantenkaart en het punt wordt direct toegevoegd. Een geluidssignaal bevestigt de scan. Klaar \u2014 de volgende klant kan al aanschuiven.',
               },
             ].map((item, i) => (
               <div key={i} className="relative bg-white rounded-3xl p-8 md:p-10 shadow-premium gradient-border group hover:shadow-premium-lg transition-all duration-500">
@@ -237,7 +237,7 @@ const Klantenkaart: React.FC = () => {
               {
                 icon: <PaletteIcon />,
                 title: 'Volledig in uw huisstijl',
-                desc: 'Uw logo, uw kleuren, uw branding — op de stempelkaart \u00e9n op de tablet. Wanneer het systeem niet actief is, draait er een dynamische screensaver met uw logo op de iPad. Uw zaak, uw uitstraling, overal.',
+                desc: 'Uw logo, uw kleuren, uw branding — op de klantenkaart én op de tablet. Wanneer het systeem niet actief is, draait er een dynamische screensaver met uw logo op de iPad. Uw zaak, uw uitstraling, overal.',
               },
               {
                 icon: <ChartIcon />,
@@ -309,7 +309,7 @@ const Klantenkaart: React.FC = () => {
 
               <div className="p-8 md:p-10 flex flex-col flex-1 relative">
                 <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2 mt-6">Het Start-Ready Pakket</h3>
-                <p className="text-slate-500 text-sm mb-8 leading-relaxed">Een kant-en-klaar digitaal stempelkaartsysteem dat u binnen 48 uur live kunt gebruiken. Geen technische kennis vereist.</p>
+                <p className="text-slate-500 text-sm mb-8 leading-relaxed">Een kant-en-klaar digitaal klantenkaart-systeem dat u binnen 48 uur live kunt gebruiken. Geen technische kennis vereist.</p>
 
                 {/* Setup Price */}
                 <div className="mb-4 flex items-baseline justify-center gap-1">
@@ -322,8 +322,8 @@ const Klantenkaart: React.FC = () => {
 
                 <ul className="space-y-4 text-sm mb-8">
                   {[
-                    { title: 'Volledig op maat design', desc: 'Uw logo, kleuren & branding op de digitale stempelkaart' },
-                    { title: 'PWA — werkt als een echte app', desc: 'Klant kan het als icoon op zijn startscherm zetten, opent fullscreen' },
+                    { title: 'Volledig op maat design', desc: 'Uw logo, kleuren & branding op de digitale klantenkaart' },
+                    { title: 'Progressive Web App (PWA) — werkt als een echte app', desc: 'Klant kan het als icoon op zijn startscherm zetten, opent fullscreen' },
                     { title: 'Magic Link & Google-login', desc: 'Registreren in \u00e9\u00e9n tik — geen wachtwoorden, geen gedoe' },
                     { title: 'Cryptografisch fraudeproof', desc: 'Unieke QR-codes, 30 seconden geldig, onmogelijk te manipuleren' },
                     { title: 'Werkt op elke telefoon & tablet', desc: 'iPhone, Samsung, Huawei, iPad — maakt niet uit, het werkt overal' },
@@ -421,10 +421,10 @@ const Klantenkaart: React.FC = () => {
               },
               {
                 q: 'Moet mijn klant een app downloaden?',
-                a: 'Nee, absoluut niet. Dat is juist de kracht van dit systeem. Alles draait als een PWA via de browser. Uw klant scant de QR-code, logt in via een Magic Link of Google, en heeft direct een digitale stempelkaart. Optioneel kan de klant het als icoon op zijn startscherm zetten \u2014 het gedraagt zich dan als een app, maar is er geen.',
+                a: 'Nee, absoluut niet. Dat is juist de kracht van dit systeem. Alles draait als een Progressive Web App (PWA) via de browser. Uw klant scant de QR-code, logt in via een Magic Link of Google, en heeft direct een digitale klantenkaart. Optioneel kan de klant het als icoon op zijn startscherm zetten \u2014 het gedraagt zich dan als een app, maar is er geen.',
               },
               {
-                q: 'Wat is een PWA precies?',
+                q: 'Wat is een Progressive Web App (PWA) precies?',
                 a: 'PWA staat voor Progressive Web App. Het is een website die eruitziet en aanvoelt als een echte app. Uw klant kan het als icoon op zijn startscherm zetten \u2014 het opent dan fullscreen, net als een gewone app. Maar er is geen download nodig, geen update, en geen plek in de App Store. Het werkt op elke telefoon met een browser.',
               },
               {
