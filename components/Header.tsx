@@ -43,6 +43,10 @@ const Header: React.FC = () => {
             <a href="#faq" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
             <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a>
             <a href="/blog/waarom-website-nodig-2026.html" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
+            <a href="/klantenkaart.html" className="relative text-amber-400 hover:text-amber-300 transition-colors duration-200 font-semibold">
+              Klantenkaart{' '}
+              <span className="absolute -top-2 -right-3 w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            </a>
           </nav>
 
           {/* CTA Buttons - Always visible */}
@@ -91,6 +95,10 @@ const Header: React.FC = () => {
               <a href="#faq" onClick={(e) => handleNav(e, 'faq')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">FAQ</a>
               <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a>
               <a href="/blog/waarom-website-nodig-2026.html" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors">Blog</a>
+              <a href="/klantenkaart.html" onClick={() => setMobileMenuOpen(false)} className="inline-flex items-center gap-2 text-amber-400 font-semibold mt-1">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />
+                <span>Nieuw: Digitale Klantenkaart</span>
+              </a>
               <a href="#seo-analyse" onClick={(e) => handleNav(e, 'seo-analyse')} className="inline-flex items-center gap-2 text-emerald-400 font-semibold mt-2 cursor-pointer">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                 <span>Gratis SEO-analyse</span>
