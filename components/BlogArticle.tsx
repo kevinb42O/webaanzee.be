@@ -1,36 +1,11 @@
 import React from 'react';
+import Header from './Header';
 import WhatsAppFloat from './WhatsAppFloat';
 
 const BlogArticle: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 px-6 py-3 md:py-4 glass-header text-white transition-all duration-300">
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent"></div>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2 md:gap-4 text-xl md:text-3xl font-serif font-bold">
-            <img
-              src="/logo.webp"
-              alt="Webaanzee"
-              width="44"
-              height="44"
-              decoding="async"
-              className="w-8 h-8 md:h-11 md:w-11 object-contain"
-            />
-            <span>
-              <span className="text-white">Web</span>
-              <span className="text-gold">aan</span>
-              <span className="text-white">zee</span>
-            </span>
-          </a>
-          <nav className="flex items-center gap-4 text-sm">
-            <a href="/" className="text-gray-300 hover:text-white transition-colors">← Terug naar home</a>
-            <a href="tel:0494816714" className="btn-primary !px-4 !py-2 !text-sm whitespace-nowrap">
-              Bel me
-            </a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <div className="relative bg-navy pt-20 pb-16 md:pt-28 md:pb-24 px-6">
