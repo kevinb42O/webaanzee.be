@@ -177,7 +177,7 @@ const Klantenkaart: React.FC = () => {
               Zo simpel als scannen,<br className="hidden sm:block" /> zo krachtig als een CRM.
             </h2>
             <p className="text-navy/50 max-w-2xl mx-auto text-lg leading-relaxed">
-              Uw klant scant een QR-code op uw toog, logt in via een Magic Link of Google, en heeft meteen een digitale klantenkaart in uw huisstijl. Bij elk volgend bezoek genereert uw tablet een unieke QR-code die de klant scant. Drie stappen, nul frictie.
+              Uw klant scant een QR-code op uw toog, logt in met e-mail (met of zonder e-mailverificatie), en heeft meteen een digitale klantenkaart in uw huisstijl. Bij elk volgend bezoek genereert uw tablet een unieke QR-code die de klant scant. Drie stappen, nul frictie.
             </p>
           </div>
 
@@ -190,8 +190,8 @@ const Klantenkaart: React.FC = () => {
               },
               {
                 step: '02',
-                title: 'Magic Link of Google-login',
-                desc: 'De klant logt in met \u00e9\u00e9n tik via een Magic Link (e-mail, geen wachtwoord nodig) of zijn Google-account. Meteen verschijnt een stijlvolle klantenkaart in uw huisstijl — uw logo, uw kleuren. De klant kan het als icoon op zijn startscherm zetten, net als een echte app.',
+                title: 'Eenvoudige login met e-mail',
+                desc: 'De klant logt in met zijn e-mailadres. U kiest zelf of u werkt met e-mailverificatie. Meteen verschijnt een stijlvolle klantenkaart in uw huisstijl — uw logo, uw kleuren. De klant kan het als icoon op zijn startscherm zetten, net als een echte app.',
               },
               {
                 step: '03',
@@ -324,7 +324,7 @@ const Klantenkaart: React.FC = () => {
                   {[
                     { title: 'Volledig op maat design', desc: 'Uw logo, kleuren & branding op de digitale klantenkaart' },
                     { title: 'Progressive Web App (PWA) — werkt als een echte app', desc: 'Klant kan het als icoon op zijn startscherm zetten, opent fullscreen' },
-                    { title: 'Magic Link & Google-login', desc: 'Registreren in \u00e9\u00e9n tik — geen wachtwoorden, geen gedoe' },
+                    { title: 'Eenvoudige e-maillogin', desc: 'Registreren met e-mail, met of zonder e-mailverificatie' },
                     { title: 'Cryptografisch fraudeproof', desc: 'Unieke QR-codes, 30 seconden geldig, onmogelijk te manipuleren' },
                     { title: 'Werkt op elke telefoon & tablet', desc: 'iPhone, Samsung, Huawei, iPad — maakt niet uit, het werkt overal' },
                     { title: 'Dynamische screensaver op tablet', desc: 'Uw logo en huisstijl als screensaver wanneer het systeem idle is' },
@@ -421,7 +421,7 @@ const Klantenkaart: React.FC = () => {
               },
               {
                 q: 'Moet mijn klant een app downloaden?',
-                a: 'Nee, absoluut niet. Dat is juist de kracht van dit systeem. Alles draait als een Progressive Web App (PWA) via de browser. Uw klant scant de QR-code, logt in via een Magic Link of Google, en heeft direct een digitale klantenkaart. Optioneel kan de klant het als icoon op zijn startscherm zetten \u2014 het gedraagt zich dan als een app, maar is er geen.',
+                a: 'Nee, absoluut niet. Dat is juist de kracht van dit systeem. Alles draait als een Progressive Web App (PWA) via de browser. Uw klant scant de QR-code, logt in met e-mail (met of zonder e-mailverificatie), en heeft direct een digitale klantenkaart. Optioneel kan de klant het als icoon op zijn startscherm zetten \u2014 het gedraagt zich dan als een app, maar is er geen.',
               },
               {
                 q: 'Wat is een Progressive Web App (PWA) precies?',
@@ -429,7 +429,7 @@ const Klantenkaart: React.FC = () => {
               },
               {
                 q: 'Hoe werkt het inloggen precies?',
-                a: 'De klant heeft twee opties. \u00c9\u00e9n: een Magic Link \u2014 de klant vult zijn e-mailadres in en ontvangt een link waarop hij \u00e9\u00e9n keer klikt. Geen wachtwoord, geen gedoe. Twee: Google-login \u2014 \u00e9\u00e9n tik op \u201cInloggen met Google\u201d en klaar. Beide opties duren minder dan 10 seconden.',
+                a: 'De klant vult zijn e-mailadres in en logt eenvoudig in. U kunt kiezen voor login met of zonder e-mailverificatie, afhankelijk van hoe strikt u het wilt maken. Dit duurt in de praktijk maar enkele seconden.',
               },
               {
                 q: 'Welke tablet heb ik nodig achter de kassa?',
