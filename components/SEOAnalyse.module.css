@@ -1,0 +1,115 @@
+.section {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-xl);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.description {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  padding: var(--spacing-lg);
+  background: var(--color-bg-tertiary);
+  border-radius: 12px;
+  transition: transform var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardIcon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cardDesc {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.cta {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.trustList {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-md);
+}
+
+.trustItem {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

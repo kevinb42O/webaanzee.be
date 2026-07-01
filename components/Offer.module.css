@@ -1,0 +1,123 @@
+.section {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--color-bg-primary);
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-xl);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.description {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  background: var(--color-bg-tertiary);
+  border-radius: 20px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.06);
+}
+
+.cardHeader {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cardPrice {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.cardPrice span {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.featureList {
+  list-style: none;
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.checkIcon {
+  color: var(--color-accent-gold);
+  font-weight: bold;
+}
+
+.cardAction {
+  margin-top: auto;
+}

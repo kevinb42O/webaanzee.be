@@ -1,0 +1,120 @@
+.section {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--spacing-2xl);
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.1;
+}
+
+.textBlock {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.textBlock p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.quoteBlock {
+  padding: var(--spacing-xl);
+  background: var(--color-bg-secondary);
+  border-left: 2px solid var(--color-accent-gold);
+  margin-bottom: var(--spacing-xl);
+  border-radius: 0 12px 12px 0;
+}
+
+.quoteText {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.quoteAuthor {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.trustSignals {
+  display: flex;
+  gap: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--spacing-lg);
+}
+
+.signal {
+  display: flex;
+  flex-direction: column;
+}
+
+.signalTitle {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+}
+
+.signalSub {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}

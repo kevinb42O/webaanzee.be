@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
@@ -6,6 +5,7 @@ import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
 const Proof = lazy(() => import('./components/Proof'));
 import Offer from './components/Offer';
+import Klantenkaart from './components/Klantenkaart';
 import SEOAnalyse from './components/SEOAnalyse';
 import FAQ from './components/FAQ';
 import About from './components/About';
@@ -14,33 +14,20 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main className="flex-grow" role="main" itemScope itemType="https://schema.org/WebPage">
+      <main style={{ flexGrow: 1 }} role="main" itemScope itemType="https://schema.org/WebPage">
         <Hero />
-        <section id="werkwijze" aria-labelledby="werkwijze-heading">
-          <ProblemSolution />
-        </section>
-        <section id="resultaten" aria-labelledby="resultaten-heading">
-          <Suspense fallback={<div className="py-32" />}>
-            <Proof />
-          </Suspense>
-        </section>
-        <section id="prijzen" aria-labelledby="prijzen-heading">
-          <Offer />
-        </section>
-        <section id="seo-analyse" aria-labelledby="seo-analyse-heading">
-          <SEOAnalyse />
-        </section>
-        <section id="faq" aria-labelledby="faq-heading">
-          <FAQ />
-        </section>
-        <section id="over-ons" aria-labelledby="over-ons-heading">
-          <About />
-        </section>
-        <section id="contact" aria-labelledby="contact-heading">
-          <ContactFooter />
-        </section>
+        <ProblemSolution />
+        <Suspense fallback={<div style={{ padding: '8rem 0' }} />}>
+          <Proof />
+        </Suspense>
+        <Offer />
+        <Klantenkaart />
+        <SEOAnalyse />
+        <FAQ />
+        <About />
+        <ContactFooter />
       </main>
       <WhatsAppFloat />
       <Analytics />

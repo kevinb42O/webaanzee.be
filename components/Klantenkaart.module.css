@@ -1,0 +1,189 @@
+.page {
+  background-color: var(--color-bg-primary);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SECTION COMMON */
+.section {
+  padding: var(--spacing-xl) var(--spacing-md);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sectionHeader {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  border-bottom: 2px solid var(--color-accent-gold);
+  margin-bottom: var(--spacing-lg);
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.title span {
+  display: block;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-gold);
+  text-transform: none;
+}
+
+.description {
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* HERO GRID */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+  padding-top: var(--spacing-2xl);
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.imageBlock {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--color-bg-secondary);
+  overflow: hidden;
+}
+
+.imageBlock img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+/* BENTO BOX GRID */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px; /* Brutalist 1px border grid */
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bentoItem {
+  background: var(--color-bg-primary);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.bentoNumber {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--color-accent-gold);
+  margin-bottom: var(--spacing-sm);
+  font-style: italic;
+}
+
+.bentoTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+}
+
+/* PRICING */
+.pricingBlock {
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.priceBig {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 1;
+  color: var(--color-accent-gold);
+  margin: var(--spacing-md) 0;
+  font-style: italic;
+}
+
+.priceList {
+  list-style: none;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto var(--spacing-lg);
+}
+
+.priceList li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.875rem;
+}
+
+/* FAQ */
+.faqItem {
+  border-top: 1px solid var(--color-border);
+}
+
+.faqSummary {
+  padding: var(--spacing-md) 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.faqContent {
+  padding-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
