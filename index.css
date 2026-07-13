@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* 2024 Light Brutalism Palette */
@@ -14,7 +14,7 @@
   --color-border: rgba(10, 10, 10, 0.1);
 
   /* Typography */
-  --font-heading: 'Playfair Display', serif; /* Use serif for massive brutalist headings */
+  --font-heading: var(--font-body);
   --font-body: 'Inter', -apple-system, sans-serif;
   
   /* Spacing */

@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import WhatsAppFloat from './WhatsAppFloat';
+import CrispChat from './CrispChat';
 
 const BlogArticle: React.FC = () => {
   return (
@@ -375,7 +375,7 @@ const BlogArticle: React.FC = () => {
         </div>
       </footer>
 
-      <WhatsAppFloat />
+      <CrispChat />
     </div>
   );
 };

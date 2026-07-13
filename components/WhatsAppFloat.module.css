@@ -1,0 +1,99 @@
+.floatContainer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tooltip {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 4px; /* Brutalist sharp corners */
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.floatContainer:hover .tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.button {
+  width: 64px;
+  height: 64px;
+  background-color: #25D366; /* WhatsApp Green */
+  border: 2px solid var(--color-text-primary);
+  border-radius: 4px; /* Brutalist sharp */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 0 var(--color-text-primary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-text-primary);
+}
+
+.button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--color-text-primary);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--color-bg-primary);
+  z-index: 2;
+  transition: transform var(--transition-fast);
+}
+
+.button:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Subtle pulse behind the button for attention */
+.pulse {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  animation: brutalistPulse 2s infinite;
+}
+
+@keyframes brutalistPulse {
+  0% { transform: scale(1); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 0.3; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .floatContainer {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .tooltip {
+    display: none; /* Hide on mobile */
+  }
+  
+  .button {
+    width: 56px;
+    height: 56px;
+  }
+}

@@ -25,11 +25,11 @@ const Header: React.FC = () => {
           <a href="#resultaten" onClick={(e) => scrollToSection(e, 'resultaten')} className={styles.navLink}>Resultaten</a>
           <a href="#prijzen" onClick={(e) => scrollToSection(e, 'prijzen')} className={styles.navLink}>Tarieven</a>
           <a href="#klantenkaart" onClick={(e) => scrollToSection(e, 'klantenkaart')} className={styles.navLink}>Klantenkaart</a>
-          <a href="#over-ons" onClick={(e) => scrollToSection(e, 'over-ons')} className={styles.navLink}>Over ons</a>
+          <a href="#over-ons" onClick={(e) => scrollToSection(e, 'over-ons')} className={styles.navLink}>Over mij</a>
         </nav>
 
         <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={styles.cta}>
-          Start Project
+          Plan een gesprek
         </a>
       </div>
     </header>

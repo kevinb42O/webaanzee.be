@@ -1,30 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import { createRoot } from 'react-dom/client';
 import Header from './components/Header';
 import Klantenkaart from './components/Klantenkaart';
-import WhatsAppFloat from './components/WhatsAppFloat';
+import ContactFooter from './components/ContactFooter';
+import CrispChat from './components/CrispChat';
+import './index.css';
 
-const KlantenkaartPage: React.FC = () => {
+const KlantenkaartPage = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-navy">
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main className="flex-grow">
+      <main style={{ flexGrow: 1, paddingTop: '100px' }}>
         <Klantenkaart />
       </main>
-      <WhatsAppFloat />
+      <CrispChat />
+      <ContactFooter />
     </div>
   );
 };
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error('Could not find root element to mount to');
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <KlantenkaartPage />
+    </React.StrictMode>
+  );
 }
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <KlantenkaartPage />
-  </React.StrictMode>
-);

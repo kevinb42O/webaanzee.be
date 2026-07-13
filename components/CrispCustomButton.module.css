@@ -1,0 +1,101 @@
+.floatContainer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tooltip {
+  background-color: #fff;
+  color: var(--color-text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.floatContainer:hover .tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.button {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1B81F7 0%, #1972F5 100%);
+  border: none;
+  border-radius: 50%; /* Perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(27, 129, 247, 0.4);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.button:hover {
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 14px 32px rgba(27, 129, 247, 0.5);
+}
+
+.button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 12px rgba(27, 129, 247, 0.3);
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  fill: #ffffff;
+  z-index: 2;
+  transition: transform var(--transition-fast);
+}
+
+.button:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Beautiful soft pulse behind the button */
+.pulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background-color: rgba(27, 129, 247, 0.6);
+  opacity: 0;
+  animation: elegantPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  z-index: -1;
+}
+
+@keyframes elegantPulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .floatContainer {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .tooltip {
+    display: none;
+  }
+  
+  .button {
+    width: 56px;
+    height: 56px;
+  }
+}

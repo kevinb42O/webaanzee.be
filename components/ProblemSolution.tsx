@@ -8,28 +8,28 @@ const ProblemSolution: React.FC = () => {
       <div className={`${styles.container} animate-on-scroll`}>
         
         <div className={styles.contentLeft}>
-          <span className={`${styles.badge} reveal-up`}>Onze Visie</span>
+          <span className={`${styles.badge} reveal-up`}>Waarom geen bureau?</span>
           <h2 className={`${styles.title} reveal-up`}>
-            Geen bandwerk.<br/>Puur vakmanschap.
+            Bij een bureau betaal je de overhead.<br/>Bij mij betaal je het werk.
           </h2>
           <p className={`${styles.description} reveal-up`}>
-            De meeste websites zijn visueel aantrekkelijk, maar falen om bezoekers om te zetten in betalende klanten. Wij bouwen platformen met één doel: meetbare groei voor uw bedrijf.
+            Je kent het verhaal: een accountmanager die je vragen doorgeeft, een junior die het bouwt, en facturen die de tussenlagen betalen. Zo werk ik niet — er is hier niemand anders. Je werkt van het eerste gesprek tot de livegang met de persoon die je site effectief bouwt.
           </p>
 
           <div className={styles.grid}>
             <div className={`${styles.card} reveal-up`}>
-              <span className={styles.cardIcon}>⚡</span>
-              <h3 className={styles.cardTitle}>Razendsnelle Prestaties</h3>
+              <span className={styles.cardIcon}>👂</span>
+              <h3 className={styles.cardTitle}>Ik luister voor ik bouw</h3>
               <p className={styles.cardText}>
-                We gebruiken de nieuwste technologieën (React, Vite) om uw site binnen milliseconden te laten laden. Google beloont dit met hogere posities.
+                Eerst begrijpen wie je bent, wat je wil uitstralen en wat je site moet opleveren. Pas dan schrijf ik de eerste regel code.
               </p>
             </div>
             
             <div className={`${styles.card} reveal-up`}>
-              <span className={styles.cardIcon}>🎯</span>
-              <h3 className={styles.cardTitle}>Conversie Gericht</h3>
+              <span className={styles.cardIcon}>⚡</span>
+              <h3 className={styles.cardTitle}>Sneller schakelen, minder kosten</h3>
               <p className={styles.cardText}>
-                Bezoekers moeten klanten worden. Elke knop, elke tekst en elk beeld is strategisch geplaatst om de bezoeker naar actie te sturen.
+                Geen vergaderingen over vergaderingen. Eén aanspreekpunt betekent kortere lijnen, snellere oplevering en een prijs zonder verborgen overhead.
               </p>
             </div>
           </div>

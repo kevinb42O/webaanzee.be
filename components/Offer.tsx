@@ -8,9 +8,9 @@ const Offer: React.FC = () => {
       <div className={`${styles.container} animate-on-scroll`}>
         <div className={`${styles.header} reveal-up`}>
           <span className={styles.badge}>Tarieven</span>
-          <h2 className={styles.title}>Transparante prijzen.<br/>Premium kwaliteit.</h2>
+          <h2 className={styles.title}>Vaste prijzen.<br/>Vooraf duidelijk.</h2>
           <p className={styles.description}>
-            Wij bouwen niet zomaar websites, wij bouwen schaalbare platformen die uw onderneming naar het volgende niveau tillen.
+            Je weet exact wat je krijgt en wat het kost — geen uurtje-factuurtje achteraf, geen verborgen overhead.
           </p>
         </div>
 

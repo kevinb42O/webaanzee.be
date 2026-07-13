@@ -10,7 +10,7 @@ import SEOAnalyse from './components/SEOAnalyse';
 import FAQ from './components/FAQ';
 import About from './components/About';
 import ContactFooter from './components/ContactFooter';
-import WhatsAppFloat from './components/WhatsAppFloat';
+import CrispChat from './components/CrispChat';
 
 const App: React.FC = () => {
   return (
@@ -29,7 +29,7 @@ const App: React.FC = () => {
         <About />
         <ContactFooter />
       </main>
-      <WhatsAppFloat />
+      <CrispChat />
       <Analytics />
     </div>
   );

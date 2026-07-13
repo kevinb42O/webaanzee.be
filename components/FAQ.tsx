@@ -17,12 +17,12 @@ const faqs: FAQItem[] = [
   {
     id: "aanpassen",
     question: "Kan ik zelf de inhoud beheren via WordPress?",
-    answer: "Nee, en dat is bewust. WordPress maakt websites vaak traag en kwetsbaar. Wij bouwen high-end static sites. Wilt u een wijziging? Stuur een bericht en het wordt dezelfde dag doorgevoerd, zonder dat u hoeft te vechten met een onhandig CMS."
+    answer: "Nee, en dat is bewust. WordPress maakt websites vaak traag en kwetsbaar. Ik bouw alles in handgeschreven, moderne code. Wil je een wijziging? Stuur een bericht en het wordt dezelfde dag doorgevoerd, zonder dat je hoeft te vechten met een onhandig CMS."
   },
   {
     id: "maandelijks",
-    question: "Waarom rekenen jullie een maandelijks bedrag voor onderhoud?",
-    answer: "Dit is uw digitale verzekering. De technologie en Google-eisen veranderen continu. Het abonnement dekt premium hosting, veiligheidsupdates en content-wijzigingen. U hoeft zich nergens zorgen over te maken."
+    question: "Waarom reken je een maandelijks bedrag voor onderhoud?",
+    answer: "De technologie en Google-eisen veranderen continu. Het abonnement dekt premium hosting, veiligheidsupdates en content-wijzigingen — zodat je site blijft doen wat hij moet doen, zonder dat jij ernaar hoeft om te kijken."
   },
   {
     id: "snelheid",

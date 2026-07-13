@@ -9,12 +9,12 @@ const ContactFooter: React.FC = () => {
     <>
       <section className={styles.section} id="contact">
         <div className={`${styles.container} animate-on-scroll`}>
-          <span className={`${styles.label} reveal-up`}>Start Project</span>
+          <span className={`${styles.label} reveal-up`}>Contact</span>
           <h2 className={`${styles.title} reveal-up`} style={{ animationDelay: '0.1s' }}>
-            Laten we samenwerken.
+            Vertel me wat je nodig hebt.
           </h2>
           <p className={`${styles.description} reveal-up`} style={{ animationDelay: '0.2s' }}>
-            Klaar voor een website die wél klanten oplevert? Neem direct contact op, we antwoorden razendsnel.
+            Geen verkooppraatje, geen verplichtingen. Jij vertelt waar je naartoe wil, ik zeg je recht voor de raap wat ik zou bouwen, wat het kost en hoelang het duurt. Je krijgt altijd antwoord van mij persoonlijk — meestal dezelfde dag.
           </p>
 
           <div className={styles.grid}>
