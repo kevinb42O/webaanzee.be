@@ -14,7 +14,6 @@ export const scrollToSection = (
   const el = document.getElementById(id);
   
   if (!el) {
-    window.location.href = `/#${id}`;
     return;
   }
 
