@@ -16,19 +16,19 @@ const Header: React.FC = () => {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className={styles.logo}>
+        <a href="/#home" onClick={(e) => scrollToSection(e, 'home')} className={styles.logo}>
           Webaanzee<span className={styles.logoDot}>.</span>
         </a>
 
         <nav className={styles.nav}>
-          <a href="#werkwijze" onClick={(e) => scrollToSection(e, 'werkwijze')} className={styles.navLink}>Werkwijze</a>
-          <a href="#resultaten" onClick={(e) => scrollToSection(e, 'resultaten')} className={styles.navLink}>Resultaten</a>
-          <a href="#prijzen" onClick={(e) => scrollToSection(e, 'prijzen')} className={styles.navLink}>Tarieven</a>
-          <a href="#klantenkaart" onClick={(e) => scrollToSection(e, 'klantenkaart')} className={styles.navLink}>Klantenkaart</a>
-          <a href="#over-ons" onClick={(e) => scrollToSection(e, 'over-ons')} className={styles.navLink}>Over mij</a>
+          <a href="/#werkwijze" onClick={(e) => scrollToSection(e, 'werkwijze')} className={styles.navLink}>Werkwijze</a>
+          <a href="/#resultaten" onClick={(e) => scrollToSection(e, 'resultaten')} className={styles.navLink}>Resultaten</a>
+          <a href="/#prijzen" onClick={(e) => scrollToSection(e, 'prijzen')} className={styles.navLink}>Tarieven</a>
+          <a href="/klantenkaart.html" className={styles.navLink}>Klantenkaart</a>
+          <a href="/#over-ons" onClick={(e) => scrollToSection(e, 'over-ons')} className={styles.navLink}>Over mij</a>
         </nav>
 
-        <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={styles.cta}>
+        <a href="/#contact" onClick={(e) => scrollToSection(e, 'contact')} className={styles.cta}>
           Plan een gesprek
         </a>
       </div>

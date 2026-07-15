@@ -1,124 +1,151 @@
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from 'recharts';
+import React, { useRef, useState } from 'react';
 import styles from './Proof.module.css';
 
 interface CaseStudy {
   id: string;
   title: string;
+  description: string;
   website: string;
-  location: string;
-  chartData: { name: string; views: number }[];
-  stats: { impressions: number; clicks: number; ctr: string; avgPosition: string };
-  quote: string;
-  author: string;
-  role: string;
+  videoSrc: string;
+  imageSrc: string;
 }
 
 const caseStudies: CaseStudy[] = [
-  {
-    id: 'vishandel',
-    title: 'vishandelolivierenkelly.be',
-    website: 'https://www.vishandelolivierenkelly.be',
-    location: 'Blankenberge',
-    chartData: [
-      { name: 'Geen website', views: 0 },
-      { name: 'Bouw', views: 980 },
-      { name: 'Na launch', views: 4510 },
-    ],
-    stats: { impressions: 4510, clicks: 297, ctr: '6.6%', avgPosition: '2.9' },
-    quote: "We zien nu wekelijks nieuwe gezichten in de winkel die ons via Google hebben gevonden.",
-    author: 'Olivier & Kelly',
-    role: 'Eigenaren',
+  { 
+    id: 'hondaanzee', 
+    title: 'Honden aan Zee', 
+    description: 'Hét platform voor honden aan de Belgische kust', 
+    website: 'https://www.hondaanzee.be', 
+    videoSrc: '/videos/hondaanzee.mp4',
+    imageSrc: '/images/cases/hondaanzee.png'
   },
-  {
-    id: 'itransform',
-    title: 'praktijk-itransform.be',
-    website: 'https://praktijk-itransform.be',
-    location: 'Brugge',
-    chartData: [
-      { name: 'Voor advies', views: 180 },
-      { name: 'Optimalisatie', views: 420 },
-      { name: 'Na webadvies', views: 890 },
-    ],
-    stats: { impressions: 890, clicks: 78, ctr: '8.8%', avgPosition: '6.1' },
-    quote: "Geen ingewikkeld technisch jargon, maar heldere taal en resultaat.",
-    author: 'Praktijk iTransform',
-    role: 'Therapeut',
+  { 
+    id: 'fabrice', 
+    title: 'Fabrice Goffin', 
+    description: 'Schepen van Oostende', 
+    website: 'https://www.fabricegoffin.be', 
+    videoSrc: '/videos/fabrice.mp4',
+    imageSrc: '/images/cases/fabrice.png'
+  },
+  { 
+    id: 'carabus', 
+    title: 'Carabus Ads', 
+    description: 'Google Ads, Social Ads & Funnels', 
+    website: 'https://www.carabusads.be', 
+    videoSrc: '/videos/carabus.mp4',
+    imageSrc: '/images/cases/carabus.png'
+  },
+  { 
+    id: 'cozy', 
+    title: 'COZY Moments', 
+    description: 'Koffiebar & Cocktails in Blankenberge', 
+    website: 'https://www.cozy-moments.be', 
+    videoSrc: '/videos/cozy.mp4',
+    imageSrc: '/images/cases/cozy.png'
+  },
+  { 
+    id: 'dailygrind', 
+    title: 'Daily Grind', 
+    description: 'Core Skateshop Blankenberge', 
+    website: 'https://www.daily-grind.be', 
+    videoSrc: '/videos/dailygrind.mp4',
+    imageSrc: '/images/cases/dailygrind.png'
+  },
+  { 
+    id: 'vishandel', 
+    title: 'De Wulk', 
+    description: 'Verse Vis & Zeevruchten', 
+    website: 'https://www.vishandelolivierenkelly.be', 
+    videoSrc: '/videos/vishandel.mp4',
+    imageSrc: '/images/cases/vishandel.png'
   },
 ];
 
-const Proof: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const currentCase = caseStudies[activeIndex];
+const CaseCard: React.FC<{ caseItem: CaseStudy }> = ({ caseItem }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  let hoverTimeout: NodeJS.Timeout;
 
+  const handleMouseEnter = () => {
+    // Add a tiny delay so it doesn't pop instantly if just moving the mouse across
+    hoverTimeout = setTimeout(() => {
+      setIsHovered(true);
+      if (videoRef.current) {
+        videoRef.current.play().catch(e => console.log('Video play failed:', e));
+      }
+    }, 150);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeout);
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // Reset video
+    }
+  };
+
+  return (
+    <div 
+      className={styles.caseWrapper}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* BASE CARD (Mobile Screenshot) */}
+      <a 
+        href={caseItem.website} 
+        target="_blank" 
+        rel="noreferrer" 
+        className={styles.baseCard}
+      >
+        <div className={styles.imageWrapper}>
+          <img src={caseItem.imageSrc} alt={caseItem.title} className={styles.mobileScreenshot} />
+        </div>
+        <div className={styles.baseContent}>
+          <h3 className={styles.caseTitle}>{caseItem.title}</h3>
+          <p className={styles.caseDescription}>{caseItem.description}</p>
+        </div>
+      </a>
+
+      {/* POPOUT CARD (16:9 Video that appears on hover) */}
+      <a 
+        href={caseItem.website} 
+        target="_blank" 
+        rel="noreferrer" 
+        className={`${styles.popoutCard} ${isHovered ? styles.active : ''}`}
+      >
+        <div className={styles.videoWrapper}>
+          <video 
+            ref={videoRef}
+            src={caseItem.videoSrc} 
+            className={styles.video}
+            loop 
+            muted 
+            playsInline
+            preload="metadata"
+          />
+        </div>
+      </a>
+    </div>
+  );
+};
+
+const Proof: React.FC = () => {
   return (
     <section className={styles.section} id="resultaten">
       <div className={`${styles.container} animate-on-scroll`}>
         <div className={`${styles.header} reveal-up`}>
-          <span className={styles.badge}>Case Studies</span>
-          <h2 className={styles.title}>Resultaten spreken<br/>voor zich.</h2>
+          <span className={styles.badge}>Onze Cases</span>
+          <h2 className={styles.title}>What you see is <br/> <span className={styles.highlight}>what you get.</span></h2>
           <p className={styles.description}>
-            Cijfers uit Google Search Console van echte projecten.
+            Bekijk enkele van onze recente projecten. Hover over een case voor een preview of klik om de live website te bezoeken.
           </p>
         </div>
 
-        <div className={`${styles.selector} reveal-up`}>
-          {caseStudies.map((caseItem, index) => (
-            <button
-              key={caseItem.id}
-              onClick={() => setActiveIndex(index)}
-              className={`${styles.selectorBtn} ${index === activeIndex ? styles.selectorBtnActive : ''}`}
-            >
-              {caseItem.title}
-            </button>
+        <div className={`${styles.grid} reveal-up`}>
+          {caseStudies.map((caseItem) => (
+            <CaseCard key={caseItem.id} caseItem={caseItem} />
           ))}
-        </div>
-
-        <div className={`${styles.card} reveal-scale`}>
-          <div className={styles.dataPanel}>
-            <h3 className={styles.caseTitle}>
-              <a href={currentCase.website} target="_blank" rel="noreferrer" className={styles.caseLink}>
-                {currentCase.title}
-              </a>
-            </h3>
-            <p className={styles.caseLocation}>{currentCase.location}</p>
-
-            <div className={styles.chartContainer}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={currentCase.chartData}>
-                  <CartesianGrid stroke="#EBE8E1" strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#828280' }} />
-                  <YAxis hide domain={[0, 'dataMax + 500']} />
-                  <Bar dataKey="views" isAnimationActive={false}>
-                    {currentCase.chartData.map((_, index) => (
-                      <Cell key={index} fill={index === 2 ? '#2B4560' : '#DCD8CF'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className={styles.statsGrid}>
-              <div className={styles.statBox}>
-                <p className={styles.statLabel}>Impressies</p>
-                <p className={styles.statValue}>{currentCase.stats.impressions}</p>
-              </div>
-              <div className={styles.statBox}>
-                <p className={styles.statLabel}>Kliks</p>
-                <p className={styles.statValue}>{currentCase.stats.clicks}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.imagePanel}>
-            <div className={styles.imageOverlay}>
-              <blockquote className={styles.quoteText}>"{currentCase.quote}"</blockquote>
-              <div>
-                <p className={styles.quoteAuthor}>{currentCase.author}</p>
-                <p className={styles.quoteRole}>{currentCase.role}</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

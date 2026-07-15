@@ -6,11 +6,17 @@ export const scrollToSection = (
   e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement> | null,
   sectionId: string
 ) => {
-  if (e) e.preventDefault();
+  if (e) {
+    e.preventDefault();
+  }
 
   const id = sectionId.replace(/^[/#]+/, '');
   const el = document.getElementById(id);
-  if (!el) return;
+  
+  if (!el) {
+    window.location.href = `/#${id}`;
+    return;
+  }
 
   // Account for sticky header
   const header = document.querySelector('header');

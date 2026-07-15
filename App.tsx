@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
 const Proof = lazy(() => import('./components/Proof'));
 import Offer from './components/Offer';
-import Klantenkaart from './components/Klantenkaart';
 import SEOAnalyse from './components/SEOAnalyse';
 import FAQ from './components/FAQ';
 import About from './components/About';
@@ -23,7 +22,6 @@ const App: React.FC = () => {
           <Proof />
         </Suspense>
         <Offer />
-        <Klantenkaart />
         <SEOAnalyse />
         <FAQ />
         <About />

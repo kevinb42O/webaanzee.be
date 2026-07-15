@@ -71,14 +71,14 @@ const Hero: React.FC = () => {
           muted
           playsInline
           preload="metadata"
-          poster="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+          poster="https://images.unsplash.com/photo-1439405326854-014607f694d7?auto=format&fit=crop&w=1920&q=80"
           aria-hidden="true"
           style={{
             y: shouldReduceMotion ? 0 : videoY,
             scale: shouldReduceMotion ? 1.03 : videoScale,
           }}
         >
-          <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src="/videos/seascape.mp4" type="video/mp4" />
         </motion.video>
       </motion.div>
 

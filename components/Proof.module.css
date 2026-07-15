@@ -1,182 +1,261 @@
 .section {
-  padding: var(--spacing-2xl) 0;
-  background-color: var(--color-bg-primary);
+  padding: 8rem 2rem;
+  background-color: #F8F7F3;
   position: relative;
+  overflow: hidden;
 }
 
 .container {
-  width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-lg);
-  }
 }
 
 .header {
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto var(--spacing-xl);
+  margin-bottom: 5rem;
 }
 
 .badge {
   display: inline-block;
-  padding: 0.25rem 0;
-  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(43, 69, 96, 0.1);
+  color: #2B4560;
+  border-radius: 2rem;
+  font-size: 0.875rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent-gold);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 1.5rem;
 }
 
 .title {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 400;
   line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
+  color: #1A1A1A;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.highlight {
+  color: #2B4560;
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  width: 100%;
+  height: 0.3em;
+  background-color: rgba(43, 69, 96, 0.2);
+  z-index: -1;
+  transform: skewX(-15deg);
 }
 
 .description {
   font-size: 1.25rem;
-  color: var(--color-text-secondary);
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-.selector {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-xl);
-  flex-wrap: wrap;
-}
-
-.selectorBtn {
-  background: transparent;
-  border: 1px solid var(--color-border);
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all var(--transition-fast);
-  color: var(--color-text-secondary);
-}
-
-.selectorBtnActive {
-  background: var(--color-text-primary);
-  color: var(--color-bg-primary);
-  border-color: var(--color-text-primary);
-}
-
-.card {
-  background: var(--color-bg-tertiary);
-  border-radius: 20px;
+/* Grid Layout */
+.grid {
   display: grid;
-  grid-template-columns: 1fr;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem;
 }
 
-@media (min-width: 1024px) {
-  .card {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.dataPanel {
-  padding: var(--spacing-xl);
-}
-
-.imagePanel {
+/* Case Wrapper */
+.caseWrapper {
   position: relative;
-  min-height: 400px;
-  background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80');
-  background-size: cover;
-  background-position: center;
+  aspect-ratio: 3 / 4; /* Portrait for mobile screenshots */
+  z-index: 1;
 }
 
-.imageOverlay {
+/* Elevate hovered item above all others */
+.caseWrapper:has(.active),
+.caseWrapper:hover {
+  z-index: 100; 
+}
+
+/* BASE CARD (Image) */
+.baseCard {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--spacing-xl);
-  color: white;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-decoration: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.caseWrapper:hover .baseCard {
+  opacity: 0; /* Hide base card smoothly when popout opens */
+}
+
+.imageWrapper {
+  flex: 1;
+  overflow: hidden;
+  background: #f0f0f0;
+  position: relative;
+}
+
+.mobileScreenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* Show top part of the mobile site */
+  transition: transform 0.5s ease;
+}
+
+.baseCard:hover .mobileScreenshot {
+  transform: scale(1.05);
+}
+
+.baseContent {
+  padding: 1.5rem;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.05);
 }
 
 .caseTitle {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: var(--spacing-xs);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  color: #1A1A1A;
 }
 
-.caseLink {
-  color: var(--color-text-primary);
+.caseDescription {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
 }
 
-.caseLocation {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-lg);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+/* POPOUT CARD (16:9 Video) */
+.popoutCard {
+  position: absolute;
+  top: 50%;
+  width: 180%; /* Almost 2x width of a grid column! */
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  z-index: 10;
 }
 
-.chartContainer {
-  margin-bottom: var(--spacing-lg);
-  height: 250px;
+/* Smart Transform Origins based on column index (Netflix style) */
+/* 1st column: expand to right */
+.grid > .caseWrapper:nth-child(3n + 1) .popoutCard {
+  left: 0;
+  transform: translateY(-50%) scale(0.8);
+  transform-origin: left center;
+}
+.grid > .caseWrapper:nth-child(3n + 1) .popoutCard.active {
+  transform: translateY(-50%) scale(1.2);
 }
 
-.statsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+/* 2nd column: expand from center */
+.grid > .caseWrapper:nth-child(3n + 2) .popoutCard {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  transform-origin: center center;
+}
+.grid > .caseWrapper:nth-child(3n + 2) .popoutCard.active {
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
-.statBox {
-  padding: var(--spacing-md);
-  background: var(--color-bg-secondary);
-  border-radius: 12px;
+/* 3rd column: expand to left */
+.grid > .caseWrapper:nth-child(3n + 3) .popoutCard {
+  right: 0;
+  transform: translateY(-50%) scale(0.8);
+  transform-origin: right center;
+}
+.grid > .caseWrapper:nth-child(3n + 3) .popoutCard.active {
+  transform: translateY(-50%) scale(1.2);
 }
 
-.statLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-text-secondary);
-  margin-bottom: 0.5rem;
+/* Active State (Hover) */
+.popoutCard.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.statValue {
-  font-size: 2rem;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  color: var(--color-text-primary);
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
-.quoteText {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.4;
-  margin-bottom: var(--spacing-md);
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.quoteAuthor {
-  font-size: 1rem;
-  font-weight: 600;
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Reset origins for 2 columns */
+  .grid > .caseWrapper .popoutCard {
+    width: 150%;
+  }
+
+  .grid > .caseWrapper:nth-child(2n + 1) .popoutCard {
+    left: 0;
+    right: auto;
+    transform: translateY(-50%) scale(0.9);
+    transform-origin: left center;
+  }
+  .grid > .caseWrapper:nth-child(2n + 1) .popoutCard.active {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .grid > .caseWrapper:nth-child(2n + 2) .popoutCard {
+    left: auto;
+    right: 0;
+    transform: translateY(-50%) scale(0.9);
+    transform-origin: right center;
+  }
+  .grid > .caseWrapper:nth-child(2n + 2) .popoutCard.active {
+    transform: translateY(-50%) scale(1.1);
+  }
 }
 
-.quoteRole {
-  font-size: 0.875rem;
-  opacity: 0.8;
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .popoutCard {
+    display: none; /* Disable popout on mobile, too complex for touch */
+  }
+  
+  .caseWrapper {
+    aspect-ratio: auto;
+    height: 500px;
+  }
+  
+  .caseWrapper:hover .baseCard {
+    opacity: 1; /* Keep base card visible */
+  }
 }
