@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
+    "lucide-react": "^1.24.0",
     "motion": "^12.42.2",
     "puppeteer": "^25.3.0",
     "react": "^19.2.3",

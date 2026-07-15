@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; background: #ddd; }
+  .hero {
+    height: 500px;
+    background: #111;
+    -webkit-mask-image: 
+      linear-gradient(black, black),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1440,0 L1440,0 C960,0 480,150 0,150 Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% calc(100% - 150px), 100% 150px;
+    -webkit-mask-position: top, bottom;
+    -webkit-mask-repeat: no-repeat;
+    margin-bottom: -150px;
+  }
+  .next {
+    height: 500px;
+    background: #f4f3f0;
+    padding-top: 150px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero"></div>
+  <div class="next">Next section</div>
+</body>
+</html>
