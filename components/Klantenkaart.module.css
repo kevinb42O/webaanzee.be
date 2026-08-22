@@ -10,6 +10,9 @@
 
 .highlight { color: var(--accent); }
 
+.backLink { position: absolute; z-index: 2; top: clamp(1.25rem, 3vw, 2rem); left: max(1.25rem, calc((100vw - 1240px) / 2)); display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 .9rem; border: 1px solid rgba(248, 244, 234, .35); color: #f8f4ea; font-size: .76rem; font-weight: 650; letter-spacing: .01em; text-decoration: none; transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast); }
+.backLink:hover { border-color: var(--accent); color: var(--ink); background: var(--accent); }
+
 .badge {
   display: flex;
   align-items: center;

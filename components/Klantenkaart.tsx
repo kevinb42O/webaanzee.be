@@ -85,7 +85,8 @@ const Klantenkaart: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      
+      <a className={styles.backLink} href="/">← Terug naar Webaanzee</a>
+
       {/* INTRO HERO SECTION */}
       <section className={styles.heroSection}>
         <div className={styles.heroGrid}>

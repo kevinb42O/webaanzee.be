@@ -18,8 +18,9 @@ const PwaymentPage = () => (
   <div className={styles.page}>
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="PWAYMENT home"><img className={styles.brandLogo} src="https://pwayment.vercel.app/branding/pwayment-logo.svg" alt="PWAYMENT" /></a>
-      <nav aria-label="Hoofdnavigatie"><a href="#werkt">Hoe het werkt</a><a href="#functies">Functies</a><a href="#retail">Voor retail</a></nav>
+      <nav aria-label="Hoofdnavigatie"><a href="/" className={styles.backLink}>← Webaanzee</a><a href="#werkt">Hoe het werkt</a><a href="#functies">Functies</a><a href="#retail">Voor retail</a></nav>
       <a className={styles.headerCta} href={appUrl} target="_blank" rel="noreferrer">Bekijk het platform <ArrowRight aria-hidden="true" /></a>
+      <a className={styles.mobileBackLink} href="/">← Webaanzee</a>
     </header>
     <main id="top">
       <section className={styles.hero}>
