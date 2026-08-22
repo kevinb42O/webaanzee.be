@@ -204,7 +204,7 @@ const CaseCard: React.FC<{ caseItem: CaseStudy; featured?: boolean }> = ({ caseI
   return (
     <motion.article
       variants={cardVariants}
-      className={`${styles.caseCard} ${featured ? styles.featuredCard : ''}`}
+      className={`${styles.caseCard} ${featured ? styles.featuredCard : ''} ${caseItem.id === 'pwayment' ? styles.wideCard : ''}`}
     >
       <a
         href={caseItem.website} 

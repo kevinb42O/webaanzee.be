@@ -8,7 +8,7 @@ import Header from './components/Header';
 const PrivacyPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white text-navy">
-      <Header />
+      <Header light />
       <main className="flex-grow">
         <Privacy />
         <Cookies />

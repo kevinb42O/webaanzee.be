@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './Header.module.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  light?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ light = false }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,7 +44,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${scrolled || light ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <a href="/#home" onClick={(e) => isHomePage ? scrollToSection(e, 'home') : undefined} className={styles.logo}>
           Webaanzee<span className={styles.logoDot}>.</span>

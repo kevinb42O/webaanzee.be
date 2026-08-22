@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 import styles from './Klantenkaart.module.css';
+
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const features = [
   {
@@ -55,12 +57,12 @@ const features = [
   }
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOut } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -117,7 +119,7 @@ const Klantenkaart: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
             whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.2, ease: easeOut }}
           >
             <img src="/spaarkaart.webp" alt="Klantenkaart Interface" className={styles.heroImage} />
           </motion.div>
@@ -150,7 +152,7 @@ const Klantenkaart: React.FC = () => {
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: easeOut }}
           >
             <div className={styles.phoneMockup}>
               <video 
@@ -189,7 +191,7 @@ const Klantenkaart: React.FC = () => {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.2, ease: easeOut }}
           >
             <div className={styles.macbookMockup}>
               <video 

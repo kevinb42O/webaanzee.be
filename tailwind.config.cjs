@@ -2,8 +2,10 @@
 module.exports = {
   content: [
     './index.html',
+    './privacy.html',
     './klantenkaart.html',
     './index.tsx',
+    './privacy.tsx',
     './klantenkaart.tsx',
     './App.tsx',
     './components/**/*.{ts,tsx}',
