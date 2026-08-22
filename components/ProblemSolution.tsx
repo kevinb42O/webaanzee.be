@@ -1,131 +1,37 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { X, Check } from 'lucide-react';
 import styles from './ProblemSolution.module.css';
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
-};
-
-const listVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.2,
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -15 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } }
-};
-
-const ProblemSolution: React.FC = () => {
-  return (
-    <section className={styles.section} id="werkwijze">
-      <div className={styles.container}>
-        
-        <motion.div 
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className={styles.title}>
-            Waarom geen traditioneel bureau?
-          </h2>
-        </motion.div>
-
-        <motion.div 
-          className={styles.cardsGrid}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          
-          {/* Traditioneel Bureau Card */}
-          <div className={styles.cardNegative}>
-            <h3 className={styles.cardTitleNegative}>Traditioneel Bureau</h3>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Maandenlange doorlooptijden met eindeloze feedbackrondes</span>
-              </li>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Je praat met accountmanagers; een junior bouwt je site</span>
-              </li>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Je betaalt mee aan hun dure kantoorpand en overhead</span>
-              </li>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Trage sites gebouwd met verouderde tech-stacks</span>
-              </li>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Matige SEO en laadtijden die conversie nekken</span>
-              </li>
-              <li className={styles.listItem}>
-                <X size={18} strokeWidth={2} className={styles.iconNegative} />
-                <span>Totaal onleesbaar voor AI-agents en LLM's</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* WebAanZee Card */}
-          <div className={styles.cardPositive}>
-            <h3 className={styles.cardTitlePositive}>WebAanZee</h3>
-            
-            <motion.ul 
-              className={styles.list}
-              variants={listVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>Live in weken door directe executie en focus</span>
-              </motion.li>
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>1-op-1 direct contact met de expert die alles bouwt</span>
-              </motion.li>
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>100% van je budget gaat naar de kwaliteit van je platform</span>
-              </motion.li>
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>Gegarandeerd 100/100 op Prestaties, SEO & Toegankelijkheid</span>
-              </motion.li>
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>Volledig AI-ready (geoptimaliseerd voor Agentisch Browsen)</span>
-              </motion.li>
-              <motion.li variants={itemVariants} className={`${styles.listItem} ${styles.listItemActive}`}>
-                <Check size={18} strokeWidth={2.5} className={styles.iconPositive} />
-                <span>Razendsnel maatwerk dat klaar is voor het nieuwe internet</span>
-              </motion.li>
-            </motion.ul>
-          </div>
-
-        </motion.div>
-
+const ProblemSolution: React.FC = () => (
+  <section className={styles.section} id="werkwijze">
+    <div className={styles.container}>
+      <div className={styles.positioning}>
+        <div>
+          <p className={styles.eyebrow}>Goed werk verdient een goede eerste indruk.</p>
+          <h2>Mensen vergelijken sneller dan ooit.</h2>
+        </div>
+        <div className={styles.positioningText}>
+          <p>Nog voor ze bellen, langskomen of een offerte vragen, hebben ze je website al bekeken.</p>
+          <p>Daarom moet die niet alleen mooi zijn. Hij moet in een paar seconden duidelijk maken:</p>
+          <p className={styles.statements}>dit is wie we zijn.<br />dit is wat we doen.<br />en hier zit je goed.</p>
+          <p>Webaanzee bouwt websites die precies dat doen.</p>
+        </div>
       </div>
-    </section>
-  );
-};
+
+      <div className={styles.better}>
+        <div>
+          <p className={styles.eyebrow}>Wat ik doe</p>
+          <h2>Niet méér website.<br /><em>Een betere.</em></h2>
+        </div>
+        <div className={styles.betterText}>
+          <p>Ik ontwerp en bouw websites rond wat jouw zaak nodig heeft.</p>
+          <p>Soms is dat een sterke, heldere website waarmee je eindelijk professioneel voor de dag komt.</p>
+          <p>Soms moet een website meer doen: aanvragen verzamelen, afspraken binnenhalen, verkopen of werk uit handen nemen.</p>
+          <p>Geen standaardpakket omdat het toevallig makkelijk verkoopt.</p>
+          <p>Eerst bepalen we wat de website moet bereiken. Daarna bouwen we precies genoeg om dat goed te doen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default ProblemSolution;

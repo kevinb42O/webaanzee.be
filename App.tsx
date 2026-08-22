@@ -1,11 +1,12 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
-const Proof = lazy(() => import('./components/Proof'));
+import Proof from './components/Proof';
+import ClientMarks from './components/ClientMarks';
 import Offer from './components/Offer';
-import SEOAnalyse from './components/SEOAnalyse';
+import Quality from './components/Quality';
 import FAQ from './components/FAQ';
 import About from './components/About';
 import ContactFooter from './components/ContactFooter';
@@ -18,13 +19,12 @@ const App: React.FC = () => {
       <main style={{ flexGrow: 1 }} role="main" itemScope itemType="https://schema.org/WebPage">
         <Hero />
         <ProblemSolution />
-        <Suspense fallback={<div style={{ padding: '8rem 0' }} />}>
-          <Proof />
-        </Suspense>
+        <Proof />
+        <ClientMarks />
+        <Quality />
         <Offer />
-        <SEOAnalyse />
-        <FAQ />
         <About />
+        <FAQ />
         <ContactFooter />
       </main>
       <CrispChat />

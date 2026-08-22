@@ -19,6 +19,7 @@ export default defineConfig({
             main: path.resolve(__dirname, 'index.html'),
             privacy: path.resolve(__dirname, 'privacy.html'),
             klantenkaart: path.resolve(__dirname, 'klantenkaart.html'),
+            pwayment: path.resolve(__dirname, 'pwayment.html'),
             blog1: path.resolve(__dirname, 'blog/waarom-website-nodig-2026.html'),
           },
         },

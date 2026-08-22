@@ -11,6 +11,7 @@ declare global {
 
 const CrispChat: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   useEffect(() => {
     const WEBSITE_ID = "ede3f23a-3d08-4cf9-93ae-cd556b614349"; 
@@ -46,6 +47,19 @@ const CrispChat: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const hero = document.getElementById('home');
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeroVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   const openChat = (e: React.MouseEvent) => {
     e.preventDefault();
     if (window.$crisp) {
@@ -56,7 +70,7 @@ const CrispChat: React.FC = () => {
   };
 
   // If the native chat is open, we hide our custom button
-  if (isChatOpen) return null;
+  if (isChatOpen || isHeroVisible) return null;
 
   return (
     <div className={styles.floatContainer}>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   /* 2024 Light Brutalism Palette */
@@ -14,7 +14,9 @@
   --color-border: rgba(10, 10, 10, 0.1);
 
   /* Typography */
-  --font-heading: var(--font-body);
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+  --font-heading: var(--font-display);
   --font-body: 'Inter', -apple-system, sans-serif;
   
   /* Spacing */
@@ -43,6 +45,10 @@ html {
   background-color: var(--color-bg-primary);
 }
 
+body {
+  overflow-x: clip;
+}
+
 /* Global Grain Overlay */
 body::after {
   content: '';
@@ -66,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: 1.1;
   color: var(--color-text-primary);
-  letter-spacing: -0.02em; /* Brutalist tight tracking */
+  letter-spacing: -0.035em;
 }
 
 a {
@@ -77,6 +83,15 @@ a {
 button {
   cursor: pointer;
   font-family: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-accent-gold);
+  outline-offset: 3px;
 }
 
 /* Base Buttons */
@@ -145,5 +160,14 @@ button {
     animation: parallaxBg linear both;
     animation-timeline: view();
     animation-range: entry cover;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

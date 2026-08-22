@@ -10,7 +10,7 @@ const KlantenkaartPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main style={{ flexGrow: 1, paddingTop: '100px' }}>
+      <main style={{ flexGrow: 1 }}>
         <Klantenkaart />
       </main>
       <CrispChat />

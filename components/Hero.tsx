@@ -93,38 +93,34 @@ const Hero: React.FC = () => {
 
         <h1 className={styles.title}>
           <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Mooi is niet genoeg.</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}>Een website die duidelijk maakt</motion.span>
           </span>
           <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Je website moet werken.</motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>waarom ze bij jóu moeten zijn.</motion.span>
           </span>
         </h1>
         
         <motion.p className={styles.description} variants={fadeVariants}>
-          Ik ontwerp en bouw snelle websites en web-apps die je verhaal helder maken en bezoekers overtuigen. Je werkt rechtstreeks met mij, van eerste idee tot livegang.
+          Geen online visitekaartje dat er alleen goed uitziet. Een website die vertrouwen wekt, je verhaal helder vertelt en mensen helpt de volgende stap te zetten.
         </motion.p>
 
         <motion.div className={styles.ctaGroup} variants={fadeVariants}>
           <motion.a
-            href="#resultaten"
-            onClick={(event) => scrollToSection(event, 'resultaten')}
+            href="#contact"
+            onClick={(event) => scrollToSection(event, 'contact')}
             className={styles.primaryCta}
             variants={ctaVariants}
             whileHover={shouldReduceMotion ? undefined : 'hover'}
             whileTap={shouldReduceMotion ? undefined : 'tap'}
           >
-            <span className={styles.buttonLabel}>Bekijk mijn werk</span>
+            <span className={styles.buttonLabel}>Plan een gesprek</span>
             <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden="true">→</motion.span>
           </motion.a>
-          <motion.a
-            href="#contact"
-            onClick={(event) => scrollToSection(event, 'contact')}
+          <motion.p
             className={styles.secondaryCta}
-            whileHover={shouldReduceMotion ? undefined : { x: 4 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
           >
-            Vertel me over je project
-          </motion.a>
+            Websites op maat voor ondernemers die goed zijn in hun vak — en willen dat hun website dat ook uitstraalt.
+          </motion.p>
         </motion.div>
       </motion.div>
 

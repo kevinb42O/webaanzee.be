@@ -6,7 +6,7 @@
 
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
@@ -33,9 +33,39 @@
   color: var(--color-text-primary);
 }
 
+.intro {
+  max-width: 38rem;
+  margin: var(--spacing-md) auto 0;
+  color: var(--color-text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
 .accordion {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.group {
+  border-top: 1px solid var(--color-border);
+}
+
+.groupTitle {
+  margin: 0;
+  padding: var(--spacing-md) 0 var(--spacing-sm);
+  color: var(--color-accent-gold);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--spacing-xl);
 }
 
 .details {
@@ -43,14 +73,16 @@
 }
 
 .summary {
-  padding: var(--spacing-lg) 0;
+  padding: 1rem 0;
   cursor: pointer;
   list-style: none;
   display: flex;
+  gap: var(--spacing-md);
   justify-content: space-between;
-  align-items: center;
-  font-size: 1.25rem;
+  align-items: flex-start;
+  font-size: 1rem;
   font-weight: 500;
+  line-height: 1.4;
   color: var(--color-text-primary);
   transition: color var(--transition-fast);
 }
@@ -64,15 +96,16 @@
 }
 
 .icon {
-  width: 2rem;
-  height: 2rem;
+  flex: 0 0 auto;
+  width: 1.625rem;
+  height: 1.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   background: var(--color-bg-secondary);
   transition: all var(--transition-fast);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .details[open] .icon {
@@ -82,10 +115,10 @@
 }
 
 .answer {
-  padding: 0 0 var(--spacing-lg) 0;
+  padding: 0 0 1rem 0;
   color: var(--color-text-secondary);
-  line-height: 1.6;
-  font-size: 1.125rem;
+  line-height: 1.55;
+  font-size: 0.9375rem;
 }
 
 .footer {
@@ -103,4 +136,14 @@
 
 .link:hover {
   color: var(--color-accent-gold);
+}
+
+@media (max-width: 680px) {
+  .items {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    font-size: 1rem;
+  }
 }

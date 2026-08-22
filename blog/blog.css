@@ -1,0 +1,5 @@
+/* The article is composed with Tailwind utility classes. Keep this bundle scoped
+   to the blog entry instead of injecting Tailwind's preflight across the site. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
