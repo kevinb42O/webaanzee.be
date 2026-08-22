@@ -17,20 +17,23 @@ const Cookies: React.FC = () => {
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Welke cookies worden momenteel geplaatst?</h3>
             <p>
-              Deze website wordt gehost via GitHub Pages en draait zonder ingeschakelde advertentie- of analyseplatformen (zoals
-              Google Analytics). Ik plaats zelf geen marketingcookies of social media trackingpixels.
+              Deze website wordt gehost op Vercel. Ik gebruik Vercel Web Analytics om in geaggregeerde, anonieme vorm te zien
+              welke pagina&apos;s bezocht worden en via welke kanalen bezoekers op de site terechtkomen. Vercel Web Analytics gebruikt
+              geen cookies en volgt bezoekers niet over verschillende websites of dagen heen.
             </p>
             <p>
-              De hostingpartij kan wel technische logs bijhouden (bijvoorbeeld foutmeldingen en anonieme bezoekinformatie) om
-              de dienst veilig te houden. Ik gebruik die gegevens niet om individuele bezoekers te volgen.
+              De chatfunctie van Crisp gebruikt functionele cookies om een chatgesprek en eerdere berichten te kunnen onthouden.
+              Die cookies dienen uitsluitend om de chat te laten werken; ik gebruik geen marketingcookies, advertentiecookies of
+              socialmedia-trackingpixels.
             </p>
           </div>
 
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Geen cookiewall, wel gezond verstand</h3>
             <p>
-              Omdat er op dit moment geen marketing- of analysecookies geplaatst worden, krijgt u geen opdringerige cookiebanner.
-              Mocht dit in de toekomst veranderen, dan pas ik zowel deze tekst als de instellingen op de site aan.
+              Vercel Analytics werkt zonder cookies. De functionele Crisp-cookies zijn er enkel voor de chatfunctie. Ik gebruik
+              geen cookies om u advertenties te tonen of uw surfgedrag voor marketingdoeleinden te volgen. Mocht dit in de toekomst
+              veranderen, dan pas ik zowel deze tekst als de instellingen op de site aan.
             </p>
           </div>
 

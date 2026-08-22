@@ -43,8 +43,8 @@ const Privacy: React.FC = () => {
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Hoe neem ik contact met u op?</h3>
             <p>
-              De contactknoppen op deze site openen gewoon uw eigen mailprogramma of WhatsApp. Uw bericht komt dus rechtstreeks
-              bij mij terecht en wordt niet via een externe tool opgeslagen.
+              De contactknoppen voor e-mail en WhatsApp openen uw eigen mailprogramma of WhatsApp. Gebruikt u de chatfunctie,
+              dan verloopt uw bericht via Crisp, de chatdienst die ik daarvoor gebruik. Uw bericht komt rechtstreeks bij mij terecht.
             </p>
           </div>
 
