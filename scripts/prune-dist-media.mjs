@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const obsolete = [
+  'videos/seascape.mp4',
+  'videos/seascape-hero-hq.mp4',
   'videos/seascape-optimized.mp4',
   'videos/dashboard.mp4',
   'videos/dashboard.mov',

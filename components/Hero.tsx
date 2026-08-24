@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
             scale: shouldReduceMotion ? 1.01 : videoScale,
           }}
         >
-          <source src="/videos/seascape.mp4" type="video/mp4" />
+          <source src="/videos/seascape-hero-web.mp4" type="video/mp4" />
         </motion.video>
       </motion.div>
 
