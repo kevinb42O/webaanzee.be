@@ -13,8 +13,8 @@ const BlogArticle: React.FC = () => (
           <span className="text-amber-300" aria-current="page">Dit artikel</span>
         </nav>
         <p className="text-xs font-bold tracking-[.18em] uppercase text-amber-300 mb-6">Webdesign voor zelfstandigen</p>
-        <h1 className="text-4xl md:text-6xl font-serif text-white leading-tight mb-6">Waarom heeft uw zaak een eigen website nodig?</h1>
-        <p className="text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">Niet omdat iedere onderneming zoveel mogelijk pagina’s nodig heeft, maar omdat een goede website vertrouwen, uitleg en actie samenbrengt op een plek die u zelf beheert.</p>
+        <h1 className="text-4xl md:text-6xl font-serif text-white leading-tight mb-6">Waarom heeft jouw zaak een eigen website nodig?</h1>
+        <p className="text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">Niet omdat iedere onderneming zoveel mogelijk pagina’s nodig heeft, maar omdat een goede website vertrouwen, uitleg en actie samenbrengt op een plek die je zelf beheert.</p>
         <div className="mt-8 text-sm text-white/45"><span>Door Kevin Bourguignon</span><span className="mx-2">•</span><time dateTime="2026-08-24">Bijgewerkt op 24 augustus 2026</time><span className="mx-2">•</span><span>8 min leestijd</span></div>
       </div>
     </header>
@@ -22,11 +22,11 @@ const BlogArticle: React.FC = () => (
     <main>
       <article className="px-6 py-16 md:py-24">
         <div className="max-w-3xl mx-auto prose prose-lg prose-slate">
-          <p className="text-xl md:text-2xl text-slate-800 font-medium leading-relaxed">Een prospect hoort uw naam, ziet uw zaak of zoekt een dienst in de buurt. Daarna volgt vaak een controle: wat doet dit bedrijf precies, ziet het er betrouwbaar uit en hoe neem ik contact op? Een eigen website kan die drie vragen zonder omweg beantwoorden.</p>
+          <p className="text-xl md:text-2xl text-slate-800 font-medium leading-relaxed">Een prospect hoort je naam, ziet je zaak of zoekt een dienst in de buurt. Daarna volgt vaak een controle: wat doet dit bedrijf precies, ziet het er betrouwbaar uit en hoe neem ik contact op? Een eigen website kan die drie vragen zonder omweg beantwoorden.</p>
 
           <h2>Een website en sociale media hebben een andere taak</h2>
           <p>Sociale media zijn nuttig om aandacht en contact op te bouwen. Een Google Business Profile kan later belangrijke praktische informatie en reviews tonen. Platformen zoals reservatiesites of marktplaatsen kunnen bereik opleveren. Maar op al die plekken bepaalt iemand anders de vorm, het algoritme en de voorwaarden.</p>
-          <p>Op een eigen website bepaalt u zelf welke informatie eerst komt, welk bewijs zichtbaar is en welke stap de bezoeker kan zetten. Dat maakt sociale media niet overbodig. De kanalen versterken elkaar juist wanneer ze naar één actuele, geloofwaardige basis verwijzen.</p>
+          <p>Op een eigen website bepaal je zelf welke informatie eerst komt, welk bewijs zichtbaar is en welke stap de bezoeker kan zetten. Dat maakt sociale media niet overbodig. De kanalen versterken elkaar juist wanneer ze naar één actuele, geloofwaardige basis verwijzen.</p>
 
           <h2>Vindbaarheid begint met een bruikbaar antwoord</h2>
           <p>Een website wordt niet automatisch hoog geplaatst omdat er een plaatsnaam of zoekterm op staat. Google probeert pagina’s te tonen die de vraag van een zoeker goed beantwoorden. Techniek helpt Google de pagina vinden en begrijpen; inhoud, bewijs, concurrentie en bekendheid bepalen mee of ze ook sterk genoeg is om te ranken.</p>
@@ -44,7 +44,7 @@ const BlogArticle: React.FC = () => (
           <p>Dat bedrag is niet eerlijk met één algemene formule te berekenen. Het hangt af van zoekvolume, marges, concurrentie, terugkerende klanten en de waarde van een aanvraag. Beweringen zoals “een website verdient zichzelf binnen een maand terug” zijn daarom geen betrouwbare basis voor een investering.</p>
           <p>Een betere nulmeting is concreet:</p>
           <ol>
-            <li>Hoe komen nieuwe klanten vandaag bij u terecht?</li>
+            <li>Hoe komen nieuwe klanten vandaag bij je terecht?</li>
             <li>Welke vragen stellen ze telkens opnieuw?</li>
             <li>Waar haken aanvragen of reservaties af?</li>
             <li>Welke handelingen kunnen bezoekers zelf veilig uitvoeren?</li>
@@ -72,8 +72,8 @@ const BlogArticle: React.FC = () => (
           <p>Een professionele website bij Webaanzee start momenteel vanaf €950. Uitgebreidere sites of toepassingen starten vanaf €1.950. Dat zijn startprijzen, geen universele pakketten. Voor de start worden doel, pagina’s, functies, inhoud en verantwoordelijkheden vastgelegd in een concreet voorstel.</p>
           <div className="not-prose mt-12 p-8 bg-slate-900 text-white rounded-2xl">
             <p className="text-sm uppercase tracking-wider text-amber-300 font-bold mb-3">Volgende stap</p>
-            <h2 className="text-3xl font-serif mb-4">Bespreek wat uw website werkelijk moet doen.</h2>
-            <p className="text-white/65 mb-6">Geen automatische score of rangschikkingsbelofte. Wel een rechtstreeks gesprek over doel, inhoud en de kortste bruikbare route.</p>
+            <h2 className="text-3xl font-serif mb-4">Bespreek wat je website werkelijk moet doen.</h2>
+            <p className="text-white/65 mb-6">Een rechtstreeks gesprek over je doel, inhoud en de kortste bruikbare route.</p>
             <a href="/#contact" className="inline-flex bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-lg">Plan een gesprek →</a>
           </div>
         </div>

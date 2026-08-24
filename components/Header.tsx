@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
   };
 
   return (
-    <header className={`${styles.header} ${scrolled || light ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${scrolled || light ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
       <div className={styles.container}>
         <a href="/#home" onClick={(e) => isHomePage ? scrollToSection(e, 'home') : undefined} className={styles.logo}>
           Webaanzee<span className={styles.logoDot}>.</span>

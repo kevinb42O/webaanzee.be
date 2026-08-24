@@ -18,9 +18,9 @@ const App: React.FC = () => {
       <Header />
       <main style={{ flexGrow: 1 }} role="main" itemScope itemType="https://schema.org/WebPage">
         <Hero />
-        <ProblemSolution />
         <Proof />
         <ClientMarks />
+        <ProblemSolution />
         <Quality />
         <Offer />
         <About />

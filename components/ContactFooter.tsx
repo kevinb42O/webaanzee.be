@@ -32,7 +32,7 @@ const ContactFooter: React.FC = () => {
       if (!result.ok) throw new Error(payload.message || 'Versturen lukte niet.');
       form.reset();
       setSubmissionState('success');
-      setSubmissionMessage('Bedankt. Uw bericht is verzonden; ik antwoord persoonlijk.');
+      setSubmissionMessage('Bedankt. Je bericht is verzonden; ik antwoord persoonlijk.');
       track('contact_form_submit_success');
     } catch (error) {
       setSubmissionState('error');
@@ -96,9 +96,9 @@ const ContactFooter: React.FC = () => {
             </div>
 
             <div className={`${styles.finalPrompt} reveal-up`} style={{ animationDelay: '0.25s' }}>
-              <span>Geen verkooppraat</span>
-              <h3>Een eerste gesprek kost je niets. Een vaag antwoord krijg je ook niet.</h3>
-              <p>Rechtstreeks contact. Meestal dezelfde werkdag antwoord.</p>
+              <span>Rechtstreeks contact</span>
+              <h3>Je idee verdient een concreet antwoord.</h3>
+              <p>Je spreekt rechtstreeks met Kevin. Meestal krijg je dezelfde werkdag antwoord.</p>
             </div>
           </div>
 
@@ -182,23 +182,23 @@ const ContactFooter: React.FC = () => {
             </div>
             <form onSubmit={submitContact}>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-name">Uw naam</label>
-                <input ref={nameInputRef} id="contact-name" type="text" name="name" autoComplete="name" placeholder="Uw naam" minLength={2} maxLength={100} required className={styles.input} />
+                <label className={styles.srOnly} htmlFor="contact-name">Je naam</label>
+                <input ref={nameInputRef} id="contact-name" type="text" name="name" autoComplete="name" placeholder="Je naam" minLength={2} maxLength={100} required className={styles.input} />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-email">Uw e-mail</label>
-                <input id="contact-email" type="email" name="email" autoComplete="email" placeholder="Uw e-mail" maxLength={200} required className={styles.input} />
+                <label className={styles.srOnly} htmlFor="contact-email">Je e-mail</label>
+                <input id="contact-email" type="email" name="email" autoComplete="email" placeholder="Je e-mail" maxLength={200} required className={styles.input} />
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.srOnly} htmlFor="contact-company">Bedrijf (optioneel)</label>
-                <input id="contact-company" type="text" name="company" autoComplete="organization" placeholder="Uw zaak (optioneel)" maxLength={160} className={styles.input} />
+                <input id="contact-company" type="text" name="company" autoComplete="organization" placeholder="Je zaak (optioneel)" maxLength={160} className={styles.input} />
               </div>
               <div className={styles.formGroup} style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
                 <label htmlFor="contact-website">Laat dit veld leeg</label>
                 <input id="contact-website" type="text" name="website" tabIndex={-1} autoComplete="off" />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-message">Uw bericht</label>
+                <label className={styles.srOnly} htmlFor="contact-message">Je bericht</label>
                 <textarea id="contact-message" name="message" rows={4} placeholder="Waar kan ik mee helpen?" minLength={10} maxLength={4000} required className={styles.input}></textarea>
               </div>
               <button type="submit" disabled={submissionState === 'sending'} className={styles.submitBtn}>{submissionState === 'sending' ? 'Versturen…' : 'Versturen'}</button>

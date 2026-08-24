@@ -93,34 +93,36 @@ const Hero: React.FC = () => {
 
         <h1 className={styles.title}>
           <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Webdesign dat duidelijk maakt</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}>Je beste werk verdient</motion.span>
           </span>
           <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>waarom ze bij jóu moeten zijn.</motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>een website op hetzelfde niveau.</motion.span>
           </span>
         </h1>
         
         <motion.p className={styles.description} variants={fadeVariants}>
-          Geen online visitekaartje dat er alleen goed uitziet. Een website die vertrouwen wekt, je verhaal helder vertelt en mensen helpt de volgende stap te zetten.
+          Webaanzee ontwerpt en bouwt onderscheidende websites voor ondernemers die online even sterk willen overkomen als in hun eigen werk.
         </motion.p>
 
         <motion.div className={styles.ctaGroup} variants={fadeVariants}>
           <motion.a
-            href="#contact"
-            onClick={(event) => scrollToSection(event, 'contact')}
+            href="#resultaten"
+            onClick={(event) => scrollToSection(event, 'resultaten')}
             className={styles.primaryCta}
             variants={ctaVariants}
             whileHover={shouldReduceMotion ? undefined : 'hover'}
             whileTap={shouldReduceMotion ? undefined : 'tap'}
           >
-            <span className={styles.buttonLabel}>Plan een gesprek</span>
+            <span className={styles.buttonLabel}>Bekijk geselecteerd werk</span>
             <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden="true">→</motion.span>
           </motion.a>
-          <motion.p
-            className={styles.secondaryCta}
-          >
-            Websites op maat voor ondernemers die goed zijn in hun vak — en willen dat hun website dat ook uitstraalt.
-          </motion.p>
+          <motion.a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={styles.secondaryLink}>Bespreek je project <span aria-hidden="true">↗</span></motion.a>
+        </motion.div>
+
+        <motion.div className={styles.proofBar} variants={fadeVariants} aria-label="Webaanzee in het kort">
+          <div className={styles.proofItem}><strong>01</strong><span>Design &amp; development<br />in dezelfde handen</span></div>
+          <div className={styles.proofItem}><strong>02</strong><span>Vanuit Blankenberge<br />voor de hele kust</span></div>
+          <a href="/cases/" className={`${styles.proofItem} ${styles.caseProof}`}><strong>Cases</strong><span>Bekijk alle realisaties ↗</span></a>
         </motion.div>
       </motion.div>
 

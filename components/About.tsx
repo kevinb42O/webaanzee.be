@@ -23,18 +23,18 @@ const About: React.FC = () => {
             
             <div className={styles.textBlock}>
               <p>
-                Je praat rechtstreeks met degene die je website ontwerpt én bouwt.
+                Ik ben Kevin. Je praat vanaf het eerste gesprek rechtstreeks met mij — en ik blijf betrokken tot je website live staat.
               </p>
               <p>
-                Geen accountmanager. Geen overdracht tussen designer en developer. Geen grote ploeg rond een klein project.
+                Strategie, inhoud, ontwerp en ontwikkeling komen zo uit dezelfde handen. Dat maakt beslissingen sneller en het eindresultaat sterker.
               </p>
             </div>
 
             <div className={styles.quoteBlock}>
               <p className={styles.quoteText}>
-                Dat houdt het proces kort, de communicatie duidelijk en de uiteindelijke website samenhangend.
+                Goed digitaal werk ontstaat wanneer het verhaal, de vorm en de techniek vanaf het begin samen worden bedacht.
               </p>
-              <p className={styles.quoteAuthor}>Zo blijft je website één geheel.</p>
+              <p className={styles.quoteAuthor}>Kevin — ontwerper &amp; developer bij Webaanzee</p>
             </div>
 
             <div className={styles.trustSignals}>

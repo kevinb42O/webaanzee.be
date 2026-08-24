@@ -17,11 +17,6 @@ interface CaseStudy {
     body: string;
     facts: string[];
   };
-  testimonial?: {
-    quote: string;
-    author: string;
-    role?: string;
-  };
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -53,11 +48,6 @@ export const caseStudies: CaseStudy[] = [
     videoSrc: '/videos/fabrice.mp4',
     imageSrc: '/images/cases/fabrice.png',
     tags: ['Publieke communicatie', 'Oostende'],
-    testimonial: {
-      quote: "Eindelijk een website die mijn politieke visie en realisaties helder en transparant overbrengt naar de burgers. De samenwerking was enorm vlot en professioneel.",
-      author: "Fabrice Goffin",
-      role: "Schepen van Oostende"
-    }
   },
   { 
     id: 'carabus', 
@@ -68,11 +58,6 @@ export const caseStudies: CaseStudy[] = [
     videoSrc: '/videos/carabus.mp4',
     imageSrc: '/images/cases/carabus.png',
     tags: ['Performance', 'Marketing'],
-    testimonial: {
-      quote: "De technische fundering die voor ons is gelegd is ongezien sterk. Onze online leadgeneratie en conversies gingen onmiddellijk door het dak na livegang.",
-      author: "Michaël",
-      role: "Zaakvoerder, Carabus"
-    }
   },
   { 
     id: 'cozy', 
@@ -83,11 +68,6 @@ export const caseStudies: CaseStudy[] = [
     videoSrc: '/videos/cozy.mp4',
     imageSrc: '/images/cases/cozy.png',
     tags: ['Horeca', 'Loyalty'],
-    testimonial: {
-      quote: "Onze klanten voelen de unieke sfeer van onze zaak al voordat ze binnenstappen. Het online reserveren gaat nu sneller en makkelijker dan ooit tevoren.",
-      author: "Eigenaars",
-      role: "COZY Moments"
-    }
   },
   { 
     id: 'dailygrind', 
@@ -98,11 +78,6 @@ export const caseStudies: CaseStudy[] = [
     videoSrc: '/videos/dailygrind.mp4',
     imageSrc: '/images/cases/dailygrind.png',
     tags: ['E-commerce', 'Community'],
-    testimonial: {
-      quote: "De webshop weerspiegelt niet alleen 100% de core skate scene, maar converteert ook vele malen beter. We zijn super blij met de snelle laadtijden.",
-      author: "Frederic",
-      role: "Founder, Daily Grind"
-    }
   },
   { 
     id: 'vishandel', 
@@ -113,11 +88,6 @@ export const caseStudies: CaseStudy[] = [
     videoSrc: '/videos/vishandel.mp4',
     imageSrc: '/images/cases/vishandel.png',
     tags: ['Lokale handel', 'Horeca'],
-    testimonial: {
-      quote: "Onze verse, ambachtelijke producten worden nu eindelijk prachtig en digitaal in de kijker gezet. Dit is een grote stap vooruit voor onze lokale zichtbaarheid.",
-      author: "Kelly",
-      role: "Zaakvoerster, De Wulk"
-    }
   },
   {
     id: 'atelierrembrandt',
@@ -263,12 +233,6 @@ const CaseCard: React.FC<{ caseItem: CaseStudy; featured?: boolean }> = ({ caseI
               </ul>
             </div>
           )}
-          {featured && !caseItem.projectNote && caseItem.testimonial && (
-            <blockquote className={styles.featuredQuote}>
-              <p>“{caseItem.testimonial.quote}”</p>
-              <footer>{caseItem.testimonial.author}<span>{caseItem.testimonial.role}</span></footer>
-            </blockquote>
-          )}
         </div>
       </a>
     </motion.article>
@@ -289,20 +253,20 @@ const Proof: React.FC = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.p className={styles.eyebrow} variants={fadeVariants}>
-            Resultaten <span>Echt werk</span>
+            Geselecteerd werk <span>2024 — 2026</span>
           </motion.p>
 
           <h2 className={styles.title}>
             <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Werk dat een zaak</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}>Ontworpen om op te vallen.</motion.span>
             </span>
             <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>merkbaar vooruithelpt.</motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Gebouwd om te werken.</motion.span>
             </span>
           </h2>
           
           <motion.p className={styles.description} variants={fadeVariants}>
-            Een selectie van werk voor zaken met een duidelijke eigenheid — en een website die daar recht aan doet.
+            Van lokale handelszaak tot digitaal product: ieder project krijgt een eigen visuele wereld en een technische basis die snel en betrouwbaar blijft.
           </motion.p>
         </motion.div>
 
@@ -313,10 +277,11 @@ const Proof: React.FC = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           <CaseCard caseItem={caseStudies[0]} featured />
-          {caseStudies.slice(1).map((caseItem) => (
+          {caseStudies.slice(1, 6).map((caseItem) => (
             <CaseCard key={caseItem.id} caseItem={caseItem} />
           ))}
         </motion.div>
+        <motion.a className={styles.allCases} href="/cases/" variants={fadeVariants}>Bekijk alle cases <ArrowUpRight aria-hidden="true" strokeWidth={1.5} /></motion.a>
       </div>
     </section>
   );

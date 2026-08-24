@@ -32,7 +32,7 @@
   aspect-ratio: 4/5;
   border-radius: 0;
   overflow: hidden;
-  box-shadow: 1rem 1rem 0 var(--color-accent-gold);
+  border-left: 0.45rem solid var(--color-accent-gold);
 }
 
 .image {
@@ -90,12 +90,14 @@
   font-size: clamp(1.55rem, 2.2vw, 2.25rem);
   color: var(--color-text-primary);
   margin-bottom: 0.5rem;
-  font-style: italic;
+  font-style: normal;
 }
 
 .quoteAuthor {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .trustSignals {
@@ -119,4 +121,28 @@
 .signalSub {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 4.6;
+  }
+
+  .title {
+    font-size: clamp(2.65rem, 13vw, 3.4rem);
+  }
+
+  .textBlock {
+    font-size: 1.08rem;
+  }
+
+  .trustSignals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }

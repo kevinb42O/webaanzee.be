@@ -1,34 +1,42 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import styles from './ProblemSolution.module.css';
+
+const capabilities = [
+  { number: '01', title: 'Webdesign', text: 'Een eigen visuele richting, heldere inhoud en een website die op elk scherm overtuigt.', href: '/diensten/webdesign/' },
+  { number: '02', title: 'Webshops', text: 'Een snelle winkelervaring waarin assortiment, vertrouwen en afrekenen logisch samenkomen.', href: '/diensten/webshops/' },
+  { number: '03', title: 'Webapplicaties', text: 'Digitale tools, dashboards en automatisaties die terugkerend werk eenvoudiger maken.', href: '/diensten/webapplicaties-en-automatisatie/' },
+  { number: '04', title: 'Lokale groei', text: 'Een sterke technische basis en relevante pagina’s voor ondernemers langs de Belgische kust.', href: '/webdesign-belgische-kust/' },
+];
 
 const ProblemSolution: React.FC = () => (
   <section className={styles.section} id="werkwijze">
     <div className={styles.container}>
-      <div className={styles.positioning}>
+      <header className={styles.header}>
+        <p className={styles.eyebrow}>Wat Webaanzee bouwt</p>
         <div>
-          <p className={styles.eyebrow}>Goed werk verdient een goede eerste indruk.</p>
-          <h2>Mensen vergelijken sneller dan ooit.</h2>
+          <h2>Niet zomaar online.<br /><em>Onmiskenbaar van jou.</em></h2>
+          <p>Strategie, ontwerp en development komen samen in één rechtstreeks traject. Zo blijven het verhaal, de visuele richting en de techniek één digitale ervaring die tot in de details klopt.</p>
         </div>
-        <div className={styles.positioningText}>
-          <p>Nog voor ze bellen, langskomen of een offerte vragen, hebben ze je website al bekeken.</p>
-          <p>Daarom moet die niet alleen mooi zijn. Hij moet in een paar seconden duidelijk maken:</p>
-          <p className={styles.statements}>dit is wie we zijn.<br />dit is wat we doen.<br />en hier zit je goed.</p>
-          <p>Webaanzee bouwt websites die precies dat doen.</p>
-        </div>
+      </header>
+
+      <div className={styles.capabilities}>
+        {capabilities.map((capability) => (
+          <a key={capability.number} className={styles.capability} href={capability.href}>
+            <span className={styles.number}>{capability.number}</span>
+            <div>
+              <h3>{capability.title}</h3>
+              <p>{capability.text}</p>
+            </div>
+            <ArrowUpRight aria-hidden="true" strokeWidth={1.4} />
+          </a>
+        ))}
       </div>
 
-      <div className={styles.better}>
-        <div>
-          <p className={styles.eyebrow}>Wat ik doe</p>
-          <h2>Niet méér website.<br /><em>Een betere.</em></h2>
-        </div>
-        <div className={styles.betterText}>
-          <p>Ik ontwerp en bouw websites rond wat jouw zaak nodig heeft.</p>
-          <p>Soms is dat een sterke, heldere website waarmee je eindelijk professioneel voor de dag komt.</p>
-          <p>Soms moet een website meer doen: aanvragen verzamelen, afspraken binnenhalen, verkopen of werk uit handen nemen.</p>
-          <p>Geen standaardpakket omdat het toevallig makkelijk verkoopt.</p>
-          <p>Eerst bepalen we wat de website moet bereiken. Daarna bouwen we precies genoeg om dat goed te doen.</p>
-        </div>
+      <div className={styles.studioNote}>
+        <span>Van eerste schets tot live website</span>
+        <p>Je praat rechtstreeks met de persoon die ontwerpt én bouwt. Daardoor blijft het idee intact, gaat feedback sneller en voelt het eindresultaat als één geheel.</p>
+        <a href="#contact">Vertel over je project <ArrowUpRight aria-hidden="true" strokeWidth={1.5} /></a>
       </div>
     </div>
   </section>

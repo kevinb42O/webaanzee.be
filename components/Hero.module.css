@@ -185,6 +185,21 @@
   line-height: 1.5;
 }
 
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .85rem .25rem;
+  border-bottom: 1px solid rgba(248, 244, 234, .45);
+  color: #f8f4ea;
+  font-size: .8rem;
+  font-weight: 650;
+  letter-spacing: .02em;
+  transition: color var(--transition-fast), border-color var(--transition-fast), gap var(--transition-fast);
+}
+
+.secondaryLink:hover { color: #f26b43; border-color: #f26b43; gap: 1rem; }
+
 .proofBar {
   display: grid;
   grid-template-columns: repeat(3, max-content);
@@ -316,6 +331,8 @@
     gap: 1rem;
     padding-top: 1rem;
   }
+
+  .secondaryLink { align-self: flex-start; }
 
   .proofItem:not(.caseProof) {
     display: none;
