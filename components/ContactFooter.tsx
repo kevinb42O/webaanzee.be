@@ -5,12 +5,41 @@ import styles from './ContactFooter.module.css';
 
 const ContactFooter: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [submissionState, setSubmissionState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [submissionMessage, setSubmissionMessage] = useState('');
   const emailButtonRef = useRef<HTMLButtonElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+  const isHomePage = typeof window === 'undefined' || window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSubmissionState('idle');
+    setSubmissionMessage('');
+  };
+  const track = (eventName: string) => {
+    window.dispatchEvent(new CustomEvent('webaanzee:conversion', { detail: { eventName, path: window.location.pathname } }));
+  };
+  const submitContact = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmissionState('sending');
+    setSubmissionMessage('');
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const result = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const payload = await result.json().catch(() => ({}));
+      if (!result.ok) throw new Error(payload.message || 'Versturen lukte niet.');
+      form.reset();
+      setSubmissionState('success');
+      setSubmissionMessage('Bedankt. Uw bericht is verzonden; ik antwoord persoonlijk.');
+      track('contact_form_submit_success');
+    } catch (error) {
+      setSubmissionState('error');
+      setSubmissionMessage(error instanceof Error ? error.message : 'Versturen lukte niet. Mail rechtstreeks naar kevin@webaanzee.be.');
+      track('contact_form_error');
+    }
+  };
   const scrollOnHomePage = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     if (isHomePage) scrollToSection(event, sectionId);
   };
@@ -76,21 +105,21 @@ const ContactFooter: React.FC = () => {
           <div className={styles.contactActions}>
             <p className={styles.actionLead}>Kies de manier die vandaag het makkelijkst is.</p>
             <div className={styles.grid}>
-            <a href="tel:0494816714" className={`${styles.card} ${styles.cardPhone} reveal-up`} style={{ animationDelay: '0.3s' }}>
+            <a href="tel:0494816714" onClick={() => track('phone_click')} className={`${styles.card} ${styles.cardPhone} reveal-up`} style={{ animationDelay: '0.3s' }}>
               <span className={styles.cardKicker}>Bel</span>
               <span className={styles.cardTitle}>0494 81 67 14</span>
               <span className={styles.cardSub}>Bel wanneer het je past</span>
               <ArrowUpRight className={styles.cardArrow} strokeWidth={1.5} aria-hidden="true" />
             </a>
             
-            <a href="https://wa.me/32494816714" target="_blank" rel="noreferrer" className={`${styles.card} ${styles.cardWhatsapp} reveal-up`} style={{ animationDelay: '0.4s' }}>
+            <a href="https://wa.me/32494816714" onClick={() => track('whatsapp_click')} target="_blank" rel="noreferrer" className={`${styles.card} ${styles.cardWhatsapp} reveal-up`} style={{ animationDelay: '0.4s' }}>
               <span className={styles.cardKicker}>WhatsApp</span>
               <span className={styles.cardTitle}>Stuur een bericht</span>
               <span className={styles.cardSub}>Handig als je vraag al even moet rijpen</span>
               <ArrowUpRight className={styles.cardArrow} strokeWidth={1.5} aria-hidden="true" />
             </a>
 
-            <button ref={emailButtonRef} onClick={() => setIsModalOpen(true)} className={`${styles.card} ${styles.cardEmail} reveal-up`} style={{ width: '100%', animationDelay: '0.5s' }}>
+            <button ref={emailButtonRef} onClick={() => { setIsModalOpen(true); track('contact_form_start'); }} className={`${styles.card} ${styles.cardEmail} reveal-up`} style={{ width: '100%', animationDelay: '0.5s' }}>
               <span className={styles.cardKicker}>E-mail</span>
               <span className={styles.cardTitle}>Vertel je idee</span>
               <span className={styles.cardSub}>Ik lees mee en antwoord persoonlijk</span>
@@ -117,9 +146,12 @@ const ContactFooter: React.FC = () => {
             <nav className={styles.footerGroup} aria-label="Navigatie">
               <span className={styles.footerHeading}>Verkennen</span>
               <a href="/" className={styles.footerLink}>Startpagina</a>
+              <a href="/diensten/webdesign/" className={styles.footerLink}>Webdesign</a>
+              <a href="/webdesign-belgische-kust/" className={styles.footerLink}>Webdesign aan de kust</a>
+              <a href="/cases/" className={styles.footerLink}>Cases</a>
               <a href="/klantenkaart.html" className={styles.footerLink}>Digitale klantenkaart</a>
               <a href="/pwayment.html" className={styles.footerLink}>PWAYMENT POS</a>
-              <a href="/blog/waarom-website-nodig-2026.html" className={styles.footerLink}>Waarom uw zaak een website nodig heeft</a>
+              <a href="/inzichten/" className={styles.footerLink}>Inzichten</a>
             </nav>
 
             <address className={styles.footerGroup}>
@@ -148,20 +180,29 @@ const ContactFooter: React.FC = () => {
               <h3 id="email-dialog-title" className={styles.modalTitle}>Stuur een bericht</h3>
               <button type="button" className={styles.closeBtn} onClick={closeModal} aria-label="Sluit e-mailformulier">×</button>
             </div>
-            <form action="mailto:kevin@webaanzee.be" method="POST" encType="text/plain">
+            <form onSubmit={submitContact}>
               <div className={styles.formGroup}>
                 <label className={styles.srOnly} htmlFor="contact-name">Uw naam</label>
-                <input ref={nameInputRef} id="contact-name" type="text" name="naam" placeholder="Uw naam" required className={styles.input} />
+                <input ref={nameInputRef} id="contact-name" type="text" name="name" autoComplete="name" placeholder="Uw naam" minLength={2} maxLength={100} required className={styles.input} />
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.srOnly} htmlFor="contact-email">Uw e-mail</label>
-                <input id="contact-email" type="email" name="email" placeholder="Uw e-mail" required className={styles.input} />
+                <input id="contact-email" type="email" name="email" autoComplete="email" placeholder="Uw e-mail" maxLength={200} required className={styles.input} />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.srOnly} htmlFor="contact-company">Bedrijf (optioneel)</label>
+                <input id="contact-company" type="text" name="company" autoComplete="organization" placeholder="Uw zaak (optioneel)" maxLength={160} className={styles.input} />
+              </div>
+              <div className={styles.formGroup} style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+                <label htmlFor="contact-website">Laat dit veld leeg</label>
+                <input id="contact-website" type="text" name="website" tabIndex={-1} autoComplete="off" />
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.srOnly} htmlFor="contact-message">Uw bericht</label>
-                <textarea id="contact-message" name="bericht" rows={4} placeholder="Uw bericht" required className={styles.input}></textarea>
+                <textarea id="contact-message" name="message" rows={4} placeholder="Waar kan ik mee helpen?" minLength={10} maxLength={4000} required className={styles.input}></textarea>
               </div>
-              <button type="submit" className={styles.submitBtn}>Versturen</button>
+              <button type="submit" disabled={submissionState === 'sending'} className={styles.submitBtn}>{submissionState === 'sending' ? 'Versturen…' : 'Versturen'}</button>
+              {submissionMessage && <p role="status" aria-live="polite" style={{ marginTop: '1rem' }}>{submissionMessage} {submissionState === 'error' && <a href="mailto:kevin@webaanzee.be">Mail rechtstreeks</a>}</p>}
             </form>
           </div>
         </div>

@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Build-time generated SEO pages (source lives in scripts/generate-seo-pages.mjs)
+public/diensten/
+public/webdesign-belgische-kust/
+public/cases/
+public/inzichten/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

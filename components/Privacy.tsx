@@ -22,7 +22,7 @@ const Privacy: React.FC = () => {
                 <span className="text-gold">aan</span>
                 <span className="text-navy">zee</span>
               </span>{' '}
-              is een eenmanszaak van Kevin Bourguignon, gevestigd in Blankenberge (België).
+              wordt beheerd door Kevin Bourguignon vanuit Blankenberge (België).
               U kan mij bereiken via <a href="mailto:kevin@webaanzee.be" className="underline decoration-gold underline-offset-2">kevin@webaanzee.be</a>.
             </p>
           </div>
@@ -32,7 +32,7 @@ const Privacy: React.FC = () => {
             <p>Alleen wat u zelf aan mij doorgeeft, bijvoorbeeld wanneer u contact opneemt:</p>
             <ul className="list-disc list-inside space-y-1">
               <li>Uw naam en contactgegevens (e-mail, telefoonnummer).</li>
-              <li>Informatie over uw zaak die u vrijwillig deelt.</li>
+              <li>Uw bedrijfsnaam en informatie over uw vraag die u vrijwillig deelt.</li>
             </ul>
             <p>
               Er is geen verborgen profielering, geen aankoopgeschiedenis en geen marketingdatabase. Ik gebruik uw gegevens
@@ -43,16 +43,18 @@ const Privacy: React.FC = () => {
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Hoe neem ik contact met u op?</h3>
             <p>
-              De contactknoppen voor e-mail en WhatsApp openen uw eigen mailprogramma of WhatsApp. Gebruikt u de chatfunctie,
-              dan verloopt uw bericht via Crisp, de chatdienst die ik daarvoor gebruik. Uw bericht komt rechtstreeks bij mij terecht.
+              Het contactformulier wordt via een beveiligde serverfunctie verstuurd. Voor de aflevering gebruikt de site Resend
+              als e-mailverwerker zodra die dienst geconfigureerd is. De WhatsApp-knop opent WhatsApp. De chatfunctie wordt pas
+              geladen wanneer u er zelf op klikt en verloopt dan via Crisp.
             </p>
           </div>
 
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Worden uw gegevens gedeeld met derden?</h3>
             <p>
-              Nee, ik verkoop of verhuur uw gegevens niet aan anderen. Enkel als de wet dat verplicht (bijvoorbeeld bij een
-              gerechtelijk onderzoek) kan het zijn dat ik gegevens moet doorgeven aan een officiële instantie.
+              Ik verkoop of verhuur uw gegevens niet. Vercel verwerkt technisch websiteverkeer voor hosting, Resend verwerkt
+              formuliergegevens voor e-mailaflevering en Crisp verwerkt gegevens wanneer u de chat opent. Daarnaast kan ik
+              gegevens delen wanneer de wet dat verplicht.
             </p>
           </div>
 

@@ -70,15 +70,15 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          preload="metadata"
-          poster="https://images.unsplash.com/photo-1439405326854-014607f694d7?auto=format&fit=crop&w=1920&q=80"
+          preload="none"
+          poster="/blankenberge-new.webp"
           aria-hidden="true"
           style={{
             y: shouldReduceMotion ? 0 : videoY,
             scale: shouldReduceMotion ? 1.03 : videoScale,
           }}
         >
-          <source src="/videos/seascape.mp4" type="video/mp4" />
+          <source src="/videos/seascape-web.mp4" type="video/mp4" />
         </motion.video>
       </motion.div>
 
@@ -88,12 +88,12 @@ const Hero: React.FC = () => {
         style={{ y: shouldReduceMotion ? 0 : contentY, opacity: shouldReduceMotion ? 1 : contentOpacity }}
       >
         <motion.p className={styles.eyebrow} variants={fadeVariants}>
-          Webdesign &amp; development <span>Brugge</span>
+          Webdesign &amp; development <span>Belgische kust</span>
         </motion.p>
 
         <h1 className={styles.title}>
           <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Een website die duidelijk maakt</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}>Webdesign dat duidelijk maakt</motion.span>
           </span>
           <span className={styles.lineMask}>
             <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>waarom ze bij jóu moeten zijn.</motion.span>

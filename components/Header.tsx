@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
     };
   }, [menuOpen]);
 
-  const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+  const isHomePage = typeof window === 'undefined' || window.location.pathname === '/' || window.location.pathname === '/index.html';
   const closeMenuAndScroll = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     setMenuOpen(false);
     if (isHomePage) scrollToSection(event, id);
@@ -51,10 +51,10 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
         </a>
 
         <nav className={styles.nav} aria-label="Hoofdnavigatie">
-          <a href="/#werkwijze" onClick={(e) => isHomePage ? scrollToSection(e, 'werkwijze') : undefined} className={styles.navLink}>Visie</a>
+          <a href="/diensten/webdesign/" className={styles.navLink}>Diensten</a>
           <a href="/#resultaten" onClick={(e) => isHomePage ? scrollToSection(e, 'resultaten') : undefined} className={styles.navLink}>Resultaten</a>
-          <a href="/#prijzen" onClick={(e) => isHomePage ? scrollToSection(e, 'prijzen') : undefined} className={styles.navLink}>Samenwerken</a>
-          <a href="/#over-ons" onClick={(e) => isHomePage ? scrollToSection(e, 'over-ons') : undefined} className={styles.navLink}>Over mij</a>
+          <a href="/webdesign-belgische-kust/" className={styles.navLink}>Kustregio</a>
+          <a href="/inzichten/" className={styles.navLink}>Inzichten</a>
         </nav>
 
         <a href="/#contact" onClick={(e) => isHomePage ? scrollToSection(e, 'contact') : undefined} className={styles.cta}>
@@ -78,10 +78,10 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
           <div>
             <p className={styles.mobileNavLabel}>Navigatie</p>
             <div className={styles.mobileLinks}>
-              <a href="/#werkwijze" onClick={(event) => closeMenuAndScroll(event, 'werkwijze')}><span>Visie</span><small>01</small></a>
+              <a href="/diensten/webdesign/" onClick={() => setMenuOpen(false)}><span>Diensten</span><small>01</small></a>
               <a href="/#resultaten" onClick={(event) => closeMenuAndScroll(event, 'resultaten')}><span>Resultaten</span><small>02</small></a>
-              <a href="/#prijzen" onClick={(event) => closeMenuAndScroll(event, 'prijzen')}><span>Samenwerken</span><small>03</small></a>
-              <a href="/#over-ons" onClick={(event) => closeMenuAndScroll(event, 'over-ons')}><span>Over mij</span><small>04</small></a>
+              <a href="/webdesign-belgische-kust/" onClick={() => setMenuOpen(false)}><span>Kustregio</span><small>03</small></a>
+              <a href="/inzichten/" onClick={() => setMenuOpen(false)}><span>Inzichten</span><small>04</small></a>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
               <span>Meer ontdekken</span>
               <a href="/klantenkaart.html" onClick={() => setMenuOpen(false)}>Digitale klantenkaart <i aria-hidden="true">↗</i></a>
               <a href="/pwayment.html" onClick={() => setMenuOpen(false)}>PWAYMENT POS <i aria-hidden="true">↗</i></a>
-              <a href="/blog/waarom-website-nodig-2026.html" onClick={() => setMenuOpen(false)}>Inzichten &amp; blog <i aria-hidden="true">↗</i></a>
+              <a href="/cases/" onClick={() => setMenuOpen(false)}>Alle cases <i aria-hidden="true">↗</i></a>
             </div>
             <a href="/#contact" className={styles.mobileCta} onClick={(event) => closeMenuAndScroll(event, 'contact')}>
               Plan een gesprek <span aria-hidden="true">→</span>

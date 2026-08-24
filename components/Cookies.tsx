@@ -22,8 +22,8 @@ const Cookies: React.FC = () => {
               geen cookies en volgt bezoekers niet over verschillende websites of dagen heen.
             </p>
             <p>
-              De chatfunctie van Crisp gebruikt functionele cookies om een chatgesprek en eerdere berichten te kunnen onthouden.
-              Die cookies dienen uitsluitend om de chat te laten werken; ik gebruik geen marketingcookies, advertentiecookies of
+              De chatfunctie van Crisp wordt niet geladen bij een gewoon paginabezoek. Pas wanneer u bewust op de chatknop klikt,
+              kan Crisp functionele opslag gebruiken om het gesprek te laten werken. Ik gebruik geen advertentiecookies of
               socialmedia-trackingpixels.
             </p>
           </div>
@@ -31,7 +31,7 @@ const Cookies: React.FC = () => {
           <div className="space-y-2">
             <h3 className="font-bold text-navy">Geen cookiewall, wel gezond verstand</h3>
             <p>
-              Vercel Analytics werkt zonder cookies. De functionele Crisp-cookies zijn er enkel voor de chatfunctie. Ik gebruik
+              Vercel Analytics werkt zonder cookies. Crisp wordt pas na uw klik geladen. Ik gebruik
               geen cookies om u advertenties te tonen of uw surfgedrag voor marketingdoeleinden te volgen. Mocht dit in de toekomst
               veranderen, dan pas ik zowel deze tekst als de instellingen op de site aan.
             </p>

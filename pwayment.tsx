@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, BarChart3, Box, Check, ChevronRight, CreditCard, Grid2X2, PackageCheck, Receipt, ScanBarcode, Search, ShoppingBag, UsersRound } from 'lucide-react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import './index.css';
 import styles from './components/Pwayment.module.css';
 
@@ -14,7 +14,7 @@ const appUrl = 'https://pwayment.vercel.app/';
 const demoUrl = 'https://pwayment.vercel.app/demo';
 const contactUrl = 'https://pwayment.vercel.app/contact';
 
-const PwaymentPage = () => (
+export const PwaymentPage = () => (
   <div className={styles.page}>
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="PWAYMENT home"><img className={styles.brandLogo} src="https://pwayment.vercel.app/branding/pwayment-logo.svg" alt="PWAYMENT" /></a>
@@ -75,5 +75,10 @@ const PwaymentPage = () => (
     <footer className={styles.footer}><a className={styles.brand} href="#top"><img className={styles.brandLogo} src="https://pwayment.vercel.app/branding/pwayment-logo.svg" alt="PWAYMENT" /></a><p>Het heldere retailplatform voor winkels die vooruit willen.</p><span>© {new Date().getFullYear()} PWAYMENT</span></footer>
   </div>
 );
-const root = document.getElementById('root');
-if (root) createRoot(root).render(<React.StrictMode><PwaymentPage /></React.StrictMode>);
+if (typeof document !== 'undefined') {
+  const root = document.getElementById('root');
+  if (!root) throw new Error('Could not find root element to mount to');
+  const app = <React.StrictMode><PwaymentPage /></React.StrictMode>;
+  if (root.hasChildNodes()) hydrateRoot(root, app);
+  else createRoot(root).render(app);
+}

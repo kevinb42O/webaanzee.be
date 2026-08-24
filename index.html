@@ -1,386 +1,91 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl-BE">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webdesigner Brugge & Kust | Website Laten Maken | Webaanzee</title>
-    <meta name="description" content="Professionele webdesigner in Brugge & de Belgische kust. Website laten maken vanaf €450. ✓ Binnen 7 dagen online ✓ SEO inbegrepen ✓ Lokale service. Bel nu!" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://www.webaanzee.be/" />
-    
-    <!-- Geo Targeting for Local SEO -->
-    <meta name="geo.region" content="BE-VWV" />
-    <meta name="geo.placename" content="Brugge, West-Vlaanderen" />
-    <meta name="geo.position" content="51.2093;3.2247" />
-    <meta name="ICBM" content="51.2093, 3.2247" />
-    
-    <!-- Additional SEO Meta -->
-    <meta name="author" content="Kevin Bourguignon - Webaanzee" />
-    <meta name="publisher" content="Webaanzee" />
-    <meta name="copyright" content="Webaanzee" />
-    <meta name="keywords" content="webdesigner brugge, website laten maken brugge, webdesign kust, website blankenberge, webdesigner oostende, website de haan, webdevelopment west-vlaanderen, seo brugge, website zelfstandigen, professionele website belgische kust" />
-    <meta name="language" content="Dutch" />
-    <meta name="revisit-after" content="7 days" />
-    <meta name="rating" content="general" />
-    <meta name="distribution" content="global" />
-    
-    <!-- Open Graph Enhanced -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Webdesigner Brugge & Kust | Website Laten Maken vanaf €450" />
-    <meta property="og:description" content="Professionele websites voor lokale ondernemers. ✓ Binnen 7 dagen online ✓ SEO inbegrepen ✓ Persoonlijke service aan de Belgische kust." />
-    <meta property="og:site_name" content="Webaanzee - Webdesigner Brugge & Kust" />
-    <meta property="og:url" content="https://www.webaanzee.be/" />
-    <meta property="og:image" content="https://www.webaanzee.be/og-image.webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Webaanzee - Webdesigner aan de Belgische Kust" />
-    <meta property="og:locale" content="nl_BE" />
-    <meta property="og:locale:alternate" content="nl_NL" />
-    
-    <!-- Twitter Enhanced -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Webdesigner Brugge & Kust | Website Laten Maken" />
-    <meta name="twitter:description" content="Professionele website binnen 7 dagen. Lokale webdesigner aan de Belgische kust. Vanaf €450." />
-    <meta name="twitter:image" content="https://www.webaanzee.be/og-image.webp" />
-    <meta name="twitter:image:alt" content="Webaanzee Webdesign" />
-    
-    <meta name="theme-color" content="#0f172a" />
-    <link rel="icon" type="image/webp" href="/logo.webp">
-    <link rel="apple-touch-icon" href="/logo.webp">
-    <link rel="preload" as="image" href="/selfie.webp" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/blankenberge-new.webp" type="image/webp" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Fallback font-face with display:swap for instant text rendering -->
-    <style>
-      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: local('Inter'); }
-      @font-face { font-family: 'Outfit'; font-style: normal; font-weight: 300 800; font-display: swap; src: local('Outfit'); }
-    </style>
-    
-    <!-- SCHEMA 1: LocalBusiness + ProfessionalService (Combined for Max Impact) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": ["LocalBusiness", "ProfessionalService"],
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webdesigner aan de Belgische kust | Webaanzee</title>
+  <meta name="description" content="Webdesign en development voor zelfstandigen aan de Belgische kust. Rechtstreeks contact, maatwerk en een website die vertrouwen wekt en klanten in beweging brengt." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://www.webaanzee.be/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Webdesigner aan de Belgische kust | Webaanzee" />
+  <meta property="og:description" content="Webdesign en development voor zelfstandigen die online dezelfde kwaliteit willen uitstralen als in hun werk." />
+  <meta property="og:site_name" content="Webaanzee" />
+  <meta property="og:url" content="https://www.webaanzee.be/" />
+  <meta property="og:image" content="https://www.webaanzee.be/og-image.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Webaanzee, webdesign en development aan de Belgische kust" />
+  <meta property="og:locale" content="nl_BE" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Webdesigner aan de Belgische kust | Webaanzee" />
+  <meta name="twitter:description" content="Webdesign en development voor zelfstandigen aan de Belgische kust." />
+  <meta name="twitter:image" content="https://www.webaanzee.be/og-image.webp" />
+  <meta name="theme-color" content="#f4f3f0" />
+  <link rel="icon" type="image/webp" href="/logo.webp" />
+  <link rel="apple-touch-icon" href="/logo.webp" />
+  <link rel="preload" as="image" href="/blankenberge-new.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
         "@id": "https://www.webaanzee.be/#organization",
         "name": "Webaanzee",
         "alternateName": "Web aan Zee",
-        "legalName": "Webaanzee - Kevin Bourguignon",
-        "image": {
-            "@type": "ImageObject",
-            "url": "https://www.webaanzee.be/logo.webp",
-            "width": 512,
-            "height": 512
-        },
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.webaanzee.be/logo.webp",
-            "width": 512,
-            "height": 512
-        },
         "url": "https://www.webaanzee.be/",
-        "telephone": "+32494816714",
+        "logo": "https://www.webaanzee.be/logo.webp",
         "email": "kevin@webaanzee.be",
-        "priceRange": "€450 - €2000",
-        "currenciesAccepted": "EUR",
-        "paymentAccepted": "Overschrijving, Bancontact",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Blankenberge",
-            "addressLocality": "Blankenberge",
-            "addressRegion": "West-Vlaanderen",
-            "postalCode": "8370",
-            "addressCountry": "BE"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 51.3128,
-            "longitude": 3.1328
-        },
-        "hasMap": "https://maps.google.com/?q=Webaanzee+Blankenberge",
-        "areaServed": [
-            {
-                "@type": "City",
-                "name": "Brugge",
-                "sameAs": "https://www.wikidata.org/wiki/Q12988"
-            },
-            {
-                "@type": "City",
-                "name": "Blankenberge",
-                "sameAs": "https://www.wikidata.org/wiki/Q239896"
-            },
-            {
-                "@type": "City",
-                "name": "De Haan"
-            },
-            {
-                "@type": "City",
-                "name": "Wenduine"
-            },
-            {
-                "@type": "City",
-                "name": "Zeebrugge"
-            },
-            {
-                "@type": "City",
-                "name": "Knokke-Heist"
-            },
-            {
-                "@type": "City",
-                "name": "Oostende"
-            },
-            {
-                "@type": "AdministrativeArea",
-                "name": "Belgische Kust"
-            },
-            {
-                "@type": "AdministrativeArea",
-                "name": "West-Vlaanderen"
-            }
-        ],
-        "serviceArea": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-                "@type": "GeoCoordinates",
-                "latitude": 51.2093,
-                "longitude": 3.2247
-            },
-            "geoRadius": "50000"
-        },
-        "openingHoursSpecification": [
-            {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-            }
-        ],
-        "founder": {
-            "@type": "Person",
-            "name": "Kevin Bourguignon",
-            "jobTitle": "Webdesigner & Developer",
-            "knowsAbout": ["Webdesign", "SEO", "Web Development", "UI/UX Design"]
-        },
-        "sameAs": [
-            "https://www.instagram.com/bourguignon_visualart/"
-        ],
-        "description": "Onafhankelijke webdeveloper in Brugge en aan de Belgische kust. Razendsnelle maatwerk websites en web-apps, rechtstreeks gebouwd door de developer zelf. Binnen 7 dagen online.",
-        "slogan": "Uw zaak professioneel online. Zonder gedoe.",
-        "knowsAbout": ["Webdesign", "Website ontwikkeling", "SEO", "Lokale SEO", "Responsive design", "WordPress", "React"],
-        "knowsLanguage": ["nl", "en", "fr"]
-    }
-    </script>
-    
-    <!-- SCHEMA 2: Service Offerings (Critical for "what do you offer" searches) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "@id": "https://www.webaanzee.be/#kust-pakket",
-        "serviceType": "Website Development",
-        "name": "Kust-Pakket - Onepage Website",
-        "description": "Professionele onepage website voor kleine zaken. Inclusief mobiel-vriendelijk design, basis SEO, eigen domeinnaam en hosting.",
-        "provider": {
-            "@type": "LocalBusiness",
-            "@id": "https://www.webaanzee.be/#organization"
-        },
-        "areaServed": {
-            "@type": "AdministrativeArea",
-            "name": "West-Vlaanderen, België"
-        },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Website Pakketten",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Kust-Pakket"
-                    },
-                    "price": "450",
-                    "priceCurrency": "EUR",
-                    "priceSpecification": {
-                        "@type": "UnitPriceSpecification",
-                        "price": "450",
-                        "priceCurrency": "EUR",
-                        "unitText": "eenmalig"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Groei-Pakket"
-                    },
-                    "price": "950",
-                    "priceCurrency": "EUR",
-                    "priceSpecification": {
-                        "@type": "UnitPriceSpecification",
-                        "price": "950",
-                        "priceCurrency": "EUR",
-                        "unitText": "eenmalig"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-    
-    <!-- SCHEMA 3: FAQ Schema (Rich Snippets Gold) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Hoeveel kost een website laten maken in Brugge?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Bij Webaanzee start een professionele onepage website vanaf €450 (eenmalig). Voor een uitgebreidere website met meerdere pagina's rekenen we vanaf €950. Hosting en onderhoud kost €50 per maand. Alles inclusief: SEO, mobiel-vriendelijk design en persoonlijke service."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Hoe snel kan mijn website online staan?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Bij Webaanzee staat uw website binnen 7 dagen online. We werken snel maar zorgvuldig, zodat u direct vindbaar bent op Google en Google Maps."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Is SEO inbegrepen bij mijn website?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ja, basis SEO is altijd inbegrepen. Dit betekent dat uw website technisch geoptimaliseerd is voor Google, met correcte meta-tags, snelle laadtijd, en mobiel-vriendelijk design. U wordt beter vindbaar in uw regio."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Werkt Webaanzee ook in Oostende en Knokke?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ja, ik werk voor klanten langs de hele Belgische kust: Blankenberge, De Haan, Wenduine, Zeebrugge, Brugge, Oostende, Knokke-Heist en omstreken. Persoonlijk contact en lokale service, rechtstreeks met de developer."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Wat is het verschil tussen het Kust-Pakket en Groei-Pakket?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Het Kust-Pakket (€450) is een onepage website, perfect voor kleine zaken. Het Groei-Pakket (€950) bevat meerdere pagina's, uitgebreide beeldstrategie, optioneel meertalig (NL/FR/EN) en koppelingen met reserveringssystemen. Ideaal voor groeiende ondernemingen."
-                }
-            }
-        ]
-    }
-    </script>
-
-    <!-- SCHEMA 4: WebSite with SearchAction (Sitelinks Search Box) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+        "telephone": "+32494816714",
+        "founder": { "@id": "https://www.webaanzee.be/#kevin" },
+        "areaServed": ["Blankenberge", "Oostende", "Brugge", "Zeebrugge", "De Haan", "Bredene", "Knokke-Heist", "Middelkerke", "Nieuwpoort", "Koksijde", "De Panne", "Belgische Kust"],
+        "sameAs": ["https://www.instagram.com/bourguignon_visualart/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.webaanzee.be/#kevin",
+        "name": "Kevin Bourguignon",
+        "jobTitle": "Webdesigner en developer",
+        "url": "https://www.webaanzee.be/",
+        "knowsAbout": ["Webdesign", "Webdevelopment", "Lokale SEO", "Webapplicaties", "UI/UX"]
+      },
+      {
         "@type": "WebSite",
         "@id": "https://www.webaanzee.be/#website",
         "url": "https://www.webaanzee.be/",
         "name": "Webaanzee",
-        "description": "Webdesigner Brugge & Belgische Kust - Professionele websites voor lokale ondernemers",
-        "publisher": {
-            "@type": "LocalBusiness",
-            "@id": "https://www.webaanzee.be/#organization"
-        },
+        "inLanguage": "nl-BE",
+        "publisher": { "@id": "https://www.webaanzee.be/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.webaanzee.be/#webpage",
+        "url": "https://www.webaanzee.be/",
+        "name": "Webdesigner aan de Belgische kust",
+        "description": "Webdesign en development voor zelfstandigen aan de Belgische kust.",
+        "isPartOf": { "@id": "https://www.webaanzee.be/#website" },
+        "about": { "@id": "https://www.webaanzee.be/#organization" },
         "inLanguage": "nl-BE"
-    }
-    </script>
-
-    <!-- SCHEMA 5: BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.webaanzee.be/"
-            }
-        ]
-    }
-    </script>
-
-    <!-- SCHEMA 6: SiteNavigationElement (Helps Google create Sitelinks) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": [
-            {
-                "@type": "SiteNavigationElement",
-                "position": 1,
-                "name": "Werkwijze",
-                "description": "Hoe ik werk: van eerste gesprek tot live website",
-                "url": "https://www.webaanzee.be/#werkwijze"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 2,
-                "name": "Resultaten",
-                "description": "Bewezen resultaten van klanten met echte cijfers",
-                "url": "https://www.webaanzee.be/#resultaten"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 3,
-                "name": "Prijzen",
-                "description": "Website pakketten vanaf €450 - transparante tarieven",
-                "url": "https://www.webaanzee.be/#prijzen"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 4,
-                "name": "FAQ",
-                "description": "Veelgestelde vragen over websites en hosting",
-                "url": "https://www.webaanzee.be/#faq"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 5,
-                "name": "Over Mij",
-                "description": "Kevin Bourguignon - Uw lokale webdesigner aan de kust",
-                "url": "https://www.webaanzee.be/#over-ons"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 6,
-                "name": "Contact",
-                "description": "Neem contact op - telefoon, WhatsApp of email",
-                "url": "https://www.webaanzee.be/#contact"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 7,
-                "name": "Gratis SEO-analyse",
-                "description": "Vraag een gratis SEO-analyse aan voor uw zaak",
-                "url": "https://www.webaanzee.be/#seo-analyse"
-            },
-            {
-                "@type": "SiteNavigationElement",
-                "position": 8,
-                "name": "Blog",
-                "description": "Artikelen over webdesign, SEO en online marketing voor lokale ondernemers",
-                "url": "https://www.webaanzee.be/blog/waarom-website-nodig-2026.html"
-            }
-        ]
-    }
-    </script>
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.webaanzee.be/#webdesign-service",
+        "name": "Webdesign en webdevelopment",
+        "serviceType": "Webdesign en webdevelopment op maat",
+        "provider": { "@id": "https://www.webaanzee.be/#organization" },
+        "areaServed": "Belgische Kust",
+        "offers": { "@type": "Offer", "price": "950", "priceCurrency": "EUR", "description": "Professionele websites vanaf €950; uitgebreidere toepassingen vanaf €1.950." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="light-mode-theme">
-    <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>

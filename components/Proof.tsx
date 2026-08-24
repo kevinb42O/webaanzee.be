@@ -8,6 +8,7 @@ interface CaseStudy {
   title: string;
   description: string;
   website: string;
+  casePath: string;
   videoSrc: string;
   imageSrc: string;
   tags: string[];
@@ -29,6 +30,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Hond aan Zee',
     description: 'Een praktisch kustplatform dat hondenbezitters snel naar de juiste strandregels, losloopzones, wandelingen en adressen leidt.',
     website: 'https://www.hondaanzee.be', 
+    casePath: '/cases/hond-aan-zee/',
     videoSrc: '/videos/hondaanzee.mp4',
     imageSrc: '/images/cases/hondaanzee.png',
     tags: ['Kustplatform', 'Praktische gids'],
@@ -47,6 +49,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Fabrice Goffin', 
     description: 'Een heldere, persoonlijke publieke site voor een Oostends schepen — met standpunten, nieuws en een directe lijn naar inwoners.',
     website: 'https://www.fabricegoffin.be', 
+    casePath: '/cases/fabrice-goffin-oostende/',
     videoSrc: '/videos/fabrice.mp4',
     imageSrc: '/images/cases/fabrice.png',
     tags: ['Publieke communicatie', 'Oostende'],
@@ -61,6 +64,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Carabus Ads', 
     description: 'Website voor een performance-marketingbureau dat werkt met Google Ads, social ads en funnels.',
     website: 'https://www.carabusads.be', 
+    casePath: '/cases/carabus-ads/',
     videoSrc: '/videos/carabus.mp4',
     imageSrc: '/images/cases/carabus.png',
     tags: ['Performance', 'Marketing'],
@@ -75,6 +79,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'COZY Moments', 
     description: 'Website voor de koffiebar en cocktailbar aan de Grote Markt in Blankenberge, met drankkaart, praktische info en digitale spaarkaart.',
     website: 'https://www.cozy-moments.be', 
+    casePath: '/cases/cozy-moments-blankenberge/',
     videoSrc: '/videos/cozy.mp4',
     imageSrc: '/images/cases/cozy.png',
     tags: ['Horeca', 'Loyalty'],
@@ -89,6 +94,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Daily Grind', 
     description: 'Webshop en communityplatform voor de Blankenbergse core skateshop, met boards, streetwear, sneakers en een skatepark guide.',
     website: 'https://www.daily-grind.be', 
+    casePath: '/cases/daily-grind-blankenberge/',
     videoSrc: '/videos/dailygrind.mp4',
     imageSrc: '/images/cases/dailygrind.png',
     tags: ['E-commerce', 'Community'],
@@ -103,6 +109,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'De Wulk', 
     description: 'Website voor de viswinkel van Olivier & Kelly in Blankenberge, met dagverse vis, huisbereide gerechten, zeevruchtenschotels en bestelinformatie.',
     website: 'https://www.vishandelolivierenkelly.be', 
+    casePath: '/cases/de-wulk-blankenberge/',
     videoSrc: '/videos/vishandel.mp4',
     imageSrc: '/images/cases/vishandel.png',
     tags: ['Lokale handel', 'Horeca'],
@@ -117,6 +124,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Atelier Rembrandt',
     description: 'Digitale collectie voor zeldzame boeken, Oude Meesters en historische kunstobjecten, met aandacht voor onderzoek, documentatie en herkomst.',
     website: 'https://www.atelierrembrandt.com/',
+    casePath: '/cases/atelier-rembrandt/',
     videoSrc: '/videos/atelierrembrandt.mp4',
     imageSrc: '/images/cases/atelierrembrandt.png',
     tags: ['Kunst & antiquariaat', 'Collectie'],
@@ -126,6 +134,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'PWAYMENT POS',
     description: 'Een retailplatform dat kassa, voorraad, klanten, webshop en inzichten samenbrengt voor Belgische winkels.',
     website: 'https://pwayment.vercel.app/',
+    casePath: '/cases/pwayment-pos/',
     videoSrc: '/videos/pwayment.mp4',
     imageSrc: '/images/cases/pwayment.png',
     tags: ['Retailtech', 'POS-systeem'],
@@ -192,7 +201,12 @@ const CaseCard: React.FC<{ caseItem: CaseStudy; featured?: boolean }> = ({ caseI
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const playPreview = () => {
-    videoRef.current?.play().catch(() => undefined);
+    if (!videoRef.current || window.matchMedia('(hover: none)').matches) return;
+    if (!videoRef.current.src) {
+      videoRef.current.src = caseItem.videoSrc;
+      videoRef.current.load();
+    }
+    videoRef.current.play().catch(() => undefined);
   };
 
   const stopPreview = () => {
@@ -207,9 +221,7 @@ const CaseCard: React.FC<{ caseItem: CaseStudy; featured?: boolean }> = ({ caseI
       className={`${styles.caseCard} ${featured ? styles.featuredCard : ''} ${caseItem.id === 'pwayment' ? styles.wideCard : ''}`}
     >
       <a
-        href={caseItem.website} 
-        target="_blank" 
-        rel="noreferrer" 
+        href={caseItem.casePath}
         className={styles.caseLink}
         aria-label={`Bekijk ${caseItem.title}`}
         onMouseEnter={playPreview}
@@ -218,15 +230,14 @@ const CaseCard: React.FC<{ caseItem: CaseStudy; featured?: boolean }> = ({ caseI
         onBlur={stopPreview}
       >
         <div className={styles.visual}>
-          <img src={caseItem.imageSrc} alt="" className={styles.projectImage} />
+          <img src={caseItem.imageSrc} alt={`Websiteproject ${caseItem.title}`} loading="lazy" decoding="async" className={styles.projectImage} />
           <video
             ref={videoRef}
             className={styles.projectVideo}
-            src={caseItem.videoSrc}
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             aria-hidden="true"
           />
           <div className={styles.visualShade} />

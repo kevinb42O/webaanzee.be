@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Webaanzee
 
-# Run and deploy your AI Studio app
+Vite/React-website met statisch gegenereerde SEO-pagina's en build-time prerendering.
 
-This contains everything you need to run your app locally.
+## Lokaal
 
-View your app in AI Studio: https://ai.studio/apps/drive/1qf20Z68_c3cz-Sc7bI66oyMXUgvvAA2q
+1. Installeer dependencies met `npm install`.
+2. Start lokaal met `npm run dev`.
+3. Maak en controleer de productie-output met `npm run build`.
+4. Bekijk die output met `npm run preview`.
 
-## Run Locally
+De build genereert diensten-, case- en gemeentepagina's, maakt `sitemap.xml`, prerendert de bestaande React-pagina's en voert SEO-validaties uit. Een build faalt bij conflicterende canonicals, sitemap/noindex-fouten, ontbrekende H1's, ongeldige JSON-LD of verouderde prijsclaims.
 
-**Prerequisites:**  Node.js
+## Contactformulier
 
+Zet de variabelen uit `.env.example` in Vercel. `CONTACT_FROM_EMAIL` moet een door de mailprovider geverifieerde afzender op `webaanzee.be` zijn. Zonder deze configuratie toont het formulier bewust een rechtstreekse e-maillink in plaats van een vals succesbericht.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## SEO na deployment
+
+- Controleer dat apex, HTTP en `/index.html` in één hop naar `https://www.webaanzee.be/` redirecten.
+- Dien `https://www.webaanzee.be/sitemap.xml` opnieuw in bij Search Console.
+- Inspecteer homepage, kusthub en de tien gemeentepagina's met URL Inspection.
+- Start validatie pas voor oude uitsluitingen die na inspectie werkelijk fout bleken.
+- Maak nog geen Google Business Profile totdat officiële, verifieerbare ondernemingsgegevens beschikbaar zijn.

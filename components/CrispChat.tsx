@@ -13,39 +13,23 @@ const CrispChat: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isHeroVisible, setIsHeroVisible] = useState(true);
 
-  useEffect(() => {
+  const initializeChat = () => {
     const WEBSITE_ID = "ede3f23a-3d08-4cf9-93ae-cd556b614349"; 
-    
-    if (!window.$crisp) {
-      window.$crisp = [];
-      window.CRISP_WEBSITE_ID = WEBSITE_ID;
+    if (window.$crisp) return;
+    window.$crisp = [];
+    window.CRISP_WEBSITE_ID = WEBSITE_ID;
 
-      const d = document;
-      const s = d.createElement("script");
-      s.src = "https://client.crisp.chat/l.js";
-      s.async = true;
-      d.getElementsByTagName("head")[0].appendChild(s);
-      
-      // Listen to Crisp events
-      window.$crisp.push(["on", "chat:opened", () => {
-        setIsChatOpen(true);
-      }]);
-      
-      window.$crisp.push(["on", "chat:closed", () => {
-        setIsChatOpen(false);
-        // Zorg dat de standaard Crisp knop weer verdwijnt als de chat sluit
-        window.$crisp.push(["do", "chat:hide"]);
-      }]);
+    const script = document.createElement("script");
+    script.src = "https://client.crisp.chat/l.js";
+    script.async = true;
+    document.head.appendChild(script);
 
-      // Verberg de standaard knop direct bij laden
-      window.$crisp.push(["on", "session:loaded", () => {
-        // Enkel verbergen als we de chat nog niet expliciet geopend hebben
-        if (!isChatOpen) {
-          window.$crisp.push(["do", "chat:hide"]);
-        }
-      }]);
-    }
-  }, []);
+    window.$crisp.push(["on", "chat:opened", () => setIsChatOpen(true)]);
+    window.$crisp.push(["on", "chat:closed", () => {
+      setIsChatOpen(false);
+      window.$crisp.push(["do", "chat:hide"]);
+    }]);
+  };
 
   useEffect(() => {
     const hero = document.getElementById('home');
@@ -62,11 +46,10 @@ const CrispChat: React.FC = () => {
 
   const openChat = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-      window.$crisp.push(["do", "chat:open"]);
-      setIsChatOpen(true);
-    }
+    initializeChat();
+    window.$crisp.push(["do", "chat:show"]);
+    window.$crisp.push(["do", "chat:open"]);
+    setIsChatOpen(true);
   };
 
   // If the native chat is open, we hide our custom button

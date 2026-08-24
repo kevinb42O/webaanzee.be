@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, type Variants } from 'motion/react';
 import styles from './Klantenkaart.module.css';
 
@@ -72,19 +72,25 @@ const staggerContainer: Variants = {
   }
 };
 
-const Klantenkaart: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const dashboardRef = useRef<HTMLVideoElement>(null);
-
+const ViewportVideo: React.FC<{ src: string; className: string; poster: string }> = ({ src, className, poster }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState(false);
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 1.0;
-    }
-    if (dashboardRef.current) {
-      dashboardRef.current.playbackRate = 1.0;
-    }
+    const element = ref.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setActive(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '300px 0px' });
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
+  return <video ref={ref} autoPlay={active} loop muted playsInline preload="none" poster={poster} className={className}>{active && <source src={src} type="video/mp4" />}Uw browser ondersteunt geen video.</video>;
+};
 
+const Klantenkaart: React.FC = () => {
   return (
     <div className={styles.page}>
       <a className={styles.backLink} href="/">← Terug naar Webaanzee</a>
@@ -155,18 +161,7 @@ const Klantenkaart: React.FC = () => {
             transition={{ duration: 1, ease: easeOut }}
           >
             <div className={styles.phoneMockup}>
-              <video 
-                ref={videoRef}
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
-                className={styles.phoneVideo}
-              >
-                <source src="/videos/spaarkaart.mp4" type="video/mp4" />
-                <source src="/videos/spaarkaart.mov" type="video/quicktime" />
-                Uw browser ondersteunt geen video.
-              </video>
+              <ViewportVideo src="/videos/spaarkaart-web.mp4" poster="/spaarkaart.webp" className={styles.phoneVideo} />
             </div>
           </motion.div>
         </div>
@@ -194,18 +189,7 @@ const Klantenkaart: React.FC = () => {
             transition={{ duration: 1.2, ease: easeOut }}
           >
             <div className={styles.macbookMockup}>
-              <video 
-                ref={dashboardRef}
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
-                className={styles.dashboardVideo}
-              >
-                <source src="/videos/dashboard.mp4" type="video/mp4" />
-                <source src="/videos/dashboard.mov" type="video/quicktime" />
-                Uw browser ondersteunt geen video.
-              </video>
+              <ViewportVideo src="/videos/dashboard-web.mp4" poster="/images/cases/spaarkaart.webp" className={styles.dashboardVideo} />
             </div>
           </motion.div>
         </div>

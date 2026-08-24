@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-seo-pages.mjs",
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "prebuild": "node scripts/generate-seo-pages.mjs",
+    "build": "vite build && node scripts/prune-dist-media.mjs && npm run build:ssr && node scripts/inject-prerender.mjs && node scripts/check-seo.mjs",
+    "build:ssr": "vite build --ssr scripts/entry-server.tsx --outDir dist-ssr",
+    "preview": "vite preview",
+    "check:seo": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
