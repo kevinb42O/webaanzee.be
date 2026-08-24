@@ -5,20 +5,20 @@
 @tailwind utilities;
 
 :root {
-  /* 2024 Light Brutalism Palette */
-  --color-bg-primary: #f4f3f0; /* Oat / Off-white */
-  --color-bg-secondary: #eae8e1; /* Slightly darker oat for bento boxes */
-  --color-bg-tertiary: #ffffff; /* Pure white for stark contrast blocks */
+  /* Webaanzee — coastal modernist system */
+  --color-bg-primary: #f5f2eb;
+  --color-bg-secondary: #ebe7dd;
+  --color-bg-tertiary: #fcfaf5;
   
-  --color-text-primary: #0a0a0a; /* Extreme black */
-  --color-text-secondary: #4a4a4a;
-  --color-text-muted: #888888;
+  --color-text-primary: #171815;
+  --color-text-secondary: #5d5e58;
+  --color-text-muted: #85857f;
   
-  --color-accent-gold: #c84b31; /* Deep Rust / Burnt Orange instead of gold */
-  --color-border: rgba(10, 10, 10, 0.1);
+  --color-accent-gold: #d86548;
+  --color-border: rgba(23, 24, 21, 0.14);
 
   /* Typography */
-  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-display: 'Inter', -apple-system, sans-serif;
   --font-mono: 'DM Mono', ui-monospace, monospace;
   --font-heading: var(--font-display);
   --font-body: 'Inter', -apple-system, sans-serif;
@@ -53,17 +53,6 @@ body {
   overflow-x: clip;
 }
 
-/* Global Grain Overlay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  opacity: 0.05; /* Subtle grain texture without washing out colors */
-}
-
 body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -74,7 +63,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  line-height: 1.1;
+  font-weight: 600;
+  line-height: 0.98;
   color: var(--color-text-primary);
   letter-spacing: -0.035em;
 }

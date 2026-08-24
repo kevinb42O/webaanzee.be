@@ -1,6 +1,6 @@
 .section {
   padding: clamp(6rem, 10vw, 10rem) 0;
-  background-color: #f3f0e8;
+  background-color: var(--color-bg-primary);
   border-top: 1px solid var(--color-border);
 }
 
@@ -32,7 +32,7 @@
   aspect-ratio: 4/5;
   border-radius: 0;
   overflow: hidden;
-  border-left: 0.45rem solid var(--color-accent-gold);
+  border-left: 1px solid var(--color-accent-gold);
 }
 
 .image {

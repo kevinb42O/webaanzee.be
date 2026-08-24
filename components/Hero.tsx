@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
     offset: ['start start', 'end start'],
   });
   const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.03, 1.12]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1.01, 1.045]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -72]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
 
@@ -70,15 +70,15 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          preload="none"
+          preload="metadata"
           poster="/blankenberge-new.webp"
           aria-hidden="true"
           style={{
             y: shouldReduceMotion ? 0 : videoY,
-            scale: shouldReduceMotion ? 1.03 : videoScale,
+            scale: shouldReduceMotion ? 1.01 : videoScale,
           }}
         >
-          <source src="/videos/seascape-web.mp4" type="video/mp4" />
+          <source src="/videos/seascape.mp4" type="video/mp4" />
         </motion.video>
       </motion.div>
 

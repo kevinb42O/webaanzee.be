@@ -1,4 +1,4 @@
-.section { padding: clamp(7rem, 12vw, 12rem) 0; overflow: clip; background: #e9e6dd; }
+.section { padding: clamp(7rem, 12vw, 12rem) 0; overflow: clip; background: var(--color-bg-secondary); }
 .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--spacing-md); }
 .header { display: grid; grid-template-columns: minmax(12rem, .4fr) minmax(0, 1fr); gap: clamp(3rem, 8vw, 9rem); margin-bottom: clamp(4rem, 8vw, 7rem); }
 .eyebrow { color: var(--color-accent-gold); font: 500 .7rem/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
