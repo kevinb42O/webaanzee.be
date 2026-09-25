@@ -27,22 +27,9 @@ const fadeVariants: Variants = {
   },
 };
 
-const ctaVariants: Variants = {
-  visible: { scale: 1 },
-  hover: {
-    scale: 1.018,
-    transition: { type: 'spring', stiffness: 380, damping: 24 },
-  },
-  tap: {
-    scale: 0.985,
-    transition: { type: 'spring', stiffness: 500, damping: 30 },
-  },
-};
-
 const arrowVariants: Variants = {
   visible: { x: 0 },
   hover: { x: 4 },
-  tap: { x: 1 },
 };
 
 const Hero: React.FC = () => {
@@ -109,37 +96,16 @@ const Hero: React.FC = () => {
             href="#resultaten"
             onClick={(event) => scrollToSection(event, 'resultaten')}
             className={styles.primaryCta}
-            variants={ctaVariants}
             whileHover={shouldReduceMotion ? undefined : 'hover'}
-            whileTap={shouldReduceMotion ? undefined : 'tap'}
           >
-            <span className={styles.buttonLabel}>Bekijk geselecteerd werk</span>
+            <span>Bekijk het werk</span>
             <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden="true">→</motion.span>
           </motion.a>
-          <motion.a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={styles.secondaryLink}>Bespreek je project <span aria-hidden="true">↗</span></motion.a>
-        </motion.div>
-
-        <motion.div className={styles.proofBar} variants={fadeVariants} aria-label="Webaanzee in het kort">
-          <div className={styles.proofItem}><strong>01</strong><span>Design &amp; development<br />in dezelfde handen</span></div>
-          <div className={styles.proofItem}><strong>02</strong><span>Vanuit Blankenberge<br />voor de hele kust</span></div>
-          <a href="/cases/" className={`${styles.proofItem} ${styles.caseProof}`}><strong>Cases</strong><span>Bekijk alle realisaties ↗</span></a>
+          <motion.a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={styles.secondaryLink}>
+            Plan een gesprek <span aria-hidden="true">↗</span>
+          </motion.a>
         </motion.div>
       </motion.div>
-
-      <motion.a
-        href="#werkwijze"
-        onClick={(event) => scrollToSection(event, 'werkwijze')}
-        className={styles.scrollCue}
-        aria-label="Scroll naar werkwijze"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.15, duration: 0.7 }}
-      >
-        <motion.span
-          animate={shouldReduceMotion ? undefined : { y: [0, 7, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.a>
     </motion.section>
   );
 };
