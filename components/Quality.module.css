@@ -31,9 +31,6 @@
 .sceneGrid { display:grid; grid-template-columns:minmax(0, 1.15fr) minmax(0, 1fr); gap:clamp(3rem, 7vw, 8rem); align-items:center; width:100%; max-width:1440px; margin:auto; }
 .titleComposition { position:relative; transform-origin:0 50%; }
 .slicedTitle { position:relative; margin:0; color:#f6f2e9; font-size:clamp(3rem, 6.65vw, 6rem); font-weight:400; line-height:1.02; letter-spacing:-.04em; }
-.titleMeasure { display:block; opacity:0; }
-.slice { position:absolute; inset:-.12em 0; display:flex; align-items:center; }
-.slice > span { display:block; width:100%; }
 .baseline { height:1px; width:100%; margin-top:2.5rem; background:#e6765d; transform-origin:left; }
 .reading { display:grid; align-items:center; min-width:0; }
 .principlesBlock, .finalStatement { grid-area:1 / 1; }
@@ -41,13 +38,11 @@
 .intro p + p { margin-top:1rem; }
 .principles { list-style:none; margin:2rem 0 0; }
 .principle { position:relative; padding:.85rem 0; font-size:clamp(.9rem, 1.24vw, 1.15rem); line-height:1.4; }
-.principleGhost { display:block; color:#a8a99f; }
-.principleInk { position:absolute; inset:.85rem 0; color:#f6f2e9; }
-.rule { position:absolute; left:0; right:0; bottom:0; height:1px; background:#e6765d; opacity:.55; transform-origin:left; }
 .finalStatement > p:first-child { max-width:32ch; margin-bottom:2rem; color:#c2c1b8; font-size:1rem; line-height:1.6; }
 .sceneClosing { color:#f6f2e9; font-size:clamp(2rem, 3.6vw, 3.6rem); line-height:1.12; letter-spacing:-.035em; text-wrap:pretty; }
 .sceneClosing em { color:#e6765d; font-family:'DM Serif Display', serif; font-weight:400; }
 .scene ::selection { color:#171815; background:#e6765d; }
-@media (max-height:750px) { .scene { padding-top:5.5rem; padding-bottom:3rem; } .principles { margin-top:1.25rem; } .principle { padding:.65rem 0; } .principleInk { inset:.65rem 0; } }
+@media (max-height:750px) { .scene { padding-top:5.5rem; padding-bottom:3rem; } .principles { margin-top:1.25rem; } .principle { padding:.65rem 0; } }
 
-.seam { position:absolute; top:50%; left:0; width:100%; height:1px; background:#e6765d; transform-origin:center; }
+
+.scene .principle { border-bottom: 1px solid rgba(230, 118, 93, .35); color: #f6f2e9; }

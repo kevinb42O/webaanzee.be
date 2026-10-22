@@ -1,0 +1,41 @@
+.mobile { --mobile-gutter: 1.25rem; }
+.opening { position: relative; background: #e3ebe7; }
+.stage { position: relative; }
+.hero { min-height: 100svh; height: auto; }
+.hero > div:last-child { width: calc(100% - 2 * var(--mobile-gutter)); max-width: 680px; min-height: 100svh; height: auto; padding: 8rem 0 4rem; }
+.hero h1 { font-size: clamp(2.8rem, 12.5vw, 5.5rem); }
+.workAnchor { position: absolute; top: calc(var(--hero-height, 100svh) + var(--anchor-offset, 80px)); width: 1px; height: 1px; pointer-events: none; }
+.workAnchor span { display: block; }
+.panel { position: relative; background: #e3ebe7; padding: 3.5rem var(--mobile-gutter) 0; }
+.panelContent { width: min(100%, 680px); margin: 0 auto; }
+.workHeading { padding: 0 0 2rem; background: transparent; text-align: left; }
+.workHeading h2 { font-size: clamp(2.25rem, 7.5vw, 4.5rem); }
+.workHeading p { margin: 1.25rem 0 0; }
+.imageComposition { position: relative; }
+.firstImage { position: relative; z-index: 1; transform-origin: center bottom; }
+.miniatures { position: absolute; inset: 0; pointer-events: none; }
+.miniatures img { position: absolute; top: -100%; width: 46%; aspect-ratio: 1276 / 720; object-fit: cover; box-shadow: 0 8px 25px #20282018; }
+.miniatures img:first-child { left: -3%; rotate: -6deg; }
+.miniatures img:last-child { right: -3%; rotate: 6deg; }
+.project { grid-template-columns: 1fr; gap: 1.75rem; padding: 3rem max(var(--mobile-gutter), calc((100% - 680px) / 2)); }
+.firstCopy { padding-top: 2rem; }
+.pinned { height: 150svh; }
+.pinned .stage { position: sticky; top: 0; height: 100svh; overflow: clip; }
+.pinned .panel { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; padding: 5.5rem var(--mobile-gutter) 0; }
+.pinned .workAnchor { top: calc(50svh + var(--anchor-offset, 80px)); }
+.pinned .panelContent { height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding-top: 1rem; }
+.pinned .workHeading { padding-bottom: clamp(3rem, 7svh, 5rem); }
+.mobile a:active, .mobile button:active { opacity: .78; }
+@media (min-width: 761px) {
+  .mobile { --mobile-gutter: 2rem; }
+  .hero > div:last-child { padding-top: 7rem; }
+  .hero h1 { font-size: clamp(4rem, 8vw, 5.5rem); }
+  .project { padding-block: 4rem; }
+}
+@media (max-width: 360px) {
+  .hero h1 { font-size: 2.6rem; }
+  .hero p:first-child { flex-wrap: wrap; gap: .5rem; font-size: .6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile *, .mobile *::before, .mobile *::after { animation: none !important; transition: none !important; }
+}

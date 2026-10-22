@@ -39,8 +39,6 @@
 
 /* Four typographic chapters share one continuous, spatial price drum. */
 .pricingScene { position:absolute; z-index:7; inset:0; overflow:clip; color:var(--price-ink); }
-.revealBlades { position:absolute; inset:0; display:grid; grid-template-columns:repeat(5,1fr); }
-.revealBlade { display:block; height:100%; background:var(--price-paper); margin-right:-1px; }
 .priceEditorial { position:absolute; inset:0; padding:clamp(6rem,12vh,8rem) clamp(2.5rem,6vw,7rem) 2rem; display:flex; flex-direction:column; }
 .editorialHeader { display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(3rem,8vw,9rem); align-items:end; flex-shrink:0; }
 .editorialHeadings { display:grid; }

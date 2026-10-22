@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform, type Variants, type MotionValue } from 'motion/react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './Hero.module.css';
+import HeroWaveCanvas from './HeroWaveCanvas';
 
 const heroVariants: Variants = {
   hidden: {},
@@ -42,28 +43,27 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
   const position = progress ?? scrollYProgress;
   const imageY = useTransform(position, [0, 1], ['0%', '4%']);
   const imageScale = useTransform(position, [0, 1], [1.01, 1.07]);
-  const contentY = useTransform(position, [0, .7], [0, -90]);
+  const contentY = useTransform(position, [0, .7], [0, -48]);
   const contentOpacity = useTransform(position, [0, .12, .65], [1, 1, 0]);
 
   return (
-    <motion.section ref={heroRef} className={`${styles.hero} ${embedded ? styles.embedded : ''}`} id={embedded ? undefined : 'home'} initial="hidden" animate="visible">
+    <motion.section ref={heroRef} className={`${styles.hero} ${embedded ? styles.embedded : ''}`} id={embedded ? undefined : 'home'} initial={shouldReduceMotion ? false : 'hidden'} animate="visible">
       <motion.div
         className={styles.imageBlock}
         initial={shouldReduceMotion ? false : { clipPath: 'inset(0 0 100% 0)' }}
         animate={{ clipPath: 'inset(0 0 0% 0)' }}
         transition={{ duration: 1.25, ease: [0.76, 0, 0.24, 1] }}
       >
-        <motion.img
-          src="/blankenberge-pier-uhd.webp"
-          alt=""
-          width={3840}
-          height={2160}
-          fetchPriority="high"
-          style={{
-            y: shouldReduceMotion ? 0 : imageY,
-            scale: shouldReduceMotion ? 1.01 : imageScale,
-          }}
-        />
+        <motion.div className={styles.imageSurface} style={{ y: shouldReduceMotion ? 0 : imageY, scale: shouldReduceMotion ? 1.01 : imageScale }}>
+          <img
+            src="/blankenberge-pier-uhd.webp"
+            alt=""
+            width={3840}
+            height={2160}
+            fetchPriority="high"
+          />
+          <HeroWaveCanvas source="/blankenberge-pier-uhd.webp" reducedMotion={shouldReduceMotion === true} />
+        </motion.div>
       </motion.div>
 
       <motion.div

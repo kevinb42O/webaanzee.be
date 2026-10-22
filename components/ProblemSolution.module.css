@@ -1,4 +1,13 @@
 .section { padding: clamp(5rem, 9vw, 9rem) 0 0; background: var(--color-bg-secondary); scroll-margin-top: 5rem; }
+.mobile .workbench { grid-template-columns: 1fr; }
+.mobile .container { width: min(calc(100% - 2.5rem), 680px); }
+.mobile .servicePanel { animation: none; }
+.mobile .header h2 em { white-space: normal; }
+.mobileExample { margin: 0 0 1.25rem; padding: 1rem; background: #c5cec0; }
+.mobileExample img { display: block; width: 100%; height: auto; aspect-ratio: 800 / 451; object-fit: cover; object-position: top; }
+.mobileExample figcaption { display: grid; gap: .4rem; margin-top: 1rem; font-size: .85rem; line-height: 1.5; }
+.mobileExample figcaption span:last-child { opacity: .75; font-size: .75rem; }
+.mobile button:active { opacity: .7; }
 .embedded { height: 100%; padding: 0; background: transparent; }
 .embedded .container { width: 100%; max-width: 1600px; height: 100%; display: flex; flex-direction: column; }
 .embedded .header { padding-bottom: clamp(1rem, 3vh, 2rem); }
@@ -7,9 +16,6 @@
 .embedded .header h2 > span { display: inline; margin-left: .3em; }
 .embedded .intro { display: none; }
 .embedded .header { position: relative; z-index: 2; }
-.embedded .morphHeading { position: relative; white-space: nowrap; }
-.embedded .header .morphHeading > span { display: inline-block; margin: 0; padding-bottom: .15em; color: inherit; }
-.embedded .header .morphHeading > .headingSecond { position: absolute; left: 0; top: 0; color: #a84029; }
 .embedded .workbench { flex: 1; min-height: 0; width: 100%; padding: 0; gap: clamp(2rem, 5vw, 5.5rem); }
 .embedded .visual { height: 100%; }
 .embedded .scene { padding: clamp(1.5rem, 2.5vw, 2.5rem); gap: 1rem; }
@@ -103,3 +109,8 @@
   .scene, .imageFrame, .capability button, .servicePanel > a svg { transition: none; }
   .servicePanel:not([hidden]) { animation: none; }
 }
+
+.embedded .servicePanel { animation: none; }
+.embedded .capability button { transition: none; }
+.embedded .workbench { align-items: center; }
+.embedded .header h2 > span { display: inline; margin-left: 0; }

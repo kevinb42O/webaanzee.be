@@ -1,0 +1,18 @@
+.showcase { position: absolute; inset: 0; overflow: clip; background: #fffaf0; font-family: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; text-transform: uppercase; letter-spacing: .08em; line-height: 1.15; }
+.canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.identity { position: absolute; left: clamp(30px, 8vw, 144px); top: 50%; display: grid; gap: 9px; pointer-events: none; }
+.index { font-size: 9px; }
+.word { margin: 0; max-width: 26ch; color: inherit; font-family: inherit; font-size: clamp(9px, .78vw, 11px); font-weight: 400; line-height: 1.15; letter-spacing: inherit; }
+.chip { display: inline-block; width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 1px rgb(255 255 255 / 14%); }
+.details { position: absolute; right: clamp(30px, 7vw, 120px); top: 50%; width: min(28vw, 360px); }
+.details dl { margin: 0; display: grid; gap: 3px; }
+.details dl > div { display: grid; grid-template-columns: 42px 1fr; align-items: baseline; gap: 9.6px; }
+.details dt, .details dd { margin: 0; font-size: clamp(9px, .72vw, 11px); font-weight: 400; }
+.details a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.details a:focus-visible, .navigation button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.scrollHint { position: absolute; left: 18px; bottom: 18px; margin: 0; font-size: 9px; }
+.navigation { position: absolute; bottom: 10px; right: 18px; display: flex; align-items: center; gap: 12px; font-size: 9px; }
+.navigation button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; color: inherit; font: inherit; font-size: 16px; cursor: pointer; }
+.navigation button:disabled { opacity: .3; cursor: default; }
+.fallback { position: absolute; width: min(60vw, 900px); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.fallback img { display: block; width: 100%; height: auto; }

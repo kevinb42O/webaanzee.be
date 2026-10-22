@@ -11,6 +11,7 @@
     "build:ssr": "vite build --ssr scripts/entry-server.tsx --outDir dist-ssr",
     "preview": "vite preview",
     "check:seo": "node scripts/check-seo.mjs",
+    "check:home-motion": "node --experimental-strip-types scripts/check-home-motion.mjs",
     "check:regions": "node scripts/check-location-pages.mjs && node scripts/check-location-motion.mjs"
   },
   "dependencies": {
@@ -20,7 +21,8 @@
     "puppeteer": "^25.3.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "recharts": "^3.6.0"
+    "recharts": "^3.6.0",
+    "three": "^0.183.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

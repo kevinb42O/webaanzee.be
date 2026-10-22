@@ -2,9 +2,11 @@
  * Smooth-scroll to a section by its ID without changing the URL hash.
  * Accounts for the sticky header height so content isn't hidden behind it.
  */
+import { scrollToHomeMoment } from './homeChoreography';
 export const scrollToSection = (
   e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement> | null,
-  sectionId: string
+  sectionId: string,
+  behavior?: ScrollBehavior
 ) => {
   if (e) {
     e.preventDefault();
@@ -17,12 +19,19 @@ export const scrollToSection = (
     return;
   }
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motion = behavior ?? (reduceMotion ? 'auto' : 'smooth');
+  const sequence = el.closest<HTMLElement>('[data-home-sequence]');
+  if (sequence && (el.dataset.homeMoment !== undefined || id === 'home')) {
+    scrollToHomeMoment(sequence, Number(el.dataset.homeMoment ?? 0), Number(sequence.dataset.homeTotal), motion);
+    return;
+  }
+
   // Account for sticky header
   const header = document.querySelector('header');
   const offset = header ? header.getBoundingClientRect().height + 16 : 80;
 
   const top = el.getBoundingClientRect().top + window.scrollY - offset;
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+  window.scrollTo({ top, behavior: motion });
 };

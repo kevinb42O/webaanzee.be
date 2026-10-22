@@ -4,6 +4,7 @@ import { ArrowUpRight, Plus } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollToSection';
 import { euro, pricing } from '../data/pricing.mjs';
 import styles from './Offer.module.css';
+import { clamp, desktopMotionQuery, itemOpacity, windowProgress } from '../utils/homeChoreography';
 
 const ContactLink = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={className}>
@@ -79,31 +80,30 @@ const StaticOffer: React.FC<{ index: number }> = ({ index }) => {
 };
 
 // Each price is a typeset face on a virtual drum. The actual amount never counts up.
-const PriceGlyph: React.FC<{ character: string; index: number; chapter: number; time: MotionValue<number> }> = ({ character, index, chapter, time }) => {
-  const position = useTransform(time, value => value - chapter - index * .018);
-  const rotateX = useTransform(position, [-.65, -.08, .5, .95], [85, 0, 0, -85]);
-  const y = useTransform(position, [-.65, -.08, .5, .95], ['95%', '0%', '0%', '-95%']);
+const PriceGlyph: React.FC<{ character: string; chapter: number; time: MotionValue<number> }> = ({ character, chapter, time }) => {
+  const position = useTransform(time, value => clamp(value - chapter, -1, 1));
+  const rotateX = useTransform(position, value => -value * 22);
+  const y = useTransform(position, value => `${-value * 25}%`);
   return <span className={styles.glyphWindow}><motion.span style={{ rotateX, y }}>{character}</motion.span></span>;
 };
 
 const PriceChapter: React.FC<{ index: number; time: MotionValue<number>; active: boolean }> = ({ index, time, active }) => {
   const offer = offers[index];
   const local = useTransform(time, value => value - index);
-  const opacity = useTransform(local, [-.65, -.35, .6, .95], [0, 1, 1, 0]);
-  const copyMask = useTransform(local, [-.45, -.05, .55, .9], ['inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 0%)', 'inset(0% 0% 0% 0%)', 'inset(0% 0% 100% 0%)']);
-  const titleY = useTransform(local, [-.6, -.05, .55, .95], ['80%', '0%', '0%', '-90%']);
-  const titleRotate = useTransform(local, [-.6, -.05, .55, .95], [18, 0, 0, -18]);
-  const detailY = useTransform(local, [-.45, -.05, .55, .9], [40, 0, 0, -40]);
+  const opacity = useTransform(time, value => itemOpacity(value, index));
+  const titleY = useTransform(local, value => `${clamp(-value, -1, 1) * 12}%`);
+  const titleRotate = useTransform(local, value => clamp(-value, -1, 1) * 3);
+  const detailY = useTransform(local, value => clamp(-value, -1, 1) * 12);
   return <motion.article className={styles.chapter} style={{ opacity }} inert={!active ? true : undefined} aria-hidden={!active} aria-label={offer.label}>
     <div className={styles.chapterIdentity}>
       <div className={styles.chapterTitleWindow}><motion.h3 style={{ y: titleY, rotateX: titleRotate }}>{offer.title[0]}<em>{offer.title[1]}</em></motion.h3></div>
       <div className={styles.priceSculpture}>
         <span className={styles.priceCaption}>vanaf</span>
-        <div className={styles.rollingPrice} role="img" aria-label={euro(offer.price)}><span aria-hidden="true"><sup className={styles.priceCurrency}>€</sup>{[...euro(offer.price).slice(1)].map((character, glyph) => <PriceGlyph key={glyph} character={character} index={glyph} chapter={index} time={time} />)}</span></div>
+        <div className={styles.rollingPrice} role="img" aria-label={euro(offer.price)}><span aria-hidden="true"><sup className={styles.priceCurrency}>€</sup>{[...euro(offer.price).slice(1)].map((character, glyph) => <PriceGlyph key={glyph} character={character} chapter={index} time={time} />)}</span></div>
         <span className={styles.priceCaption}>eenmalig · excl. btw</span>
       </div>
     </div>
-    <motion.div className={styles.chapterDetails} style={{ clipPath: copyMask, y: detailY }}>
+    <motion.div className={styles.chapterDetails} style={{ y: detailY }}>
       <p className={styles.chapterDescription}>{offer.description}</p>
       <p className={styles.chapterScope}>{offer.scope}</p>
       <ul className={styles.chapterFeatures}>{offer.features.map(text => <li key={text}><FeatureText text={text} /></li>)}</ul>
@@ -114,29 +114,20 @@ const PriceChapter: React.FC<{ index: number; time: MotionValue<number>; active:
   </motion.article>;
 };
 
-const RevealBlade: React.FC<{ index: number; progress: MotionValue<number> }> = ({ index, progress }) => {
-  const y = useTransform(progress, [index * .09, .85 + index * .09], [index % 2 ? '-105%' : '105%', '0%']);
-  return <motion.span className={styles.revealBlade} style={{ y }} />;
-};
-
-export const PricingScene: React.FC<{ progress: MotionValue<number>; onNavigate: (index: number) => void }> = ({ progress, onNavigate }) => {
-  const [active, setActive] = useState(-1);
-  const time = useTransform(progress, value => Math.min(3.45, (value - 1.35) / 1.65));
-  useMotionValueEvent(time, 'change', value => {
-    const next = value < -.45 ? -1 : Math.max(0, Math.min(3, Math.floor(value + .3)));
-    setActive(current => current === next ? current : next);
-  });
+export const PricingScene: React.FC<{ progress: MotionValue<number>; phase: MotionValue<number>; onNavigate: (index: number) => void }> = ({ progress, phase: time, onNavigate }) => {
+  const [active, setActive] = useState(0);
+  useMotionValueEvent(time, 'change', value => setActive(current => current === Math.round(value) ? current : Math.round(value)));
+  const mask = useTransform(progress, v => `inset(${(1 - windowProgress(v, 0, .75)) * 100}% 0% 0% 0%)`);
   const visible = useTransform(progress, value => value <= 0 ? 'hidden' : 'visible');
-  const contentOpacity = useTransform(progress, [.65, 1.3], [0, 1]);
-  const paper = useTransform(time, [0, 1.35, 1.9, 2.4, 2.95], ['#f3eee4', '#f3eee4', '#a94732', '#a94732', '#24221f']);
-  const ink = useTransform(time, [1.35, 1.9], ['#29251f', '#fff5e8']);
-  const muted = useTransform(time, [1.35, 1.9, 2.4, 2.95], ['#655b50', '#f6ddc8', '#f6ddc8', '#c9beb0']);
-  const accent = useTransform(time, [1.35, 1.9, 2.4, 2.95], ['#a13d28', '#ffe1ab', '#ffe1ab', '#f0ae91']);
-  const firstHeader = useTransform(time, [1.35, 1.7], [1, 0]);
-  const nextHeader = useTransform(time, [1.45, 1.8], [0, 1]);
-  const ruleScale = useTransform(progress, [.65, 1.4], [0, 1]);
-  return <motion.section className={styles.pricingScene} style={{ visibility: visible, '--price-paper': paper, '--price-ink': ink, '--price-muted': muted, '--price-accent': accent } as import('motion/react').MotionStyle} aria-label="Aanbod en prijzen">
-    <div className={styles.revealBlades} aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <RevealBlade key={index} index={index} progress={progress} />)}</div>
+  const contentOpacity = useTransform(progress, v => windowProgress(v, .3, .75));
+  const paper = useTransform(time, [0, 1, 2, 3], ['#f3eee4', '#f3eee4', '#a94732', '#24221f']);
+  const ink = useTransform(time, [1, 2], ['#29251f', '#fff5e8']);
+  const muted = useTransform(time, [1, 2, 3], ['#655b50', '#f6ddc8', '#c9beb0']);
+  const accent = useTransform(time, [1, 2, 3], ['#a13d28', '#ffe1ab', '#f0ae91']);
+  const firstHeader = useTransform(time, v => 1 - windowProgress(v, 1, 1.48));
+  const nextHeader = useTransform(time, v => windowProgress(v, 1.52, 2));
+  const ruleScale = useTransform(progress, v => windowProgress(v, .3, .75));
+  return <motion.section className={styles.pricingScene} style={{ visibility: visible, clipPath: mask, background: paper, '--price-paper': paper, '--price-ink': ink, '--price-muted': muted, '--price-accent': accent } as import('motion/react').MotionStyle} aria-label="Aanbod en prijzen">
     <motion.div className={styles.priceEditorial} style={{ opacity: contentOpacity }}>
       <header className={styles.editorialHeader}>
         <div className={styles.editorialHeadings}>
@@ -158,7 +149,7 @@ export const PricingScene: React.FC<{ progress: MotionValue<number>; onNavigate:
 const Offer: React.FC = () => {
   const [embedded, setEmbedded] = useState(false);
   useEffect(() => {
-    const media = window.matchMedia('(min-width: 1000px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)');
+    const media = window.matchMedia(desktopMotionQuery);
     const update = () => setEmbedded(media.matches);
     update();
     media.addEventListener('change', update);
