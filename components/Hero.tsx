@@ -77,15 +77,15 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
 
         <h1 className={styles.title}>
           <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Je beste werk verdient</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}>Je kent je vak.</motion.span>
           </span>
           <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>een website op hetzelfde niveau.</motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Laat het online zien.</motion.span>
           </span>
         </h1>
         
         <motion.p className={styles.description} variants={fadeVariants}>
-          Webaanzee ontwerpt en bouwt onderscheidende websites voor ondernemers die online even sterk willen overkomen als in hun eigen werk.
+          Ik ben Kevin. Ik ontwerp en bouw websites, webshops en toepassingen voor ondernemers aan de Belgische kust. Van eerste gesprek tot oplevering werk je rechtstreeks met mij.
         </motion.p>
 
         <motion.div className={styles.ctaGroup} variants={fadeVariants}>
@@ -99,7 +99,7 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
             <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden="true">→</motion.span>
           </motion.a>
           <motion.a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={styles.secondaryLink}>
-            Plan een gesprek <span aria-hidden="true">↗</span>
+            Bespreek je website <span aria-hidden="true">↗</span>
           </motion.a>
         </motion.div>
       </motion.div>

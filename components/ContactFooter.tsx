@@ -30,14 +30,19 @@ const ContactFooter: React.FC = () => {
     try {
       const result = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       const payload = await result.json().catch(() => ({}));
-      if (!result.ok) throw new Error(payload.message || 'Versturen lukte niet.');
+      if (!result.ok) {
+        setSubmissionState('error');
+        setSubmissionMessage(payload.message || 'Je bericht kon niet worden verstuurd. Probeer opnieuw of mail rechtstreeks.');
+        track('contact_form_error');
+        return;
+      }
       form.reset();
       setSubmissionState('success');
-      setSubmissionMessage('Bedankt. Je bericht is verzonden; ik antwoord persoonlijk.');
+      setSubmissionMessage('Je bericht is verzonden. Ik neem contact met je op via e-mail.');
       track('contact_form_submit_success');
-    } catch (error) {
+    } catch {
       setSubmissionState('error');
-      setSubmissionMessage(error instanceof Error ? error.message : 'Versturen lukte niet. Mail rechtstreeks naar kevin@webaanzee.be.');
+      setSubmissionMessage('Je bericht kon niet worden verstuurd. Controleer je verbinding en probeer opnieuw, of mail rechtstreeks.');
       track('contact_form_error');
     }
   };
@@ -89,41 +94,41 @@ const ContactFooter: React.FC = () => {
             <div>
               <span className={`${styles.label} reveal-up`}>Contact</span>
               <h2 className={`${styles.title} reveal-up`} style={{ animationDelay: '0.1s' }}>
-                Laten we kijken wat jouw zaak nodig heeft.
+                Wat wil je laten maken of verbeteren?
               </h2>
               <p className={`${styles.description} reveal-up`} style={{ animationDelay: '0.2s' }}>
-                Je hoeft vooraf geen pakket, aantal pagina&apos;s of technische oplossing te kennen. Vertel me waar je vandaag staat en wat er beter moet. Ik geef je een helder, eerlijk voorstel — ook wanneer eenvoudiger beter is.
+                Vertel wat je zaak doet en waar je hulp bij zoekt. Heb je al een website? Stuur de link mee. Ik bekijk met je welke pagina’s en functies nodig zijn en maak een voorstel met de kosten.
               </p>
             </div>
 
             <div className={`${styles.finalPrompt} reveal-up`} style={{ animationDelay: '0.25s' }}>
               <span>Rechtstreeks contact</span>
-              <h3>Je idee verdient een concreet antwoord.</h3>
-              <p>Je spreekt rechtstreeks met Kevin. Meestal krijg je dezelfde werkdag antwoord.</p>
+              <h3>Je spreekt met Kevin.</h3>
+              <p>Ik lees je vraag en neem contact met je op. Een eerste gesprek is vrijblijvend.</p>
             </div>
           </div>
 
           <div className={styles.contactActions}>
-            <p className={styles.actionLead}>Kies de manier die vandaag het makkelijkst is.</p>
+            <p className={styles.actionLead}>Bel, stuur een WhatsApp of gebruik het contactformulier.</p>
             <div className={styles.grid}>
             <a href="tel:0494816714" onClick={() => track('phone_click')} className={`${styles.card} ${styles.cardPhone} reveal-up`} style={{ animationDelay: '0.3s' }}>
               <span className={styles.cardKicker}>Bel</span>
               <span className={styles.cardTitle}>0494 81 67 14</span>
-              <span className={styles.cardSub}>Bel wanneer het je past</span>
+              <span className={styles.cardSub}>Bespreek je vraag telefonisch</span>
               <ArrowUpRight className={styles.cardArrow} strokeWidth={1.5} aria-hidden="true" />
             </a>
             
             <a href="https://wa.me/32494816714" onClick={() => track('whatsapp_click')} target="_blank" rel="noreferrer" className={`${styles.card} ${styles.cardWhatsapp} reveal-up`} style={{ animationDelay: '0.4s' }}>
               <span className={styles.cardKicker}>WhatsApp</span>
               <span className={styles.cardTitle}>Stuur een bericht</span>
-              <span className={styles.cardSub}>Handig als je vraag al even moet rijpen</span>
+              <span className={styles.cardSub}>Stuur je vraag via WhatsApp</span>
               <ArrowUpRight className={styles.cardArrow} strokeWidth={1.5} aria-hidden="true" />
             </a>
 
             <button ref={emailButtonRef} onClick={() => { setIsModalOpen(true); track('contact_form_start'); }} className={`${styles.card} ${styles.cardEmail} reveal-up`} style={{ width: '100%', animationDelay: '0.5s' }}>
-              <span className={styles.cardKicker}>E-mail</span>
-              <span className={styles.cardTitle}>Vertel je idee</span>
-              <span className={styles.cardSub}>Ik lees mee en antwoord persoonlijk</span>
+              <span className={styles.cardKicker}>Contactformulier</span>
+              <span className={styles.cardTitle}>Stuur een bericht</span>
+              <span className={styles.cardSub}>Je bericht komt bij Kevin terecht</span>
               <ArrowUpRight className={styles.cardArrow} strokeWidth={1.5} aria-hidden="true" />
             </button>
             </div>
@@ -137,9 +142,9 @@ const ContactFooter: React.FC = () => {
             <a href="/" className={styles.footerLogo} aria-label="Webaanzee, naar de startpagina">
               <Logo />
             </a>
-            <p className={styles.footerTagline}>Websites met een helder verhaal, gemaakt voor zelfstandigen aan de Belgische kust en ver daarbuiten.</p>
+            <p className={styles.footerTagline}>Websites, webshops en toepassingen voor ondernemers. Ontworpen en gebouwd door Kevin in Blankenberge.</p>
             <a href="/#contact" onClick={(e) => scrollOnHomePage(e, 'contact')} className={styles.footerCta}>
-              Start een gesprek <ArrowUpRight aria-hidden="true" strokeWidth={1.7} />
+              Neem contact op <ArrowUpRight aria-hidden="true" strokeWidth={1.7} />
             </a>
           </div>
 
@@ -149,10 +154,10 @@ const ContactFooter: React.FC = () => {
               <a href="/" className={styles.footerLink}>Startpagina</a>
               <a href="/diensten/webdesign/" className={styles.footerLink}>Webdesign</a>
               <a href="/webdesign-belgische-kust/" className={styles.footerLink}>Webdesign aan de kust</a>
-              <a href="/cases/" className={styles.footerLink}>Cases</a>
+              <a href="/cases/" className={styles.footerLink}>Projecten</a>
               <a href="/klantenkaart.html" className={styles.footerLink}>Digitale klantenkaart</a>
               <a href="/pwayment.html" className={styles.footerLink}>PWAYMENT POS</a>
-              <a href="/inzichten/" className={styles.footerLink}>Inzichten</a>
+              <a href="/inzichten/" className={styles.footerLink}>Uitleg en aanpak</a>
             </nav>
 
             <address className={styles.footerGroup}>
@@ -165,7 +170,7 @@ const ContactFooter: React.FC = () => {
           </div>
 
           <div className={styles.footerBottom}>
-            <span>© {new Date().getFullYear()} Webaanzee.be</span>
+            <span>© {new Date().getFullYear()} Webaanzee</span>
             <a href="/privacy.html" className={styles.footerLegal}>Privacy</a>
             <a href="/#home" onClick={(e) => scrollOnHomePage(e, 'home')} className={styles.backToTop}>
               Naar boven <ArrowUp aria-hidden="true" strokeWidth={1.7} />
@@ -179,30 +184,30 @@ const ContactFooter: React.FC = () => {
           <div ref={dialogRef} className={styles.modalContent} role="dialog" aria-modal="true" aria-labelledby="email-dialog-title">
             <div className={styles.modalHeader}>
               <h3 id="email-dialog-title" className={styles.modalTitle}>Stuur een bericht</h3>
-              <button type="button" className={styles.closeBtn} onClick={closeModal} aria-label="Sluit e-mailformulier">×</button>
+              <button type="button" className={styles.closeBtn} onClick={closeModal} aria-label="Sluit contactformulier">×</button>
             </div>
             <form onSubmit={submitContact}>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-name">Je naam</label>
-                <input ref={nameInputRef} id="contact-name" type="text" name="name" autoComplete="name" placeholder="Je naam" minLength={2} maxLength={100} required className={styles.input} />
+                <label className={styles.fieldLabel} htmlFor="contact-name">Je naam (verplicht)</label>
+                <input ref={nameInputRef} id="contact-name" type="text" name="name" autoComplete="name" placeholder="Voor- en achternaam" minLength={2} maxLength={100} required className={styles.input} />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-email">Je e-mail</label>
-                <input id="contact-email" type="email" name="email" autoComplete="email" placeholder="Je e-mail" maxLength={200} required className={styles.input} />
+                <label className={styles.fieldLabel} htmlFor="contact-email">Je e-mailadres (verplicht)</label>
+                <input id="contact-email" type="email" name="email" autoComplete="email" placeholder="naam@jezaak.be" maxLength={200} required className={styles.input} />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-company">Bedrijf (optioneel)</label>
-                <input id="contact-company" type="text" name="company" autoComplete="organization" placeholder="Je zaak (optioneel)" maxLength={160} className={styles.input} />
+                <label className={styles.fieldLabel} htmlFor="contact-company">Je zaak (optioneel)</label>
+                <input id="contact-company" type="text" name="company" autoComplete="organization" placeholder="Naam van je zaak" maxLength={160} className={styles.input} />
               </div>
               <div className={styles.formGroup} style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
                 <label htmlFor="contact-website">Laat dit veld leeg</label>
                 <input id="contact-website" type="text" name="website" tabIndex={-1} autoComplete="off" />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.srOnly} htmlFor="contact-message">Je bericht</label>
-                <textarea id="contact-message" name="message" rows={4} placeholder="Waar kan ik mee helpen?" minLength={10} maxLength={4000} required className={styles.input}></textarea>
+                <label className={styles.fieldLabel} htmlFor="contact-message">Je bericht (verplicht, minimaal 10 tekens)</label>
+                <textarea id="contact-message" name="message" rows={4} placeholder="Wat doet je zaak en wat wil je laten maken of verbeteren?" minLength={10} maxLength={4000} required className={styles.input}></textarea>
               </div>
-              <button type="submit" disabled={submissionState === 'sending'} className={styles.submitBtn}>{submissionState === 'sending' ? 'Versturen…' : 'Versturen'}</button>
+              <button type="submit" disabled={submissionState === 'sending'} className={styles.submitBtn}>{submissionState === 'sending' ? 'Bericht versturen…' : 'Bericht versturen'}</button>
               {submissionMessage && <p role="status" aria-live="polite" style={{ marginTop: '1rem' }}>{submissionMessage} {submissionState === 'error' && <a href="mailto:kevin@webaanzee.be">Mail rechtstreeks</a>}</p>}
             </form>
           </div>

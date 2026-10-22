@@ -15,3 +15,7 @@ const obsolete = [
 ];
 for (const relative of obsolete) await rm(path.join(root, 'dist', relative), { force: true });
 console.log(`Removed ${obsolete.length} unused source-media files from the deployment output.`);
+// Local viewport comparison pages must not become public deployment routes.
+for (const relative of ['__region-qa.html', '__copy-qa.html']) {
+  await rm(path.join(root, 'dist', relative), { force: true });
+}

@@ -5,22 +5,23 @@ import { pricingSummary, euro, pricing } from '../data/pricing.mjs';
 
 const faqGroups = [
   {
-    title: 'Project & investering',
+    title: 'Je website',
     faqs: [
-      { id: 'match', question: 'Voor wie is Webaanzee een goede match?', answer: 'Voor ondernemers en kleine organisaties die veel belang hechten aan uitstraling, duidelijke communicatie en rechtstreeks contact. Dat kan een lokale handelszaak zijn, maar ook een webshop, digitaal platform of toepassing op maat.' },
-      { id: 'prijs', question: 'Wat kost een professionele website?', answer: pricingSummary },
-      { id: 'cms', question: 'Kan ik mijn website zelf aanpassen met een CMS?', answer: `Ja. Een website met CMS/dashboard start vanaf ${euro(pricing.cms.price)} excl. btw. De website, een beveiligde login, beheer van teksten en foto’s, één inhoudstype en persoonlijke uitleg zijn inbegrepen. Extra inhoudstypes, gebruikersrollen en bedrijfsprocessen begroten we apart.` },
-      { id: 'start', question: 'Moet ik vooraf exact weten wat ik nodig heb?', answer: 'Nee. Vertel waar je zaak vandaag staat, wat er beter moet en wat je wilt bereiken. Webaanzee vertaalt dat naar een passende structuur, functies en aanpak.' },
-      { id: 'timing', question: 'Hoe lang duurt een traject?', answer: 'Dat hangt af van de omvang, functies en beschikbare inhoud. Voor de start leggen we een realistische planning en vaste feedbackmomenten vast, zodat je altijd weet waar het project staat.' },
+      { id: 'match', question: 'Voor wie bouw je websites?', answer: `Voor zelfstandigen, winkels en kleine organisaties die hun website willen laten ontwerpen en bouwen door één persoon. Een website op maat start vanaf ${euro(pricing.website.price)} excl. btw. Voor online verkoop of een bedrijfsproces werk ik een webshop of toepassing uit.` },
+      { id: 'prijs', question: 'Wat kost een website?', answer: pricingSummary },
+      { id: 'cms', question: 'Kan ik teksten en foto’s zelf aanpassen?', answer: `Ja, met een beheerscherm (CMS). Dit aanbod start vanaf ${euro(pricing.cms.price)} excl. btw en omvat de website, een beveiligde login, tekst- en fotobeheer en uitleg. Het beheer wordt ingericht voor één soort inhoud, bijvoorbeeld nieuws óf projecten. Extra soorten inhoud, statistieken en gebruikersrollen staan apart in de offerte.` },
+      { id: 'start', question: 'Wat heb je nodig om een voorstel te maken?', answer: 'Vertel wat je zaak doet, wie je klanten zijn en wat je wilt laten maken of verbeteren. Stuur de link van je huidige website mee als je die hebt. Je hoeft nog geen lijst met pagina’s of technische keuzes klaar te hebben.' },
+      { id: 'timing', question: 'Wanneer kan mijn website klaar zijn?', answer: 'Stuur je gewenste opleverdatum mee met je aanvraag. Ik bekijk dan de beschikbare ruimte in de planning, de benodigde functies en welke teksten en beelden al klaarstaan. Je krijgt een planning bij het voorstel; de bouw en feedbackmomenten spreken we voor de start af.' },
     ],
   },
   {
-    title: 'Samenwerking & techniek',
+    title: 'Samenwerken en beheer',
     faqs: [
-      { id: 'werkwijze', question: 'Hoe verloopt de samenwerking?', answer: 'We starten met je zaak, klanten en doelen. Daarna volgen structuur, visuele richting, ontwerp en technische bouw. Je ziet het project tussendoor en geeft feedback op logische momenten. Voor de lancering wordt alles grondig getest.' },
-      { id: 'inhoud', question: 'Krijg ik hulp met tekst en beelden?', answer: 'Ja. We bekijken wat al beschikbaar is en wat nog ontbreekt. Je krijgt hulp met structuur, teksten, beeldselectie en—wanneer nodig—een duidelijke briefing voor fotografie.' },
-      { id: 'google', question: 'Wordt mijn website goed gevonden in Google?', answer: 'Elke website krijgt een snelle technische basis, heldere structuur en correcte zoekmachine-instellingen. Goede zichtbaarheid groeit daarna verder met relevante inhoud, lokale bekendheid en gerichte optimalisatie.' },
-      { id: 'nazorg', question: 'Wat gebeurt er na de lancering?', answer: `Hosting en technisch beheer via Webaanzee starten vanaf ${euro(pricing.website.monthly)}/maand voor een website, ${euro(pricing.cms.monthly)}/maand met CMS en ${euro(pricing.webshop.monthly)}/maand voor een webshop, excl. btw. Domeinnaam, zakelijke e-mail en externe licenties staan apart in de offerte. Inhoudelijke wijzigingen kosten ${euro(pricing.hourly)}/uur excl. btw, na een raming en jouw akkoord.` },
+      { id: 'werkwijze', question: 'Hoe verloopt de samenwerking?', answer: 'Eerst bespreken we je aanbod en de vragen van je klanten. Ik werk de pagina-indeling en het ontwerp uit, waarna je feedback geeft op de afgesproken momenten. Daarna volgen de bouw en de controle van de website op mobiel en desktop. De offerte vermeldt wat ik oplever en wat je zelf aanlevert.' },
+      { id: 'inhoud', question: 'Help je met teksten en beelden?', answer: 'Ik help bepalen welke inhoud nodig is en hoe die over je pagina’s wordt verdeeld. Voor de bouw lever je de afgesproken teksten en beelden aan. Wil je tekstschrijven, fotografie of vertalingen laten verzorgen? Dan neem ik die werkzaamheden apart op in de offerte.' },
+      { id: 'google', question: 'Wat doe je voor de vindbaarheid?', answer: 'De bouw omvat paginatitels, beschrijvingen en de technische instellingen waarmee zoekmachines de pagina’s kunnen vinden en lezen. Aanvullend zoekwoordenonderzoek, nieuwe inhoud en doorlopende optimalisatie spreken we apart af. Een positie in Google kan ik niet garanderen.' },
+      { id: 'nazorg', question: 'Hoe vraag ik hulp na de oplevering?', answer: `Neem rechtstreeks contact met mij op bij een technisch probleem of een gewenste wijziging. Hosting en technisch beheer omvatten de online infrastructuur, updates en back-ups volgens je offerte. Die kosten starten vanaf ${euro(pricing.website.monthly)}/maand voor een website, ${euro(pricing.cms.monthly)}/maand met CMS en ${euro(pricing.webshop.monthly)}/maand voor een webshop, excl. btw. Inhoud aanpassen kost ${euro(pricing.hourly)}/uur, na een raming en je akkoord.` },
+      { id: 'overdracht', question: 'Wat spreken we af over toegang en overdracht?', answer: 'Voor de start leggen we vast wie de domeinnaam, hosting en eventuele softwareaccounts beheert en welke toegang je krijgt. Wil je eigen hosting gebruiken of later verhuizen? Geef dat aan, zodat de mogelijkheden, werkzaamheden en eventuele kosten vooraf in de offerte staan.' },
     ],
   },
 ];
@@ -32,9 +33,9 @@ const FAQ: React.FC = () => {
     <section className={styles.section} id="faq">
       <div className={`${styles.container} animate-on-scroll`}>
         <div className={`${styles.header} reveal-up`}>
-          <span className={styles.label}>Goed om te weten</span>
-          <h2 className={styles.title}>Heldere antwoorden.<br />Voor je beslist.</h2>
-          <p className={styles.intro}>De belangrijkste vragen over investering, samenwerking en wat je na de lancering mag verwachten.</p>
+
+          <h2 className={styles.title}>Vragen over<br />je website.</h2>
+          <p className={styles.intro}>Van de eerste aanvraag tot het aanpassen van je website na de oplevering.</p>
         </div>
 
         <div className={styles.accordion}>
@@ -45,7 +46,7 @@ const FAQ: React.FC = () => {
                 {group.faqs.map((faq) => (
                   <details key={faq.id} className={styles.details} open={openFaqId === faq.id}>
                     <summary className={styles.summary} onClick={(event) => { event.preventDefault(); setOpenFaqId((current) => current === faq.id ? null : faq.id); }}>
-                      {faq.question}<span className={styles.icon}>+</span>
+                      {faq.question}<span className={styles.icon} aria-hidden="true">+</span>
                     </summary>
                     <div className={styles.answer}><p>{faq.answer}</p></div>
                   </details>

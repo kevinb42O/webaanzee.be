@@ -1,6 +1,8 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pricing, euro } from '../data/pricing.mjs';
+import { loyaltyFaqs } from '../data/loyalty.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dist=path.join(root,'dist');
@@ -27,7 +29,17 @@ for(const file of publicPages){
   }
   for(const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){try{JSON.parse(match[1])}catch(e){errors.push(`${rel}: invalid JSON-LD (${e.message})`)}}
   for(const match of html.matchAll(/<a[^>]+href=["']([^"']+)["']/gi))internalLinks.push({rel,href:match[1]});
-  if(/Binnen 7 dagen|vanaf €450|"price"\s*:\s*"450"/i.test(html))errors.push(`${rel}: stale price or seven-day claim`);
+  if(/Binnen (?:7 dagen|48 uur)|vanaf €450|"price"\s*:\s*"(?:450|950)"|geen wurgcontracten|honderd procent traceerbaar en veilig/i.test(html))errors.push(`${rel}: stale price or unsupported guarantee`);
+}
+// Check visible pricing and FAQ content as well as syntactically valid metadata.
+const homeText=strip(await readFile(path.join(dist,'index.html'),'utf8')).replace(/\s/g,'');
+for(const offer of [pricing.website,pricing.cms,pricing.webshop,pricing.application]){
+  if(!homeText.includes(euro(offer.price)))errors.push(`index.html: current offer price missing from rendered copy: ${euro(offer.price)}`);
+}
+const loyaltyHtml=await readFile(path.join(dist,'klantenkaart.html'),'utf8');
+const loyaltyText=strip(loyaltyHtml);
+for(const item of loyaltyFaqs){
+  if(!loyaltyText.includes(strip(item.question))||!loyaltyText.includes(strip(item.answer)))errors.push(`klantenkaart.html: structured FAQ must also be visible: ${item.question}`);
 }
 const validPaths=new Set(publicPages.map(file=>{const rel=path.relative(dist,file).split(path.sep).join('/');if(rel==='index.html')return '/';if(rel.endsWith('/index.html'))return '/'+rel.slice(0,-'index.html'.length);return '/'+rel}));
 for(const {rel,href} of internalLinks){

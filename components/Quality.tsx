@@ -3,11 +3,11 @@ import { motion, useTransform, type MotionValue } from 'motion/react';
 import styles from './Quality.module.css';
 
 const principles = [
-  'De structuur moet kloppen.',
-  'De tekst moet helder zijn.',
-  'De mobiele versie moet net zo sterk voelen.',
-  'De website moet snel zijn.',
-  'Iedere belangrijke actie moet logisch voelen.',
+  'Je aanbod en contactgegevens zijn makkelijk te vinden.',
+  'Teksten beantwoorden de vragen van je klanten.',
+  'Ook op je telefoon kun je lezen en navigeren.',
+  'Beelden en techniek mogen het laden niet in de weg zitten.',
+  'Bezoekers weten hoe ze contact opnemen of bestellen.',
 ];
 
 // Each strip contains the same typesetting; only its own vertical slice is visible.
@@ -57,14 +57,14 @@ export const QualityScene: React.FC<{ progress: MotionValue<number> }> = ({ prog
       <motion.div className={styles.reading} style={{ opacity: readingOpacity }}>
         <motion.div className={styles.principlesBlock} style={{ opacity: bodyOpacity, y: bodyY }}>
           <motion.div className={styles.intro} style={{ clipPath: introMask }}>
-            <p>Een website kan er uitstekend uitzien en alsnog weinig doen.</p>
-            <p>Daarom kijk ik verder dan kleur, lettertype en animatie.</p>
+            <p>Je klanten komen met een vraag: wat bied je aan, wat kost het en hoe kunnen ze bij je terecht?</p>
+            <p>Die vragen bepalen de inhoud en opbouw van je website.</p>
           </motion.div>
           <ul className={styles.principles}>{principles.map((text, index) => <Principle key={text} index={index} progress={progress}>{text}</Principle>)}</ul>
         </motion.div>
         <motion.div className={styles.finalStatement} style={{ clipPath: closingMask, y: closingY }}>
-          <p>Het resultaat moet niet alleen indruk maken in een screenshot.</p>
-          <p className={styles.sceneClosing}>Het moet <em>werken</em> wanneer echte mensen hem gebruiken.</p>
+          <p>Daar draait het om:</p>
+          <p className={styles.sceneClosing}>Je aanbod begrijpen.<br /><em>De volgende stap vinden.</em></p>
         </motion.div>
       </motion.div>
     </div>
@@ -86,11 +86,11 @@ const Quality: React.FC = () => {
       <div className={styles.grid}>
         <h2 id="quality-static-title" className={styles.title}>Mooi is de ondergrens.</h2>
         <div className={styles.content}>
-          <p>Een website kan er uitstekend uitzien en alsnog weinig doen.</p>
-          <p>Daarom kijk ik verder dan kleur, lettertype en animatie.</p>
+          <p>Je klanten komen met een vraag: wat bied je aan, wat kost het en hoe kunnen ze bij je terecht?</p>
+          <p>Die vragen bepalen de inhoud en opbouw van je website.</p>
           <ul>{principles.map(text => <li key={text}>{text}</li>)}</ul>
-          <p>Het resultaat moet niet alleen indruk maken in een screenshot.</p>
-          <p className={styles.closing}>Het moet werken wanneer echte mensen hem gebruiken.</p>
+          <p>Daar draait het om:</p>
+          <p className={styles.closing}>Je aanbod begrijpen. De volgende stap vinden.</p>
         </div>
       </div>
     </div>

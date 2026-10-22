@@ -32,8 +32,8 @@ const ClientMarks: React.FC = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className={styles.eyebrow}>Samenwerkingen</p>
-          <h2 id="client-marks-title">Gekozen door ondernemers met ambitie.</h2>
+          <p className={styles.eyebrow}>Projecten</p>
+          <h2 id="client-marks-title">Websites en digitale producten.</h2>
         </motion.div>
 
         <motion.div

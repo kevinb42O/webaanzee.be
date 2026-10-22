@@ -5,11 +5,11 @@ import { scrollToSection } from '../utils/scrollToSection';
 import styles from './ProblemSolution.module.css';
 
 export const capabilities = [
-  { title: 'Webdesign', text: 'Een eigen visuele richting, heldere inhoud en een website die op elk scherm overtuigt.', href: '/diensten/webdesign/', image: '/images/cases/previews/cozy.jpg', project: 'COZY Moments', detail: 'Een eigen gezicht. Tot in de details.', tags: ['Visuele identiteit', 'Responsive design'], tone: 'design' },
-  { title: 'Webshops', text: 'Een snelle winkelervaring waarin assortiment, vertrouwen en afrekenen logisch samenkomen.', href: '/diensten/webshops/', image: '/images/cases/previews/dailygrind.jpg', project: 'Daily Grind', detail: 'Van eerste indruk tot laatste klik.', tags: ['E-commerce', 'Gebruikservaring'], tone: 'shop' },
-  { title: 'Webapplicaties', text: 'Digitale tools, dashboards en automatisaties die terugkerend werk eenvoudiger maken.', href: '/diensten/webapplicaties-en-automatisatie/', image: '/images/cases/pwayment.png', project: 'PWAYMENT POS', detail: 'Slim gebouwd. Voelbaar eenvoudiger.', tags: ['Tools op maat', 'Automatisatie'], tone: 'app' },
-  { title: 'Eigen dashboard', text: 'Zelf de touwtjes in handen? Als je dat nodig hebt, krijg je een eigen dashboard op maat. Pas zelf teksten aan, voeg nieuwe foto’s toe en volg je bezoekers en resultaten op. Alles overzichtelijk op één plek.', href: '#contact', cta: 'Bespreek jouw dashboard', image: '/images/cases/hondaanzee-dashboard.jpg', project: 'Hond aan Zee · Dashboard', detail: 'Jouw website. Zelf in handen.', tags: ['Foto’s & teksten beheren', 'Analytics & overzicht'], tone: 'dashboard' },
-  { title: 'Lokale groei', text: 'Een sterke technische basis en relevante pagina’s voor ondernemers langs de Belgische kust.', href: '/webdesign-belgische-kust/', image: '/images/cases/previews/hondaanzee.jpg', project: 'Hond aan Zee', detail: 'Dicht bij je zaak. Dicht bij je klant.', tags: ['Lokale vindbaarheid', 'Belgische kust'], tone: 'local' },
+  { title: 'Webdesign', text: 'Een website voor je aanbod, met contactmogelijkheden en een ontwerp voor mobiel en desktop.', href: '/diensten/webdesign/', image: '/images/cases/previews/cozy.jpg', project: 'COZY Moments', detail: 'Drankkaart en praktische info voor COZY.', tags: ['Vormgeving', 'Mobiel en desktop'], tone: 'design' },
+  { title: 'Webshops', text: 'Een webshop waarin bezoekers producten vinden, hun bestelling samenstellen en online betalen.', href: '/diensten/webshops/', image: '/images/cases/previews/dailygrind.jpg', project: 'Daily Grind', detail: 'Een webshop voor Daily Grind.', tags: ['E-commerce', 'Gebruikservaring'], tone: 'shop' },
+  { title: 'Webapplicaties', text: 'Een toepassing voor terugkerend werk: aanvragen verwerken, klanten beheren of gegevens uitwisselen.', href: '/diensten/webapplicaties-en-automatisatie/', image: '/images/cases/pwayment.png', project: 'PWAYMENT POS', detail: 'Kassa en voorraad voor PWAYMENT.', tags: ['Tools op maat', 'Automatisatie'], tone: 'app' },
+  { title: 'Eigen dashboard', text: 'Pas zelf teksten en foto’s aan via een eigen beheerscherm, ook wel een CMS. We spreken vooraf af welke inhoud je wilt beheren. Statistieken of andere functies nemen we apart op in je offerte.', href: '#contact', cta: 'Bespreek jouw dashboard', image: '/images/cases/hondaanzee-dashboard.jpg', project: 'Hond aan Zee · Dashboard', detail: 'Teksten en foto’s zelf aanpassen.', tags: ['Foto’s & teksten beheren', 'Beheer op maat'], tone: 'dashboard' },
+  { title: 'Lokale vindbaarheid', text: 'Pagina’s over je aanbod en werkgebied, met titels en beschrijvingen voor zoekmachines. Aanvullend SEO-werk spreken we apart af.', href: '/webdesign-belgische-kust/', image: '/images/cases/previews/hondaanzee.jpg', project: 'Hond aan Zee', detail: 'Praktische informatie per kustgemeente.', tags: ['Lokale vindbaarheid', 'Belgische kust'], tone: 'local' },
 ];
 
 const ServiceScene: React.FC<{ capability: typeof capabilities[number]; index: number; active: number; progress?: MotionValue<number> }> = ({ capability, index, active, progress }) => {
@@ -18,12 +18,12 @@ const ServiceScene: React.FC<{ capability: typeof capabilities[number]; index: n
   const opacity = useTransform(position, [index - .65, index - .15, index + .35, index + .85], [0, 1, 1, 0]);
   const y = useTransform(position, [index - .65, index, index + .85], [35, 0, -35]);
   return <motion.div className={`${styles.scene} ${styles[capability.tone]} ${active === index ? styles.sceneActive : ''}`} style={progress ? { opacity, y, clipPath: 'inset(0)', visibility: 'visible', transition: 'none' } : undefined}>
-    <div className={styles.sceneTop}><span>Van idee naar digitaal</span><ArrowUpRight strokeWidth={1.2} /></div>
+    <div className={styles.sceneTop}><span>Voorbeelden van mijn werk</span><ArrowUpRight strokeWidth={1.2} /></div>
     <p className={styles.sceneTitle}>{capability.detail}</p>
     <div className={styles.previewMedia}><div className={styles.imageFrame}>
       <img src={capability.image} alt="" width="800" height="451" loading="lazy" decoding="async" />
     </div></div>
-    <div className={styles.sceneBottom}><span>Uit de studio</span><span>{capability.project}</span></div>
+    <div className={styles.sceneBottom}><span>Project</span><span>{capability.project}</span></div>
   </motion.div>;
 };
 
@@ -54,9 +54,9 @@ const ServiceHeading: React.FC<{ entrance: MotionValue<number> }> = ({ entrance 
   const secondY = useTransform(entrance, [1.18, 1.5], [metrics.font * 1.1, 0]);
   const firstMask = useTransform(entrance, [.35, .7], ['inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 0%)']);
   const secondMask = useTransform(entrance, [.46, .82], ['inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 0%)']);
-  return <motion.h2 ref={headingRef} id="services-title" aria-label="Niet zomaar online. Onmiskenbaar van jou." className={styles.morphHeading} style={{ scale, y, originX: 0, originY: 0 }}>
-    <motion.span ref={firstRef} style={{ clipPath: firstMask }}>Niet zomaar online.</motion.span>
-    <motion.span className={styles.headingSecond} style={{ x: secondX, y: secondY, clipPath: secondMask }}>Onmiskenbaar <em>van jou.</em></motion.span>
+  return <motion.h2 ref={headingRef} id="services-title" aria-label="Wat wil je online mogelijk maken?" className={styles.morphHeading} style={{ scale, y, originX: 0, originY: 0 }}>
+    <motion.span ref={firstRef} style={{ clipPath: firstMask }}>Wat wil je online</motion.span>
+    <motion.span className={styles.headingSecond} style={{ x: secondX, y: secondY, clipPath: secondMask }}><em>mogelijk maken?</em></motion.span>
   </motion.h2>;
 };
 
@@ -72,10 +72,10 @@ const ProblemSolution: React.FC<{ progress?: MotionValue<number>; entrance?: Mot
     <section className={`${styles.section} ${progress ? styles.embedded : ''}`} id={progress ? undefined : 'werkwijze'} aria-labelledby="services-title">
       <div className={styles.container}>
         <header className={styles.header}>
-          {entrance ? <ServiceHeading entrance={entrance} /> : <h2 id="services-title">Niet zomaar online.<br /><span>Onmiskenbaar <em>van jou.</em></span></h2>}
+          {entrance ? <ServiceHeading entrance={entrance} /> : <h2 id="services-title">Wat wil je online<br /><span><em>mogelijk maken?</em></span></h2>}
           <div className={styles.intro}>
             <ArrowDown aria-hidden="true" strokeWidth={1} />
-            <p>Strategie, ontwerp en development komen samen in één rechtstreeks traject. Zo blijven het verhaal, de visuele richting en de techniek één digitale ervaring die tot in de details klopt.</p>
+            <p>Ik ontwerp én bouw je website. Je bespreekt de inhoud, vormgeving en techniek met dezelfde persoon. Dit kan ik voor je uitwerken.</p>
           </div>
         </header>
 

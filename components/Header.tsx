@@ -53,13 +53,13 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
 
         <nav className={styles.nav} aria-label="Hoofdnavigatie">
           <a href="/diensten/webdesign/" className={styles.navLink}>Diensten</a>
-          <a href="/#resultaten" onClick={(e) => isHomePage ? scrollToSection(e, 'resultaten') : undefined} className={styles.navLink}>Resultaten</a>
+          <a href="/#resultaten" onClick={(e) => isHomePage ? scrollToSection(e, 'resultaten') : undefined} className={styles.navLink}>Projecten</a>
           <a href="/webdesign-belgische-kust/" className={styles.navLink}>Kustregio</a>
-          <a href="/inzichten/" className={styles.navLink}>Inzichten</a>
+          <a href="/inzichten/" className={styles.navLink}>Uitleg en aanpak</a>
         </nav>
 
         <a href="/#contact" onClick={(e) => isHomePage ? scrollToSection(e, 'contact') : undefined} className={styles.cta}>
-          Plan een gesprek
+          Neem contact op
         </a>
 
         <button
@@ -80,9 +80,9 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
             <p className={styles.mobileNavLabel}>Navigatie</p>
             <div className={styles.mobileLinks}>
               <a href="/diensten/webdesign/" onClick={() => setMenuOpen(false)}><span>Diensten</span><small>01</small></a>
-              <a href="/#resultaten" onClick={(event) => closeMenuAndScroll(event, 'resultaten')}><span>Resultaten</span><small>02</small></a>
+              <a href="/#resultaten" onClick={(event) => closeMenuAndScroll(event, 'resultaten')}><span>Projecten</span><small>02</small></a>
               <a href="/webdesign-belgische-kust/" onClick={() => setMenuOpen(false)}><span>Kustregio</span><small>03</small></a>
-              <a href="/inzichten/" onClick={() => setMenuOpen(false)}><span>Inzichten</span><small>04</small></a>
+              <a href="/inzichten/" onClick={() => setMenuOpen(false)}><span>Uitleg en aanpak</span><small>04</small></a>
             </div>
           </div>
 
@@ -91,10 +91,10 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
               <span>Meer ontdekken</span>
               <a href="/klantenkaart.html" onClick={() => setMenuOpen(false)}>Digitale klantenkaart <i aria-hidden="true">↗</i></a>
               <a href="/pwayment.html" onClick={() => setMenuOpen(false)}>PWAYMENT POS <i aria-hidden="true">↗</i></a>
-              <a href="/cases/" onClick={() => setMenuOpen(false)}>Alle cases <i aria-hidden="true">↗</i></a>
+              <a href="/cases/" onClick={() => setMenuOpen(false)}>Alle projecten <i aria-hidden="true">↗</i></a>
             </div>
             <a href="/#contact" className={styles.mobileCta} onClick={(event) => closeMenuAndScroll(event, 'contact')}>
-              Plan een gesprek <span aria-hidden="true">→</span>
+              Neem contact op <span aria-hidden="true">→</span>
             </a>
             <div className={styles.mobileContact}>
               <a href="tel:0494816714">0494 81 67 14</a>

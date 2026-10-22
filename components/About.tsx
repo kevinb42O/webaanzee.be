@@ -88,15 +88,15 @@ const About: React.FC = () => {
             <div className={styles.content}>
               <h2 id="about-title" className={styles.title}>Eén aanspreekpunt.<span>Van eerste idee tot werkende website.</span></h2>
               <div className={styles.textBlock}>
-                <p>Ik ben Kevin. Je praat vanaf het eerste gesprek rechtstreeks met mij — en ik blijf betrokken tot je website live staat.</p>
-                <p>Strategie, inhoud, ontwerp en ontwikkeling komen zo uit dezelfde handen. Dat maakt beslissingen sneller en het eindresultaat sterker.</p>
+                <p>Ik ben Kevin, webdesigner en ontwikkelaar in Blankenberge. Ik werk de inhoud, het ontwerp en de techniek van je website uit. Je vragen en feedback komen rechtstreeks bij mij terecht.</p>
+                <p>Voor de start spreken we af wat ik bouw, welke inhoud je aanlevert en hoe je feedback geeft. Ook hosting, beheer en wijzigingen na de oplevering staan in je offerte.</p>
               </div>
               <a className={styles.contactLink} href="#contact" onClick={(event) => scrollToSection(event, 'contact')}>
                 Vertel me over je idee <ArrowUpRight aria-hidden="true" size={18} />
               </a>
             </div>
           </div>
-          <p className={styles.signature}>Kevin — ontwerper &amp; developer bij Webaanzee</p>
+          <p className={styles.signature}>Kevin — ontwerper &amp; ontwikkelaar bij Webaanzee</p>
         </motion.div>
       </div>
 

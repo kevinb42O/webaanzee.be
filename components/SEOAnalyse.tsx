@@ -12,12 +12,12 @@ const SEOAnalyse: React.FC = () => {
     {
       icon: '02',
       title: 'Dan bepalen',
-      desc: 'Ik breng structuur aan in pagina\'s, inhoud en gebruikersflow voordat we ons druk maken over details.',
+      desc: 'Ik werk uit welke informatie op elke pagina komt en hoe bezoekers contact opnemen of bestellen.',
     },
     {
       icon: '03',
       title: 'Ontwerpen en bouwen',
-      desc: 'Geen ontwerp dat daarna nog eens vertaald moet worden naar code. De website wordt als één geheel ontwikkeld.',
+      desc: 'Ik ontwerp en bouw de website. Je feedback op inhoud en vormgeving komt bij dezelfde persoon terecht.',
     },
     {
       icon: '04',
@@ -31,7 +31,7 @@ const SEOAnalyse: React.FC = () => {
       <div className={`${styles.container} animate-on-scroll`}>
         <div className={`${styles.header} reveal-up`}>
           <span className={styles.badge}>Werkwijze</span>
-          <h2 className={styles.title}>Geen traject vol vergaderingen.</h2>
+          <h2 className={styles.title}>Van je vraag naar een uitgewerkte opdracht.</h2>
           <p className={styles.description}>
             Je hoeft geen briefing van twintig pagina&apos;s te schrijven of uit te leggen welk CMS je wilt. Vertel me gewoon over je zaak. Wat verkoop je? Wie moet je overtuigen? Wat werkt vandaag niet? En wat zou de website idealiter voor je oplossen? Daar maak ik een concreet plan van.
           </p>
@@ -48,7 +48,7 @@ const SEOAnalyse: React.FC = () => {
         </div>
 
         <div className={`${styles.cta} reveal-up`} style={{ animationDelay: '0.4s' }}>
-          <a href="#resultaten" onClick={(event) => scrollToSection(event, 'resultaten')} className="btn btn-primary">Bekijk mijn werkwijze</a>
+          <a href="#resultaten" onClick={(event) => scrollToSection(event, 'resultaten')} className="btn btn-primary">Bekijk mijn projecten</a>
         </div>
       </div>
     </section>

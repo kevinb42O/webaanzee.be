@@ -1,7 +1,7 @@
 
 {
-  "name": "Web aan Zee",
-  "description": "Een professionele website voor lokale ondernemers aan de Belgische kust, gericht op betrouwbaarheid, vakmanschap en resultaat.",
+  "name": "Webaanzee",
+  "description": "Websites, webshops en toepassingen voor ondernemers aan de Belgische kust. Ontworpen en gebouwd door Kevin in Blankenberge.",
   "requestFramePermissions": [
     "geolocation"
   ]

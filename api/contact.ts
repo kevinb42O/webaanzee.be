@@ -19,14 +19,16 @@ export default async function handler(request: any, response: any) {
 
   // Bots vullen dit verborgen veld vaak in. Antwoord neutraal zodat het formulier niet wordt herhaald.
   if (website) return response.status(200).json({ ok: true });
-  if (name.length < 2 || !emailPattern.test(email) || message.length < 10) {
-    return response.status(400).json({ ok: false, message: 'Controleer uw naam, e-mailadres en bericht.' });
-  }
+  if (name.length < 2) return response.status(400).json({ ok: false, message: 'Vul je naam in met minimaal 2 tekens.' });
+  if (!emailPattern.test(email)) return response.status(400).json({ ok: false, message: 'Vul een geldig e-mailadres in, bijvoorbeeld naam@jezaak.be.' });
+  if (message.length < 10) return response.status(400).json({ ok: false, message: 'Beschrijf je vraag in minimaal 10 tekens.' });
 
   const forwarded = clean(request.headers?.['x-forwarded-for'], 200).split(',')[0] || 'unknown';
   const lastSubmission = recentSubmissions.get(forwarded) || 0;
   if (Date.now() - lastSubmission < 30_000) {
-    return response.status(429).json({ ok: false, message: 'Wacht even voordat u opnieuw verstuurt.' });
+    const seconds = Math.ceil((30_000 - (Date.now() - lastSubmission)) / 1000);
+    response.setHeader('Retry-After', String(seconds));
+    return response.status(429).json({ ok: false, message: `Wacht ${seconds} seconden en probeer opnieuw.` });
   }
   recentSubmissions.set(forwarded, Date.now());
 
@@ -34,7 +36,7 @@ export default async function handler(request: any, response: any) {
   const from = process.env.CONTACT_FROM_EMAIL;
   const to = process.env.CONTACT_TO_EMAIL || 'kevin@webaanzee.be';
   if (!apiKey || !from) {
-    return response.status(503).json({ ok: false, message: 'De e-mailservice wordt nog geconfigureerd. Mail rechtstreeks naar kevin@webaanzee.be.' });
+    return response.status(503).json({ ok: false, message: 'Het formulier is tijdelijk niet beschikbaar. Mail rechtstreeks naar kevin@webaanzee.be.' });
   }
 
   const resend = await fetch('https://api.resend.com/emails', {

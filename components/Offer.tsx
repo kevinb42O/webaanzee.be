@@ -13,8 +13,8 @@ const ContactLink = ({ children, className }: { children: React.ReactNode; class
 
 const PricingHeader: React.FC = () => (
 <header className={styles.header}>
-        <h2 id="pricing-title">Goed werk.<br />Een heldere <em>prijs.</em></h2>
-        <div><p>Een website is een investering in je zaak. Je mag dus weten wat je krijgt, wat het kost en wat er later nog bij komt.</p>
+        <h2 id="pricing-title">Wat kost<br />je <em>website?</em></h2>
+        <div><p>Dit is inbegrepen in de startprijs. Hosting, beheer en eventuele extra’s staan apart, zodat je de bouwprijs en de terugkerende kosten kunt vergelijken.</p>
           <p className={styles.taxNote}>Alle prijzen zijn exclusief btw. Eenmalige bouw en doorlopende kosten staan apart.</p>
         </div>
       </header>
@@ -23,30 +23,30 @@ const PricingHeader: React.FC = () => (
 const offers = [
   {
     title: ['Website', 'op maat.'], label: 'Website op maat', price: pricing.website.price,
-    description: 'Je zaak overtuigend online. Voor wie vooral wil informeren, vertrouwen opbouwen en aanvragen ontvangen.',
-    scope: 'Een heldere basis, volledig voor jouw zaak ontworpen.',
+    description: 'Voor een zaak die haar aanbod wil tonen en bereikbaar wil zijn voor vragen en aanvragen.',
+    scope: 'Geschikt als je de inhoud niet regelmatig zelf hoeft aan te passen.',
     features: ['Tot 5 pagina’s, in één taal', 'Ontwerp op maat, voor mobiel en desktop', 'Contactformulier en basis voor vindbaarheid', '2 gebundelde feedbackrondes en livegang'],
-    limit: `Zonder CMS. Inhoud laten aanpassen kan achteraf aan ${euro(pricing.hourly)}/uur.`,
+    limit: `Zonder eigen beheerscherm (CMS). Inhoud laten aanpassen kan aan ${euro(pricing.hourly)}/uur.`,
     recurring: `Hosting & technisch beheer via Webaanzee: vanaf ${euro(pricing.website.monthly)}/maand`, action: 'Bespreek mijn website',
   },
   {
-    title: ['Website.', 'Eigen CMS.'], label: 'Website + CMS', price: pricing.cms.price,
-    description: 'Een complete website met een eigen dashboard. Pas zelf je teksten, foto’s en aanbod aan, wanneer het jou past.',
-    scope: 'Website én dashboard inbegrepen in deze prijs.',
-    features: ['Alles van Website op maat, tot 8 pagina’s', 'Eigen CMS met beveiligde login', 'Teksten, foto’s en één inhoudstype beheren', 'Persoonlijke uitleg om zelf aan de slag te gaan'],
-    limit: 'Eén inhoudstype, zoals nieuws, projecten of je aanbod. Klantportalen en bedrijfsprocessen vallen onder maatwerk.',
+    title: ['Website.', 'Zelf beheren.'], label: 'Website + CMS', price: pricing.cms.price,
+    description: 'Pas zelf teksten en foto’s aan via een beveiligd beheerscherm. Je krijgt uitleg over het gebruik.',
+    scope: 'We richten het beheer in voor één soort inhoud, bijvoorbeeld nieuws of projecten.',
+    features: ['Alles van Website op maat, tot 8 pagina’s', 'Eigen CMS met beveiligde login', 'Teksten, foto’s en één soort inhoud beheren', 'Persoonlijke uitleg om zelf aan de slag te gaan'],
+    limit: 'Extra soorten inhoud, statistieken, klantportalen en bedrijfsprocessen krijgen een aparte prijs in je offerte.',
     recurring: `Hosting & technisch beheer via Webaanzee: vanaf ${euro(pricing.cms.monthly)}/maand`, action: 'Bespreek mijn website met CMS',
   },
   {
     title: ['Jouw zaak.', 'Jouw webshop.'], label: 'Webshop', price: pricing.webshop.price,
     description: 'Een website met productbeheer, winkelmand en online betalen.',
-    scope: 'Verkopen of je werk vereenvoudigen vraagt een andere aanpak. Ook daar hoort een eerlijk startbudget bij.',
+    scope: 'Je levert productteksten, prijzen en foto’s aan. Ik richt de eerste 20 producten en de afgesproken verzendwijze in.',
     features: ['Productbeheer, winkelmand en online betalen', 'Inrichting van één betaalprovider', 'Inrichting van verzending', 'De eerste 20 producten, op basis van jouw aangeleverde inhoud'],
     limit: 'Transactiekosten en betaalde licenties apart.',
     recurring: `Hosting & technisch beheer vanaf ${euro(pricing.webshop.monthly)}/maand`, action: 'Bespreek mijn webshop',
   },
   {
-    title: ['Meer mogelijk.', 'Op maat.'], label: 'Webapplicatie', price: pricing.application.price,
+    title: ['Een toepassing.', 'Voor je werk.'], label: 'Webapplicatie', price: pricing.application.price,
     description: 'Een webapplicatie of dashboard op maat. Voor een klantportaal, intern dashboard of automatisatie.',
     scope: 'We starten met één afgebakend proces en leggen schermen, gebruikersrollen en koppelingen vooraf vast.',
     features: ['Eén afgebakend proces als vertrekpunt', 'Schermen en gebruikersrollen vooraf vastgelegd', 'Koppelingen afgestemd op jouw proces'],
@@ -140,10 +140,10 @@ export const PricingScene: React.FC<{ progress: MotionValue<number>; onNavigate:
     <motion.div className={styles.priceEditorial} style={{ opacity: contentOpacity }}>
       <header className={styles.editorialHeader}>
         <div className={styles.editorialHeadings}>
-          <motion.h2 style={{ opacity: firstHeader }} aria-hidden={active >= 2}>Goed werk.<em>Een heldere prijs.</em></motion.h2>
-          <motion.h2 style={{ opacity: nextHeader }} aria-hidden={active < 2}>Mag het <em>meer doen?</em></motion.h2>
+          <motion.h2 style={{ opacity: firstHeader }} aria-hidden={active >= 2}>Wat kost<em>je website?</em></motion.h2>
+          <motion.h2 style={{ opacity: nextHeader }} aria-hidden={active < 2}>Webshop of<em>toepassing.</em></motion.h2>
         </div>
-        <p>Een website is een investering in je zaak.<br />Je mag weten wat je krijgt en wat het kost.</p>
+        <p>Vergelijk de bouwprijs en wat daarin zit.<br />Hosting en beheer staan apart.</p>
       </header>
       <motion.div className={styles.editorialRule} style={{ scaleX: ruleScale }} aria-hidden="true" />
       <div className={styles.chapterStage}>{offers.map((offer, index) => <PriceChapter key={offer.label} index={index} time={time} active={active === index} />)}</div>
@@ -171,28 +171,28 @@ const Offer: React.FC = () => {
         <PricingHeader />
         <StaticOffer index={0} />
         <StaticOffer index={1} />
-        <h3 className={styles.moreHeading}>Mag het <em>meer doen?</em></h3>
+        <h3 className={styles.moreHeading}>Webshop of<em>toepassing.</em></h3>
         <StaticOffer index={2} />
         <StaticOffer index={3} />
       </>}
       <div className={styles.transparency}>
-        <div className={styles.costIntro}><h3>Ook na de<br />livegang: helder.</h3><p>Een startprijs heeft alleen zin als je ook het volledige plaatje ziet.</p>
+        <div className={styles.costIntro}><h3>Kosten na<br />de oplevering.</h3><p>Naast de bouw betaal je voor het online houden en technisch beheren van je website.</p>
           <div className={styles.example}>
             <h4>Rekenvoorbeeld · website + CMS</h4>
             <p>Bij de startprijzen, met beheer via Webaanzee:</p>
             <dl><div><dt>Bouw website + CMS</dt><dd>{euro(pricing.cms.price)}</dd></div><div><dt>12 maanden hosting & beheer</dt><dd>{euro(pricing.cms.monthly * 12)}</dd></div><div className={styles.total}><dt>Eerste jaar vanaf</dt><dd>{euro(pricing.cms.price + pricing.cms.monthly * 12)}</dd></div></dl>
-            <p>Excl. btw, domeinnaam en eventuele externe licenties. Daarna vanaf {euro(pricing.cms.monthly * 12)}/jaar voor hosting & beheer, bij gelijkblijvende scope en tarieven.</p>
+            <p>Excl. btw, domeinnaam en eventuele externe licenties. Daarna vanaf {euro(pricing.cms.monthly * 12)}/jaar voor hosting & beheer, bij gelijkblijvende omvang en tarieven.</p>
           </div>
         </div>
         <div className={styles.conditions}>
-          <details open><summary>Wat betekent ‘vanaf’ precies?<Plus aria-hidden="true" /></summary><p>De prijs geldt voor de hierboven beschreven basis. De inhoud lever je aan. Extra pagina’s, talen, inhoudstypes, functies of een migratie veranderen de omvang. Voor de start krijg je één offerte met de exacte prijs, feedbackrondes en planning. Extra werk voeren we pas uit nadat je de meerprijs hebt goedgekeurd.</p></details>
-          <details open><summary>Wat omvat hosting & technisch beheer?<Plus aria-hidden="true" /></summary><p>De online infrastructuur, SSL, technische updates en back-ups. De maandbedragen zijn starttarieven voor beheer via Webaanzee; je offerte vermeldt capaciteit, back-upafspraken, facturatie en opzegvoorwaarden. Nieuwe inhoud, nieuwe functies en externe licenties vallen hier niet onder. Eigen hosting bespreken we vooraf.</p></details>
+          <details open><summary>Wat betekent ‘vanaf’ precies?<Plus aria-hidden="true" /></summary><p>De prijs geldt voor de hierboven beschreven basis. De inhoud lever je aan. Extra pagina’s, talen, soorten inhoud, functies of een verhuizing veranderen de omvang. Voor de start krijg je één offerte met de exacte prijs, feedbackrondes en planning. Extra werk voeren we pas uit nadat je de meerprijs hebt goedgekeurd.</p></details>
+          <details open><summary>Wat omvat hosting & technisch beheer?<Plus aria-hidden="true" /></summary><p>De hosting, een beveiligde verbinding (SSL), technische updates en back-ups. De maandbedragen zijn starttarieven voor beheer via Webaanzee; je offerte vermeldt capaciteit, back-upafspraken, facturatie en opzegvoorwaarden. Nieuwe inhoud, nieuwe functies en externe licenties vallen hier niet onder. Eigen hosting bespreken we vooraf.</p></details>
           <details open><summary>Welke kosten kunnen er nog bij komen?<Plus aria-hidden="true" /></summary><p>Een domeinnaam, zakelijke e-mail, betaalde CMS- of softwarelicenties en verbruik van externe diensten. Bij een webshop ook kosten van de betaalprovider per transactie. Tekstschrijven, fotografie, vertalingen en migraties worden apart begroot wanneer je die nodig hebt. Alle voorziene kosten staan in je offerte.</p></details>
           <details><summary>En wijzigingen of uitbreidingen achteraf?<Plus aria-hidden="true" /></summary><p>Inhoudelijke wijzigingen en klein aanvullend werk kosten {euro(pricing.hourly)}/uur excl. btw, met een raming vooraf. Grotere uitbreidingen krijgen een aparte offerte. Met een CMS beheer je de afgesproken inhoud zelf, zonder daarvoor telkens ontwikkeltijd te betalen.</p></details>
         </div>
       </div>
 
-      <div className={styles.reassurance}><div><h3>Wat past bij jouw zaak?</h3><p>Vertel wat je wilt bereiken. Je krijgt een voorstel met de juiste omvang én de volledige kosten.</p></div><ContactLink className={styles.finalAction}>Plan een vrijblijvend gesprek</ContactLink></div>
+      <div className={styles.reassurance}><div><h3>Wat past bij jouw zaak?</h3><p>Vertel wat je wilt laten maken of verbeteren. Ik werk uit welke pagina’s en functies nodig zijn en wat de bouw en het beheer kosten.</p></div><ContactLink className={styles.finalAction}>Bespreek je website</ContactLink></div>
     </div>
   </section>
   );

@@ -128,3 +128,10 @@
   .featureRow:hover { margin-inline: -.7rem; padding-inline: .7rem; }
   .featureTitle { font-size: 1.7rem; }
 }
+
+.pricingTerms, .productFaq { max-width: 76ch; margin: 3rem auto 0; text-align: left; line-height: 1.7; }
+.pricingTerms h3, .productFaq h2 { margin-bottom: 1rem; font-size: 1.4rem; }
+.pricingTerms p + p { margin-top: 1rem; }
+.productFaq details { padding: 1rem 0; border-bottom: 1px solid var(--color-border, #ddd); }
+.productFaq summary { cursor: pointer; font-weight: 600; }
+.productFaq p { margin-top: .8rem; }

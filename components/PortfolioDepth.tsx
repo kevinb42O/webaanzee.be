@@ -25,8 +25,8 @@ const at = (value: number, stops: number[], values: number[]) => {
 };
 
 const WorkHeading: React.FC = () => <>
-  <h2 id="work-title">Ontworpen om op te vallen.<span>Gebouwd om te werken.</span></h2>
-  <p>Van lokale handelszaak tot digitaal product: ieder project krijgt een eigen visuele wereld en een technische basis die snel en betrouwbaar blijft.</p>
+  <h2 id="work-title">Een koffiebar. Een skateshop.<span>Een kustgids.</span></h2>
+  <p>Bekijk de websites, webshops en platforms die ik ontwierp en bouwde. Bij elk project lees je welke vraag erachter zat en wat er is uitgewerkt.</p>
 </>;
 
 const GridTile: React.FC<{ project: CaseStudy; index: number; timeline: MotionValue<number>; center: boolean }> = ({ project, index, timeline, center }) => {
@@ -108,8 +108,7 @@ const ProjectCopy: React.FC<{ project: CaseStudy }> = ({ project }) => (
     <h3 className={project.title.length > 22 ? styles.longTitle : undefined}>{project.title}</h3>
     <p className={styles.description}>{project.description}</p>
     <p className={styles.tags}>{project.tags.join(' / ')}</p>
-    {project.projectNote && <p className={styles.impact}>{project.projectNote.facts[0]}</p>}
-    <a className={styles.caseLink} href={project.casePath}>Ontdek de case <ArrowUpRight aria-hidden="true" size={20} strokeWidth={1.5} /></a>
+    <a className={styles.caseLink} href={project.casePath}>Bekijk het project <ArrowUpRight aria-hidden="true" size={20} strokeWidth={1.5} /></a>
   </div>
 );
 
@@ -276,7 +275,7 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
         <motion.div className={styles.servicesStage} style={{ visibility: servicesVisibility, scale: serviceScale, opacity: serviceOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive}>
           <ProblemSolution progress={serviceProgress} entrance={handoff} onNavigate={goToService} />
         </motion.div>
-        <motion.a className={styles.servicesArchive} style={{ opacity: archiveOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive} href="/cases/">Bekijk alle cases <ArrowUpRight aria-hidden="true" size={16} /></motion.a>
+        <motion.a className={styles.servicesArchive} style={{ opacity: archiveOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive} href="/cases/">Bekijk alle projecten <ArrowUpRight aria-hidden="true" size={16} /></motion.a>
         <motion.div className={styles.qualityBackdrop} style={{ opacity: qualityBackdropOpacity }} aria-hidden="true" />
         <motion.div style={{ scale: qualityScale, opacity: qualityShade }} className={styles.qualityLayer} aria-hidden={!scene.qualityActive} inert={!scene.qualityActive ? true : undefined}><QualityScene progress={qualityProgress} /></motion.div>
         <div aria-hidden={!scene.pricingActive} inert={!scene.pricingActive ? true : undefined}><PricingScene progress={pricingProgress} onNavigate={goToPrice} /></div>
@@ -329,7 +328,7 @@ const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
         </div>
       )}
       {!animated && <>
-        <div className={styles.archive} style={{ background: palettes[projects.length - 1] }}><a href="/cases/">Bekijk alle cases <ArrowUpRight aria-hidden="true" size={22} strokeWidth={1.5} /></a></div>
+        <div className={styles.archive} style={{ background: palettes[projects.length - 1] }}><a href="/cases/">Bekijk alle projecten <ArrowUpRight aria-hidden="true" size={22} strokeWidth={1.5} /></a></div>
         <ProblemSolution />
       </>}
     </div>

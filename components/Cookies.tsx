@@ -1,67 +1,31 @@
 import React from 'react';
 
-const Cookies: React.FC = () => {
-  return (
-    <section id="cookies" className="py-20 px-6 bg-white border-t border-slate-200">
-      <div className="max-w-4xl mx-auto space-y-8 text-sm md:text-base text-navy/80">
-        <header className="space-y-3">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold">Cookies</p>
-          <h2 className="text-3xl md:text-4xl font-serif text-navy">Hoe deze website cookies gebruikt.</h2>
-          <p className="text-navy/70">
-            Ik hou niet van onnodige tracking en lange, onleesbare cookie-banners. Daarom gebruik ik op deze site alleen wat
-            strikt nodig is om alles veilig en stabiel te laten werken.
-          </p>
-        </header>
-
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="font-bold text-navy">Welke cookies worden momenteel geplaatst?</h3>
-            <p>
-              Deze website wordt gehost op Vercel. Ik gebruik Vercel Web Analytics om in geaggregeerde, anonieme vorm te zien
-              welke pagina&apos;s bezocht worden en via welke kanalen bezoekers op de site terechtkomen. Vercel Web Analytics gebruikt
-              geen cookies en volgt bezoekers niet over verschillende websites of dagen heen.
-            </p>
-            <p>
-              De chatfunctie van Crisp wordt niet geladen bij een gewoon paginabezoek. Pas wanneer u bewust op de chatknop klikt,
-              kan Crisp functionele opslag gebruiken om het gesprek te laten werken. Ik gebruik geen advertentiecookies of
-              socialmedia-trackingpixels.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-bold text-navy">Geen cookiewall, wel gezond verstand</h3>
-            <p>
-              Vercel Analytics werkt zonder cookies. Crisp wordt pas na uw klik geladen. Ik gebruik
-              geen cookies om u advertenties te tonen of uw surfgedrag voor marketingdoeleinden te volgen. Mocht dit in de toekomst
-              veranderen, dan pas ik zowel deze tekst als de instellingen op de site aan.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-bold text-navy">Externe links</h3>
-            <p>
-              Op deze site staan links naar andere diensten, zoals Instagram of WhatsApp. Zodra u daarop klikt, valt u onder de
-              privacy- en cookievoorwaarden van die platformen. Daar heb ik geen invloed op.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-bold text-navy">Vragen?</h3>
-            <p>
-              Heeft u toch vragen over cookies of privacy? Stuur gerust een mail naar
-              {' '}<a href="mailto:kevin@webaanzee.be" className="underline decoration-gold underline-offset-2">kevin@webaanzee.be</a>.
-              Ik antwoord in gewone taal, zonder juridisch vakjargon.
-            </p>
-          </div>
-
-          <p className="text-xs text-navy/50 border-t border-slate-200 pt-6">
-            Deze uitleg is informatief en bedoeld om openheid te geven over hoe deze site werkt. Voor formeel juridisch advies
-            rond cookies en privacy kan u terecht bij een gespecialiseerde jurist of adviseur.
-          </p>
+const Cookies: React.FC = () => (
+  <section id="cookies" className="py-20 px-6 bg-white border-t border-slate-200">
+    <div className="max-w-4xl mx-auto space-y-8 text-sm md:text-base text-navy/80">
+      <header className="space-y-3">
+        <h2 className="text-3xl md:text-4xl font-serif text-navy">Cookies en browseropslag</h2>
+        <p>De website gebruikt bezoekstatistieken. De chat wordt afzonderlijk geladen wanneer je die opent.</p>
+      </header>
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <h3 className="font-bold text-navy">Bezoekstatistieken</h3>
+          <p>Vercel Web Analytics verzamelt bezoekstatistieken zonder analyticscookies te plaatsen. Daarmee bekijk ik onder meer welke pagina’s worden bezocht. Lees meer over de gegevensverwerking in de <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noreferrer" className="underline">privacyuitleg van Vercel Web Analytics</a>.</p>
+        </div>
+        <div className="space-y-2">
+          <h3 className="font-bold text-navy">Chat via Crisp</h3>
+          <p>Crisp wordt pas geladen als je op de chatknop klikt. De chat kan dan cookies of browseropslag gebruiken om het gesprek te laten werken. Je kunt ook rechtstreeks mailen of bellen zonder de chat te openen.</p>
+        </div>
+        <div className="space-y-2">
+          <h3 className="font-bold text-navy">Externe diensten</h3>
+          <p>Links naar WhatsApp, PWAYMENT en de websites van projecten openen een andere dienst. Op die bestemming gelden de eigen privacy- en cookievoorwaarden. Webaanzee gebruikt op deze website geen advertentiecookies of socialmedia-trackingpixels.</p>
+        </div>
+        <div className="space-y-2">
+          <h3 className="font-bold text-navy">Vragen over deze website?</h3>
+          <p>Mail naar <a href="mailto:kevin@webaanzee.be" className="underline">kevin@webaanzee.be</a> als je meer wilt weten over de verwerking van je gegevens.</p>
         </div>
       </div>
-    </section>
-  );
-};
-
+    </div>
+  </section>
+);
 export default Cookies;

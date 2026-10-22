@@ -453,3 +453,5 @@
 .submitBtn:hover {
   opacity: 0.9;
 }
+
+.fieldLabel { display: block; margin-bottom: .45rem; font-size: .9rem; color: var(--color-text-primary); }
