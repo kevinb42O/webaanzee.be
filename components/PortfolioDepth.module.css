@@ -1,0 +1,86 @@
+.gallery { position: relative; scroll-margin-top: 0; }
+.sequence { position: relative; height: calc((1 + var(--scroll-units) * .75) * 100svh); }
+.workAnchor { position: absolute; top: 93.75svh; width: 1px; height: 1px; pointer-events: none; }
+.servicesAnchor { position: absolute; width: 1px; height: 1px; pointer-events: none; }
+.handoff { position: absolute; z-index: 3; inset: 0; display: flex; align-items: center; padding: 6rem clamp(2rem, 4.2vw, 5rem); background: #eae7df; pointer-events: none; }
+.servicesStage { position: absolute; z-index: 4; inset: 6.25rem clamp(2rem, 4.2vw, 5rem) 4rem; }
+.servicesStage[aria-hidden='true'] { pointer-events: none; }
+.servicesArchive { position: absolute; z-index: 4; bottom: 1.35rem; right: calc(clamp(2rem, 4.2vw, 5rem) + 3.5rem); display: inline-flex; align-items: center; gap: .75rem; min-height: 32px; color: #3d493f; font-size: .75rem; text-decoration: underline; text-underline-offset: 4px; }
+.servicesArchive:focus-visible { outline: 2px solid #90452e; outline-offset: 5px; }
+.heroBackdrop { position: absolute; z-index: 2; inset: 0; }
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 650px;
+  overflow: clip;
+  isolation: isolate;
+  background: var(--gallery-surface, #e3ebe7);
+  color: #202820;
+  padding: 6.5rem clamp(2rem, 4.2vw, 5rem) 6.5rem;
+}
+.layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: center; gap: clamp(3rem, 5vw, 6rem); height: 100%; max-width: 1600px; margin: 0 auto; }
+.imageScene { position: relative; min-width: 0; height: 100%; perspective: 1100px; perspective-origin: 50% 50%; }
+.planes { position: absolute; inset: 0; transform-style: preserve-3d; }
+.plane { position: absolute; inset: 0; display: flex; align-items: center; opacity: var(--plane-opacity, 1); }
+.mediaLink { position: relative; display: block; width: 100%; aspect-ratio: 1276 / 720; color: #202820; background: #d6ddd6; box-shadow: 0 28px 65px rgba(30, 40, 32, .13); }
+.mediaLink img, .mediaLink video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.mediaLink video { position: absolute; inset: 0; pointer-events: none; transition: opacity 240ms ease; }
+.imageAction { position: absolute; right: 1rem; bottom: 1rem; display: grid; place-items: center; width: 44px; height: 44px; background: #f6f3ec; color: #202820; }
+.imageAction svg { transition: transform 200ms ease; }
+.plane[aria-hidden='true'] .imageAction { visibility: hidden; }
+.mediaLink:hover .imageAction svg { transform: translate(2px, -2px); }
+.mediaLink:focus-visible, .caseLink:focus-visible, .galleryNav button:focus-visible, .skip:focus-visible, .archive a:focus-visible { outline: 2px solid #90452e; outline-offset: 6px; }
+.projectDetails { position: relative; z-index: 2; min-width: 0; opacity: var(--details-opacity, 1); }
+.copy h3 { margin: 0 0 1.5rem; color: #202820; font-family: var(--font-display); font-size: clamp(3rem, 5.2vw, 6rem); font-weight: 400; line-height: .99; letter-spacing: -.04em; text-wrap: balance; }
+.copy h3.longTitle { font-size: clamp(2rem, 3.6vw, 4.2rem); line-height: 1.05; }
+.description { max-width: 40ch; margin: 0; color: #3d493f; font-size: clamp(.95rem, 1.1vw, 1.1rem); line-height: 1.65; }
+.tags { margin: 1.5rem 0 0; color: #4a554b; font-size: .72rem; line-height: 1.5; }
+.impact { max-width: 36ch; margin: 1.5rem 0 0; padding-top: 1rem; border-top: 1px solid rgba(32, 40, 32, .25); color: #3d493f; font-size: .85rem; line-height: 1.5; }
+.caseLink { display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem; min-height: 44px; margin-top: 1.5rem; padding: .8rem 0; border-bottom: 1px solid #202820; color: #202820; font-size: .85rem; font-weight: 600; }
+.caseLink:hover { color: #90452e; border-color: currentColor; }
+.galleryNav { position: absolute; right: clamp(2rem, 4.2vw, 5rem); bottom: 3.75rem; left: clamp(2rem, 4.2vw, 5rem); display: flex; align-items: center; gap: 2.5rem; max-width: 1600px; margin: 0 auto; opacity: var(--details-opacity, 1); }
+.counter { flex-shrink: 0; min-width: 5rem; color: #4a554b; font-size: .8rem; font-variant-numeric: tabular-nums; }
+.counter span { color: #202820; font-size: 1.25rem; }
+.steps { display: flex; flex: 1; gap: .5rem; max-width: 460px; }
+.steps button { display: flex; align-items: center; flex: 1; min-width: 0; height: 44px; padding: 0; border: 0; color: #202820; background: transparent; }
+.steps button span { display: block; width: 100%; height: 2px; background: currentColor; opacity: .2; transition: opacity 180ms ease; }
+.steps button[aria-current] span, .steps button:hover span { opacity: 1; }
+.arrows { display: flex; gap: .5rem; margin-left: auto; padding-right: 2rem; }
+.arrows button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(32, 40, 32, .4); border-radius: 0; background: transparent; color: #202820; transition: color 180ms ease, background 180ms ease; }
+.arrows button:hover:not(:disabled) { background: #202820; color: #f6f3ec; }
+.arrows button:disabled { opacity: .3; cursor: default; }
+.skip { position: absolute; z-index: 4; bottom: 1.35rem; left: clamp(2rem, 4.2vw, 5rem); display: inline-flex; align-items: center; gap: .75rem; min-height: 32px; padding: .25rem .5rem; color: #3d493f; background: var(--gallery-surface, #f6f3ec); font-size: .7rem; }
+.archive { display: flex; justify-content: center; padding: clamp(3rem, 5vw, 5rem) 1.25rem; background: #dce5ec; }
+.archive a { display: inline-flex; align-items: center; gap: clamp(2rem, 5vw, 5rem); min-height: 44px; padding-bottom: .7rem; border-bottom: 1px solid #202820; color: #202820; font-size: clamp(1.3rem, 2vw, 2rem); letter-spacing: -.025em; }
+.staticProject { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 3rem; padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 5rem); background: var(--gallery-surface, #e3ebe7); }
+.staticProject .copy h3 { font-size: clamp(2.5rem, 5vw, 5rem); }
+.staticProject .copy h3.longTitle { font-size: clamp(2rem, 3.6vw, 4.2rem); }
+.staticProject .mediaLink { box-shadow: 0 18px 35px rgba(30, 40, 32, .1); }
+
+.openerGrid { position: absolute; z-index: 3; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: center; gap: clamp(1rem, 2vw, 2rem); width: min(82vw, 1200px); margin: 0 auto; perspective: 1100px; transform-style: preserve-3d; pointer-events: none; }
+.gridTile { min-width: 0; aspect-ratio: 1276 / 720; }
+.gridTile { opacity: var(--tile-opacity, 1); }
+.gridTile img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.opening { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; justify-content: center; width: min(88%, 1000px); margin: 0 auto; text-align: center; opacity: var(--opening-opacity, 1); pointer-events: none; }
+.opening h2, .staticOpening h2 { margin: 0; color: #202820; font-family: var(--font-display); font-size: clamp(3rem, 5.1vw, 5.5rem); font-weight: 400; letter-spacing: -.04em; line-height: 1.02; text-wrap: balance; }
+.opening h2 span, .staticOpening h2 span { display: block; color: #be492d; }
+.opening p, .staticOpening p { max-width: 530px; margin: 1.5rem auto 0; color: #465048; font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
+.introHint { position: absolute; z-index: 4; bottom: 4.5rem; left: clamp(2rem, 4.2vw, 5rem); display: flex; align-items: center; gap: 1rem; margin: 0; padding: .4rem .5rem; color: #465048; background: #f6f3ec; font-size: .75rem; opacity: var(--opening-opacity, 1); pointer-events: none; }
+.staticOpening { padding: clamp(4rem, 7vw, 7rem) 1.25rem; text-align: center; background: #f6f3ec; }
+
+@media (max-width: 999px) {
+  .staticProject { grid-template-columns: 1fr; gap: 2rem; }
+  .staticProject .copy { max-width: 640px; }
+  .staticProject .copy h3 { font-size: clamp(2.6rem, 9vw, 4.5rem); margin-bottom: 1rem; }
+  .staticProject .copy h3.longTitle { font-size: clamp(1.9rem, 7vw, 3.8rem); }
+  .description { max-width: 52ch; }
+  .tags { margin-top: 1rem; }
+  .impact { margin-top: 1rem; }
+  .caseLink { margin-top: 1rem; }
+  .staticOpening h2 { font-size: clamp(2.25rem, 7.5vw, 4.5rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mediaLink video, .imageAction svg, .steps button span, .arrows button { transition: none; }
+  .mediaLink:hover .imageAction svg { transform: none; }
+}

@@ -5,8 +5,8 @@
 .title { max-width:590px; color:#f6f2e9; font-size:clamp(3.25rem, 6vw, 6rem); font-weight:400; line-height:.92; }
 .content { max-width:450px; color:rgba(246,242,233,.74); font-size:clamp(1rem, 1.3vw, 1.16rem); line-height:1.58; }
 .content p + p { margin-top:1rem; }
-ul { display:grid; gap:.45rem; margin:1.5rem 0; list-style:none; color:#f6f2e9; }
-li { padding-left:1rem; position:relative; } li::before { content:'—'; position:absolute; left:0; color:#e6765d; }
+.content ul { display:grid; gap:.45rem; margin:1.5rem 0; list-style:none; color:#f6f2e9; }
+.content li { padding-left:1rem; position:relative; } .content li::before { content:'—'; position:absolute; left:0; color:#e6765d; }
 .closing { color:#f6f2e9; font-family:var(--font-display); font-size:clamp(1.65rem, 2.5vw, 2.5rem); line-height:1.08; }
 @media(min-width:1024px) { .container { padding:0 var(--spacing-lg); } }
 @media(min-width:761px) {

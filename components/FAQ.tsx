@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './FAQ.module.css';
+import { pricingSummary, euro, pricing } from '../data/pricing.mjs';
 
 const faqGroups = [
   {
     title: 'Project & investering',
     faqs: [
       { id: 'match', question: 'Voor wie is Webaanzee een goede match?', answer: 'Voor ondernemers en kleine organisaties die veel belang hechten aan uitstraling, duidelijke communicatie en rechtstreeks contact. Dat kan een lokale handelszaak zijn, maar ook een webshop, digitaal platform of toepassing op maat.' },
-      { id: 'prijs', question: 'Wat kost een professionele website?', answer: 'Een heldere professionele website start vanaf €950. Websites die ook afspraken, aanvragen, verkoop of koppelingen verwerken starten vanaf €1.950. Na het eerste gesprek krijg je een concreet voorstel met duidelijke scope en afspraken.' },
+      { id: 'prijs', question: 'Wat kost een professionele website?', answer: pricingSummary },
+      { id: 'cms', question: 'Kan ik mijn website zelf aanpassen met een CMS?', answer: `Ja. Een website met CMS/dashboard start vanaf ${euro(pricing.cms.price)} excl. btw. De website, een beveiligde login, beheer van teksten en foto’s, één inhoudstype en persoonlijke uitleg zijn inbegrepen. Extra inhoudstypes, gebruikersrollen en bedrijfsprocessen begroten we apart.` },
       { id: 'start', question: 'Moet ik vooraf exact weten wat ik nodig heb?', answer: 'Nee. Vertel waar je zaak vandaag staat, wat er beter moet en wat je wilt bereiken. Webaanzee vertaalt dat naar een passende structuur, functies en aanpak.' },
       { id: 'timing', question: 'Hoe lang duurt een traject?', answer: 'Dat hangt af van de omvang, functies en beschikbare inhoud. Voor de start leggen we een realistische planning en vaste feedbackmomenten vast, zodat je altijd weet waar het project staat.' },
     ],
@@ -18,7 +20,7 @@ const faqGroups = [
       { id: 'werkwijze', question: 'Hoe verloopt de samenwerking?', answer: 'We starten met je zaak, klanten en doelen. Daarna volgen structuur, visuele richting, ontwerp en technische bouw. Je ziet het project tussendoor en geeft feedback op logische momenten. Voor de lancering wordt alles grondig getest.' },
       { id: 'inhoud', question: 'Krijg ik hulp met tekst en beelden?', answer: 'Ja. We bekijken wat al beschikbaar is en wat nog ontbreekt. Je krijgt hulp met structuur, teksten, beeldselectie en—wanneer nodig—een duidelijke briefing voor fotografie.' },
       { id: 'google', question: 'Wordt mijn website goed gevonden in Google?', answer: 'Elke website krijgt een snelle technische basis, heldere structuur en correcte zoekmachine-instellingen. Goede zichtbaarheid groeit daarna verder met relevante inhoud, lokale bekendheid en gerichte optimalisatie.' },
-      { id: 'nazorg', question: 'Wat gebeurt er na de lancering?', answer: 'Je blijft niet alleen achter met een nieuwe website. Hosting, technisch onderhoud, inhoudelijke wijzigingen en verdere verbeteringen kunnen na de livegang worden opgevolgd volgens duidelijke afspraken.' },
+      { id: 'nazorg', question: 'Wat gebeurt er na de lancering?', answer: `Hosting en technisch beheer via Webaanzee starten vanaf ${euro(pricing.website.monthly)}/maand voor een website, ${euro(pricing.cms.monthly)}/maand met CMS en ${euro(pricing.webshop.monthly)}/maand voor een webshop, excl. btw. Domeinnaam, zakelijke e-mail en externe licenties staan apart in de offerte. Inhoudelijke wijzigingen kosten ${euro(pricing.hourly)}/uur excl. btw, na een raming en jouw akkoord.` },
     ],
   },
 ];

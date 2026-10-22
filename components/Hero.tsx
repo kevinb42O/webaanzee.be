@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform, type Variants, type MotionValue } from 'motion/react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './Hero.module.css';
 
@@ -32,41 +32,38 @@ const arrowVariants: Variants = {
   hover: { x: 4 },
 };
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = ({ progress, embedded = false }) => {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
   });
-  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.01, 1.045]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -72]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
+  const position = progress ?? scrollYProgress;
+  const imageY = useTransform(position, [0, 1], ['0%', '4%']);
+  const imageScale = useTransform(position, [0, 1], [1.01, 1.07]);
+  const contentY = useTransform(position, [0, .7], [0, -90]);
+  const contentOpacity = useTransform(position, [0, .12, .65], [1, 1, 0]);
 
   return (
-    <motion.section ref={heroRef} className={styles.hero} id="home" initial="hidden" animate="visible">
+    <motion.section ref={heroRef} className={`${styles.hero} ${embedded ? styles.embedded : ''}`} id={embedded ? undefined : 'home'} initial="hidden" animate="visible">
       <motion.div
-        className={styles.videoBlock}
+        className={styles.imageBlock}
         initial={shouldReduceMotion ? false : { clipPath: 'inset(0 0 100% 0)' }}
         animate={{ clipPath: 'inset(0 0 0% 0)' }}
         transition={{ duration: 1.25, ease: [0.76, 0, 0.24, 1] }}
       >
-        <motion.video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/blankenberge-new.webp"
-          aria-hidden="true"
+        <motion.img
+          src="/blankenberge-pier-uhd.webp"
+          alt=""
+          width={3840}
+          height={2160}
+          fetchPriority="high"
           style={{
-            y: shouldReduceMotion ? 0 : videoY,
-            scale: shouldReduceMotion ? 1.01 : videoScale,
+            y: shouldReduceMotion ? 0 : imageY,
+            scale: shouldReduceMotion ? 1.01 : imageScale,
           }}
-        >
-          <source src="/videos/seascape-hero-web.mp4" type="video/mp4" />
-        </motion.video>
+        />
       </motion.div>
 
       <motion.div

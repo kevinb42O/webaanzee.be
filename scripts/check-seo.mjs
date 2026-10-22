@@ -40,7 +40,7 @@ const sitemap=await readFile(path.join(dist,'sitemap.xml'),'utf8');
 const sitemapUrls=new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]));
 for(const url of sitemapUrls)if(!indexable.has(url))errors.push(`sitemap: URL not represented by an indexable canonical: ${url}`);
 for(const url of indexable)if(!sitemapUrls.has(url)&&!url.endsWith('/404.html'))errors.push(`sitemap: missing indexable canonical ${url}`);
-if(sitemapUrls.size!==29)warnings.push(`sitemap contains ${sitemapUrls.size} URLs; expected current manifest count 29`);
+if(sitemapUrls.size!==31)warnings.push(`sitemap contains ${sitemapUrls.size} URLs; expected current manifest count 31`);
 if(errors.length){console.error(`SEO checks failed (${errors.length}):\n- ${errors.join('\n- ')}`);process.exit(1)}
 console.log(`SEO checks passed for ${publicPages.length} HTML files and ${sitemapUrls.size} sitemap URLs.`);
 if(warnings.length)console.warn(`Warnings (${warnings.length}):\n- ${warnings.join('\n- ')}`);

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import CrispChat from './CrispChat';
+import { pricingSummary } from '../data/pricing.mjs';
 
 const BlogArticle: React.FC = () => (
   <div className="min-h-screen bg-white">
@@ -69,7 +70,7 @@ const BlogArticle: React.FC = () => (
           <p>Hetzelfde geldt voor een Google Business Profile: dat moet echte, verifieerbare ondernemingsgegevens tonen. Webaanzee activeert dat spoor pas wanneer de officiële gegevens beschikbaar zijn, in plaats van met een tijdelijk of fictief profiel te werken.</p>
 
           <h2>Een realistische start</h2>
-          <p>Een professionele website bij Webaanzee start momenteel vanaf €950. Uitgebreidere sites of toepassingen starten vanaf €1.950. Dat zijn startprijzen, geen universele pakketten. Voor de start worden doel, pagina’s, functies, inhoud en verantwoordelijkheden vastgelegd in een concreet voorstel.</p>
+          <p>{pricingSummary}</p>
           <div className="not-prose mt-12 p-8 bg-slate-900 text-white rounded-2xl">
             <p className="text-sm uppercase tracking-wider text-amber-300 font-bold mb-3">Volgende stap</p>
             <h2 className="text-3xl font-serif mb-4">Bespreek wat je website werkelijk moet doen.</h2>

@@ -23,5 +23,6 @@ export const scrollToSection = (
 
   const top = el.getBoundingClientRect().top + window.scrollY - offset;
 
-  window.scrollTo({ top, behavior: 'smooth' });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
 };

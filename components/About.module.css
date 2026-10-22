@@ -1,148 +1,125 @@
 .section {
-  padding: clamp(6rem, 10vw, 10rem) 0;
-  background-color: var(--color-bg-primary);
-  border-top: 1px solid var(--color-border);
+  background: #f5f2eb;
+  scroll-margin-top: 64px;
 }
 
-.container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1fr 1.2fr;
-    gap: var(--spacing-2xl);
-    padding: 0 var(--spacing-lg);
-  }
-}
-
-.imageWrapper {
+.sequence { position: relative; }
+.stage {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4/5;
-  border-radius: 0;
-  overflow: hidden;
-  border-left: 1px solid var(--color-accent-gold);
+  overflow: clip;
+  isolation: isolate;
+  padding: 5rem 2rem 2rem;
+  background: var(--scene-surface, #eee8dc);
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.atmosphere {
+  position: absolute;
+  z-index: -1;
+  top: 5%;
+  left: -15%;
+  width: 85%;
+  height: 95%;
+  background: url('/blankenberge-new.webp') center / cover no-repeat;
+  filter: blur(60px);
+  opacity: .18;
+  pointer-events: none;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
+.sceneGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+  width: min(100%, 1320px);
+  margin: 0 auto;
 }
 
-.label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent-gold);
-  margin-bottom: var(--spacing-sm);
+.visual {
+  position: relative;
+  min-width: 0;
+  height: min(64svh, 680px);
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
 }
 
+.space {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.portraitFrame, .coastFrame, .horizonFrame { position: absolute; }
+.portraitFrame {
+  top: 9%;
+  left: 24%;
+  width: 70%;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 24px 45px rgba(52, 38, 23, .12);
+}
+.coastFrame {
+  top: 26%;
+  left: -8%;
+  width: 96%;
+  aspect-ratio: 1.55;
+  opacity: var(--plane-opacity, 1);
+}
+.horizonFrame { top: 2%; left: 56%; width: 61%; aspect-ratio: 1.15; }
+.visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portraitFrame img { object-position: 50% 45%; }
+.coastFrame img { object-position: 65% 50%; }
+.horizonFrame img { object-position: 90% 50%; }
+
+.content { position: relative; z-index: 1; padding: 1rem 0; }
 .title {
-  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
-  font-weight: 400;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-lg);
-  line-height: 1.1;
-}
-
-.textBlock {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-xl);
-}
-
-.textBlock p {
-  margin-bottom: var(--spacing-sm);
-}
-
-.quoteBlock {
-  padding: var(--spacing-lg) 0;
-  background: transparent;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  border-left: 0;
-  margin-bottom: var(--spacing-xl);
-  border-radius: 0;
-}
-
-.quoteText {
+  margin: 0 0 1.75rem;
+  color: #20211d;
   font-family: var(--font-display);
-  font-size: clamp(1.55rem, 2.2vw, 2.25rem);
-  color: var(--color-text-primary);
-  margin-bottom: 0.5rem;
-  font-style: normal;
+  font-size: clamp(2.5rem, 3.7vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.title span { display: block; margin-top: .18em; color: #8e402b; }
+.textBlock { max-width: 48ch; color: #41423c; font-size: clamp(.96rem, 1.12vw, 1.1rem); line-height: 1.65; }
+.textBlock p + p { margin-top: 1rem; }
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  min-height: 44px;
+  margin-top: 1.5rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid #20211d;
+  color: #20211d;
+  font-size: .85rem;
+  font-weight: 600;
+}
+.contactLink:hover { color: #8e402b; border-color: currentColor; }
+.contactLink svg { transition: transform 180ms ease; }
+.contactLink:hover svg { transform: translate(2px, -2px); }
+.contactLink:focus-visible { outline: 2px solid #8e402b; outline-offset: 5px; }
+.signature { position: relative; margin: 2rem 0 0; color: #41423c; font-size: .7rem; line-height: 1.5; }
+
+.animated { height: 210svh; }
+.animated .stage { position: sticky; top: 0; display: flex; flex-direction: column; justify-content: center; height: 100svh; padding-top: 5rem; }
+.animated .sceneGrid { flex: 1; }
+.animated .signature { margin: 0 0 0 max(0px, calc((100% - 1320px) / 2)); }
+
+.staticVisual .coastFrame { top: 2%; left: 0; width: 85%; aspect-ratio: 1.9; }
+.staticVisual .portraitFrame { top: 14%; left: 30%; width: 63%; }
+
+@media (max-width: 999px) {
+  .stage { padding: 3rem 1.25rem 2rem; }
+  .sceneGrid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 620px; }
+  .visual { height: auto; aspect-ratio: 1.08; width: min(100%, 520px); margin: 0 auto; }
+  .title { max-width: 16ch; font-size: clamp(2.25rem, 7vw, 3.6rem); }
+  .textBlock { max-width: 52ch; font-size: 1rem; }
+  .signature { max-width: 620px; margin: 2rem auto 0; }
 }
 
-.quoteAuthor {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.trustSignals {
-  display: flex;
-  gap: var(--spacing-lg);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--spacing-lg);
-}
-
-.signal {
-  display: flex;
-  flex-direction: column;
-}
-
-.signalTitle {
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--color-text-primary);
-}
-
-.signalSub {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-}
-
-@media (max-width: 639px) {
-  .section {
-    padding: 5rem 0;
-  }
-
-  .imageWrapper {
-    aspect-ratio: 4 / 4.6;
-  }
-
-  .title {
-    font-size: clamp(2.65rem, 13vw, 3.4rem);
-  }
-
-  .textBlock {
-    font-size: 1.08rem;
-  }
-
-  .trustSignals {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .contactLink svg { transition: none; }
+  .contactLink:hover svg { transform: none; }
 }
