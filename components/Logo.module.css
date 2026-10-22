@@ -1,0 +1,11 @@
+.logo {
+  display: block;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.light { display: var(--logo-light-display, block); }
+.dark { display: var(--logo-dark-display, none); }

@@ -84,3 +84,7 @@
   .mediaLink video, .imageAction svg, .steps button span, .arrows button { transition: none; }
   .mediaLink:hover .imageAction svg { transform: none; }
 }
+
+.qualityLayer { position:absolute; z-index:6; inset:0; pointer-events:none; }
+
+.qualityBackdrop { position:absolute; z-index:5; inset:0; background:#171815; pointer-events:none; }

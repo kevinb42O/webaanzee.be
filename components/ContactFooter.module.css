@@ -206,16 +206,9 @@
 }
 
 .footerLogo {
-  font-family: var(--font-heading);
-  display: inline-block;
-  font-size: clamp(2.75rem, 5.3vw, 5rem);
-  font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 0.9;
-}
-
-.footerLogo span {
-  color: var(--color-accent-gold);
+  display: block;
+  width: min(100%, 25rem);
+  color: inherit;
 }
 
 .footerTagline {

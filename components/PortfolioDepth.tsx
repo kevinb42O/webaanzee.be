@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, useVelocity, type MotionStyle, type MotionValue } from 'motion/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Hero from './Hero';
+import { QualityScene } from './Quality';
+import { PricingScene } from './Offer';
 import ProblemSolution, { capabilities } from './ProblemSolution';
 import type { CaseStudy } from './Proof';
 import { scrollToSection } from '../utils/scrollToSection';
@@ -143,15 +145,25 @@ const DepthPlane: React.FC<{ project: CaseStudy; index: number; phase: MotionVal
 
 const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   const sequenceRef = useRef<HTMLDivElement>(null);
-  const [scene, setScene] = useState({ index: 0, ready: false, heroActive: true, servicesActive: false });
+  const [scene, setScene] = useState({ index: 0, ready: false, heroActive: true, servicesActive: false, qualityActive: false, pricingActive: false });
   const gridSelection = projects.filter(project => project.showInGrid !== false);
   const gridProjects = gridSelection.slice(1);
   if (gridSelection.length) gridProjects.splice(Math.floor(gridSelection.length / 2), 0, gridSelection[0]);
   const handoffStart = introEnd + projects.length - 1 + .45;
   const servicesStart = handoffStart + 1.8;
-  const totalUnits = heroUnits + servicesStart + capabilities.length - 1 + .85;
+  const qualityStart = servicesStart + capabilities.length - 1 + .75;
+  const pricingStart = qualityStart + 4.25;
+  const totalUnits = heroUnits + pricingStart + 8.0;
   const { scrollYProgress } = useScroll({ target: sequenceRef, offset: ['start start', 'end end'] });
   const sequenceTime = useTransform(scrollYProgress, [0, 1], [0, totalUnits]);
+  const pricingProgress = useTransform(sequenceTime, value => value - heroUnits - pricingStart);
+  const qualityScale = useTransform(pricingProgress, [0, 1], [1, .91]);
+  const qualityShade = useTransform(pricingProgress, [0, 1], [1, .45]);
+  const qualityProgress = useTransform(sequenceTime, value => value - heroUnits - qualityStart);
+  const qualityBackdropOpacity = useTransform(qualityProgress, [.74, .75], [0, 1]);
+  const serviceScale = useTransform(qualityProgress, [0, .75], [1, .93]);
+  const serviceOpacity = useTransform(qualityProgress, [.7, .76], [1, 0]);
+  const serviceChromeOpacity = useTransform(qualityProgress, [0, .3], [1, 0]);
   const heroProgress = useTransform(sequenceTime, [0, heroUnits], [0, 1]);
   const timeline = useTransform(sequenceTime, value => value - heroUnits);
   const backdropOpacity = useTransform(timeline, [-heroUnits, .35, 1.35], [1, 1, 0]);
@@ -181,6 +193,7 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   const navigationOpacity = useTransform(() => detailsOpacity.get() * copyExit.get());
   const projectCopyOpacity = useTransform(() => detailsOpacity.get() * copyExit.get());
   const servicesFooterOpacity = useTransform(handoff, [1.65, 1.8], [0, 1]);
+  const archiveOpacity = useTransform(() => servicesFooterOpacity.get() * serviceChromeOpacity.get());
   const hintOpacity = useTransform(timeline, (value) => at(value, [-heroUnits, -.15, 0, 1.95, 2.25], [0, 0, 1, 1, 0]));
   const velocity = useVelocity(phase);
   const drift = useSpring(useTransform(velocity, (value) => clamp(value * -7, -20, 20)), { stiffness: 110, damping: 27 });
@@ -193,8 +206,10 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
     const index = clamp(Math.round(value - introEnd), 0, projects.length - 1);
     const ready = value >= 2.25 && value < handoffStart + .32;
     const heroActive = value < -heroUnits * .35;
-    const servicesActive = value >= servicesStart - .15;
-    setScene((current) => current.index === index && current.ready === ready && current.heroActive === heroActive && current.servicesActive === servicesActive ? current : { index, ready, heroActive, servicesActive });
+    const pricingActive = value >= pricingStart + .9;
+    const qualityActive = value >= qualityStart + .35 && !pricingActive;
+    const servicesActive = value >= servicesStart - .15 && value < qualityStart + .35;
+    setScene((current) => current.index === index && current.ready === ready && current.heroActive === heroActive && current.servicesActive === servicesActive && current.qualityActive === qualityActive && current.pricingActive === pricingActive ? current : { index, ready, heroActive, servicesActive, qualityActive, pricingActive });
   });
 
   const goToProject = (index: number) => {
@@ -213,10 +228,19 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
+  const goToPrice = (index: number) => {
+    const sequence = sequenceRef.current;
+    if (!sequence) return;
+    const top = sequence.getBoundingClientRect().top + window.scrollY
+      + ((heroUnits + pricingStart + (1.55 + index * 1.65)) / totalUnits) * (sequence.offsetHeight - window.innerHeight);
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   return (
     <div ref={sequenceRef} id="home" className={styles.sequence} style={{ '--scroll-units': totalUnits } as React.CSSProperties}>
       <div id="resultaten" className={styles.workAnchor}><div id="projecten" /></div>
       <div id="werkwijze" className={styles.servicesAnchor} style={{ top: `${(heroUnits + servicesStart) * 75}svh` }} />
+      <div id="prijzen" className={styles.servicesAnchor} style={{ top: `${(heroUnits + pricingStart + 1.2) * 75}svh` }} />
       <motion.div className={styles.stage} style={{ '--gallery-surface': surface } as MotionStyle}>
         <motion.div className={styles.heroBackdrop} style={{ opacity: backdropOpacity }} inert={!scene.heroActive ? true : undefined} aria-hidden={!scene.heroActive}>
           <Hero embedded progress={heroProgress} />
@@ -249,10 +273,13 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
           </motion.div>
         </motion.div>
         <motion.div className={styles.handoff} style={{ clipPath: handoffMask }} aria-hidden="true" />
-        <motion.div className={styles.servicesStage} style={{ visibility: servicesVisibility }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive}>
+        <motion.div className={styles.servicesStage} style={{ visibility: servicesVisibility, scale: serviceScale, opacity: serviceOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive}>
           <ProblemSolution progress={serviceProgress} entrance={handoff} onNavigate={goToService} />
         </motion.div>
-        <motion.a className={styles.servicesArchive} style={{ opacity: servicesFooterOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive} href="/cases/">Bekijk alle cases <ArrowUpRight aria-hidden="true" size={16} /></motion.a>
+        <motion.a className={styles.servicesArchive} style={{ opacity: archiveOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive} href="/cases/">Bekijk alle cases <ArrowUpRight aria-hidden="true" size={16} /></motion.a>
+        <motion.div className={styles.qualityBackdrop} style={{ opacity: qualityBackdropOpacity }} aria-hidden="true" />
+        <motion.div style={{ scale: qualityScale, opacity: qualityShade }} className={styles.qualityLayer} aria-hidden={!scene.qualityActive} inert={!scene.qualityActive ? true : undefined}><QualityScene progress={qualityProgress} /></motion.div>
+        <div aria-hidden={!scene.pricingActive} inert={!scene.pricingActive ? true : undefined}><PricingScene progress={pricingProgress} onNavigate={goToPrice} /></div>
         <motion.div className={styles.galleryNav} style={{ opacity: navigationOpacity }} inert={!scene.ready || scene.servicesActive ? true : undefined} aria-hidden={!scene.ready || scene.servicesActive}>
           <div className={styles.counter} aria-live="polite" aria-atomic="true"><span>{String(scene.index + 1).padStart(2, '0')}</span> / {String(projects.length).padStart(2, '0')}</div>
           <div className={styles.steps}>
@@ -264,7 +291,7 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
           </div>
         </motion.div>
         <motion.p className={styles.introHint} style={{ '--opening-opacity': hintOpacity } as MotionStyle}>Scroll om het werk te verkennen <ArrowDown aria-hidden="true" size={15} /></motion.p>
-        <a className={styles.skip} href={scene.servicesActive ? '#contact' : '#werkwijze'} inert={scene.heroActive ? true : undefined} aria-hidden={scene.heroActive} style={{ visibility: scene.heroActive ? 'hidden' : undefined }} onClick={(event) => scene.servicesActive ? scrollToSection(event, 'contact') : (event.preventDefault(), goToService(0))}>{scene.servicesActive ? 'Vertel over je project' : 'Verder naar diensten'} <ArrowDown aria-hidden="true" size={15} /></a>
+        <a className={styles.skip} href={scene.servicesActive ? '#contact' : '#werkwijze'} inert={scene.heroActive || scene.qualityActive || scene.pricingActive ? true : undefined} aria-hidden={scene.heroActive || scene.qualityActive || scene.pricingActive} style={{ visibility: scene.heroActive || scene.qualityActive || scene.pricingActive ? 'hidden' : undefined }} onClick={(event) => scene.servicesActive ? scrollToSection(event, 'contact') : (event.preventDefault(), goToService(0))}>{scene.servicesActive ? 'Vertel over je project' : 'Verder naar diensten'} <ArrowDown aria-hidden="true" size={15} /></a>
       </motion.div>
     </div>
   );
@@ -280,7 +307,7 @@ const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
     media.addEventListener('change', update);
     let frame = requestAnimationFrame(() => {
       frame = requestAnimationFrame(() => {
-        if (['#projecten', '#resultaten'].includes(window.location.hash)) document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        if (['#projecten', '#resultaten', '#prijzen'].includes(window.location.hash)) document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: 'instant', block: 'start' });
       });
     });
     return () => { cancelAnimationFrame(frame); media.removeEventListener('change', update); };

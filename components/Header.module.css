@@ -45,18 +45,16 @@
 }
 
 .logo {
-  font-family: var(--font-body); /* Terug naar strak sans-serif lettertype */
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: inherit; /* Neemt de wit/zwart kleur van de header over */
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  --logo-light-display: block;
+  --logo-dark-display: none;
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(11.5rem, 57vw, 15.75rem);
+  color: inherit;
 }
 
-.logoDot {
-  color: var(--color-accent-gold);
-}
+.scrolled .logo { --logo-light-display: none; --logo-dark-display: block; }
+.menuOpen .logo { --logo-light-display: block; --logo-dark-display: none; }
 
 .nav {
   display: none;

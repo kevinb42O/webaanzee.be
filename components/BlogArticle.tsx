@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Logo from './Logo';
 import CrispChat from './CrispChat';
 import { pricingSummary } from '../data/pricing.mjs';
 
@@ -81,7 +82,7 @@ const BlogArticle: React.FC = () => (
       </article>
     </main>
 
-    <footer className="bg-slate-950 text-white px-6 py-12"><div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-6 justify-between"><a href="/" className="text-2xl font-serif">Webaanzee<span className="text-amber-400">.</span></a><nav className="flex flex-wrap gap-5 text-sm text-white/60"><a href="/diensten/webdesign/">Webdesign</a><a href="/cases/">Cases</a><a href="/webdesign-belgische-kust/">Kustregio</a><a href="/privacy.html">Privacy</a></nav></div></footer>
+    <footer className="bg-slate-950 text-white px-6 py-12"><div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-6 justify-between"><a href="/" className="block w-52" aria-label="Webaanzee, naar de startpagina"><Logo /></a><nav className="flex flex-wrap gap-5 text-sm text-white/60"><a href="/diensten/webdesign/">Webdesign</a><a href="/cases/">Cases</a><a href="/webdesign-belgische-kust/">Kustregio</a><a href="/privacy.html">Privacy</a></nav></div></footer>
     <CrispChat />
   </div>
 );

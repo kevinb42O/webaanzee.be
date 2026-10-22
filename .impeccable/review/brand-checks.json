@@ -1,0 +1,26 @@
+[
+  {
+    "page": "mobile home",
+    "overflow": false,
+    "logo": {
+      "x": 32,
+      "y": 24.59375,
+      "width": 222.296875,
+      "height": 26.8125,
+      "top": 24.59375,
+      "right": 254.296875,
+      "bottom": 51.40625,
+      "left": 32
+    },
+    "icons": [
+      "/favicon.ico",
+      "/favicon.svg",
+      "/apple-touch-icon.png"
+    ]
+  },
+  {
+    "page": "mobile service",
+    "overflow": false,
+    "logos": 4
+  }
+]

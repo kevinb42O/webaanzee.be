@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUp, ArrowUpRight } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './ContactFooter.module.css';
+import Logo from './Logo';
 
 const ContactFooter: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -134,7 +135,7 @@ const ContactFooter: React.FC = () => {
         <div className={styles.footerInner}>
           <div className={styles.footerLead}>
             <a href="/" className={styles.footerLogo} aria-label="Webaanzee, naar de startpagina">
-              webaanzee<span>.</span>
+              <Logo />
             </a>
             <p className={styles.footerTagline}>Websites met een helder verhaal, gemaakt voor zelfstandigen aan de Belgische kust en ver daarbuiten.</p>
             <a href="/#contact" onClick={(e) => scrollOnHomePage(e, 'contact')} className={styles.footerCta}>
