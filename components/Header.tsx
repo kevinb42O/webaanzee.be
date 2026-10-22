@@ -5,19 +5,55 @@ import Logo from './Logo';
 
 interface HeaderProps {
   light?: boolean;
+  opening?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ light = false }) => {
-  const [scrolled, setScrolled] = useState(false);
+const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
+  const [phase, setPhase] = useState<'hidden' | 'transparent' | 'solid'>(opening ? 'hidden' : 'transparent');
+  const [hydrated, setHydrated] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrolled = phase === 'solid';
 
   useEffect(() => {
+    setHydrated(true);
+    let frame = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      frame = 0;
+      if (!opening) { setPhase(window.scrollY > 50 ? 'solid' : 'transparent'); return; }
+      const sequence = document.querySelector<HTMLElement>('[data-home-sequence]');
+      const stage = sequence?.querySelector<HTMLElement>('[data-home-stage]');
+      if (sequence && stage) {
+        const travel = sequence.offsetHeight - stage.offsetHeight;
+        const time = Math.max(0, -sequence.getBoundingClientRect().top) / Math.max(1, travel) * Number(sequence.dataset.homeTotal);
+        setPhase(time < Number(sequence.dataset.navReveal) ? 'hidden' : time < Number(sequence.dataset.navSolid) ? 'transparent' : 'solid');
+        return;
+      }
+      const mobile = document.querySelector<HTMLElement>('[data-mobile-opening]');
+      if (mobile?.dataset.mobileOpening === 'pinned') {
+        const viewport = mobile.querySelector<HTMLElement>('section')?.offsetHeight ?? window.innerHeight;
+        const distance = Number(getComputedStyle(mobile).getPropertyValue('--portal-distance'));
+        const time = Math.max(0, -mobile.getBoundingClientRect().top) / viewport;
+        setPhase(time < distance ? 'hidden' : time < distance + .5 ? 'transparent' : 'solid');
+        return;
+      }
+      // Static and reduced-motion layouts have no passage to wait for.
+      // Keep the initial server frame hidden until the desktop sequence has mounted.
+      const enhancedDesktop = window.matchMedia('(min-width: 1000px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)').matches;
+      if (enhancedDesktop && !sequence) { setPhase('hidden'); return; }
+      const hero = document.querySelector<HTMLElement>('main #home section, main section#home, [data-mobile-opening] section');
+      setPhase(hero && hero.getBoundingClientRect().bottom <= 80 ? 'solid' : 'transparent');
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(handleScroll); };
+    const observer = new MutationObserver(schedule);
+    const main = document.querySelector('main');
+    if (opening && main) observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-mobile-opening', 'data-nav-reveal', 'data-nav-solid'] });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    schedule();
+    return () => { cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); };
+  }, [opening]);
+
+  useEffect(() => { if (phase === 'hidden') setMenuOpen(false); }, [phase]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -45,7 +81,8 @@ const Header: React.FC<HeaderProps> = ({ light = false }) => {
   };
 
   return (
-    <header className={`${styles.header} ${scrolled || light ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
+    <header data-opening-navigation={opening ? phase : undefined} inert={hydrated && phase === 'hidden' ? true : undefined} aria-hidden={hydrated && phase === 'hidden' ? true : undefined} className={`${styles.header} ${scrolled || light ? styles.scrolled : ''} ${phase === 'hidden' ? styles.openingHidden : ''} ${menuOpen ? styles.menuOpen : ''}`}>
+      {opening && <noscript><style>{`[data-opening-navigation] { opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; }`}</style></noscript>}
       <div className={styles.container}>
         <a href="/#home" onClick={(e) => isHomePage ? scrollToSection(e, 'home') : undefined} className={styles.logo} aria-label="Webaanzee, naar de startpagina">
           <Logo />

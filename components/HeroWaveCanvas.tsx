@@ -1,16 +1,34 @@
 import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useTransform, type MotionValue } from 'motion/react';
 import styles from './Hero.module.css';
 
 const columns = 20;
 const rows = 12;
 
 /** Each tile is a cropped piece of the hero photograph and moves as a small cube. */
-export default function HeroWaveCanvas({ source, reducedMotion }: { source: string; reducedMotion: boolean }) {
+export default function HeroWaveCanvas({ source, reducedMotion, progress }: { source: string; reducedMotion: boolean; progress?: MotionValue<number> }) {
   const field = useRef<HTMLDivElement>(null);
+  const visible = useMotionValue(1);
+  const opacity = useTransform(progress ?? visible, [.44, .82], [0, 1]);
   useEffect(() => {
     const root = field.current;
     if (!root || reducedMotion) return;
     const tiles = Array.from(root.querySelectorAll<HTMLElement>('[data-tile]'));
+    // Match the photograph's object-fit: cover and 58% horizontal position.
+    // Both layers must depict the same pixels while the effect fades in.
+    const alignPhoto = () => {
+      const width = root.clientWidth, height = root.clientHeight;
+      const photoWidth = Math.max(width, height * 16 / 9);
+      const photoHeight = photoWidth * 9 / 16;
+      const left = (width - photoWidth) * .58, top = (height - photoHeight) / 2;
+      tiles.forEach(tile => {
+        tile.style.backgroundSize = `${photoWidth}px ${photoHeight}px`;
+        tile.style.backgroundPosition = `${left - tile.offsetLeft}px ${top - tile.offsetTop}px`;
+      });
+    };
+    const size = new ResizeObserver(alignPhoto);
+    size.observe(root);
+    alignPhoto();
     const waves: { x: number; y: number; t: number; power: number }[] = [];
     let pointer = { x: -2, y: -2 }, last = { x: -2, y: -2 }, active = false, raf = 0, start = performance.now();
     const move = (event: PointerEvent) => {
@@ -45,9 +63,9 @@ export default function HeroWaveCanvas({ source, reducedMotion }: { source: stri
     const startFrame=()=>{if(!raf)raf=requestAnimationFrame(frame);};
     window.addEventListener('pointermove',move,{passive:true});window.addEventListener('pointermove',startFrame,{passive:true});
     const observer=new IntersectionObserver(([entry])=>{if(entry.isIntersecting)startFrame();else if(raf){cancelAnimationFrame(raf);raf=0;}});observer.observe(root);
-    return()=>{cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('pointermove',move);window.removeEventListener('pointermove',startFrame);};
+    return()=>{cancelAnimationFrame(raf);observer.disconnect();size.disconnect();window.removeEventListener('pointermove',move);window.removeEventListener('pointermove',startFrame);};
   },[reducedMotion]);
-  return <div ref={field} className={styles.waveCanvas} aria-hidden="true" style={{'--hero-photo':`url("${source}")`} as React.CSSProperties}>
+  return <motion.div ref={field} className={styles.waveCanvas} aria-hidden="true" data-scroll-reveal={progress ? '' : undefined} style={{'--hero-photo':`url("${source}")`, opacity} as import('motion/react').MotionStyle}>
     {Array.from({length:columns*rows},(_,i)=>{const col=i%columns,row=Math.floor(i/columns);return <i key={i} data-tile="" style={{backgroundPosition:`${col/(columns-1)*100}% ${row/(rows-1)*100}%`}}/>;})}
-  </div>;
+  </motion.div>;
 }

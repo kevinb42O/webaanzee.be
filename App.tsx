@@ -12,7 +12,7 @@ import CrispChat from './components/CrispChat';
 const App: React.FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header />
+      <Header opening />
       <main style={{ flexGrow: 1 }} role="main" itemScope itemType="https://schema.org/WebPage">
         <Proof />
         <Quality />

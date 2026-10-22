@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform, type Variants, type MotionValue } from 'motion/react';
-import { scrollToSection } from '../utils/scrollToSection';
 import styles from './Hero.module.css';
 import HeroWaveCanvas from './HeroWaveCanvas';
+import CoastalPortal from './CoastalPortal';
+import PortalHeroCopy from './PortalHeroCopy';
+import { heroIntroduction } from '../data/heroCopy';
 
 const heroVariants: Variants = {
   hidden: {},
@@ -28,12 +30,7 @@ const fadeVariants: Variants = {
   },
 };
 
-const arrowVariants: Variants = {
-  visible: { x: 0 },
-  hover: { x: 4 },
-};
-
-const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = ({ progress, embedded = false }) => {
+const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionValue<number>; embedded?: boolean }> = ({ progress, portalProgress, embedded = false }) => {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -50,11 +47,11 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
     <motion.section ref={heroRef} className={`${styles.hero} ${embedded ? styles.embedded : ''}`} id={embedded ? undefined : 'home'} initial={shouldReduceMotion ? false : 'hidden'} animate="visible">
       <motion.div
         className={styles.imageBlock}
-        initial={shouldReduceMotion ? false : { clipPath: 'inset(0 0 100% 0)' }}
+        initial={shouldReduceMotion || portalProgress ? false : { clipPath: 'inset(0 0 100% 0)' }}
         animate={{ clipPath: 'inset(0 0 0% 0)' }}
         transition={{ duration: 1.25, ease: [0.76, 0, 0.24, 1] }}
       >
-        <motion.div className={styles.imageSurface} style={{ y: shouldReduceMotion ? 0 : imageY, scale: shouldReduceMotion ? 1.01 : imageScale }}>
+        <motion.div className={`${styles.imageSurface} ${portalProgress ? styles.portalImageSurface : ''}`} style={{ y: shouldReduceMotion ? 0 : imageY, scale: shouldReduceMotion ? 1.01 : imageScale }}>
           <img
             src="/blankenberge-pier-uhd.webp"
             alt=""
@@ -62,11 +59,13 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
             height={2160}
             fetchPriority="high"
           />
-          <HeroWaveCanvas source="/blankenberge-pier-uhd.webp" reducedMotion={shouldReduceMotion === true} />
+          <HeroWaveCanvas source="/blankenberge-pier-uhd.webp" reducedMotion={shouldReduceMotion === true} progress={portalProgress} />
         </motion.div>
       </motion.div>
 
-      <motion.div
+      {portalProgress && <CoastalPortal progress={portalProgress} />}
+
+      {portalProgress ? <motion.div className={styles.portalCopy} style={{ opacity: contentOpacity, y: contentY }}><PortalHeroCopy progress={portalProgress} /></motion.div> : <motion.div
         className={styles.container}
         variants={heroVariants}
         style={{ y: shouldReduceMotion ? 0 : contentY, opacity: shouldReduceMotion ? 1 : contentOpacity }}
@@ -85,24 +84,10 @@ const Hero: React.FC<{ progress?: MotionValue<number>; embedded?: boolean }> = (
         </h1>
         
         <motion.p className={styles.description} variants={fadeVariants}>
-          Ik ben Kevin. Ik ontwerp en bouw websites, webshops en toepassingen voor ondernemers aan de Belgische kust. Van eerste gesprek tot oplevering werk je rechtstreeks met mij.
+          {heroIntroduction}
         </motion.p>
 
-        <motion.div className={styles.ctaGroup} variants={fadeVariants}>
-          <motion.a
-            href="#resultaten"
-            onClick={(event) => scrollToSection(event, 'resultaten')}
-            className={styles.primaryCta}
-            whileHover={shouldReduceMotion ? undefined : 'hover'}
-          >
-            <span>Bekijk het werk</span>
-            <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden="true">→</motion.span>
-          </motion.a>
-          <motion.a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={styles.secondaryLink}>
-            Bespreek je website <span aria-hidden="true">↗</span>
-          </motion.a>
-        </motion.div>
-      </motion.div>
+      </motion.div>}
     </motion.section>
   );
 };

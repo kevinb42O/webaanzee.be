@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.tmp/
 
 # Build-time generated SEO pages (source lives in scripts/generate-seo-pages.mjs)
 public/diensten/

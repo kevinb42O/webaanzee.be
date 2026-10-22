@@ -1,11 +1,15 @@
 import assert from 'node:assert/strict';
-import { clamp, createHomeScore, itemOpacity, itemPhase, scrollToHomeMoment, soften } from '../utils/homeChoreography.ts';
+import { clamp, createHomeScore, itemOpacity, itemPhase, scrollToHomeMoment, soften, serviceCompletion, serviceDuration, servicePhase, serviceReadMoment, serviceReading, serviceStart, serviceTiming } from '../utils/homeChoreography.ts';
+import { registerHomeScroll } from '../utils/homeScroll.ts';
 
 const score = createHomeScore(10, 5);
-assert.equal(score.total, 22.75);
+assert.ok(Math.abs(score.total - 27.4) < 1e-10);
+assert.ok(Math.abs(score.hero - score.portal - .75) < 1e-10, 'The original hero duration is preserved after the portal');
 assert.deepEqual(Object.values(score), [...Object.values(score)].sort((a, b) => a - b));
+assert.ok(score.gridReveal < score.gridZoom && score.gridZoom < score.gridContent);
+assert.ok(score.gridContent < score.gridSettle && score.gridSettle < score.gridExit && score.gridExit < score.work);
 
-for (const [count, hold] of [[10, .5], [5, .6], [4, 1]]) {
+for (const [count, hold] of [[10, .5], [5, serviceTiming.read], [4, 1]]) {
   const slot = hold + .25;
   for (let index = 0; index < count; index++) {
     // Reading must be genuinely still, including either edge of the hold.
@@ -29,6 +33,25 @@ for (const [count, hold] of [[10, .5], [5, .6], [4, 1]]) {
   assert.equal(itemPhase(100, count, hold), count - 1);
 }
 
+// Services keep copy steady without swallowing scroll input; the last item
+// exits directly into quality rather than waiting through a nonexistent sixth.
+assert.ok(Math.abs(score.services - score.handoff - serviceTiming.entrance) < 1e-9);
+assert.ok(Math.abs(score.quality - score.services - serviceDuration(5)) < 1e-9);
+assert.ok(Math.abs(serviceTiming.entrance + serviceDuration(5) + serviceTiming.exit - 3.85) < 1e-9);
+for (let index = 0; index < 5; index++) {
+  assert.ok(Math.abs(servicePhase(serviceReadMoment(index), 5) - index) < 1e-9, 'navigation lands on stable copy');
+  let previous = -1;
+  for (let step = 0; step <= 100; step++) {
+    const position = serviceStart(index) + serviceTiming.read * step / 100;
+    assert.ok(Math.abs(servicePhase(position, 5) - index) < 1e-9, 'copy remains still throughout reading');
+    assert.ok(serviceCompletion(position, index, 5) > previous, 'every reading increment advances feedback');
+    assert.ok(Math.abs(serviceReading(position, index) - step / 100) < 1e-9, 'image follows scroll in both directions');
+    previous = serviceCompletion(position, index, 5);
+  }
+}
+assert.ok(Math.abs(serviceCompletion(serviceDuration(5), 4, 5) - 1) < 1e-9);
+assert.equal(servicePhase(serviceDuration(5) + serviceTiming.exit, 5), 4);
+
 // Value, velocity and acceleration meet the still reading windows continuously.
 const epsilon = 1e-4;
 assert.ok(soften(epsilon) / epsilon < 1e-6);
@@ -43,14 +66,25 @@ for (let step = 0; step <= 100; step++) {
 const calls = [];
 globalThis.window = { scrollY: 200, innerHeight: 1000, scrollTo: args => calls.push(args) };
 const sequence = {
-  offsetHeight: 23750,
+  offsetHeight: (1 + score.total) * 1000,
   querySelector: () => ({ offsetHeight: 1000 }),
   getBoundingClientRect: () => ({ top: -200 }),
 };
-for (const moment of [score.work + .25, score.services + .3, score.prices + .5, score.total]) {
+for (const moment of [score.work + .25, ...Array.from({ length: 5 }, (_, i) => score.services + serviceReadMoment(i)), score.prices + .5, score.total]) {
   scrollToHomeMoment(sequence, moment, score.total, 'instant');
   assert.ok(Math.abs(calls.at(-1).top - moment * 1000) < 1e-8);
 }
+// Anchor buttons must use the same controller as wheel scrolling, and release it on unmount.
+const controlledCalls = [];
+const unregister = registerHomeScroll((top, behavior) => controlledCalls.push({ top, behavior }));
+scrollToHomeMoment(sequence, score.work, score.total);
+assert.equal(controlledCalls.length, 1);
+assert.equal(controlledCalls[0].behavior, 'smooth');
+assert.ok(Math.abs(controlledCalls[0].top - score.work * 1000) < 1e-8);
+const nativeCount = calls.length;
+unregister();
+scrollToHomeMoment(sequence, score.services, score.total, 'instant');
+assert.equal(calls.length, nativeCount + 1, 'native navigation resumes after leaving desktop motion');
 assert.equal(clamp(-1), 0);
 assert.equal(clamp(2), 1);
 console.log('Homepage motion: stable reading, uniform travel, soft boundaries, reversible curves, non-overlapping text and measured navigation passed.');

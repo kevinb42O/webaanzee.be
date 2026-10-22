@@ -49,6 +49,10 @@ html {
   background-color: var(--color-bg-primary);
 }
 
+html.lenis {
+  scroll-behavior: auto;
+}
+
 body {
   overflow-x: clip;
 }

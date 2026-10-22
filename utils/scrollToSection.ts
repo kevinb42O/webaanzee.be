@@ -3,6 +3,7 @@
  * Accounts for the sticky header height so content isn't hidden behind it.
  */
 import { scrollToHomeMoment } from './homeChoreography';
+import { scrollHomeTo } from './homeScroll';
 export const scrollToSection = (
   e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement> | null,
   sectionId: string,
@@ -33,5 +34,5 @@ export const scrollToSection = (
 
   const top = el.getBoundingClientRect().top + window.scrollY - offset;
 
-  window.scrollTo({ top, behavior: motion });
+  scrollHomeTo(top, motion);
 };

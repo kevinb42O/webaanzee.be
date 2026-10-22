@@ -1,0 +1,14 @@
+{
+  "before": {
+    "copy": "none",
+    "image": "matrix(1.01735, -0.0177578, 0.0177578, 1.01735, 0, 0)",
+    "line": "transform: scaleX(0.295082);",
+    "scroll": 14652
+  },
+  "after": {
+    "copy": "none",
+    "image": "matrix(1.03381, -0.00122517, 0.00122517, 1.03381, 0, 0)",
+    "line": "transform: scaleX(0.570128);",
+    "scroll": 14803
+  }
+}

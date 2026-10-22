@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { motion, useMotionValueEvent, useScroll, useTransform, type MotionStyle, type MotionValue } from 'motion/react';
+import { motion, useTransform, type MotionStyle, type MotionValue } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import Hero from './Hero';
 import DepthShowcase from './DepthShowcase';
@@ -9,28 +9,18 @@ import ProblemSolution, { capabilities } from './ProblemSolution';
 import type { CaseStudy } from './Proof';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './PortfolioDepth.module.css';
+import StickyProjectGrid from './StickyProjectGrid';
+import { useHomeScroll } from '../utils/useHomeScroll';
 import MobileHomeChoreography, { MobileNoScriptFallback } from './MobileHomeChoreography';
 import { mobileViewportQuery, useMediaQuery } from '../utils/useMediaQuery';
 import { preserveHomeReadingPosition, trackHomeReadingPosition } from '../utils/preserveHomeReadingPosition';
-import { clamp, createHomeScore, desktopMotionQuery, interpolate as at, itemOpacity, itemPhase, scrollToHomeMoment, windowProgress } from '../utils/homeChoreography';
+import { clamp, createHomeScore, desktopMotionQuery, itemPhase, scrollToHomeMoment, serviceReadMoment, windowProgress } from '../utils/homeChoreography';
 
 const palettes = ['#e3ebe7', '#efe1de', '#d9e6eb', '#eae1d3', '#e2e4d8', '#dce5ec', '#ebe3d8', '#dce3ee', '#f0e7da', '#eee6d4'];
 const WorkHeading: React.FC = () => <>
   <h2 id="work-title">Ontworpen om op te vallen.<span>Gebouwd om te werken.</span></h2>
   <p>Van lokale handelszaak tot digitaal product: ieder project krijgt een eigen visuele wereld en een technische basis die snel en betrouwbaar blijft.</p>
 </>;
-
-const GridTile: React.FC<{ project: CaseStudy; index: number; timeline: MotionValue<number>; center: boolean }> = ({ project, index, timeline, center }) => {
-  const column = index % 3;
-  const row = Math.floor(index / 3);
-  const x = useTransform(timeline, v => `${(column - 1) * at(v, [0, .18, .8, 1], [0, 0, 16, 24])}vw`);
-  const y = useTransform(timeline, v => `${(row === 0 ? -1 : 1) * at(v, [0, .18, .8, 1], [0, 0, 35, 58])}vh`);
-  const scale = useTransform(timeline, v => center ? at(v, [0, .7], [1, .8]) : at(v, [0, 1], [1, 1.08]));
-  const opacity = useTransform(timeline, v => 1 - windowProgress(v, center ? .15 : .65, center ? .65 : 1));
-  return <motion.div className={styles.gridTile} style={{ x, y, scale, opacity }}>
-    <img src={project.previewSrc ?? `/images/cases/previews/${project.id}.jpg`} alt="" width="800" height="451" loading="eager" decoding="async" />
-  </motion.div>;
-};
 
 const ProjectMedia: React.FC<{ project: CaseStudy; active?: boolean; animated?: boolean }> = ({ project, active = true, animated = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -103,109 +93,96 @@ const ProjectCopy: React.FC<{ project: CaseStudy }> = ({ project }) => (
 const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   const sequenceRef = useRef<HTMLDivElement>(null);
   const score = createHomeScore(projects.length, capabilities.length);
-  const [scene, setScene] = useState({ index: 0, ready: false, heroActive: true, servicesActive: false, qualityActive: false, pricingActive: false });
-  const gridSelection = projects.filter(project => project.showInGrid !== false);
-  const gridProjects = gridSelection.slice(1);
-  if (gridSelection.length) gridProjects.splice(Math.floor(gridSelection.length / 2), 0, gridSelection[0]);
-  const { scrollYProgress } = useScroll({ target: sequenceRef, offset: ['start start', 'end end'] });
-  // Native scroll stays native. The smooth curves live in the score, with no delayed spring clock.
-  const time = useTransform(scrollYProgress, v => v * score.total);
-  const heroProgress = useTransform(time, v => windowProgress(v, 0, score.hero));
-  const intro = useTransform(time, v => v - score.hero);
-  const gridOpacity = useTransform(time, v => windowProgress(v, .25, score.hero));
-  const gridScale = useTransform(time, v => at(v, [.25, score.hero], [.94, 1]));
-  const gridY = useTransform(time, v => at(v, [.25, score.hero], [40, 0]));
-  const backdropOpacity = useTransform(time, v => 1 - windowProgress(v, .35, score.hero + .25));
+  const [scene, setScene] = useState({ index: 0, ready: false, heroActive: true, showcaseActive: false, servicesActive: false, qualityActive: false, pricingActive: false });
+  const time = useHomeScroll(sequenceRef, score.total, projects.length, capabilities.length);
+  const portalProgress = useTransform(time, v => clamp(v / score.portal));
+  const heroProgress = useTransform(time, v => windowProgress(v, score.portal, score.hero));
+  const backdropOpacity = useTransform(time, v => 1 - windowProgress(v, score.gridReveal - .2, score.gridReveal + .05));
+  const backdropDisplay = useTransform(time, v => v < score.gridReveal + .05 ? 'block' : 'none');
   const phase = useTransform(time, v => clamp((v - score.work) / .75, 0, projects.length - 1));
   const surface = useTransform(phase, projects.map((_, i) => i), palettes.slice(0, projects.length));
-  const workOpacity = useTransform(time, v => windowProgress(v, score.work - .3, score.work) * (1 - windowProgress(v, score.handoff + .05, score.handoff + .4)));
-  const openingOpacity = useTransform(intro, v => at(v, [0, .25, .6, .85], [0, 1, 1, 0]));
-  const openingY = useTransform(intro, v => at(v, [0, .25, .6, .85], [18, 0, 0, -18]));
+  const workOpacity = useTransform(time, v => windowProgress(v, score.gridSettle, score.gridExit) * (1 - windowProgress(v, score.handoff + .05, score.handoff + .4)));
   const handoff = useTransform(time, v => windowProgress(v, score.handoff, score.services));
   const handoffMask = useTransform(handoff, v => `inset(${(1 - v) * 100}% 0% 0% 0%)`);
   const servicesVisibility = useTransform(time, v => v < score.handoff ? 'hidden' : 'visible');
-  const serviceProgress = useTransform(time, v => itemPhase(v - score.services, capabilities.length, .6));
+  const serviceProgress = useTransform(time, v => v - score.services);
   const qualityProgress = useTransform(time, v => v - score.quality);
-  const serviceOpacity = useTransform(qualityProgress, v => 1 - windowProgress(v, .1, .5));
-  const serviceScale = useTransform(qualityProgress, v => at(v, [0, .5], [1, .98]));
+  const serviceOpacity = useTransform(qualityProgress, v => v < .5 ? 1 : 0);
   const archiveOpacity = useTransform(time, v => windowProgress(v, score.services - .15, score.services) * (1 - windowProgress(v, score.quality, score.quality + .3)));
   const pricingProgress = useTransform(time, v => v - score.priceEntrance);
   const pricingPhase = useTransform(time, v => itemPhase(v - score.prices, 4, 1));
   const qualityShade = useTransform(pricingProgress, v => 1 - windowProgress(v, .3, .75));
-  const hintOpacity = useTransform(time, v => at(v, [.5, .75, 1.25, 1.55], [0, 1, 1, 0]));
 
-  useMotionValueEvent(time, 'change', v => {
-
-    const ready = v >= score.work - .1 && v < score.handoff + .15;
-    const heroActive = v < .45;
-    const servicesActive = v >= score.services - .1 && v < score.quality + .25;
-    const pricingActive = v >= score.prices - .05;
-    const qualityActive = v >= score.quality + .25 && !pricingActive;
-    setScene(current => current.ready === ready && current.heroActive === heroActive && current.servicesActive === servicesActive && current.qualityActive === qualityActive && current.pricingActive === pricingActive ? current : { index: current.index, ready, heroActive, servicesActive, qualityActive, pricingActive });
-  });
+  useLayoutEffect(() => {
+    const update = (v: number) => {
+      const ready = v >= score.work - .1 && v < score.handoff + .15;
+      const showcaseActive = v >= score.gridSettle && v < score.handoff + .4;
+      const heroActive = v < score.portal + .45;
+      const servicesActive = v >= score.services - .1 && v < score.quality + .25;
+      const pricingActive = v >= score.prices - .05;
+      const qualityActive = v >= score.quality + .25 && !pricingActive;
+      setScene(current => current.ready === ready && current.heroActive === heroActive && current.showcaseActive === showcaseActive && current.servicesActive === servicesActive && current.qualityActive === qualityActive && current.pricingActive === pricingActive ? current : { index: current.index, ready, heroActive, showcaseActive, servicesActive, qualityActive, pricingActive });
+    };
+    update(time.get());
+    return time.on('change', update);
+  }, [time, score.portal, score.work, score.gridSettle, score.handoff, score.services, score.quality, score.prices]);
 
   const navigate = (moment: number) => {
     if (sequenceRef.current) scrollToHomeMoment(sequenceRef.current, moment, score.total);
   };
   const goToProject = (index: number) => navigate(score.work + clamp(index, 0, projects.length - 1) * .75);
-  const goToService = (index: number) => navigate(score.services + clamp(index, 0, capabilities.length - 1) * .85 + .3);
+  const goToService = (index: number) => navigate(score.services + serviceReadMoment(clamp(index, 0, capabilities.length - 1)));
   const goToPrice = (index: number) => navigate(score.prices + clamp(index, 0, 3) * 1.25 + .5);
   const anchor = (id: string, moment: number) => <div key={id} id={id} data-home-moment={moment} className={styles.servicesAnchor} style={{ top: `${moment * 100}svh` }} />;
 
-  return <div ref={sequenceRef} id="home" data-home-sequence data-home-total={score.total} className={styles.sequence} style={{ '--scroll-units': score.total } as React.CSSProperties}>
+  return <div ref={sequenceRef} id="home" data-home-sequence data-home-total={score.total} data-nav-reveal={score.portal} data-nav-solid={score.gridReveal} className={styles.sequence} style={{ '--scroll-units': score.total } as React.CSSProperties}>
     {anchor('resultaten', score.work)}
     {anchor('projecten', score.work)}
-    {anchor('werkwijze', score.services + .3)}
+    {anchor('werkwijze', score.services + serviceReadMoment(0))}
     {anchor('prijzen', score.prices + .5)}
     <motion.div data-home-stage className={styles.stage} style={{ '--gallery-surface': surface } as MotionStyle}>
-      <motion.div className={styles.heroBackdrop} style={{ opacity: backdropOpacity }} inert={!scene.heroActive ? true : undefined} aria-hidden={!scene.heroActive}><Hero embedded progress={heroProgress} /></motion.div>
-      <motion.div className={styles.openerGrid} style={{ opacity: gridOpacity, scale: gridScale, y: gridY }} aria-hidden="true">
-        {gridProjects.map((project, index) => <GridTile key={project.id} project={project} index={index} timeline={intro} center={project.id === gridSelection[0].id} />)}
-      </motion.div>
-      <motion.div className={styles.opening} style={{ opacity: openingOpacity, y: openingY }}><WorkHeading /></motion.div>
+      <motion.div className={styles.heroBackdrop} style={{ opacity: backdropOpacity, display: backdropDisplay }} inert={!scene.heroActive ? true : undefined} aria-hidden={!scene.heroActive}><Hero embedded progress={heroProgress} portalProgress={portalProgress} /></motion.div>
+      <StickyProjectGrid projects={projects} time={time} score={score}><WorkHeading /></StickyProjectGrid>
       <motion.div className={styles.depthShowcase} style={{ opacity: workOpacity }} inert={!scene.ready ? true : undefined} aria-hidden={!scene.ready}>
-        <DepthShowcase projects={projects} phase={phase} active={scene.ready} onIndex={index => setScene(current => current.index === index ? current : { ...current, index })} onNavigate={goToProject} />
+        <DepthShowcase projects={projects} phase={phase} departure={handoff} active={scene.showcaseActive} onIndex={index => setScene(current => current.index === index ? current : { ...current, index })} onNavigate={goToProject} />
       </motion.div>
       <motion.div className={styles.handoff} style={{ clipPath: handoffMask }} aria-hidden="true" />
-      <motion.div className={styles.servicesStage} style={{ visibility: servicesVisibility, scale: serviceScale, opacity: serviceOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive}>
+      <motion.div className={styles.servicesStage} style={{ visibility: servicesVisibility, opacity: serviceOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive}>
         <ProblemSolution progress={serviceProgress} entrance={handoff} onNavigate={goToService} />
       </motion.div>
       <motion.a className={styles.servicesArchive} style={{ opacity: archiveOpacity }} inert={!scene.servicesActive ? true : undefined} aria-hidden={!scene.servicesActive} href="/cases/">Bekijk alle projecten <ArrowUpRight aria-hidden="true" size={16} /></motion.a>
       <motion.div style={{ opacity: qualityShade }} className={styles.qualityLayer} aria-hidden={!scene.qualityActive} inert={!scene.qualityActive ? true : undefined}><QualityScene progress={qualityProgress} /></motion.div>
       <div aria-hidden={!scene.pricingActive} inert={!scene.pricingActive ? true : undefined}><PricingScene progress={pricingProgress} phase={pricingPhase} onNavigate={goToPrice} /></div>
-      <motion.p className={styles.introHint} style={{ opacity: hintOpacity }}>Scroll om het werk te verkennen <ArrowDown aria-hidden="true" size={15} /></motion.p>
       <a className={styles.skip} href={scene.servicesActive ? '#contact' : '#werkwijze'} hidden={!scene.ready && !scene.servicesActive} onClick={event => scene.servicesActive ? scrollToSection(event, 'contact') : (event.preventDefault(), goToService(0))}>{scene.servicesActive ? 'Vertel over je project' : 'Verder naar diensten'} <ArrowDown aria-hidden="true" size={15} /></a>
     </motion.div>
   </div>;
 };
 
 const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
-  const [animated, setAnimated] = useState(false);
+  const animated = useMediaQuery(desktopMotionQuery);
   const mobile = useMediaQuery(mobileViewportQuery);
-  const previousMobile = useRef<boolean | undefined>(undefined);
+  const previousMode = useRef<string | undefined>(undefined);
+  const mode = mobile ? 'mobile' : animated ? 'desktop' : 'static';
 
   useLayoutEffect(() => {
-    if (previousMobile.current === undefined) {
-      previousMobile.current = window.matchMedia(mobileViewportQuery).matches;
+    if (previousMode.current === undefined) {
+      previousMode.current = window.matchMedia(mobileViewportQuery).matches ? 'mobile'
+        : window.matchMedia(desktopMotionQuery).matches ? 'desktop' : 'static';
       return;
     }
-    if (previousMobile.current !== mobile) preserveHomeReadingPosition(mobile, projects.length, capabilities.length);
-    previousMobile.current = mobile;
-  }, [mobile, projects.length]);
+    if (previousMode.current !== mode) preserveHomeReadingPosition(mobile, projects.length, capabilities.length);
+    previousMode.current = mode;
+  }, [mode, mobile, projects.length]);
 
   useEffect(() => trackHomeReadingPosition(projects.length, capabilities.length), [projects.length]);
 
   useEffect(() => {
-    const media = window.matchMedia(desktopMotionQuery);
-    const update = () => setAnimated(media.matches);
-    update();
-    media.addEventListener('change', update);
     let frame = requestAnimationFrame(() => {
       frame = requestAnimationFrame(() => {
         if (['#projecten', '#resultaten', '#werkwijze', '#prijzen'].includes(window.location.hash)) scrollToSection(null, window.location.hash.slice(1), 'instant');
       });
     });
-    return () => { cancelAnimationFrame(frame); media.removeEventListener('change', update); };
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (

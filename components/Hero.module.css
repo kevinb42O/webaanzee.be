@@ -20,6 +20,9 @@
   background: linear-gradient(90deg, rgba(10, 11, 9, .8) 0%, rgba(10, 11, 9, .47) 48%, rgba(10, 11, 9, .08) 78%), linear-gradient(0deg, rgba(10, 11, 9, .58) 0%, transparent 44%, rgba(10, 11, 9, .06) 100%);
 }
 .imageSurface { position: absolute; inset: 0; }
+.portalCopy { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+.portalImageSurface > img { opacity: 1 !important; }
+.waveCanvas[data-scroll-reveal] { transition: none; filter: saturate(.96) contrast(1.02); }
 .waveCanvas { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-columns: repeat(20, 1fr); grid-template-rows: repeat(12, 1fr); gap: 2px; perspective: 1100px; perspective-origin: 50% 52%; pointer-events: auto; opacity: 0; transition: opacity 250ms ease; }
 .waveCanvas i { display: block; min-width: 0; min-height: 0; background-image: var(--hero-photo); background-size: 2000% 1200%; background-repeat: no-repeat; border: 1px solid rgba(245, 241, 230, .28); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); transform-style: preserve-3d; will-change: transform; }
 .waveCanvas:not(:empty) { opacity: 1; }

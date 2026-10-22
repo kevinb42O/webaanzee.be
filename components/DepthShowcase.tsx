@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { MotionValue } from 'motion/react';
+import { motion, useMotionValue, useTransform, type MotionValue } from 'motion/react';
 import type { CaseStudy } from './Proof';
 import styles from './DepthShowcase.module.css';
 
@@ -13,13 +13,18 @@ const moods = [
   { x: -.7, accent: '#fdd895', background: '#7d936e', blob1: '#fdd895', blob2: '#a5b599', ink: '#f4f4f4' },
 ];
 
-export default function DepthShowcase({ projects, phase, active, onIndex, onNavigate }: {
+export default function DepthShowcase({ projects, phase, active, onIndex, onNavigate, departure }: {
   projects: CaseStudy[];
   phase: MotionValue<number>;
   active: boolean;
   onIndex: (index: number) => void;
   onNavigate: (index: number) => void;
+  departure?: MotionValue<number>;
 }) {
+  const still = useMotionValue(0);
+  const departingScale = useTransform(departure ?? still, [0, 1], [1, .86]);
+  const departingX = useTransform(departure ?? still, [0, 1], ['0%', '-8%']);
+  const departingY = useTransform(departure ?? still, [0, 1], ['0%', '4%']);
   const canvas = useRef<HTMLCanvasElement>(null);
   const engine = useRef<import('./depth-gallery/PortfolioEngine.js').PortfolioEngine | null>(null);
   const activeRef = useRef(active);
@@ -68,8 +73,8 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
   const project = projects[index];
   const mood = moods[index % moods.length];
   return <section className={styles.showcase} data-depth-showcase data-depth-ready={ready && !failed} data-depth-index={index} aria-label="Portfolio" style={{ color: mood.ink }}>
-    <canvas ref={canvas} className={styles.canvas} aria-hidden="true" />
-    {(!ready || failed) && <a href={project.casePath} className={styles.fallback}><img src={project.imageSrc} alt={`Website van ${project.title}`} width="1276" height="720" /></a>}
+    <motion.canvas ref={canvas} className={styles.canvas} aria-hidden="true" style={{ scale: departingScale, x: departingX, y: departingY }} />
+    {(!ready || failed) && <motion.a href={project.casePath} className={styles.fallback} style={{ scale: departingScale, x: departingX, y: departingY }}><img src={project.imageSrc} alt={`Website van ${project.title}`} width="1276" height="720" /></motion.a>}
     <div className={styles.identity}>
       <span className={styles.index}>{String(index + 1).padStart(2, '0')}</span>
       <h3 className={styles.word}>{project.title}</h3>

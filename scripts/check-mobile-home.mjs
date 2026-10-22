@@ -67,18 +67,16 @@ try {
 
   for (let index = 0; index < 5; index++) {
     await jump(`service-trigger-${index}`);
-    await page.tap(`#service-trigger-${index}`);
-    await new Promise(resolve => setTimeout(resolve, 320));
     const state = await page.$eval(`#service-panel-${index}`, node => ({
-      hidden: node.getAttribute('aria-hidden'),
       height: node.getBoundingClientRect().height,
-      image: !!node.querySelector('figure img'),
-      focused: document.activeElement?.id,
+      image: !!node.closest('[data-service-chapter]')?.querySelector('figure img'),
+      link: !!node.querySelector('a[href]'),
+      concealed: !!node.closest('[inert], [hidden], [aria-hidden="true"]'),
     }));
-    assert.equal(state.hidden, 'false');
+    assert.equal(state.concealed, false);
     assert.ok(state.height > 200);
     assert.ok(state.image);
-    assert.equal(state.focused, `service-trigger-${index}`);
+    assert.ok(state.link);
   }
   await jump('faq');
   await page.tap('#faq summary');

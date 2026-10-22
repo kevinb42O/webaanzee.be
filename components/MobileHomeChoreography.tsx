@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { animate, motion, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { animate, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
 import type { CaseStudy } from './Proof';
 import ProblemSolution from './ProblemSolution';
 import MobileHomepageEffects from './MobileHomepageEffects';
+import CoastalPortal from './CoastalPortal';
+import PortalHeroCopy from './PortalHeroCopy';
+import { heroIntroduction } from '../data/heroCopy';
+import { portalDistance } from '../utils/homeChoreography';
 import { scrollToSection } from '../utils/scrollToSection';
 import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
 import hero from './Hero.module.css';
@@ -40,10 +44,10 @@ function ProjectCopy({ project }: { project: CaseStudy }) {
   </div>;
 }
 
-function MobileHero({ enabled, covered }: { enabled: boolean; covered: boolean }) {
+function MobileHero({ enabled, covered, portalProgress }: { enabled: boolean; covered: boolean; portalProgress?: MotionValue<number> }) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
-    if (!enabled || !ref.current || window.scrollY > 32 || window.location.hash) return;
+    if (!enabled || portalProgress || !ref.current || window.scrollY > 32 || window.location.hash) return;
     // Start from visible server markup. A failed script can never hide the hero.
     const lines = ref.current.querySelectorAll(`.${hero.titleLine}`);
     const controls = animate(lines, { y: ['105%', '0%'] }, { duration: .6, ease, delay: i => i * .07 });
@@ -51,21 +55,18 @@ function MobileHero({ enabled, covered }: { enabled: boolean; covered: boolean }
     const arrival = image ? animate(image, { scale: [1.02, 1] }, { duration: .7, ease }) : undefined;
     const supporting = animate(ref.current.querySelectorAll(`.${hero.description}, .${hero.ctaGroup}`), { opacity: [.7, 1], y: [8, 0] }, { duration: .45, delay: .14, ease });
     return () => { controls.complete(); arrival?.complete(); supporting.complete(); };
-  }, [enabled]);
+  }, [enabled, portalProgress]);
   return <section ref={ref} className={`${hero.hero} ${styles.hero}`} aria-label="Webaanzee" inert={covered ? true : undefined} aria-hidden={covered ? true : undefined}>
     <div className={hero.imageBlock}><img src="/blankenberge-pier-uhd.webp" alt="" width="3840" height="2160" fetchPriority="high" /></div>
-    <div className={hero.container}>
+    {portalProgress && <CoastalPortal progress={portalProgress} />}
+    {portalProgress ? <PortalHeroCopy progress={portalProgress} /> : <div className={hero.container}>
       <p className={hero.eyebrow}>Webdesign &amp; development <span>Belgische kust</span></p>
       <h1 className={hero.title}>
         <span className={hero.lineMask}><span className={hero.titleLine}>Je kent je vak.</span></span>
         <span className={hero.lineMask}><span className={`${hero.titleLine} ${hero.accentLine}`}>Laat het online zien.</span></span>
       </h1>
-      <p className={hero.description}>Ik ben Kevin. Ik ontwerp en bouw websites, webshops en toepassingen voor ondernemers aan de Belgische kust. Van eerste gesprek tot oplevering werk je rechtstreeks met mij.</p>
-      <div className={hero.ctaGroup}>
-        <a href="#resultaten" onClick={e => scrollToSection(e, 'resultaten')} className={hero.primaryCta}><span>Bekijk het werk</span><ArrowRight className={hero.arrow} size={22} aria-hidden="true" /></a>
-        <a href="#contact" onClick={e => scrollToSection(e, 'contact')} className={hero.secondaryLink}>Bespreek je website <ArrowUpRight size={18} aria-hidden="true" /></a>
-      </div>
-    </div>
+      <p className={hero.description}>{heroIntroduction}</p>
+    </div>}
   </section>;
 }
 
@@ -75,13 +76,17 @@ function Opening({ projects, enabled }: { projects: CaseStudy[]; enabled: boolea
   const [fits, setFits] = useState(false);
   const [ready, setReady] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
-  const panelY = useTransform(scrollYProgress, [0, 1], ['100%', '0%']);
-  const leftX = useTransform(scrollYProgress, [.1, .85], [-16, 0]);
-  const rightX = useTransform(scrollYProgress, [.1, .85], [16, 0]);
-  const minisOpacity = useTransform(scrollYProgress, [0, .35, .8, 1], [0, 1, .7, 0]);
-  const imageScale = useTransform(scrollYProgress, [0, .8, 1], [.98, 1, 1]);
+  // The passage and reading hold finish before the existing .5-height panel.
+  const passageEnd = portalDistance / (portalDistance + .5);
+  const portalProgress = useTransform(scrollYProgress, [0, passageEnd], [0, 1]);
+  const panelProgress = useTransform(scrollYProgress, [passageEnd, 1], [0, 1]);
+  const panelY = useTransform(panelProgress, [0, 1], ['100%', '0%']);
+  const leftX = useTransform(panelProgress, [.1, .85], [-16, 0]);
+  const rightX = useTransform(panelProgress, [.1, .85], [16, 0]);
+  const minisOpacity = useTransform(panelProgress, [0, .35, .8, 1], [0, 1, .7, 0]);
+  const imageScale = useTransform(panelProgress, [0, .8, 1], [.98, 1, 1]);
   const pinned = enabled && fits;
-  useMotionValueEvent(scrollYProgress, 'change', value => setReady(current => current === (value >= .97) ? current : value >= .97));
+  useMotionValueEvent(panelProgress, 'change', value => setReady(current => current === (value >= .97) ? current : value >= .97));
 
   useEffect(() => {
     const node = stageRef.current;
@@ -115,10 +120,10 @@ function Opening({ projects, enabled }: { projects: CaseStudy[]; enabled: boolea
     return () => cancelAnimationFrame(frame);
   }, [pinned]);
 
-  return <div ref={ref} id="home" data-mobile-opening={pinned ? 'pinned' : 'flow'} className={`${styles.opening} ${pinned ? styles.pinned : ''}`}>
+  return <div ref={ref} id="home" data-mobile-opening={pinned ? 'pinned' : 'flow'} className={`${styles.opening} ${pinned ? styles.pinned : ''}`} style={{ '--portal-distance': portalDistance } as React.CSSProperties}>
     <div className={styles.workAnchor} id="resultaten"><span id="projecten" /></div>
     <div ref={stageRef} className={styles.stage}>
-      <MobileHero enabled={enabled} covered={pinned && ready} />
+      <MobileHero enabled={enabled} covered={pinned && ready} portalProgress={pinned ? portalProgress : undefined} />
       <motion.div className={styles.panel} style={pinned ? { y: panelY } : undefined} inert={pinned && !ready ? true : undefined}>
         <div className={styles.panelContent}>
           <header className={`${work.staticOpening} ${styles.workHeading}`}><WorkHeading /></header>
