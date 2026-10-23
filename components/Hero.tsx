@@ -30,7 +30,7 @@ const fadeVariants: Variants = {
   },
 };
 
-const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionValue<number>; embedded?: boolean }> = ({ progress, portalProgress, embedded = false }) => {
+const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionValue<number>; embedded?: boolean; touchEffects?: boolean }> = ({ progress, portalProgress, embedded = false, touchEffects = false }) => {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -59,7 +59,7 @@ const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionVa
             height={2160}
             fetchPriority="high"
           />
-          <HeroWaveCanvas source="/blankenberge-pier-uhd.webp" reducedMotion={shouldReduceMotion === true} progress={portalProgress} />
+          <HeroWaveCanvas source="/blankenberge-pier-uhd.webp" reducedMotion={shouldReduceMotion === true} progress={portalProgress} touchReactive={touchEffects} />
         </motion.div>
       </motion.div>
 

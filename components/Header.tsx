@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
       }
       const mobile = document.querySelector<HTMLElement>('[data-mobile-opening]');
       if (mobile?.dataset.mobileOpening === 'pinned') {
-        const viewport = mobile.querySelector<HTMLElement>('section')?.offsetHeight ?? window.innerHeight;
+        const viewport = mobile.querySelector<HTMLElement>('[data-mobile-stage]')?.offsetHeight ?? mobile.querySelector<HTMLElement>('section')?.offsetHeight ?? window.innerHeight;
         const distance = Number(getComputedStyle(mobile).getPropertyValue('--portal-distance'));
         const time = Math.max(0, -mobile.getBoundingClientRect().top) / viewport;
         setPhase(time < distance ? 'hidden' : time < distance + .5 ? 'transparent' : 'solid');
@@ -59,8 +59,22 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
     if (!menuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
+    const mobile = window.matchMedia('(max-width: 999px)');
+    const trapFocus = mobile.matches;
+    const toggle = document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-navigation"]');
+    const navigation = document.getElementById('mobile-navigation');
+    const focusFrame = trapFocus ? requestAnimationFrame(() => navigation?.querySelector<HTMLElement>('a[href]')?.focus({ preventScroll: true })) : 0;
+    const closeOnResize = () => { if (trapFocus && !mobile.matches) setMenuOpen(false); };
+    mobile.addEventListener('change', closeOnResize);
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setMenuOpen(false);
+      if (event.key === 'Tab' && trapFocus) {
+        const targets = [toggle, ...Array.from(navigation?.querySelectorAll<HTMLElement>('a[href], button') ?? [])].filter((node): node is HTMLElement => !!node);
+        const index = targets.indexOf(document.activeElement as HTMLElement);
+        const next = event.shiftKey ? (index <= 0 ? targets.length - 1 : index - 1) : (index + 1) % targets.length;
+        event.preventDefault();
+        targets[next]?.focus();
+      }
     };
 
     document.body.style.overflow = 'hidden';
@@ -71,6 +85,9 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
       document.body.style.overflow = previousOverflow;
       document.body.classList.remove('mobile-menu-open');
       window.removeEventListener('keydown', closeOnEscape);
+      mobile.removeEventListener('change', closeOnResize);
+      cancelAnimationFrame(focusFrame);
+      if (trapFocus) toggle?.focus({ preventScroll: true });
     };
   }, [menuOpen]);
 

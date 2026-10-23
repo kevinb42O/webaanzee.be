@@ -1,10 +1,12 @@
+import MobileAbout from './MobileAbout';
+import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useScroll, useSpring, useTransform, useVelocity, type MotionStyle, type MotionValue } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './About.module.css';
 
-const DepthPortrait: React.FC<{ progress: MotionValue<number> }> = ({ progress }) => {
+export const DepthPortrait: React.FC<{ progress: MotionValue<number> }> = ({ progress }) => {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const rotateY = useSpring(pointerX, { stiffness: 90, damping: 24 });
@@ -55,7 +57,7 @@ const StaticPortrait: React.FC = () => (
   </div>
 );
 
-const About: React.FC = () => {
+const AboutContent: React.FC = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [animated, setAnimated] = useState(false);
   const { scrollYProgress } = useScroll({ target: sceneRef, offset: ['start end', 'end end'] });
@@ -102,6 +104,11 @@ const About: React.FC = () => {
 
     </section>
   );
+};
+
+const About: React.FC = () => {
+  const mobile = useMediaQuery(mobileMotionQuery);
+  return mobile ? <MobileAbout /> : <AboutContent />;
 };
 
 export default About;

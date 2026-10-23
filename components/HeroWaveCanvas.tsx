@@ -2,11 +2,10 @@ import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useTransform, type MotionValue } from 'motion/react';
 import styles from './Hero.module.css';
 
-const columns = 20;
-const rows = 12;
-
 /** Each tile is a cropped piece of the hero photograph and moves as a small cube. */
-export default function HeroWaveCanvas({ source, reducedMotion, progress }: { source: string; reducedMotion: boolean; progress?: MotionValue<number> }) {
+export default function HeroWaveCanvas({ source, reducedMotion, progress, touchReactive = false }: { source: string; reducedMotion: boolean; progress?: MotionValue<number>; touchReactive?: boolean }) {
+  const columns = touchReactive ? 8 : 20;
+  const rows = touchReactive ? 14 : 12;
   const field = useRef<HTMLDivElement>(null);
   const visible = useMotionValue(1);
   const opacity = useTransform(progress ?? visible, [.44, .82], [0, 1]);
@@ -32,8 +31,10 @@ export default function HeroWaveCanvas({ source, reducedMotion, progress }: { so
     const waves: { x: number; y: number; t: number; power: number }[] = [];
     let pointer = { x: -2, y: -2 }, last = { x: -2, y: -2 }, active = false, raf = 0, start = performance.now();
     const move = (event: PointerEvent) => {
-      if (event.pointerType !== 'mouse') return;
+      if (event.pointerType !== 'mouse' && !touchReactive) return;
+      if (touchReactive && getComputedStyle(root).visibility === 'hidden') { active = false; return; }
       const r = root.getBoundingClientRect();
+      if (!r.width || !r.height || document.hidden) { active = false; return; }
       pointer = { x: (event.clientX-r.left)/r.width, y: (event.clientY-r.top)/r.height };
       active = pointer.x >= 0 && pointer.x <= 1 && pointer.y >= 0 && pointer.y <= 1;
       if (!active) return;
@@ -60,12 +61,24 @@ export default function HeroWaveCanvas({ source, reducedMotion, progress }: { so
       });
       raf=requestAnimationFrame(frame);
     };
-    const startFrame=()=>{if(!raf)raf=requestAnimationFrame(frame);};
+    let inView = true;
+    const startFrame=()=>{if(!raf && (!touchReactive || (inView && getComputedStyle(root).visibility !== 'hidden')) && !document.hidden)raf=requestAnimationFrame(frame);};
+    // Native touch scrolling cancels pointermove. Feed its progress into the same
+    // waves so the desktop surface also reacts underneath a swiping finger.
+    let previousProgress = progress?.get() ?? 0;
+    const unsubscribe = touchReactive ? progress?.on('change', value => {
+      if (value < .4 || value > 1 || Math.abs(value - previousProgress) < .025) return;
+      previousProgress = value;
+      waves.push({ x: .5 + Math.sin(value * 12) * .22, y: .25 + value * .5, t: (performance.now() - start) / 1000, power: .75 });
+      if (waves.length > 8) waves.shift();
+      startFrame();
+    }) : undefined;
+    if (touchReactive) { window.addEventListener('pointerup', leave); window.addEventListener('pointercancel', leave); }
     window.addEventListener('pointermove',move,{passive:true});window.addEventListener('pointermove',startFrame,{passive:true});
-    const observer=new IntersectionObserver(([entry])=>{if(entry.isIntersecting)startFrame();else if(raf){cancelAnimationFrame(raf);raf=0;}});observer.observe(root);
-    return()=>{cancelAnimationFrame(raf);observer.disconnect();size.disconnect();window.removeEventListener('pointermove',move);window.removeEventListener('pointermove',startFrame);};
-  },[reducedMotion]);
-  return <motion.div ref={field} className={styles.waveCanvas} aria-hidden="true" data-scroll-reveal={progress ? '' : undefined} style={{'--hero-photo':`url("${source}")`, opacity} as import('motion/react').MotionStyle}>
+    const observer=new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;if(entry.isIntersecting)startFrame();else { if(touchReactive)leave(); if(raf){cancelAnimationFrame(raf);raf=0;} }});observer.observe(root);
+    return()=>{if (touchReactive) { window.removeEventListener('pointerup', leave); window.removeEventListener('pointercancel', leave); } unsubscribe?.();cancelAnimationFrame(raf);observer.disconnect();size.disconnect();window.removeEventListener('pointermove',move);window.removeEventListener('pointermove',startFrame);};
+  },[reducedMotion, touchReactive, progress]);
+  return <motion.div ref={field} className={styles.waveCanvas} aria-hidden="true" data-scroll-reveal={progress ? '' : undefined} style={{'--hero-photo':`url("${source}")`, opacity, ...(touchReactive ? { gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)` } : {})} as import('motion/react').MotionStyle}>
     {Array.from({length:columns*rows},(_,i)=>{const col=i%columns,row=Math.floor(i/columns);return <i key={i} data-tile="" style={{backgroundPosition:`${col/(columns-1)*100}% ${row/(rows-1)*100}%`}}/>;})}
   </motion.div>;
 }

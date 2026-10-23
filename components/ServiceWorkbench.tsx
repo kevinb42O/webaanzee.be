@@ -23,7 +23,7 @@ export function ServiceLink({ index }: { index: number }) {
   </a>;
 }
 
-function Chapter({ index, distance, phase, active }: { index: number; distance: MotionValue<number>; phase: MotionValue<number>; active: number }) {
+export function Chapter({ index, distance, phase, active }: { index: number; distance: MotionValue<number>; phase: MotionValue<number>; active: number }) {
   const item = capabilities[index];
   const example = serviceExamples[index];
   const near = Math.abs(active - index) <= 1;
@@ -55,7 +55,7 @@ function Chapter({ index, distance, phase, active }: { index: number; distance: 
   </motion.figure>;
 }
 
-function Copy({ index, phase, active }: { index: number; phase: MotionValue<number>; active: number }) {
+export function Copy({ index, phase, active }: { index: number; phase: MotionValue<number>; active: number }) {
   const opacity = useTransform(phase, v => itemOpacity(v, index));
   const y = useTransform(phase, v => clamp(index - v, -1, 1) * 20);
   const visible = useTransform(opacity, v => v > .001 ? 'visible' : 'hidden');
@@ -69,7 +69,7 @@ function Copy({ index, phase, active }: { index: number; phase: MotionValue<numb
   </motion.article>;
 }
 
-function ChapterButton({ index, distance, active, onNavigate }: { index: number; distance: MotionValue<number>; active: number; onNavigate: (index: number) => void }) {
+export function ChapterButton({ index, distance, active, onNavigate }: { index: number; distance: MotionValue<number>; active: number; onNavigate: (index: number) => void }) {
   const scaleX = useTransform(distance, v => serviceCompletion(v, index, capabilities.length));
   return <button type="button" id={`service-trigger-${index}`} aria-controls={`service-panel-${index}`} aria-current={active === index ? 'step' : undefined} onClick={() => onNavigate(index)}>
     <span className={styles.chapterTrack} aria-hidden="true"><motion.span style={{ scaleX }} /></span>

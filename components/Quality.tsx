@@ -1,3 +1,4 @@
+import { mobileMotionQuery } from '../utils/useMediaQuery';
 import React, { useEffect, useState } from 'react';
 import { motion, useTransform, type MotionValue } from 'motion/react';
 import styles from './Quality.module.css';
@@ -48,10 +49,12 @@ const Quality: React.FC = () => {
   const [embedded, setEmbedded] = useState(false);
   useEffect(() => {
     const media = window.matchMedia(desktopMotionQuery);
-    const update = () => setEmbedded(media.matches);
+    const mobileMedia = window.matchMedia(mobileMotionQuery);
+    const update = () => setEmbedded(media.matches || mobileMedia.matches);
     update();
     media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
+    mobileMedia.addEventListener('change', update);
+    return () => { media.removeEventListener('change', update); mobileMedia.removeEventListener('change', update); };
   }, []);
   if (embedded) return null;
   return <section className={styles.section} aria-labelledby="quality-static-title">

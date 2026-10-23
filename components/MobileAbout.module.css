@@ -1,0 +1,15 @@
+@value visual as portraitVisual, portraitFrame as portraitFrame, coastFrame as coastFrame, horizonFrame as horizonFrame from './About.module.css';
+.about { background: #eee8dc; }
+.sequence { position: relative; height: 350svh; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: clip; isolation: isolate; }
+.content { width: min(calc(100% - 2.5rem), 620px); margin: 0 auto; padding: 5.5rem 0 2rem; }
+.content .portraitVisual { height: clamp(340px, 54svh, 620px); aspect-ratio: auto; width: 100%; margin-bottom: 1.5rem; perspective: 1100px; }
+.content .portraitFrame { top: 6%; left: 24%; width: 65%; }
+.content .coastFrame { top: 24%; left: 0; width: 90%; }
+.content .horizonFrame { top: 1%; left: 50%; width: 56%; }
+@media (max-height: 600px) { .content .portraitVisual { height: 420px; max-width: 520px; } }
+
+.content .portraitVisual { height: auto; aspect-ratio: 1.05; }
+@media (max-height: 500px) and (min-width: 600px) { .content .portraitVisual { width: min(100%, 340px); height: auto; aspect-ratio: 1.05; } }
+.content { width: min(calc(100% - 32px), 620px); }
+.content h2, .content p, .content a { overflow-wrap: anywhere; }

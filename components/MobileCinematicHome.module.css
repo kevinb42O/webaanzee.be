@@ -1,0 +1,231 @@
+@value section as serviceSection, heading as serviceHeading, composition as serviceComposition, visual as serviceVisual, visualInner as serviceInner, exampleTravel as serviceTravel, mediaSpace as serviceMedia, browserFrame as serviceBrowser, detailFrame as serviceDetail, copySpace as serviceCopySpace, copy as serviceCopy, chapters as serviceChapters, chapterLabel as serviceLabel, exampleCaption as serviceCaption, chapterNumber as serviceNumber, serviceLink as serviceLink from './ServiceWorkbench.module.css';
+@value scene as qualityScene, sceneGrid as qualityGrid, slicedTitle as qualityTitle, reading as qualityReading, principles as qualityPrinciples, principle as qualityPrinciple, baseline as qualityBaseline, sceneClosing as qualityClosing from './Quality.module.css';
+@value pricingScene as priceScene, priceEditorial as priceEditorial, editorialHeader as priceHeader, editorialRule as priceRule, chapterStage as priceStage, chapter as priceChapter, chapterIdentity as priceIdentity, chapterTitleWindow as priceTitle, priceSculpture as priceSculpture, rollingPrice as rollingPrice, chapterDetails as priceDetails, editorialNav as priceNav from './Offer.module.css';
+@value showcase as depthScene, canvas as depthCanvas, identity as depthIdentity, details as depthDetails, navigation as depthNav, scrollHint as depthHint, fallback as depthFallback, word as depthWord, index as depthIndex, chip as depthChip from './DepthShowcase.module.css';
+@value hero as heroScene, embedded as heroEmbedded from './Hero.module.css';
+
+.mobile { --mobile-gutter: clamp(1.25rem, 4vw, 2.5rem); }
+.sequence { position: relative; height: 500svh; }
+.sequence + .sequence { margin-top: -45svh; }
+.anchor { position: absolute; width: 1px; height: 1px; pointer-events: none; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: clip; isolation: isolate; background: #fffaf0; }
+.hero { position: absolute; z-index: 2; inset: 0; }
+.hero .heroScene.heroEmbedded { height: 100%; min-height: 0; }
+.portfolio { position: absolute; inset: 0; }
+.workIntro { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 2rem; padding: 5rem var(--mobile-gutter) 3rem; background: #e3ebe7; }
+.workIntro h2 { max-width: 14ch; font-size: clamp(2.5rem, 9.5vw, 4.5rem); font-weight: 400; line-height: 1.06; letter-spacing: -.04em; }
+.workIntro h2 span { display: block; color: #a84029; }
+.workIntro p { max-width: 42ch; font-size: 1rem; line-height: 1.65; color: #465048; }
+.skip { position: absolute; z-index: 4; left: var(--mobile-gutter); bottom: max(1rem, env(safe-area-inset-bottom)); display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; color: inherit; background: #fffaf0; padding: .4rem .7rem; font-size: .7rem; }
+.mobile :is(a, button):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.mobile button { touch-action: manipulation; }
+.mobile a:active, .mobile button:active { opacity: .75; }
+
+/* Leave room around the actual WebGL surface for readable identity and case actions. */
+.portfolio .depthScene { text-transform: none; letter-spacing: 0; }
+.portfolio .depthCanvas { top: 0; height: 100%; }
+.portfolio .depthIdentity { top: 6.5rem; left: var(--mobile-gutter); right: var(--mobile-gutter); display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.portfolio .depthWord { max-width: calc(100% - 4rem); font-size: clamp(.95rem, 3.8vw, 1.3rem); line-height: 1.3; }
+.portfolio .depthIndex { font-size: .75rem; }
+.portfolio .depthChip { width: 12px; height: 12px; }
+.portfolio .depthDetails { top: auto; bottom: 5.5rem; left: var(--mobile-gutter); right: var(--mobile-gutter); width: auto; }
+.portfolio .depthDetails dl { gap: .5rem; }
+.portfolio .depthDetails dl > div { grid-template-columns: 3.5rem 1fr; gap: .75rem; }
+.portfolio .depthDetails dt, .portfolio .depthDetails dd { font-size: .75rem; line-height: 1.5; }
+.portfolio .depthDetails dl > div:first-child { display: none; }
+.portfolio .depthDetails a { min-height: 44px; font-size: .9rem; }
+.portfolio .depthHint { display: none; }
+.portfolio .depthNav { top: 9rem; bottom: auto; right: var(--mobile-gutter); font-size: .75rem; }
+.portfolio .depthFallback { width: calc(100% - 2 * var(--mobile-gutter)); top: 45%; }
+
+.editorial { position: relative; margin: 0 var(--mobile-gutter); padding: 5.5rem 0 1.5rem; }
+.services .stage { background: #eae7df; }
+.serviceHandoff { position: absolute; inset: 0; background: #eae7df; }
+.services .serviceSection { height: auto; display: flex; flex-direction: column; gap: 1.5rem; }
+.services .serviceHeading { display: block; }
+.services .serviceHeading h2 { max-width: 20ch; font-size: clamp(1.75rem, 6.7vw, 2.8rem); line-height: 1.12; }
+.services .serviceHeading em { white-space: normal; }
+.services .serviceComposition { display: flex; flex-direction: column; gap: 1.5rem; }
+.services .serviceVisual { flex: none; height: clamp(260px, 48svh, 480px); }
+.services .serviceInner { height: 100%; }
+.services .serviceTravel { padding: 1rem; gap: .6rem; }
+.services .serviceMedia { padding: .75rem 0; }
+.services .serviceBrowser { max-width: 94%; }
+.services .serviceInner .serviceDetail { bottom: 2rem; }
+.services .serviceCaption { align-items: center; gap: .75rem; }
+.services .serviceCaption > span { max-width: 16ch; font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
+.services .serviceCaption > a { font-size: .7rem; max-width: 16ch; }
+.services .serviceCopySpace { display: grid; }
+.services .serviceCopy { align-self: start; }
+.services .serviceCopy h3 { max-width: 100%; font-size: clamp(2.1rem, 8vw, 3.5rem); margin-bottom: 1rem; }
+.services .serviceCopy > p { font-size: 1rem; line-height: 1.6; }
+.services .serviceNumber { margin-bottom: .75rem; }
+.services .serviceChapters { gap: .6rem; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: .5rem; }
+.services .serviceChapters button { min-height: 56px; }
+.services .serviceLabel { font-size: 0; }
+.services .serviceLabel > span { font-size: .85rem; }
+
+.quality .stage { background: #eae7df; }
+.qualityBackdrop { position: absolute; inset: 0; background: #171815; }
+.quality .qualityScene { position: relative; inset: auto; display: block; padding: 0; overflow: visible; background: transparent; }
+.quality .qualityGrid { grid-template-columns: 1fr; gap: 2rem; }
+.quality .qualityTitle { font-size: clamp(2.8rem, 11vw, 5rem); }
+.quality .qualityBaseline { margin-top: 1.5rem; }
+.quality .qualityReading { min-height: 300px; }
+.quality .qualityPrinciples { margin-top: 1.5rem; }
+.quality .qualityPrinciple { font-size: 1rem; padding: .85rem 0; }
+.quality .qualityClosing { font-size: clamp(2rem, 8vw, 3.8rem); }
+
+.prices .priceScene { position: relative; inset: auto; overflow: visible; background: transparent !important; }
+.prices .priceEditorial { position: relative; inset: auto; padding: 0; }
+.prices .priceHeader { grid-template-columns: 1fr; gap: 1rem; }
+.prices .priceHeader h2 { font-size: clamp(1.7rem, 6.5vw, 2.5rem); }
+.prices .priceHeader > p { font-size: .85rem; }
+.prices .priceRule { margin: 1.5rem 0; }
+.prices .priceStage { display: grid; flex: none; }
+.prices .priceChapter { position: relative; inset: auto; grid-area: 1 / 1; grid-template-columns: 1fr; align-content: start; gap: 1.5rem; }
+.prices .priceIdentity { gap: .5rem; padding-bottom: 0; }
+.prices .priceTitle h3 { font-size: clamp(2.3rem, 9.2vw, 4rem); }
+.prices .priceSculpture { margin-top: 1rem; }
+.prices .rollingPrice { font-size: clamp(4rem, 18vw, 6rem); }
+.prices .priceDetails { min-height: 0; padding-bottom: 0; }
+.prices .priceDetails > p:first-child { font-size: 1.05rem; }
+.prices .priceNav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1rem; margin-top: 2rem; }
+.prices .priceNav button { min-height: 52px; font-size: .7rem; }
+.prices .priceNav button > span:last-child { font-size: .7rem; }
+.prices .priceNav > a { grid-column: 2; justify-self: end; }
+
+@media (min-width: 761px) {
+  .editorial { width: min(calc(100% - 4rem), 680px); margin-inline: auto; padding-top: 6.5rem; }
+  .workIntro { align-items: center; text-align: center; }
+  .workIntro h2 { max-width: 18ch; }
+  .portfolio .depthIdentity { top: 7rem; }
+}
+@media (max-height: 600px) {
+  .editorial { padding-top: 5rem; }
+  .portfolio .depthIdentity { top: 4.5rem; }
+  .portfolio .depthNav { top: 7rem; }
+  .portfolio .depthCanvas { top: 0; height: 100%; }
+  .portfolio .depthDetails { bottom: 3.5rem; }
+  .portfolio .depthDetails dl > div:nth-child(2) { display: none; }
+  .workIntro { gap: 1rem; padding-top: 4.5rem; }
+  .workIntro h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+  .workIntro p { font-size: .9rem; }
+  .services .serviceVisual { height: 300px; }
+}
+
+.archive { display: inline-flex; align-items: center; min-height: 44px; margin-top: 1rem; color: #3d493f; font-size: .85rem; text-decoration: underline; text-underline-offset: 5px; }
+
+/* Mobile reading stages: headings and navigation never disappear during a handover. */
+.serviceWorkbench, .priceWorkbench { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 1rem; padding: calc(var(--mobile-header-height, 64px) + 1rem) var(--mobile-gutter) 5rem; }
+.sceneHeading { flex: none; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; }
+.sceneHeading h2 { max-width: 22ch; font-size: clamp(1.5rem, 5.8vw, 2.4rem); font-weight: 400; line-height: 1.12; color: inherit; }
+.sceneHeading h2 em { color: #a84029; font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+.sceneHeading > a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; font-size: .8rem; text-decoration: underline; text-underline-offset: 4px; }
+.readingViewport { position: relative; flex: 1; min-height: 0; overflow: clip; }
+.readingLayer { position: absolute; inset: 0; overflow: clip; background: #eae7df; }
+.readingItem { display: flex; flex-direction: column; gap: 1.5rem; padding: .25rem 0 1rem; }
+.services .serviceVisual { height: clamp(210px, 33svh, 360px); }
+.services .serviceCopy { flex: none; }
+.services .serviceCopy h3 { font-size: clamp(1.9rem, 7.5vw, 3rem); }
+.services .serviceInner .serviceDetail { bottom: 1.25rem; }
+.services .serviceChapters.sceneNavigation { margin-top: 0; flex: none; }
+.prices .priceWorkbench { font-family: 'Offer Manrope', sans-serif; }
+.prices .sceneHeading { gap: .6rem; padding-bottom: .8rem; border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
+.prices .sceneHeading h2 { font-size: clamp(1.4rem, 5.5vw, 2rem); font-weight: 700; }
+.prices .sceneHeading h2 em { color: var(--price-accent); font-family: 'Offer Bodoni', Georgia, serif; font-size: 1.25em; }
+.prices .sceneHeading p { font-size: .75rem; line-height: 1.5; color: var(--price-muted); }
+.prices .readingLayer { background: var(--price-paper); }
+.prices .priceNav.sceneNavigation { flex: none; margin-top: 0; gap: 0 1rem; }
+.prices .priceNav.sceneNavigation button { min-height: 44px; padding: .5rem 0; }
+.prices .priceTitle h3 { font-size: clamp(2rem, 8vw, 3.5rem); }
+.prices .readingItem { gap: 0; }
+.prices .priceChapter { flex: none; }
+.prices .skip { background: var(--price-paper); color: var(--price-ink); }
+.portfolio .depthScene { padding: calc(var(--mobile-header-height, 64px) + 1.25rem) var(--mobile-gutter) 0; }
+.portfolio .depthIdentity { position: relative; inset: auto; }
+.portfolio .depthNav { position: relative; inset: auto; justify-content: flex-end; margin-top: .75rem; }
+@media (max-height: 600px) {
+  .serviceWorkbench, .priceWorkbench { gap: .65rem; padding-top: calc(var(--mobile-header-height, 64px) + .5rem); padding-bottom: 4.5rem; }
+  .sceneHeading h2 { font-size: 1.4rem; }
+  .sceneHeading > a { font-size: .75rem; }
+  .prices .sceneHeading p { display: none; }
+  .quality .qualityTitle { font-size: 2.5rem; }
+  .quality .qualityClosing { font-size: 2rem; }
+  .quality .qualityGrid { gap: 1rem; }
+}
+/* The browser mockup needs real image space even on a narrow phone. */
+.services .serviceVisual { height: clamp(320px, 40svh, 440px); }
+.services .serviceInner .serviceDetail { bottom: 2.5rem; }
+.readingViewport { mask-image: linear-gradient(to bottom, #000 calc(100% - 10px), transparent); }
+.bodyArchive { display: none; }
+@media (max-height: 500px) and (min-width: 600px) {
+  .services .sceneHeading { flex-wrap: nowrap; }
+  .services .sceneHeading > a { white-space: nowrap; }
+  .services .readingItem { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+  .services .serviceVisual { height: 290px; }
+  .services .serviceCopy h3 { font-size: 1.8rem; }
+  .prices .priceNav.sceneNavigation { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+  .prices .sceneHeading h2 { font-size: 1.4rem; }
+  .prices .priceChapter { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.5rem; }
+  .prices .priceTitle h3 { font-size: 2rem; }
+  .prices .rollingPrice { font-size: 4rem; }
+  .services .sceneHeading h2 { max-width: none; }
+}
+@value supporting as portalSupporting, statement as portalStatement, introduction as portalIntroduction, leftTitle as portalLeft, rightTitle as portalRight, splitTitle as portalTitle from './CoastalPortal.module.css';
+.hero .portalSupporting { justify-content: safe center; transform: translateY(var(--hero-reading-y, 0px)); }
+@media (max-height: 500px) {
+  .hero .portalSupporting { padding-top: calc(var(--mobile-header-height, 64px) + .75rem); padding-bottom: 1.5rem; }
+  .hero .portalStatement { font-size: clamp(1.6rem, 4vw, 2.5rem); }
+  .hero .portalIntroduction { font-size: 1rem; line-height: 1.5; margin-top: 1rem; }
+  .hero .portalTitle { font-size: clamp(2rem, 5vw, 3rem); }
+  .hero .portalLeft { top: 18%; }
+  .hero .portalRight { top: 55%; }
+}
+.mobile { --mobile-gutter: clamp(16px, 4vw, 40px); }
+.services .serviceChapters { gap: min(.6rem, 8px); }
+.hero .portalRight { top: auto; bottom: clamp(80px, 12svh, 128px); }
+.navIndex { display: none; }
+@media (max-width: 360px) {
+  .prices .priceNav.sceneNavigation { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }
+  .prices .sceneHeading > p { display: none; }
+  .prices .priceNav .navIndex { display: inline; font-size: .85rem; }
+  .prices .priceNav .navLabel, .prices .priceNav .navAmount { display: none; }
+}
+/* Persistent chrome has bounded spacing; enlarged reading text keeps its own scroll room. */
+.serviceWorkbench, .priceWorkbench { gap: 12px; padding-top: calc(var(--mobile-header-height, 64px) + 12px); padding-bottom: 80px; }
+.sceneHeading h2, .prices .sceneHeading h2 { font-size: clamp(24px, 5.8vw, 38px); }
+.sceneHeading > a { font-size: clamp(12px, .8rem, 16px); }
+.prices .sceneHeading { padding-bottom: 12px; gap: 8px; }
+.prices .sceneHeading p { font-size: clamp(12px, .75rem, 16px); }
+.services .serviceChapters button { padding: 4px 0; gap: 8px; }
+.services .serviceLabel > span { font-size: clamp(14px, .85rem, 18px); }
+.prices .priceNav.sceneNavigation button { padding: 8px 0; gap: 8px; font-size: clamp(12px, .75rem, 16px); }
+.prices .priceNav.sceneNavigation button > span:last-child { font-size: inherit; }
+.prices .priceNav .navIndex { font-size: 14px; }
+.skip { font-size: clamp(12px, .75rem, 16px); line-height: 1.4; max-width: calc(100% - 88px); padding: 6px 10px; gap: 8px; bottom: max(16px, env(safe-area-inset-bottom)); }
+.services .serviceCopy { align-self: stretch; width: 100%; min-width: 0; }
+.services .serviceCopy h3, .services .serviceCopy p { overflow-wrap: anywhere; }
+.services .serviceLink { display: flex; max-width: 100%; gap: 1rem; overflow-wrap: anywhere; }
+.quality .qualityGrid { grid-template-columns: minmax(0, 1fr); }
+.quality .qualityTitle, .quality .qualityClosing, .quality .qualityReading { overflow-wrap: anywhere; min-width: 0; }
+.prices .priceChapter { min-width: 0; width: 100%; grid-template-columns: minmax(0, 1fr); }
+.prices .priceDetails { min-width: 0; width: 100%; overflow-wrap: anywhere; }
+.prices .priceTitle h3 { overflow-wrap: anywhere; }
+.prices .rollingPrice { font-size: clamp(56px, 18vw, 96px); }
+.hero .portalStatement, .hero .portalIntroduction, .workIntro h2, .workIntro p { overflow-wrap: anywhere; }
+@media (max-height: 500px) and (min-width: 600px) { .prices .priceChapter { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } }
+.workIntro { justify-content: safe center; gap: 0; }
+.workIntroReading { display: flex; flex-direction: column; gap: 2rem; flex: none; }
+.services .serviceVisual { height: calc(260px + 6rem); }
+.services .serviceCaption { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; }
+.services .serviceCaption > span { max-width: 100%; min-width: 0; font-size: clamp(20px, 4.5vw, 28px); overflow-wrap: anywhere; }
+.services .serviceCaption > a { max-width: 100%; min-width: 0; min-height: 44px; font-size: clamp(12px, .7rem, 16px); overflow-wrap: anywhere; }
+@media (max-height: 500px) and (min-width: 600px) { .services .serviceVisual { height: calc(240px + 4rem); } }
+.quality .qualityReading { align-items: start; }
+@media (max-height: 500px) and (min-width: 600px) { .sceneHeading h2, .prices .sceneHeading h2 { font-size: 22px; } }
+@media (max-height: 500px) and (min-width: 600px) {
+  .serviceWorkbench, .priceWorkbench { gap: 6px; padding-bottom: 72px; }
+}
+@value hint as portalHint from './CoastalPortal.module.css';
+.hero .portalHint { left: var(--mobile-gutter); right: auto; max-width: calc(100% - 104px); font-size: clamp(11px, .7rem, 14px); }

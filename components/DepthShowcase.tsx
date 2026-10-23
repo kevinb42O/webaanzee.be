@@ -13,8 +13,9 @@ const moods = [
   { x: -.7, accent: '#fdd895', background: '#7d936e', blob1: '#fdd895', blob2: '#a5b599', ink: '#f4f4f4' },
 ];
 
-export default function DepthShowcase({ projects, phase, active, onIndex, onNavigate, departure }: {
+export default function DepthShowcase({ projects, phase, active, onIndex, onNavigate, departure, mobile = false }: {
   projects: CaseStudy[];
+  mobile?: boolean;
   phase: MotionValue<number>;
   active: boolean;
   onIndex: (index: number) => void;
@@ -37,11 +38,12 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
 
   useEffect(() => {
     let cancelled = false;
+    let mobileResize: ResizeObserver | undefined;
     let instance: import('./depth-gallery/PortfolioEngine.js').PortfolioEngine | null = null;
     const unsubscribe = phase.on('change', value => engine.current?.setPosition(value));
     const data = projects.map((project, i) => {
       const mood = moods[i % moods.length];
-      return { textureSrc: project.imageSrc, fallbackColor: mood.accent, accentColor: mood.accent,
+      return { textureSrc: mobile ? (project.previewSrc ?? `/images/cases/previews/${project.id}.jpg`) : project.imageSrc, fallbackColor: mood.accent, accentColor: mood.accent,
         backgroundColor: mood.background, blob1Color: mood.blob1, blob2Color: mood.blob2,
         position: { x: mood.x, y: 0 }, label: { word: project.title, color: mood.ink } };
     });
@@ -52,6 +54,22 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
         setIndex(next);
         indexCallback.current(next);
       }, () => { if (!cancelled) setFailed(true); });
+      if (mobile) {
+        // Configure this instance only; desktop engine defaults remain untouched.
+        instance.gallery.mobileBreakpoint = 999;
+        instance.gallery.mobileXSpreadFactor = .12;
+        const fit = () => {
+          if (!instance || !canvas.current) return;
+          instance.gallery.mobilePlaneScale = Math.min(.55, Math.max(.14, canvas.current.clientWidth / canvas.current.clientHeight * .68));
+          instance.resize();
+        };
+        fit();
+        mobileResize = new ResizeObserver(fit);
+        mobileResize.observe(canvas.current);
+        instance.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+        instance.trail.configuration.responsiveSettings.mobileBreakpoint = 999;
+        instance.trail.configuration.responsiveSettings.mobileWidthScale = .25;
+      }
       engine.current = instance;
       instance.setPosition(phase.get());
       instance.setEnabled(activeRef.current);
@@ -64,15 +82,27 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
     return () => {
       cancelled = true;
       unsubscribe();
+      mobileResize?.disconnect();
       instance?.dispose();
       engine.current = null;
     };
-  }, [projects, phase]);
+  }, [projects, phase, mobile]);
 
-  useEffect(() => { engine.current?.setEnabled(active); }, [active]);
+  useEffect(() => { engine.current?.setEnabled(active && (!mobile || !failed)); }, [active, mobile, failed]);
+  useEffect(() => {
+    if (!mobile || (ready && !failed)) return;
+    // Loading and WebGL failure still expose the correct case at every scroll moment.
+    const read = (value: number) => {
+      const next = Math.max(0, Math.min(projects.length - 1, Math.round(value)));
+      setIndex(next);
+      indexCallback.current(next);
+    };
+    read(phase.get());
+    return phase.on('change', read);
+  }, [mobile, ready, failed, phase, projects.length]);
   const project = projects[index];
   const mood = moods[index % moods.length];
-  return <section className={styles.showcase} data-depth-showcase data-depth-ready={ready && !failed} data-depth-index={index} aria-label="Portfolio" style={{ color: mood.ink }}>
+  return <section className={styles.showcase} data-depth-showcase data-depth-ready={ready && !failed} data-depth-index={index} aria-label="Portfolio" style={{ color: mood.ink, ...(mobile ? { backgroundColor: (!ready || failed) && mood.ink === '#f4f4f4' ? '#263b42' : mood.background } : {}) }}>
     <motion.canvas ref={canvas} className={styles.canvas} aria-hidden="true" style={{ scale: departingScale, x: departingX, y: departingY }} />
     {(!ready || failed) && <motion.a href={project.casePath} className={styles.fallback} style={{ scale: departingScale, x: departingX, y: departingY }}><img src={project.imageSrc} alt={`Website van ${project.title}`} width="1276" height="720" /></motion.a>}
     <div className={styles.identity}>

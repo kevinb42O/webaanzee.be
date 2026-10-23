@@ -1,3 +1,4 @@
+import { mobileMotionQuery } from '../utils/useMediaQuery';
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValueEvent, useTransform, type MotionValue } from 'motion/react';
 import { ArrowUpRight, Plus } from 'lucide-react';
@@ -21,7 +22,7 @@ const PricingHeader: React.FC = () => (
       </header>
 );
 
-const offers = [
+export const offers = [
   {
     title: ['Website', 'op maat.'], label: 'Website op maat', price: pricing.website.price,
     description: 'Voor een zaak die haar aanbod wil tonen en bereikbaar wil zijn voor vragen en aanvragen.',
@@ -87,14 +88,14 @@ const PriceGlyph: React.FC<{ character: string; chapter: number; time: MotionVal
   return <span className={styles.glyphWindow}><motion.span style={{ rotateX, y }}>{character}</motion.span></span>;
 };
 
-const PriceChapter: React.FC<{ index: number; time: MotionValue<number>; active: boolean }> = ({ index, time, active }) => {
+export const PriceChapter: React.FC<{ index: number; time: MotionValue<number>; active: boolean; masked?: boolean }> = ({ index, time, active, masked = false }) => {
   const offer = offers[index];
   const local = useTransform(time, value => value - index);
   const opacity = useTransform(time, value => itemOpacity(value, index));
   const titleY = useTransform(local, value => `${clamp(-value, -1, 1) * 12}%`);
   const titleRotate = useTransform(local, value => clamp(-value, -1, 1) * 3);
   const detailY = useTransform(local, value => clamp(-value, -1, 1) * 12);
-  return <motion.article className={styles.chapter} style={{ opacity }} inert={!active ? true : undefined} aria-hidden={!active} aria-label={offer.label}>
+  return <motion.article className={styles.chapter} style={{ opacity: masked ? 1 : opacity }} inert={!active ? true : undefined} aria-hidden={!active} aria-label={offer.label}>
     <div className={styles.chapterIdentity}>
       <div className={styles.chapterTitleWindow}><motion.h3 style={{ y: titleY, rotateX: titleRotate }}>{offer.title[0]}<em>{offer.title[1]}</em></motion.h3></div>
       <div className={styles.priceSculpture}>
@@ -150,10 +151,12 @@ const Offer: React.FC = () => {
   const [embedded, setEmbedded] = useState(false);
   useEffect(() => {
     const media = window.matchMedia(desktopMotionQuery);
-    const update = () => setEmbedded(media.matches);
+    const mobileMedia = window.matchMedia(mobileMotionQuery);
+    const update = () => setEmbedded(media.matches || mobileMedia.matches);
     update();
     media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
+    mobileMedia.addEventListener('change', update);
+    return () => { media.removeEventListener('change', update); mobileMedia.removeEventListener('change', update); };
   }, []);
   return (
   <section className={styles.section} id={embedded ? 'prijsdetails' : 'prijzen'} aria-label={embedded ? 'Maatwerk en prijsvoorwaarden' : undefined} aria-labelledby={embedded ? undefined : 'pricing-title'}>

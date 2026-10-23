@@ -6,7 +6,8 @@ type Spot = { type: 'project' | 'service' | 'price'; index: number } | { type: '
 let spot: Spot = { type: 'home' };
 let readingMode: string | undefined;
 const renderedMode = () => document.querySelector('[data-home-sequence]') ? 'desktop'
-  : document.querySelector('[data-mobile-home]') ? 'mobile' : 'static';
+  : document.querySelector('[data-mobile-cinematic]') ? 'mobile'
+  : document.querySelector('[data-mobile-home]') ? 'mobile-static' : 'static';
 
 /** Called while the old desktop controller still owns its measured timeline. */
 export function rememberHomeMoment(t: number, projectCount: number, serviceCount: number) {
@@ -37,6 +38,26 @@ export function trackHomeReadingPosition(projectCount: number, serviceCount: num
     };
     for (const id of ['over-ons', 'faq', 'contact', 'prijsdetails']) {
       if (contains(document.getElementById(id))) { spot = { type: 'section', id }; return; }
+    }
+    const cinematic = Array.from(document.querySelectorAll<HTMLElement>('[data-mobile-sequence]')).find(contains);
+    if (cinematic) {
+      const kind = cinematic.dataset.mobileKind;
+      // Native scroll events arrive before the Motion/React frame has committed.
+      // Read the physical score, not the previous frame's rendered item index.
+      const position = -cinematic.getBoundingClientRect().top;
+      const first = Number(cinematic.dataset.mobileFirst ?? 0);
+      const slot = Number(cinematic.dataset.mobileSlot ?? 1);
+      const change = Number(cinematic.dataset.mobileChange ?? 0);
+      const count = cinematic.querySelectorAll('[data-mobile-target]').length;
+      const starts: number[] = JSON.parse(cinematic.dataset.mobileStarts ?? '[]');
+      const holds: number[] = JSON.parse(cinematic.dataset.mobileHolds ?? '[]');
+      const item = starts.findIndex((start, i) => position < start + holds[i] + change / 2);
+      const index = starts.length ? (item < 0 ? starts.length - 1 : item)
+        : Math.max(0, Math.min(count - 1, Math.floor((position - first + change / 2) / slot)));
+      if (kind === 'project' && window.scrollY < Number(cinematic.querySelector<HTMLElement>('#projecten')?.dataset.mobileMoment ?? 0)) spot = { type: 'home' };
+      else if (kind === 'project' || kind === 'service' || kind === 'price') spot = { type: kind, index };
+      else if (kind === 'quality') spot = { type: 'quality' };
+      return;
     }
     const sequence = document.querySelector<HTMLElement>('[data-home-sequence]');
     if (sequence) {
@@ -80,6 +101,13 @@ export function preserveHomeReadingPosition(nextMobile: boolean, projectCount: n
         : saved.type === 'price' ? score.prices + saved.index * 1.25 + .5
         : saved.type === 'resultaten' ? score.work + .25 : 0;
       scrollToHomeMoment(sequence, moment, score.total, 'instant');
+      return;
+    }
+    const targetKey = saved.type === 'project' || saved.type === 'service' || saved.type === 'price' ? `${saved.type}:${saved.index}` : saved.type === 'quality' ? 'quality' : null;
+    const mobileAnchor = targetKey ? document.querySelector<HTMLElement>(`[data-mobile-target="${targetKey}"]`) : null;
+    const mobileSequence = mobileAnchor?.closest<HTMLElement>('[data-mobile-sequence]');
+    if (nextMobile && mobileAnchor && mobileSequence) {
+      window.scrollTo({ top: mobileSequence.getBoundingClientRect().top + window.scrollY + Number(mobileAnchor.dataset.mobileMoment), behavior: 'instant' });
       return;
     }
     let target: HTMLElement | null = null;

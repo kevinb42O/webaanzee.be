@@ -55,7 +55,9 @@ const ContactFooter: React.FC = () => {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    nameInputRef.current?.focus();
+    const mobile = window.matchMedia('(max-width: 999px)').matches;
+    nameInputRef.current?.focus({ preventScroll: mobile });
+    const focusFrame = mobile ? requestAnimationFrame(() => { if (dialogRef.current) dialogRef.current.scrollTop = 0; }) : 0;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') closeModal();

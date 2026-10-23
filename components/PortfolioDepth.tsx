@@ -12,7 +12,7 @@ import styles from './PortfolioDepth.module.css';
 import StickyProjectGrid from './StickyProjectGrid';
 import { useHomeScroll } from '../utils/useHomeScroll';
 import MobileHomeChoreography, { MobileNoScriptFallback } from './MobileHomeChoreography';
-import { mobileViewportQuery, useMediaQuery } from '../utils/useMediaQuery';
+import { mobileMotionQuery, mobileViewportQuery, useMediaQuery } from '../utils/useMediaQuery';
 import { preserveHomeReadingPosition, trackHomeReadingPosition } from '../utils/preserveHomeReadingPosition';
 import { clamp, createHomeScore, desktopMotionQuery, itemPhase, scrollToHomeMoment, serviceReadMoment, windowProgress } from '../utils/homeChoreography';
 
@@ -161,12 +161,13 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
 const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   const animated = useMediaQuery(desktopMotionQuery);
   const mobile = useMediaQuery(mobileViewportQuery);
+  const mobileAnimated = useMediaQuery(mobileMotionQuery);
   const previousMode = useRef<string | undefined>(undefined);
-  const mode = mobile ? 'mobile' : animated ? 'desktop' : 'static';
+  const mode = mobile ? (mobileAnimated ? 'mobile' : 'mobile-static') : animated ? 'desktop' : 'static';
 
   useLayoutEffect(() => {
     if (previousMode.current === undefined) {
-      previousMode.current = window.matchMedia(mobileViewportQuery).matches ? 'mobile'
+      previousMode.current = window.matchMedia(mobileViewportQuery).matches ? (window.matchMedia(mobileMotionQuery).matches ? 'mobile' : 'mobile-static')
         : window.matchMedia(desktopMotionQuery).matches ? 'desktop' : 'static';
       return;
     }

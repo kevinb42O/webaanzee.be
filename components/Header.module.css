@@ -313,3 +313,19 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
 }
+
+@media (max-width: 999px) {
+  .header, .header.scrolled { padding: 8px 0; }
+  .container { padding: 0 16px; gap: 12px; }
+  .logo { width: clamp(184px, 57vw, 252px); max-width: calc(100% - 56px); min-width: 0; }
+  .menuButton { flex: 0 0 44px; width: 44px; height: 44px; gap: 6px; }
+  .menuButton span { width: 18px; }
+  .menuButton[aria-expanded='true'] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .menuButton[aria-expanded='true'] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  .mobileNav { padding: 80px 16px max(24px, env(safe-area-inset-bottom)); }
+  .mobileLinks a, .mobileExplore a, .mobileCta { gap: 12px; }
+  .mobileLinks a > span, .mobileExplore a, .mobileContact a { min-width: 0; overflow-wrap: anywhere; }
+  .mobileLinks small { flex: none; }
+  .mobileExplore a, .mobileContact a { display: inline-flex; align-items: center; min-height: 44px; }
+  .mobileExplore a { display: flex; }
+}

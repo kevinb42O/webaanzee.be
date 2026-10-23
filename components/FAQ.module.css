@@ -147,3 +147,8 @@
     font-size: 1rem;
   }
 }
+@media (max-width: 999px) {
+  .container { padding-inline: clamp(16px, 4vw, 40px); }
+  .title, .groupTitle, .summary, .answer { overflow-wrap: anywhere; }
+  .summary { min-width: 0; }
+}

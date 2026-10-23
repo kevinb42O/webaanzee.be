@@ -5,6 +5,7 @@ import type { CaseStudy } from './Proof';
 import ProblemSolution from './ProblemSolution';
 import MobileHomepageEffects from './MobileHomepageEffects';
 import CoastalPortal from './CoastalPortal';
+import MobileCinematicHome from './MobileCinematicHome';
 import PortalHeroCopy from './PortalHeroCopy';
 import { heroIntroduction } from '../data/heroCopy';
 import { portalDistance } from '../utils/homeChoreography';
@@ -152,6 +153,7 @@ function MobileProject({ project, index, enabled }: { project: CaseStudy; index:
 
 export default function MobileHomeChoreography({ projects }: { projects: CaseStudy[] }) {
   const enabled = useMediaQuery(mobileMotionQuery);
+  if (enabled) return <div data-mobile-home><MobileCinematicHome projects={projects} /></div>;
   return <div className={styles.mobile} data-mobile-home>
     <Opening projects={projects} enabled={enabled} />
     <article data-mobile-project="0" className={`${work.staticProject} ${styles.project} ${styles.firstCopy}`} style={{ '--gallery-surface': palettes[0] } as React.CSSProperties}><ProjectCopy project={projects[0]} /></article>

@@ -22,6 +22,11 @@ export const scrollToSection = (
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const motion = behavior ?? (reduceMotion ? 'auto' : 'smooth');
+  const mobileSequence = el.closest<HTMLElement>('[data-mobile-sequence]');
+  if (mobileSequence && el.dataset.mobileMoment !== undefined) {
+    window.scrollTo({ top: mobileSequence.getBoundingClientRect().top + window.scrollY + Number(el.dataset.mobileMoment), behavior: motion });
+    return;
+  }
   const sequence = el.closest<HTMLElement>('[data-home-sequence]');
   if (sequence && (el.dataset.homeMoment !== undefined || id === 'home')) {
     scrollToHomeMoment(sequence, Number(el.dataset.homeMoment ?? 0), Number(sequence.dataset.homeTotal), motion);
