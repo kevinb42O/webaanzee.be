@@ -7,7 +7,6 @@ import MobileHomepageEffects from './MobileHomepageEffects';
 import CoastalPortal from './CoastalPortal';
 import MobileCinematicHome from './MobileCinematicHome';
 import PortalHeroCopy from './PortalHeroCopy';
-import { heroIntroduction } from '../data/heroCopy';
 import { portalDistance } from '../utils/homeChoreography';
 import { scrollToSection } from '../utils/scrollToSection';
 import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
@@ -61,12 +60,12 @@ function MobileHero({ enabled, covered, portalProgress }: { enabled: boolean; co
     <div className={hero.imageBlock}><img src="/blankenberge-pier-uhd.webp" alt="" width="3840" height="2160" fetchPriority="high" /></div>
     {portalProgress && <CoastalPortal progress={portalProgress} />}
     {portalProgress ? <PortalHeroCopy progress={portalProgress} /> : <div className={hero.container}>
-      <p className={hero.eyebrow}>Webdesign &amp; development <span>Belgische kust</span></p>
+
       <h1 className={hero.title}>
-        <span className={hero.lineMask}><span className={hero.titleLine}>Je kent je vak.</span></span>
-        <span className={hero.lineMask}><span className={`${hero.titleLine} ${hero.accentLine}`}>Laat het<em> online zien.</em></span></span>
+        <span className={hero.lineMask}><span className={hero.titleLine}><span>Je onderneming</span><em> verdient beter.</em></span></span>
+        <span className={hero.lineMask}><span className={`${hero.titleLine} ${hero.accentLine}`}><span>Dan zomaar</span><em> een website.</em></span></span>
       </h1>
-      <p className={hero.description}>{heroIntroduction}</p>
+
     </div>}
   </section>;
 }

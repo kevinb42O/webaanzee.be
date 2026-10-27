@@ -178,13 +178,9 @@
   .hero .portalSupporting { padding-top: calc(var(--mobile-header-height, 64px) + .75rem); padding-bottom: 1.5rem; }
   .hero .portalStatement { font-size: clamp(1.6rem, 4vw, 2.5rem); }
   .hero .portalIntroduction { font-size: 1rem; line-height: 1.5; margin-top: 1rem; }
-  .hero .portalTitle { font-size: clamp(2rem, 5vw, 3rem); }
-  .hero .portalLeft { top: 18%; }
-  .hero .portalRight { top: 55%; }
 }
 .mobile { --mobile-gutter: clamp(16px, 4vw, 40px); }
 .services .serviceChapters { gap: min(.6rem, 8px); }
-.hero .portalRight { top: auto; bottom: clamp(80px, 12svh, 128px); }
 .navIndex { display: none; }
 @media (max-width: 360px) {
   .prices .priceNav.sceneNavigation { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }

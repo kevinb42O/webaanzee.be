@@ -116,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
 
         <nav className={styles.nav} aria-label="Hoofdnavigatie">
           <a href="/diensten/webdesign/" className={styles.navLink}>Diensten</a>
-          <a href="/#resultaten" onClick={(e) => isHomePage ? scrollToSection(e, 'resultaten') : undefined} className={styles.navLink}>Projecten</a>
+          <a href="/#resultaten" onClick={(e) => isHomePage ? scrollToSection(e, 'resultaten') : undefined} className={styles.navLink}>{isHomePage ? 'Ontdek mijn werk' : 'Projecten'}</a>
           <a href="/webdesign-belgische-kust/" className={styles.navLink}>Kustregio</a>
           <a href="/inzichten/" className={styles.navLink}>Uitleg en aanpak</a>
         </nav>

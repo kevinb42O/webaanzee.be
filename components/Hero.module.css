@@ -95,3 +95,24 @@
   .primaryCta, .secondaryLink, .secondaryLink span { transition: none; }
   .secondaryLink:hover span { transform: none; }
 }
+
+.accentLine em > span { display: block; }
+.clarification { max-width: 30rem; color: #f7f3e9; font-size: 1rem; font-weight: 400; line-height: 1.6; letter-spacing: -.01em; text-wrap: pretty; }
+.discoveryLink { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: .65rem; color: #f7f3e9; font-size: .9rem; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .35em; pointer-events: auto; }
+.discoveryLink:hover { color: #fff; text-decoration-thickness: 2px; }
+.discoveryLink:focus-visible { outline: 2px solid #f7f3e9; outline-offset: 5px; }
+@media (max-height: 500px) { .clarification { font-size: .875rem; line-height: 1.4; } .discoveryLink { margin-top: .25rem; } }
+
+@media (min-width: 1000px) {
+  .hero .eyebrow, .hero .clarification, .hero .discoveryLink { display: none; }
+  .accentLine em { font-size: clamp(2.625rem, 5.85vw, 4.5rem); }
+}
+
+.titleLine > span { display: block; font-size: clamp(1.5rem, 2.4vw, 2.5rem); font-weight: 400; line-height: 1.05; }
+.titleLine > em { display: block; margin-top: .12em; font-family: 'Hero Bodoni', Georgia, serif; font-size: clamp(2.5rem, 4.2vw, 4.5rem); font-weight: 500; line-height: 1.02; letter-spacing: -.025em; }
+.accentLine > em { font-size: clamp(3.25rem, 6.1vw, 6rem); }
+@media (max-width: 999px) {
+  .titleLine > span { font-size: clamp(1.125rem, 4.8vw, 1.75rem); }
+  .titleLine > em { font-size: clamp(2rem, 8.5vw, 3.5rem); }
+  .accentLine > em { font-size: clamp(2.5rem, 10.6vw, 4.5rem); }
+}

@@ -4,7 +4,6 @@ import styles from './Hero.module.css';
 import HeroWaveCanvas from './HeroWaveCanvas';
 import CoastalPortal from './CoastalPortal';
 import PortalHeroCopy from './PortalHeroCopy';
-import { heroIntroduction } from '../data/heroCopy';
 
 const heroVariants: Variants = {
   hidden: {},
@@ -70,22 +69,18 @@ const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionVa
         variants={heroVariants}
         style={{ y: shouldReduceMotion ? 0 : contentY, opacity: shouldReduceMotion ? 1 : contentOpacity }}
       >
-        <motion.p className={styles.eyebrow} variants={fadeVariants}>
-          Webdesign &amp; development <span>Belgische kust</span>
-        </motion.p>
+
 
         <h1 className={styles.title}>
           <span className={styles.lineMask}>
-            <motion.span className={styles.titleLine} variants={revealVariants}>Je kent je vak.</motion.span>
+            <motion.span className={styles.titleLine} variants={revealVariants}><span>Je onderneming</span><em> verdient beter.</em></motion.span>
           </span>
           <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Laat het<em> online zien.</em></motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}><span>Dan zomaar</span><em> een website.</em></motion.span>
           </span>
         </h1>
         
-        <motion.p className={styles.description} variants={fadeVariants}>
-          {heroIntroduction}
-        </motion.p>
+
 
       </motion.div>}
     </motion.section>

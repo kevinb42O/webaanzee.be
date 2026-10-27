@@ -32,22 +32,17 @@
 }
 
 .splitTitle {
-  position: absolute;
-  z-index: 3;
-  inset: 0;
-  margin: 0;
-  color: #f7f3e9;
-  font-family: var(--font-body);
-  font-size: clamp(2.25rem, 3vw, 3rem);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -.03em;
-  pointer-events: none;
+  position: absolute; z-index: 3; inset: 0; margin: 0;
+  color: #f7f3e9; font-family: var(--font-body); font-weight: 500;
+  line-height: 1; letter-spacing: -.03em; pointer-events: none;
 }
 .leftTitle, .rightTitle { position: absolute; display: block; }
-.leftTitle { top: 29%; left: clamp(1.25rem, 4.8vw, 6rem); max-width: 42%; }
-.rightTitle { bottom: 12%; right: clamp(1.25rem, 4.8vw, 6rem); max-width: 75%; color: #f7f3e9; text-align: right; }
-.rightTitle > em { display: block; margin-top: .06em; font-family: 'Hero Bodoni', Georgia, serif; font-size: clamp(4rem, 7.8vw, 6rem); font-weight: 500; line-height: 1.12; letter-spacing: -.035em; }
+.splitTitle .leftTitle { top: 18%; left: 5.5%; max-width: 45%; }
+.splitTitle .rightTitle { top: 68%; bottom: auto; right: 7.5%; max-width: 48%; text-align: right; }
+.leftTitle > span, .rightTitle > span { display: block; font-size: clamp(1rem, 2.4vw, 2.5rem); font-weight: 400; line-height: 1.05; }
+.leftTitle > em, .rightTitle > em { display: block; margin-top: .12em; font-family: 'Hero Bodoni', Georgia, serif; font-weight: 500; line-height: 1.02; letter-spacing: -.025em; white-space: nowrap; }
+.leftTitle > em { font-size: clamp(1.5rem, 4.2vw, 4.5rem); }
+.rightTitle > em { font-size: clamp(1.75rem, 6.1vw, 6rem); }
 .readingShade { position: absolute; z-index: 1; inset: 0; background: rgba(7, 13, 12, .34); pointer-events: none; }
 .supporting[data-portal-supporting] {
   align-items: center;
@@ -82,26 +77,34 @@
   text-wrap: balance;
 }
 
+
 @media (max-width: 999px) {
   .hint { right: 1.25rem; bottom: 1.25rem; font-size: .7rem; }
-  .splitTitle { font-size: clamp(1.75rem, 3.8vw, 2.5rem); }
-  .leftTitle, .rightTitle { max-width: 88%; }
-  .leftTitle { top: 25%; }
-  .rightTitle { bottom: 12%; }
   .statement { font-size: clamp(2.7rem, 6.5vw, 4.5rem); }
 }
-
+@media (max-width: 999px) and (max-aspect-ratio: 4/5) {
+  .splitTitle { display: flex; flex-direction: column; gap: 1.5rem; padding: max(2rem, 6svh) 6% 0; }
+  .splitTitle .leftTitle, .splitTitle .rightTitle { position: static; max-width: 100%; text-align: left; }
+  .leftTitle > span, .rightTitle > span { font-size: clamp(1.125rem, 4.8vw, 1.75rem); }
+  .leftTitle > em { font-size: clamp(2rem, 8.5vw, 3.5rem); }
+  .rightTitle > em { font-size: clamp(2.5rem, 10.6vw, 4.5rem); }
+}
 @media (max-width: 760px) {
   .foreground img { width: max(106vw, 60svh); transform: translate(-50%, -48%); }
-  .splitTitle { font-size: clamp(1.5rem, 5.5vw, 2.25rem); }
-  .leftTitle { top: 23%; max-width: 88%; }
-  .rightTitle { bottom: 15%; max-width: calc(100% - 2.5rem); }
-  .rightTitle > em { font-size: clamp(2.5rem, 12vw, 5.2rem); margin-top: .12em; }
   .supporting[data-portal-supporting] { width: calc(100% - 2.5rem); padding: 5rem 0; }
   .statement { font-size: clamp(2.3rem, 10.2vw, 4.5rem); line-height: 1.08; }
   .introduction { max-width: 34ch; margin-top: 1.75rem; font-size: clamp(1.125rem, 4.8vw, 1.3rem); line-height: 1.65; letter-spacing: -.01em; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .foreground, .hint { display: none; }
+@media (max-height: 500px) and (max-width: 999px) and (max-aspect-ratio: 4/5) {
+  .splitTitle { gap: 1rem; padding-top: 1.5rem; }
+  .leftTitle > em { font-size: 2rem; }
+  .rightTitle > em { font-size: 2.5rem; }
 }
+@media (prefers-reduced-motion: reduce) { .foreground, .hint { display: none; } }
+@media (min-width: 1000px) { .hint { display: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .leftTitle > span, .leftTitle > em, .rightTitle > span, .rightTitle > em { animation: coverReveal .85s cubic-bezier(.16, 1, .3, 1) both; }
+  .leftTitle > em, .rightTitle > em { animation-delay: .08s; }
+}
+@keyframes coverReveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
