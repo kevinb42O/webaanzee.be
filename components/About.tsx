@@ -1,5 +1,7 @@
 import { useDesktopMotion } from '../utils/useDesktopMotion';
 import MobileAbout from './MobileAbout';
+import CoastalTitle from './CoastalTitle';
+import { windowProgress } from '../utils/homeChoreography';
 import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionStyle, type MotionValue } from 'motion/react';
@@ -34,11 +36,13 @@ export const DepthPortrait: React.FC<{ progress: MotionValue<number> }> = ({ pro
 };
 
 export function CoastToStudio({ progress }: { progress: MotionValue<number> }) {
-  const x = useTransform(progress, [0, .12, .7, 1], ['0%', '0%', '-105%', '-105%']);
+  const x = useTransform(progress, value => `${-105 * windowProgress(value, .12, .7)}%`);
   const scale = useTransform(progress, [0, .7, 1], [1.08, 1, 1]);
+  const shade = useTransform(progress, [0, .25, .65], [.42, .36, 0]);
   const visibility = useTransform(progress, value => value >= .72 ? 'hidden' : 'visible');
   return <motion.div className={styles.coastalReveal} style={{ x, visibility }} aria-hidden="true">
     <motion.img src="/blankenberge-pier-uhd.webp" alt="" width="3840" height="2160" loading="lazy" decoding="async" style={{ scale }} />
+    <motion.div className={styles.coastalShade} style={{ opacity: shade }} />
   </motion.div>;
 }
 
@@ -57,7 +61,9 @@ const AboutContent: React.FC = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const animated = useDesktopMotion();
   const { scrollYProgress } = useScroll({ target: sceneRef, offset: ['start start', 'end end'] });
-  const surface = useTransform(scrollYProgress, [0, .45, .72, .98, 1], ['#eee8dc', '#eee8dc', '#dce8e7', '#efddd1', '#efddd1']);
+  const sceneProgress = useSpring(scrollYProgress, { stiffness: 160, damping: 32, mass: .6 });
+  const supportingOpacity = useTransform(sceneProgress, [.58, .76], [0, 1]);
+  const surface = useTransform(sceneProgress, [0, .45, .72, .98, 1], ['#eee8dc', '#eee8dc', '#dce8e7', '#efddd1', '#efddd1']);
 
 
 
@@ -66,11 +72,12 @@ const AboutContent: React.FC = () => {
       <div ref={sceneRef} data-about-sequence={animated ? '' : undefined} className={`${styles.sequence} ${animated ? styles.animated : ''}`}>
         <motion.div key={`scene-${animated}`} data-about-stage={animated ? '' : undefined} className={styles.stage} style={animated ? { '--scene-surface': surface } as MotionStyle : undefined}>
           <div className={styles.atmosphere} aria-hidden="true" />
-          {animated && <CoastToStudio progress={scrollYProgress} />}
+          {animated && <CoastToStudio progress={sceneProgress} />}
           <div className={styles.sceneGrid}>
-            {animated ? <DepthPortrait progress={scrollYProgress} /> : <StaticPortrait />}
+            {animated ? <DepthPortrait progress={sceneProgress} /> : <StaticPortrait />}
             <div className={styles.content}>
-              <h2 id="about-title" className={styles.title}>Eén aanspreekpunt.<span>Van eerste idee tot werkende website.</span></h2>
+              {animated ? <CoastalTitle progress={sceneProgress} /> : <h2 id="about-title" className={styles.title}>Eén aanspreekpunt.<span>Van eerste idee tot werkende website.</span></h2>}
+              <motion.div style={animated ? { opacity: supportingOpacity } : undefined}>
               <div className={styles.textBlock}>
                 <p>Ik ben Kevin, webdesigner en ontwikkelaar in Blankenberge. Ik werk de inhoud, het ontwerp en de techniek van je website uit. Je vragen en feedback komen rechtstreeks bij mij terecht.</p>
                 <p>Voor de start spreken we af wat ik bouw, welke inhoud je aanlevert en hoe je feedback geeft. Ook hosting, beheer en wijzigingen na de oplevering staan in je offerte.</p>
@@ -78,6 +85,7 @@ const AboutContent: React.FC = () => {
               <a className={styles.contactLink} href="#contact" onClick={(event) => scrollToSection(event, 'contact')}>
                 Vertel me over je idee <ArrowUpRight aria-hidden="true" size={18} />
               </a>
+              </motion.div>
             </div>
           </div>
           <p className={styles.signature}>Kevin — ontwerper &amp; ontwikkelaar bij Webaanzee</p>

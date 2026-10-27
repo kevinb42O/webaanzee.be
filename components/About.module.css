@@ -133,3 +133,25 @@
 .animated .visual { height:min(70svh,700px); }
 .animated .atmosphere { opacity:.09; }
 @media(prefers-reduced-motion:reduce) { .coastalReveal { display:none; } }
+
+/* The title stays above the moving photograph, then hands over at identical coordinates. */
+.travellingTitle {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  margin: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.travellingTitle .travellingLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  margin: 0;
+  white-space: pre;
+  transform-origin: 0 0;
+}
+.coastalShade { position: absolute; inset: 0; background: #10242a; }

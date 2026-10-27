@@ -1,0 +1,38 @@
+import { projects } from '../../data/projects.mjs';
+import { pricing, euro } from '../../data/pricing.mjs';
+import { arrow } from './location-page.mjs';
+
+const esc = (value = '') => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const diagonal = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
+const link = (href, text, quiet = false) => `<a class="rg-button${quiet ? ' rg-button-quiet' : ''}" href="${href}">${text}${arrow}</a>`;
+const project = id => {
+  const p = projects.find(item => item.id === id);
+  if (!p) throw new Error(`Unknown webdesign project: ${id}`);
+  return p;
+};
+const screen = (p, hero = false) => `<a class="wd-screen${hero ? ' wd-screen-main' : ''}" href="${p.casePath}" aria-label="Bekijk het project ${esc(p.title)}"><div class="wd-browser"><span></span><span></span><span></span><span>${esc(new URL(p.url).hostname.replace(/^www\./, ''))}</span>${diagonal}</div><div class="wd-screen-image"><img src="${esc(p.introVideoPoster || p.image)}" width="1280" height="720" alt="Webdesign voor ${esc(p.title)}" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">${hero && p.videoSrc ? `<video data-wd-video data-src="${esc(p.videoSrc)}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>` : ''}</div></a>`;
+
+export function webdesignBody(service, services) {
+  const featured = project('carabus');
+  const secondary = project('fabrice');
+  const selected = [project('hondaanzee'), secondary];
+  const steps = [
+    ['Je vraag bespreken', 'Vertel wat je zaak doet, wie je wilt bereiken en wat je wilt laten maken of verbeteren.'],
+    ['De opdracht vastleggen', 'De offerte vermeldt pagina’s, functies, inhoud, kosten en planning. We spreken af wanneer je feedback geeft.'],
+    ['Ontwerpen en bouwen', 'Ik werk de website uit en controleer de pagina’s op mobiel en desktop vóór de oplevering.'],
+    ['Beheer afspreken', 'Hosting, technisch beheer en eventuele wijzigingen na de oplevering verlopen volgens je offerte.'],
+  ];
+  return `<section class="wd-hero rg-hero" aria-labelledby="webdesign-title"><div class="wd-hero-wash" aria-hidden="true"></div><div class="rg-wrap wd-hero-layout"><div class="wd-hero-copy"><nav class="rg-crumbs" aria-label="Kruimelpad"><a href="/">Startpagina</a><span aria-hidden="true">/</span><span aria-current="page">Webdesign</span></nav><h1 id="webdesign-title">Een website.<br>Voor je aanbod.<br><em>En je klanten.</em></h1><p>${esc(service.intro)}</p><div class="rg-actions">${link('/#contact', 'Bespreek je website')}${link('#werk', 'Bekijk mijn werk', true)}</div></div><div class="wd-hero-work">${screen(featured, true)}<div class="wd-floating-screen" aria-hidden="true"><img src="${secondary.image}" width="1276" height="720" alt="" decoding="async"></div><div class="wd-work-caption"><span>Ontwerp & ontwikkeling</span><a href="${featured.casePath}">${esc(featured.title)} ${diagonal}</a></div><button class="wd-motion" type="button" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span>Video pauzeren</span></button></div></div><div class="rg-wrap wd-hero-bottom"><p>Rechtstreeks met Kevin.<br><span>Van het eerste ontwerp tot de laatste regel code.</span></p><a href="#inhoud-website">Ontdek de aanpak ${arrow}</a></div></section>
+
+<section class="wd-scope rg-section" id="inhoud-website" aria-labelledby="scope-title"><div class="rg-wrap wd-split"><div class="wd-section-intro"><h2 id="scope-title">Wat werken<br>we <em>uit?</em></h2><p>${esc(service.detail)}</p></div><ul class="wd-deliverables">${service.items.map(item => `<li><h3>${esc(item)}</h3><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></li>`).join('')}</ul></div></section>
+
+<section class="wd-work rg-section" id="werk" aria-labelledby="work-title"><div class="rg-wrap"><div class="wd-section-heading"><h2 id="work-title">Het ontwerp zie je.<br><em>Het verschil ook.</em></h2><p>Bekijk welke informatie en functies bij deze projecten zijn uitgewerkt.</p></div><div class="wd-projects">${selected.map(p => `<article class="wd-project">${screen(p)}<div class="wd-project-copy"><p class="wd-project-kind">${esc(p.kind)} · ${esc(p.place)}</p><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><a class="rg-inline" href="${p.casePath}">Bekijk het project ${diagonal}</a></div></article>`).join('')}</div><a class="rg-inline wd-all-work" href="/cases/">Bekijk alle projecten ${arrow}</a></div></section>
+
+<section class="wd-pricing rg-section" id="kosten" aria-labelledby="cost-title"><div class="rg-wrap wd-split"><div class="wd-section-intro"><h2 id="cost-title">Een helder plan.<br><em>Heldere afspraken.</em></h2><p>Je krijgt vooraf een offerte met de exacte omvang, planning en kosten. Alle bedragen zijn exclusief btw.</p><a class="rg-inline" href="/#prijzen">Bekijk het volledige aanbod ${arrow}</a></div><div class="wd-price-detail"><h3>Website op maat</h3><p class="wd-price"><span>vanaf</span><strong>${euro(pricing.website.price)}</strong><span>eenmalig · excl. btw</span></p><p>Tot vijf pagina’s in één taal. Ontwerp en bouw voor mobiel en desktop, een contactformulier en twee gebundelde feedbackrondes. Je levert teksten en beelden aan.</p><p class="wd-recurring">Hosting & technisch beheer vanaf ${euro(pricing.website.monthly)}/maand.</p><p>Zelf je inhoud aanpassen? Een website met eigen beheerscherm start vanaf ${euro(pricing.cms.price)} excl. btw. Hosting, technisch beheer en externe licenties staan apart van de eenmalige projectprijs.</p>${link('/#contact', 'Bespreek je website')}<details class="wd-faq"><summary>${esc(service.question)}<span class="rg-plus" aria-hidden="true"></span></summary><p>${esc(service.answer)}</p></details></div></div></section>
+
+<section class="wd-process rg-section" aria-labelledby="process-title"><div class="rg-wrap"><div class="wd-maker"><div><h2 id="process-title">Van eerste gesprek<br><em>tot jouw website.</em></h2><p>Je bespreekt de inhoud, het ontwerp en de bouw rechtstreeks met Kevin.</p></div><figure><img src="/studiofoto.webp" width="800" height="800" loading="lazy" decoding="async" alt="Kevin Bourguignon, webdesigner en ontwikkelaar van Webaanzee"><figcaption>Kevin Bourguignon<span>Webdesigner & ontwikkelaar · Blankenberge</span></figcaption></figure></div><ol class="wd-steps">${steps.map(([title, text], i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><div><h3>${title}</h3><p>${text}</p></div></li>`).join('')}</ol></div></section>
+
+<section class="wd-other rg-section" aria-labelledby="other-title"><div class="rg-wrap wd-split"><h2 id="other-title">Andere<br><em>mogelijkheden.</em></h2><nav class="wd-other-links" aria-label="Andere diensten">${services.filter(s => s.slug !== service.slug).map(s => `<a href="/diensten/${s.slug}/"><div><h3>${esc(s.title)}</h3><p>${esc(s.short)}</p></div>${diagonal}</a>`).join('')}</nav></div></section>
+
+<section class="wd-closing rg-section" aria-labelledby="closing-title"><div class="rg-wrap"><h2 id="closing-title">Wat wil je met je<br>website <em>veranderen?</em></h2><div class="wd-closing-bottom"><p>Beschrijf je vraag. Ik werk een voorstel uit met de werkzaamheden, planning en kosten.</p><div>${link('/#contact', 'Bespreek je vraag')}<a class="rg-inline" href="mailto:kevin@webaanzee.be">kevin@webaanzee.be ${diagonal}</a><a href="tel:+32494816714">0494 81 67 14</a></div></div></div></section>`;
+}

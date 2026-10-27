@@ -27,7 +27,7 @@ export const locations = [
     workTitle: 'Een eigen plek voor je verhaal.',
     workIntro: 'Deze twee projecten uit Oostende laten zien hoe je verschillende soorten informatie overzichtelijk presenteert: van nieuws en standpunten tot een evenement en inschrijving.',
     cases: [
-      ['fabrice-goffin-oostende', 'Een persoonlijke website voor Fabrice Goffin in Oostende. Nieuws, thema’s en contactinformatie krijgen elk hun plaats, zodat inwoners gericht kunnen lezen of contact opnemen.'],
+      ['fabrice-goffin-oostende', 'De persoonlijke website voor de Oostendse schepen van Digitalisering. Ik ontwierp en bouwde de presentatie, van de eerste kennismaking tot de beleidsprioriteiten en het contact met inwoners.'],
       ['welzijnswerking-oostende', 'Een evenementensite voor het kerstfeest in het Kursaal Oostende. Voor wie is de avond, wat staat er op het programma en hoe schrijf je in? De praktische vragen sturen de opbouw.'],
     ],
     needTitle: 'Niet iedere bezoeker komt voor hetzelfde.',

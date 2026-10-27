@@ -43,31 +43,31 @@ export const projects = [
   },
   {
     "slug": "fabrice-goffin-oostende",
-    "title": "Fabrice Goffin",
+    "title": "Schepen van Digitalisering",
     "place": "Oostende",
-    "image": "/images/cases/fabrice.png",
+    "image": "/images/cases/schepen-digitalisering/intro.webp",
     "url": "https://www.fabricegoffin.be",
-    "summary": "Een persoonlijke website voor Fabrice Goffin in Oostende, met standpunten, nieuws en contactinformatie.",
-    "challenge": "Publieke communicatie moet tegelijk menselijk, overzichtelijk en snel bij te werken zijn. Bezoekers komen vaak voor één concreet standpunt of contactmoment.",
-    "solution": "De site geeft de persoon, thema’s en actualiteit elk een duidelijke plaats en houdt de route naar contact zichtbaar zonder de inhoud te overschreeuwen.",
-    "result": "Nieuws, standpunten en contactinformatie zijn op één eigen website beschikbaar, naast communicatie via sociale media.",
+    "summary": "Ontwerp en ontwikkeling van de persoonlijke website voor de Oostendse schepen van Digitalisering. Een uitgesproken presentatie, met ruimte voor beleidsprioriteiten en contact met inwoners.",
+    "challenge": "Een schepen is tegelijk een aanspreekpunt voor inwoners en iemand met een eigen verhaal en beleidsprioriteiten. Die verschillende kanten moeten samen een herkenbare presentatie vormen. Voor deze opdracht komt daar een bijzondere context bij: digitalisering behoort tot zijn bevoegdheden.",
+    "solution": "Ik ontwierp en bouwde een website met een uitgesproken introductie: grote typografie, portretfotografie en een herkenbaar rood accent. De standpunten krijgen een eigen visuele indeling. Nieuws en realisaties laten zien waarmee de schepen bezig is; een aparte contactpagina geeft inwoners ruimte voor hun vraag.",
+    "result": "Zo komen de persoon en zijn publieke werk samen op één website. Bezoekers kunnen kennismaken, zich in een onderwerp verdiepen en contact opnemen.",
     "id": "fabrice",
-    "kind": "Persoonlijke website",
-    "headline": "Nieuws en standpunten uit Oostende.",
-    "challengeTitle": "Nieuws en standpunten naast elkaar",
-    "solutionTitle": "Een eigen plek voor publieke communicatie",
+    "kind": "Publieke communicatie",
+    "headline": "Een website voor een publieke functie.",
+    "challengeTitle": "Een publieke functie, een persoonlijk verhaal.",
+    "solutionTitle": "Van kennismaking naar inhoud.",
     "choices": [
       [
-        "Persoon en thema’s",
-        "De presentatie van Fabrice en zijn standpunten hebben elk een eigen plaats."
+        "Een herkenbare introductie",
+        "Grote typografie, portretfotografie en rood als accent geven de eerste kennismaking een uitgesproken karakter."
       ],
       [
-        "Actuele berichten",
-        "Nieuws staat naast de blijvende informatie over de thema’s."
+        "Ruimte voor beleidsprioriteiten",
+        "Op de standpuntenpagina kiezen bezoekers een onderwerp om de bijbehorende uitleg te lezen."
       ],
       [
         "Contact met inwoners",
-        "De contactinformatie is bereikbaar vanuit de inhoud."
+        "Vanuit de navigatie bereiken bezoekers de contactpagina, met een formulier voor hun vraag of idee."
       ]
     ],
     "services": [
@@ -75,12 +75,50 @@ export const projects = [
       "website-laten-maken"
     ],
     "tags": [
-      "Publieke communicatie",
+      "Schepen van Digitalisering",
       "Oostende"
     ],
     "casePath": "/cases/fabrice-goffin-oostende/",
     "videoSrc": "/videos/fabrice.mp4?v=9e6103045bd8",
-    "showInGrid": true
+    "showInGrid": true,
+    "previewSrc": "/images/cases/schepen-digitalisering/intro.webp",
+    "introVideoPoster": "/images/cases/schepen-digitalisering/intro.webp",
+    "heroTitle": "Een website voor de schepen van Digitalisering.",
+    "heroIntro": "Voor de Oostendse schepen van Digitalisering ontwierp en bouwde ik een persoonlijke website. Met ruimte voor zijn verhaal, zijn beleidsprioriteiten en het contact met inwoners.",
+    "heroAside": "Een publieke functie vraagt een herkenbare presentatie. Van de eerste kennismaking tot het lezen van een standpunt en het stellen van een vraag.",
+    "videoCaption": "De persoonlijke website van de Oostendse schepen van Digitalisering",
+    "seoTitle": "Website voor de schepen van Digitalisering in Oostende | Webaanzee",
+    "updated": "2026-10-27",
+    "ctaTitle": "Een publieke rol verdient een doordachte website.",
+    "ctaText": "Voor je onderneming, organisatie of publieke functie ontwerp en bouw ik een website die je verhaal en je werk laat zien. Vertel me wat je wilt overbrengen en wie je wilt bereiken.",
+    "ctaAction": "Bespreek je website",
+    "designDetails": [
+      {
+        "title": "Een herkenbare introductie.",
+        "text": "De openingspagina brengt eerst de persoon in beeld. Het grote letterbeeld, het portret en de rode accenten bepalen samen het karakter. De introductie maakt zijn functie duidelijk en biedt twee vervolgstappen: meer over de persoon lezen of contact opnemen.",
+        "image": "/images/cases/schepen-digitalisering/intro.webp",
+        "alt": "Openingspagina van de persoonlijke website van de Oostendse schepen van Digitalisering",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "title": "Beleidsprioriteiten krijgen de ruimte.",
+        "text": "Een standpunt vraagt meer ruimte dan een losse post. Op deze pagina staan de onderwerpen bij elkaar, met een eigen route naar de uitleg. Een groot achtergrondbeeld houdt de persoonlijke presentatie ook hier herkenbaar.",
+        "image": "/images/cases/schepen-digitalisering/standpunten.webp",
+        "alt": "Standpuntenpagina met zes beleidsprioriteiten en een persoonlijke achtergrondfoto",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "title": "Een vraag stellen, ook op je telefoon.",
+        "text": "De contactpagina sluit aan op de rest van de website. Na een korte uitnodiging volgen velden voor naam, e-mail, onderwerp en bericht. Ook op een klein scherm krijgt die inhoud een rustige volgorde, met ruimte om de vraag te formuleren.",
+        "image": "/images/cases/schepen-digitalisering/contact-mobiel.webp",
+        "alt": "Mobiele contactpagina met een uitnodiging om contact op te nemen en het contactformulier",
+        "width": 390,
+        "height": 844,
+        "portrait": true
+      }
+    ]
   },
   {
     "slug": "carabus-ads",

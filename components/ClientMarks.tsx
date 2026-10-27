@@ -9,7 +9,7 @@ const clientMarks: ClientMark[] = [
   { id: 'fietsaanzee', name: 'Fiets aan Zee', website: 'https://www.fietsaanzee.be', mark: <><strong>Fiets</strong><em>aan</em><i>Zee</i></> },
   { id: 'camperaanzee', name: 'Camper aan Zee', website: 'https://www.camperaanzee.be', mark: <><strong>Camper</strong><em>aan</em><i>Zee</i></> },
   { id: 'kidsaanzee', name: 'Kids aan Zee', website: 'https://www.kidsaanzee.be', mark: <><strong>Kids</strong><em>aan</em><i>Zee</i></> },
-  { id: 'fabrice', name: 'Fabrice Goffin', website: 'https://www.fabricegoffin.be', mark: <>Fabrice <span>Goffin</span></> },
+  { id: 'fabrice', name: 'Schepen van Digitalisering in Oostende', website: 'https://www.fabricegoffin.be', mark: <>Schepen van<br /><span>Digitalisering · Oostende</span></> },
   { id: 'carabus', name: 'Carabus Ads', website: 'https://www.carabusads.com', mark: <>carabus<span>ads</span></> },
   { id: 'cozy', name: 'COZY Moments', website: 'https://www.cozy-moments.be', mark: <>COZY <span>moments</span></> },
   { id: 'spaarkaart', name: 'COZY spaarkaart', website: 'https://spaarkaart.cozy-moments.be', mark: <><strong>COZY</strong><span>spaarkaart</span></> },
