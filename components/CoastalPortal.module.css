@@ -83,8 +83,8 @@
   .statement { font-size: clamp(2.7rem, 6.5vw, 4.5rem); }
 }
 @media (max-width: 999px) and (max-aspect-ratio: 4/5) {
-  .splitTitle { display: flex; flex-direction: column; gap: 1.5rem; padding: max(2rem, 6svh) 6% 0; }
-  .splitTitle .leftTitle, .splitTitle .rightTitle { position: static; max-width: 100%; text-align: left; }
+  .splitTitle .leftTitle { top: max(2rem, 6svh); left: 6%; max-width: 88%; }
+  .splitTitle .rightTitle { top: 68%; right: 6%; max-width: 88%; text-align: right; }
   .leftTitle > span, .rightTitle > span { font-size: clamp(1.125rem, 4.8vw, 1.75rem); }
   .leftTitle > em { font-size: clamp(2rem, 8.5vw, 3.5rem); }
   .rightTitle > em { font-size: clamp(2.5rem, 10.6vw, 4.5rem); }
@@ -96,7 +96,7 @@
   .introduction { max-width: 34ch; margin-top: 1.75rem; font-size: clamp(1.125rem, 4.8vw, 1.3rem); line-height: 1.65; letter-spacing: -.01em; }
 }
 @media (max-height: 500px) and (max-width: 999px) and (max-aspect-ratio: 4/5) {
-  .splitTitle { gap: 1rem; padding-top: 1.5rem; }
+  .splitTitle .leftTitle { top: 1.5rem; }
   .leftTitle > em { font-size: 2rem; }
   .rightTitle > em { font-size: 2.5rem; }
 }
