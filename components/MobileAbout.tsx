@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useTransform } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { DepthPortrait } from './About';
+import { CoastToStudio, DepthPortrait } from './About';
 import { useMobileChapter } from '../utils/useMobileChapter';
 import { clamp, windowProgress } from '../utils/homeChoreography';
 import { scrollToSection } from '../utils/scrollToSection';
@@ -17,6 +17,7 @@ export default function MobileAbout() {
   return <section aria-labelledby="about-title" className={styles.about}>
     <div ref={root} id="over-ons" data-mobile-moment={layout.entrance + layout.viewport * .15} data-mobile-sequence data-mobile-kind="about" className={styles.sequence}>
       <motion.div ref={stage} className={styles.stage} data-mobile-stage style={{ background: surface }}>
+        <CoastToStudio progress={progress} />
         <motion.div ref={content} className={styles.content} style={{ y }}>
           <DepthPortrait progress={progress} />
           <motion.div style={{ opacity: reveal }}>

@@ -27,6 +27,12 @@ export const scrollToSection = (
     window.scrollTo({ top: mobileSequence.getBoundingClientRect().top + window.scrollY + Number(el.dataset.mobileMoment), behavior: motion });
     return;
   }
+  const aboutSequence = id === 'over-ons' ? el.querySelector<HTMLElement>('[data-about-sequence]') : null;
+  const aboutStage = aboutSequence?.querySelector<HTMLElement>('[data-about-stage]');
+  if (aboutSequence && aboutStage) {
+    scrollHomeTo(aboutSequence.getBoundingClientRect().top + window.scrollY + (aboutSequence.offsetHeight - aboutStage.offsetHeight) * .78, motion);
+    return;
+  }
   const sequence = el.closest<HTMLElement>('[data-home-sequence]');
   if (sequence && (el.dataset.homeMoment !== undefined || id === 'home')) {
     scrollToHomeMoment(sequence, Number(el.dataset.homeMoment ?? 0), Number(sequence.dataset.homeTotal), motion);

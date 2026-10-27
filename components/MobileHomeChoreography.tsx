@@ -15,7 +15,7 @@ import hero from './Hero.module.css';
 import work from './PortfolioDepth.module.css';
 import styles from './MobileHomeChoreography.module.css';
 
-const palettes = ['#e3ebe7', '#efe1de', '#d9e6eb', '#eae1d3', '#e2e4d8', '#dce5ec', '#ebe3d8', '#dce3ee', '#f0e7da', '#eee6d4'];
+const palettes = ['#e3ebe7', '#efe1de', '#d9e6eb', '#eae1d3', '#e2e4d8', '#dce5ec', '#ebe3d8', '#dce3ee', '#f0e7da', '#eee6d4', '#e7e4dc'];
 const ease = [.16, 1, .3, 1] as const;
 
 export function MobileNoScriptFallback() {
@@ -64,7 +64,7 @@ function MobileHero({ enabled, covered, portalProgress }: { enabled: boolean; co
       <p className={hero.eyebrow}>Webdesign &amp; development <span>Belgische kust</span></p>
       <h1 className={hero.title}>
         <span className={hero.lineMask}><span className={hero.titleLine}>Je kent je vak.</span></span>
-        <span className={hero.lineMask}><span className={`${hero.titleLine} ${hero.accentLine}`}>Laat het online zien.</span></span>
+        <span className={hero.lineMask}><span className={`${hero.titleLine} ${hero.accentLine}`}>Laat het<em> online zien.</em></span></span>
       </h1>
       <p className={hero.description}>{heroIntroduction}</p>
     </div>}

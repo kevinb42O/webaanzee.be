@@ -15,4 +15,4 @@
 .navigation button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; color: inherit; font: inherit; font-size: 16px; cursor: pointer; }
 .navigation button:disabled { opacity: .3; cursor: default; }
 .fallback { position: absolute; width: min(60vw, 900px); top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.fallback img { display: block; width: 100%; height: auto; }
+.fallback img, .fallback video { display: block; width: 100%; height: auto; }

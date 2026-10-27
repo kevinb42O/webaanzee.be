@@ -32,14 +32,18 @@ const CrispChat: React.FC = () => {
   };
 
   useEffect(() => {
+    const opening = document.querySelector<HTMLElement>('[data-opening-navigation]');
+    if (opening) {
+      // The opening is rebuilt when the responsive scene mounts; its header remains stable.
+      const read = () => setIsHeroVisible(opening.dataset.openingNavigation !== 'solid');
+      const observer = new MutationObserver(read);
+      observer.observe(opening, { attributes: true, attributeFilter: ['data-opening-navigation'] });
+      read();
+      return () => observer.disconnect();
+    }
     const hero = document.getElementById('home');
-    if (!hero) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsHeroVisible(entry.isIntersecting),
-      { threshold: 0 }
-    );
-
+    if (!hero) { setIsHeroVisible(false); return; }
+    const observer = new IntersectionObserver(([entry]) => setIsHeroVisible(entry.isIntersecting));
     observer.observe(hero);
     return () => observer.disconnect();
   }, []);

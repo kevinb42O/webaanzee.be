@@ -1,3 +1,4 @@
+import { desktopMotionEnabled, useDesktopMotion } from '../utils/useDesktopMotion';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, useTransform, type MotionStyle, type MotionValue } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -14,9 +15,9 @@ import { useHomeScroll } from '../utils/useHomeScroll';
 import MobileHomeChoreography, { MobileNoScriptFallback } from './MobileHomeChoreography';
 import { mobileMotionQuery, mobileViewportQuery, useMediaQuery } from '../utils/useMediaQuery';
 import { preserveHomeReadingPosition, trackHomeReadingPosition } from '../utils/preserveHomeReadingPosition';
-import { clamp, createHomeScore, desktopMotionQuery, itemPhase, scrollToHomeMoment, serviceReadMoment, windowProgress } from '../utils/homeChoreography';
+import { clamp, createHomeScore, pricePhase, priceMoment, scrollToHomeMoment, serviceReadMoment, windowProgress } from '../utils/homeChoreography';
 
-const palettes = ['#e3ebe7', '#efe1de', '#d9e6eb', '#eae1d3', '#e2e4d8', '#dce5ec', '#ebe3d8', '#dce3ee', '#f0e7da', '#eee6d4'];
+const palettes = ['#e3ebe7', '#efe1de', '#d9e6eb', '#eae1d3', '#e2e4d8', '#dce5ec', '#ebe3d8', '#dce3ee', '#f0e7da', '#eee6d4', '#e7e4dc'];
 const WorkHeading: React.FC = () => <>
   <h2 id="work-title">Ontworpen om op te vallen.<span>Gebouwd om te werken.</span></h2>
   <p>Van lokale handelszaak tot digitaal product: ieder project krijgt een eigen visuele wereld en een technische basis die snel en betrouwbaar blijft.</p>
@@ -110,7 +111,7 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   const serviceOpacity = useTransform(qualityProgress, v => v < .5 ? 1 : 0);
   const archiveOpacity = useTransform(time, v => windowProgress(v, score.services - .15, score.services) * (1 - windowProgress(v, score.quality, score.quality + .3)));
   const pricingProgress = useTransform(time, v => v - score.priceEntrance);
-  const pricingPhase = useTransform(time, v => itemPhase(v - score.prices, 4, 1));
+  const pricingPhase = useTransform(time, v => pricePhase(v - score.prices));
   const qualityShade = useTransform(pricingProgress, v => 1 - windowProgress(v, .3, .75));
 
   useLayoutEffect(() => {
@@ -132,14 +133,14 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   };
   const goToProject = (index: number) => navigate(score.work + clamp(index, 0, projects.length - 1) * .75);
   const goToService = (index: number) => navigate(score.services + serviceReadMoment(clamp(index, 0, capabilities.length - 1)));
-  const goToPrice = (index: number) => navigate(score.prices + clamp(index, 0, 3) * 1.25 + .5);
+  const goToPrice = (index: number) => navigate(score.prices + priceMoment(index));
   const anchor = (id: string, moment: number) => <div key={id} id={id} data-home-moment={moment} className={styles.servicesAnchor} style={{ top: `${moment * 100}svh` }} />;
 
   return <div ref={sequenceRef} id="home" data-home-sequence data-home-total={score.total} data-nav-reveal={score.portal} data-nav-solid={score.gridReveal} className={styles.sequence} style={{ '--scroll-units': score.total } as React.CSSProperties}>
     {anchor('resultaten', score.work)}
     {anchor('projecten', score.work)}
     {anchor('werkwijze', score.services + serviceReadMoment(0))}
-    {anchor('prijzen', score.prices + .5)}
+    {anchor('prijzen', score.prices)}
     <motion.div data-home-stage className={styles.stage} style={{ '--gallery-surface': surface } as MotionStyle}>
       <motion.div className={styles.heroBackdrop} style={{ opacity: backdropOpacity, display: backdropDisplay }} inert={!scene.heroActive ? true : undefined} aria-hidden={!scene.heroActive}><Hero embedded progress={heroProgress} portalProgress={portalProgress} /></motion.div>
       <StickyProjectGrid projects={projects} time={time} score={score}><WorkHeading /></StickyProjectGrid>
@@ -159,7 +160,7 @@ const AnimatedGallery: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
 };
 
 const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
-  const animated = useMediaQuery(desktopMotionQuery);
+  const animated = useDesktopMotion();
   const mobile = useMediaQuery(mobileViewportQuery);
   const mobileAnimated = useMediaQuery(mobileMotionQuery);
   const previousMode = useRef<string | undefined>(undefined);
@@ -168,7 +169,7 @@ const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   useLayoutEffect(() => {
     if (previousMode.current === undefined) {
       previousMode.current = window.matchMedia(mobileViewportQuery).matches ? (window.matchMedia(mobileMotionQuery).matches ? 'mobile' : 'mobile-static')
-        : window.matchMedia(desktopMotionQuery).matches ? 'desktop' : 'static';
+        : desktopMotionEnabled() ? 'desktop' : 'static';
       return;
     }
     if (previousMode.current !== mode) preserveHomeReadingPosition(mobile, projects.length, capabilities.length);
@@ -178,12 +179,19 @@ const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
   useEffect(() => trackHomeReadingPosition(projects.length, capabilities.length), [projects.length]);
 
   useEffect(() => {
-    let frame = requestAnimationFrame(() => {
-      frame = requestAnimationFrame(() => {
-        if (['#projecten', '#resultaten', '#werkwijze', '#prijzen'].includes(window.location.hash)) scrollToSection(null, window.location.hash.slice(1), 'instant');
-      });
-    });
-    return () => cancelAnimationFrame(frame);
+    let disposed = false, frame = 0;
+    const align = () => {
+      const id = window.location.hash.slice(1);
+      if (['home', 'projecten', 'resultaten', 'werkwijze', 'prijzen', 'prijsdetails', 'over-ons', 'faq', 'contact'].includes(id)) scrollToSection(null, id, 'instant');
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => { frame = requestAnimationFrame(align); });
+    };
+    window.addEventListener('hashchange', schedule);
+    // Font loading and measured mobile chapters must settle before choosing the reading position.
+    document.fonts.ready.then(() => { if (!disposed) schedule(); });
+    return () => { disposed = true; cancelAnimationFrame(frame); window.removeEventListener('hashchange', schedule); };
   }, []);
 
   return (

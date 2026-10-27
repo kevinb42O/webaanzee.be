@@ -34,7 +34,8 @@ export class PortfolioEngine {
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.autoClear = false;
     this.textures = new Map();
-    this.onVisibility = () => this.schedule();
+    this.videos = new Map();
+    this.onVisibility = () => { this.syncVideo(); this.schedule(); };
     this.onContextLost = () => { this.setEnabled(false); this.onError(); };
     this.tick = this.tick.bind(this);
   }
@@ -88,7 +89,68 @@ export class PortfolioEngine {
   setEnabled(enabled) {
     if (enabled && !this.enabled && this.initialized) this.setPosition(this.target, true);
     this.enabled = enabled;
+    this.syncVideo();
     this.schedule();
+  }
+
+  // Keep the existing 3D planes and transitions; only swap their image map for
+  // a video texture. Download and decode a movie only when its card is active.
+  syncVideo() {
+    const playingIndex = this.enabled && !this.disposed && !document.hidden ? this.index : -1;
+    for (const [index, entry] of this.videos) {
+      if (index === playingIndex) continue;
+      entry.video.pause();
+      if (entry.video.readyState >= 1) entry.video.currentTime = 0;
+      this.restorePoster(index);
+    }
+    const definition = this.gallery.planeConfig[playingIndex];
+    if (!definition?.videoSrc) return;
+    let entry = this.videos.get(playingIndex);
+    if (!entry) {
+      const video = document.createElement('video');
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = 'none';
+      video.hidden = true;
+      video.dataset.portfolioVideo = String(playingIndex);
+      video.setAttribute('aria-hidden', 'true');
+      const texture = new THREE.VideoTexture(video);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      entry = { video, texture, failed: false, pending: false };
+      this.videos.set(playingIndex, entry);
+      video.addEventListener('playing', () => {
+        if (this.disposed || !this.enabled || document.hidden || this.index !== playingIndex) {
+          video.pause();
+          return;
+        }
+        const plane = this.gallery.planes[playingIndex];
+        plane.userData.texture = texture;
+        plane.material.map = texture;
+        plane.material.needsUpdate = true;
+      });
+      video.addEventListener('error', () => {
+        entry.failed = true;
+        this.restorePoster(playingIndex);
+      });
+      this.canvas.appendChild(video);
+      video.src = definition.videoSrc;
+    }
+    if (entry.failed || entry.pending || !entry.video.paused) return;
+    entry.pending = true;
+    entry.video.play().then(() => {
+      if (this.disposed || !this.enabled || document.hidden || this.index !== playingIndex) entry.video.pause();
+    }).catch(() => this.restorePoster(playingIndex)).finally(() => { entry.pending = false; });
+  }
+
+  restorePoster(index) {
+    if (this.disposed) return;
+    const plane = this.gallery.planes[index];
+    if (!plane) return;
+    const poster = this.textures.get(this.gallery.planeConfig[index].textureSrc);
+    plane.userData.texture = poster;
+    plane.material.map = poster;
+    plane.material.needsUpdate = true;
   }
 
   schedule() {
@@ -105,7 +167,7 @@ export class PortfolioEngine {
     this.gallery.update(this.camera, this.scroll);
     const blend = this.gallery.getPlaneBlendData(this.camera.position.z);
     const index = blend.blend >= .5 ? blend.nextPlaneIndex : blend.currentPlaneIndex;
-    if (index !== this.index) { this.index = index; this.onIndex(index); }
+    if (index !== this.index) { this.index = index; this.onIndex(index); this.syncVideo(); }
     const mood = this.gallery.getMoodBlendData(this.camera.position.z);
     if (mood) this.background.setMoodBlend(mood);
     const distanceFromCenter = Math.abs(blend.blend - .5) * 2;
@@ -124,6 +186,14 @@ export class PortfolioEngine {
 
   dispose() {
     this.disposed = true;
+    for (const { video, texture } of this.videos.values()) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      video.remove();
+      texture.dispose();
+    }
+    this.videos.clear();
     cancelAnimationFrame(this.frame);
     this.resizeObserver?.disconnect();
     document.removeEventListener('visibilitychange', this.onVisibility);

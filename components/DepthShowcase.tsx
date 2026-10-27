@@ -1,3 +1,4 @@
+import { useMotionState } from '../utils/useMotionState';
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useTransform, type MotionValue } from 'motion/react';
 import type { CaseStudy } from './Proof';
@@ -12,6 +13,26 @@ const moods = [
   { x: 1, accent: '#3c72c6', background: '#5b9bc2', blob1: '#ffaa00', blob2: '#00e1ff', ink: '#f4f4f4' },
   { x: -.7, accent: '#fdd895', background: '#7d936e', blob1: '#fdd895', blob2: '#a5b599', ink: '#f4f4f4' },
 ];
+
+function FallbackPreview({ project, active }: { project: CaseStudy; active: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !project.videoSrc) return;
+    let disposed = false;
+    const sync = () => {
+      if (!active || document.hidden) { video.pause(); return; }
+      if (!video.getAttribute('src')) video.src = project.videoSrc;
+      video.play().then(() => { if (disposed || !active || document.hidden) video.pause(); }).catch(() => undefined);
+    };
+    sync();
+    document.addEventListener('visibilitychange', sync);
+    return () => { disposed = true; document.removeEventListener('visibilitychange', sync); video.pause(); };
+  }, [project.videoSrc, active]);
+  return project.videoSrc
+    ? <video key={project.id} ref={videoRef} poster={project.imageSrc} muted loop playsInline preload="none" aria-hidden="true" />
+    : <img src={project.imageSrc} alt={`Website van ${project.title}`} width="1276" height="720" />;
+}
 
 export default function DepthShowcase({ projects, phase, active, onIndex, onNavigate, departure, mobile = false }: {
   projects: CaseStudy[];
@@ -32,7 +53,8 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
   const indexCallback = useRef(onIndex);
   indexCallback.current = onIndex;
   activeRef.current = active;
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => Math.max(0, Math.min(projects.length - 1, Math.round(phase.get()))));
+  const fallbackIndex = useMotionState(phase, value => Math.max(0, Math.min(projects.length - 1, Math.round(value))));
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -43,7 +65,7 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
     const unsubscribe = phase.on('change', value => engine.current?.setPosition(value));
     const data = projects.map((project, i) => {
       const mood = moods[i % moods.length];
-      return { textureSrc: mobile ? (project.previewSrc ?? `/images/cases/previews/${project.id}.jpg`) : project.imageSrc, fallbackColor: mood.accent, accentColor: mood.accent,
+      return { textureSrc: mobile ? (project.previewSrc ?? `/images/cases/previews/${project.id}.jpg`) : project.imageSrc, videoSrc: project.videoSrc, fallbackColor: mood.accent, accentColor: mood.accent,
         backgroundColor: mood.background, blob1Color: mood.blob1, blob2Color: mood.blob2,
         position: { x: mood.x, y: 0 }, label: { word: project.title, color: mood.ink } };
     });
@@ -91,20 +113,15 @@ export default function DepthShowcase({ projects, phase, active, onIndex, onNavi
   useEffect(() => { engine.current?.setEnabled(active && (!mobile || !failed)); }, [active, mobile, failed]);
   useEffect(() => {
     if (!mobile || (ready && !failed)) return;
-    // Loading and WebGL failure still expose the correct case at every scroll moment.
-    const read = (value: number) => {
-      const next = Math.max(0, Math.min(projects.length - 1, Math.round(value)));
-      setIndex(next);
-      indexCallback.current(next);
-    };
-    read(phase.get());
-    return phase.on('change', read);
-  }, [mobile, ready, failed, phase, projects.length]);
+    // Loading and WebGL failure share the same safe semantic motion state.
+    setIndex(fallbackIndex);
+    indexCallback.current(fallbackIndex);
+  }, [mobile, ready, failed, fallbackIndex]);
   const project = projects[index];
   const mood = moods[index % moods.length];
   return <section className={styles.showcase} data-depth-showcase data-depth-ready={ready && !failed} data-depth-index={index} aria-label="Portfolio" style={{ color: mood.ink, ...(mobile ? { backgroundColor: (!ready || failed) && mood.ink === '#f4f4f4' ? '#263b42' : mood.background } : {}) }}>
     <motion.canvas ref={canvas} className={styles.canvas} aria-hidden="true" style={{ scale: departingScale, x: departingX, y: departingY }} />
-    {(!ready || failed) && <motion.a href={project.casePath} className={styles.fallback} style={{ scale: departingScale, x: departingX, y: departingY }}><img src={project.imageSrc} alt={`Website van ${project.title}`} width="1276" height="720" /></motion.a>}
+    {(!ready || failed) && <motion.a href={project.casePath} aria-label={`Bekijk de case ${project.title}`} className={styles.fallback} style={{ scale: departingScale, x: departingX, y: departingY }}><FallbackPreview project={project} active={active} /></motion.a>}
     <div className={styles.identity}>
       <span className={styles.index}>{String(index + 1).padStart(2, '0')}</span>
       <h3 className={styles.word}>{project.title}</h3>

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Hero Bodoni';
+  src: url('/fonts/bodoni-moda-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+}
+
 .hero {
   position: relative;
   isolation: isolate;
@@ -46,10 +54,11 @@
 .eyebrow::before { width: 2.5rem; height: 1px; background: #d86548; content: ''; }
 .eyebrow span { padding-left: .75rem; border-left: 1px solid rgba(247, 243, 233, .35); }
 
-.title { max-width: 1160px; margin-bottom: clamp(1.75rem, 3.5vh, 2.75rem); color: #f7f3e9; font-family: var(--font-body); font-size: clamp(3.75rem, 6.35vw, 6.7rem); font-weight: 600; letter-spacing: -.07em; line-height: .93; }
+.title { max-width: 1160px; margin-bottom: clamp(1.75rem, 3.5vh, 2.75rem); color: #f7f3e9; font-family: var(--font-body); font-size: clamp(1.75rem, 3vw, 3rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.12; }
 .lineMask { display: block; overflow: hidden; padding-bottom: .08em; }
 .titleLine { display: block; width: fit-content; will-change: transform; }
-.accentLine { color: #d86548; }
+.accentLine { margin-top: .8em; color: #f7f3e9; }
+.accentLine em { display: block; margin-top: .06em; font-family: 'Hero Bodoni', Georgia, serif; font-size: clamp(3.5rem, 7.8vw, 6rem); font-weight: 500; line-height: 1.12; letter-spacing: -.035em; }
 
 .description { max-width: 590px; margin-bottom: clamp(2.2rem, 4.5vh, 3.25rem); color: rgba(247, 243, 233, .78); font-size: clamp(1rem, 1.25vw, 1.16rem); line-height: 1.58; }
 
@@ -69,8 +78,9 @@
   .imageBlock img { object-position: 58% center; }
   .container { justify-content: center; width: calc(100% - 2.5rem); height: auto; min-height: 100svh; padding: 8rem 0 4rem; }
   .eyebrow { margin-bottom: 1.4rem; font-size: .65rem; }
-  .title { margin-bottom: 1.35rem; font-size: clamp(2.8rem, 12.5vw, 4.25rem); line-height: .96; }
-  .accentLine { margin-top: .06em; }
+  .title { margin-bottom: 1.35rem; font-size: clamp(1.5rem, 5.5vw, 2.25rem); line-height: 1.12; }
+  .accentLine { margin-top: .8em; }
+  .accentLine em { font-size: clamp(2.5rem, 12vw, 5.2rem); }
   .description { margin-bottom: 1.65rem; font-size: .94rem; }
   .ctaGroup { flex-direction: column; align-items: stretch; gap: .7rem; }
   .primaryCta { width: 100%; }

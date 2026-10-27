@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValueEvent, useTransform, type MotionValue } from 'motion/react';
+import { useMotionState } from '../utils/useMotionState';
+import React, { useEffect, useRef } from 'react';
+import { motion, useTransform, type MotionValue } from 'motion/react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
 import { capabilities } from '../data/capabilities';
 import { clamp, itemOpacity, serviceCompletion, serviceDuration, servicePhase, serviceReading, serviceTiming, windowProgress } from '../utils/homeChoreography';
@@ -79,13 +80,8 @@ export function ChapterButton({ index, distance, active, onNavigate }: { index: 
 
 export default function ServiceWorkbench({ distance, entrance, onNavigate }: { distance: MotionValue<number>; entrance: MotionValue<number>; onNavigate: (index: number) => void }) {
   const phase = useTransform(distance, v => servicePhase(v, capabilities.length));
-  const getActive = () => Math.round(phase.get());
-  const [active, setActive] = useState(getActive);
+  const active = useMotionState(phase, Math.round);
   const root = useRef<HTMLElement>(null);
-  useMotionValueEvent(phase, 'change', value => {
-    const next = Math.round(value);
-    setActive(current => current === next ? current : next);
-  });
   const headingOpacity = useTransform(entrance, v => windowProgress(v, .75, 1));
   const contentOpacity = useTransform(entrance, v => windowProgress(v, .12, .75));
   const copyOpacity = useTransform(entrance, v => windowProgress(v, .65, .95));

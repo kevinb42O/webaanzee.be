@@ -21,6 +21,10 @@ export const itemPhase = (distance: number, count: number, hold: number) => {
   const index = Math.floor(Math.max(0, distance) / slot);
   return clamp(index + windowProgress(distance - index * slot, hold, slot), 0, count - 1);
 };
+/** Paper follows every scroll increment, without a reading hold or transition easing. */
+export const pricePhase = (distance: number, count = 4) => clamp(distance, 0, count - 1);
+export const priceMoment = (index: number) => clamp(index, 0, 3);
+
 /** Text never overlaps: outgoing is gone before incoming becomes readable. */
 export const itemOpacity = (phase: number, index: number) => 1 - windowProgress(Math.abs(phase - index), .05, .48);
 
@@ -49,8 +53,8 @@ export const createHomeScore = (projectCount: number, serviceCount: number) => {
   const quality = services + serviceDuration(serviceCount);
   const priceEntrance = quality + 2.25;
   const prices = priceEntrance + .75;
-  const release = prices + 4 * 1.25;
-  return { portal, hero, gridReveal, gridZoom, gridContent, gridSettle, gridExit, work, handoff, services, quality, priceEntrance, prices, release, total: release + .5 };
+  const release = prices + priceMoment(3);
+  return { portal, hero, gridReveal, gridZoom, gridContent, gridSettle, gridExit, work, handoff, services, quality, priceEntrance, prices, release, total: release };
 };
 
 export const scrollToHomeMoment = (sequence: HTMLElement, moment: number, total: number, behavior: ScrollBehavior = 'smooth') => {

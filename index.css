@@ -45,6 +45,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   font-size: 16px;
   background-color: var(--color-bg-primary);
 }
@@ -169,3 +170,5 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+html[data-scroll-locked] { overflow:hidden !important; overscroll-behavior:none; }

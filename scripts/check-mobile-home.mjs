@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import puppeteer from 'puppeteer';
+import { projects } from '../data/projects.mjs';
 
 // Run against a production preview (npm run build && npm run preview).
 // Native scroll scenes: Chromium emulation and synthesized touch, not physical Safari.
@@ -55,7 +56,7 @@ try {
     assert.ok(state.overflow <= 1, `${width}: overflow ${state.overflow}`);
     assert.deepEqual(state.duplicates, [], `${width}: duplicate IDs`);
     if (width < 1000) {
-      assert.equal(state.projects, 10);
+      assert.equal(state.projects, projects.length);
       assert.equal(state.services, 5);
       assert.equal(state.prices, 4);
       assert.ok(state.depth && state.workbench && state.priceDetails);
@@ -71,9 +72,9 @@ try {
 
   await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
   await go();
-  // The portal, depth camera, services and price drum all reverse under native scroll.
+  // The portal, depth camera, services and offer sheets all reverse under native scroll.
   for (const [kind, selector] of [['project', '[data-depth-showcase]'], ['service', '[data-service-workbench]']]) {
-    for (let i = 0; i < (kind === 'project' ? 10 : 5); i++) {
+    for (let i = 0; i < (kind === 'project' ? projects.length : 5); i++) {
       await moment(`${kind}:${i}`);
       if (kind === 'project') await page.waitForFunction(index => Number(document.querySelector('[data-depth-showcase]').dataset.depthIndex) === index, {}, i);
       const value = await page.$eval(selector, (node, kind) => Number(node.dataset[kind === 'project' ? 'depthIndex' : 'serviceIndex']), kind);
@@ -83,7 +84,7 @@ try {
     await settle(700);
     assert.equal(await page.$eval(selector, (node, kind) => Number(node.dataset[kind === 'project' ? 'depthIndex' : 'serviceIndex']), kind), 0, `${kind}: reverse scroll`);
   }
-  console.log('All ten depth projects and five service transitions passed in both directions.');
+  console.log('All depth projects and five service transitions passed in both directions.');
   assert.equal(await page.$eval('[data-depth-showcase]', node => node.dataset.depthReady), 'true', 'real WebGL engine initialized');
 
   for (let i = 0; i < 4; i++) {
@@ -91,11 +92,11 @@ try {
     const state = await page.evaluate(() => {
       const root = document.querySelector('[data-mobile-kind="price"]');
       const chapter = root.querySelector('article:not([inert])');
-      return { index: Number(root.dataset.mobileIndex), label: chapter?.getAttribute('aria-label'), transform: chapter?.querySelector('[class*="glyphWindow"] > span')?.style.transform };
+      return { index: Number(root.dataset.mobileIndex), label: chapter?.getAttribute('aria-label'), paper: chapter?.closest('[data-offer-paper]')?.getAttribute('data-offer-paper') };
     });
     assert.equal(state.index, i);
     assert.ok(state.label);
-    assert.ok(state.transform, 'price glyphs use the original 3D drum');
+    assert.equal(state.paper, 'true', 'the complete offer travels as one paper sheet');
   }
 
   // Long compositions have a measured reading path. Their final actions must enter the viewport.
@@ -108,7 +109,7 @@ try {
         const viewport = root.querySelector('[data-mobile-stage]').offsetHeight;
         const slot = Number(anchors[1].dataset.mobileMoment) - Number(anchors[0].dataset.mobileMoment);
         const hold = JSON.parse(root.dataset.mobileHolds)[i];
-        const top = root.getBoundingClientRect().top + scrollY + Number(anchors[i].dataset.mobileMoment) - viewport * .15;
+        const top = root.getBoundingClientRect().top + scrollY + Number(anchors[i].dataset.mobileMoment) - (kind === 'price' ? 0 : viewport * .15);
         window.scrollTo({ top: top + hold - 1, behavior: 'instant' });
         return { top, hold };
       }, { kind, i });
@@ -141,7 +142,7 @@ try {
   await scroll(position);
   assert.equal(await page.$eval('[data-coastal-portal]', n => n.style.transform), first, 'portal reverses to the same scroll frame');
 
-  console.log('Price drums, complete reading paths, keyboard focus and native touch passed.');
+  console.log('Offer sheets, complete reading paths, keyboard focus and native touch passed.');
 
   // Buttons seek the exact same timeline as touch scrolling.
   await moment('project:0');
@@ -177,8 +178,8 @@ try {
   await page.$eval('#contact button', n => n.scrollIntoView({ block: 'center', behavior: 'instant' }));
   await page.tap('#contact button');
   await page.waitForSelector('[role="dialog"]');
-  assert.equal(await page.evaluate(() => document.activeElement.id), 'contact-name');
-  await page.keyboard.type('Test');
+  assert.equal(await page.evaluate(() => document.activeElement.getAttribute('role')), 'dialog', 'mobile opening keeps the keyboard closed');
+  await page.type('#contact-name', 'Test');
   await page.keyboard.press('Escape');
   assert.equal(await page.$('[role="dialog"]'), null);
   assert.notEqual(await page.evaluate(() => document.body.style.overflow), 'hidden');
@@ -202,7 +203,7 @@ try {
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await go();
   assert.equal(await page.$('[data-mobile-cinematic]'), null);
-  assert.equal(await page.$$eval('[data-mobile-project]', nodes => nodes.length), 10);
+  assert.equal(await page.$$eval('[data-mobile-project]', nodes => nodes.length), projects.length);
   assert.ok(await page.$('#quality-static-title'));
   assert.ok(await page.$('#prijzen'));
   await page.emulateMediaFeatures([]);
@@ -227,10 +228,39 @@ try {
   await page.removeScriptToEvaluateOnNewDocument(fallback.identifier);
 
   console.log('Responsive reading position, reduced motion, large text and WebGL fallback passed.');
+  // A desktop controller must stop behind overlays, including the 1000–1023 menu range.
+  await page.setViewport({ width: 1008, height: 800, isMobile: false, hasTouch: false });
+  await go('#contact');
+  await page.click('#contact button');
+  await page.waitForSelector('[role="dialog"]');
+  const lockedScroll = await page.evaluate(() => scrollY);
+  await page.mouse.move(450, 400);
+  await page.mouse.wheel({ deltaY: 300 });
+  await settle(300);
+  assert.ok(Math.abs(await page.evaluate(() => scrollY) - lockedScroll) < 1, 'the desktop background stays locked behind the form');
+  assert.equal(await page.$eval('#contact', n => n.inert), true, 'the form isolates background controls');
+  assert.ok(await page.$eval('[aria-label="Sluit contactformulier"]', n => n.getBoundingClientRect().width >= 44));
+  await page.keyboard.press('Escape');
+  assert.equal(await page.$eval('#contact', n => n.inert), false);
+  await page.click('button[aria-controls="mobile-navigation"]');
+  await settle();
+  assert.equal(await page.$eval('main', n => n.inert), true);
+  assert.ok(await page.evaluate(() => document.activeElement.closest('#mobile-navigation') !== null), 'compact menu traps focus at 1008px');
+  await page.keyboard.press('Escape');
+
+  await page.setViewport({ width: 1440, height: 900 });
+  await page.evaluate(() => { document.documentElement.style.fontSize = '32px'; });
+  await settle();
+  assert.equal(await page.$('[data-home-sequence]'), null, 'enlarged desktop text gets a complete readable document');
+  assert.equal(await page.$$eval('[class*="staticOffer"]', nodes => nodes.length), 4);
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), '200% text causes no horizontal scrolling');
+  await page.evaluate(() => { document.documentElement.style.removeProperty('font-size'); });
+  console.log('Overlay scroll locks, compact-menu focus, large-text layout and minimum touch targets passed.');
+
   await page.setJavaScriptEnabled(false);
   await page.goto(origin, { waitUntil: 'networkidle0' });
   assert.equal(await page.$$eval('h1', nodes => nodes.length), 1);
-  assert.equal(await page.$$eval('main article', nodes => nodes.length), 19, 'server fallback contains ten cases, five services and four offers');
+  assert.equal(await page.$$eval('main article', nodes => nodes.length), projects.length + 9, 'server fallback contains all cases, five services and four offers');
   assert.deepEqual(errors, [], 'no browser runtime errors');
   console.log('All cases, services, prices, reading actions, touch, reversal, anchors, interactions, responsive restoration and fallbacks passed.');
 } finally {

@@ -17,7 +17,7 @@ export function chapterPosition(distance: number, layout: MobileChapterLayout, c
   while (index < count - 1 && distance >= chapterStart(layout, index + 1)) index++;
   const within = Math.max(0, distance - chapterStart(layout, index));
   const hold = chapterHold(layout, index);
-  return { index, within, reading: clamp(within / hold), changing: clamp((within - hold) / layout.change) };
+  return { index, within, reading: hold > 0 ? clamp(within / hold) : 1, changing: clamp((within - hold) / layout.change) };
 }
 /** Outgoing content stays at its reading end; incoming content always starts at its own top. */
 export function mobileReadingOffset(distance: number, layout: MobileChapterLayout, index: number) {
@@ -27,7 +27,7 @@ export function mobileReadingOffset(distance: number, layout: MobileChapterLayou
 }
 
 /** Native scroll, measured per-item reading paths and stable semantic restoration. */
-export function useMobileChapter(count: number, fixedUnits?: number, tailUnits = .45) {
+export function useMobileChapter(count: number, fixedUnits?: number, tailUnits = .45, continuousPaper = false) {
   const root = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
@@ -59,8 +59,9 @@ export function useMobileChapter(count: number, fixedUnits?: number, tailUnits =
       const available = panels.length ? content.current!.clientHeight : Math.max(100, viewport - 112);
       const overflows = panels.length ? panels.map(panel => Math.max(0, panel.offsetHeight - available))
         : Array.from({ length: count }, () => Math.max(0, (content.current?.offsetHeight ?? 0) - available));
-      const holds = overflows.map(overflow => Math.max(viewport * .7, overflow + viewport * .65));
-      const change = viewport * .5, entrance = viewport * .65;
+      const holds = overflows.map(overflow => continuousPaper ? overflow : Math.max(viewport * .7, overflow + viewport * .65));
+      const change = continuousPaper ? available : viewport * .5;
+      const entrance = continuousPaper ? 1 : viewport * .65;
       const starts: number[] = [];
       let total = entrance;
       holds.forEach((hold, i) => { starts.push(total); total += hold + (i < count - 1 ? change : 0); });
@@ -78,7 +79,7 @@ export function useMobileChapter(count: number, fixedUnits?: number, tailUnits =
         else if (previous >= chapterStart(current, count - 1) + chapterHold(current, count - 1)) {
           restored = starts[count - 1] + holds[count - 1] + (previous - chapterStart(current, count - 1) - chapterHold(current, count - 1)) / current.viewport * viewport;
         } else restored = starts[position.index] + (position.within <= oldHold
-          ? position.within / oldHold * holds[position.index]
+          ? position.within / Math.max(1, oldHold) * holds[position.index]
           : holds[position.index] + position.changing * change);
       }
       current = next;
@@ -99,7 +100,7 @@ export function useMobileChapter(count: number, fixedUnits?: number, tailUnits =
       const item = Number(panel.dataset.mobileReadingItem);
       const naturalBottom = bounds.bottom - panel.getBoundingClientRect().top;
       const needed = clamp(naturalBottom - viewport.height + 12, 0, chapterOverflow(current, item));
-      const reading = current.viewport * .15 + (chapterOverflow(current, item) ? needed / chapterOverflow(current, item) : 0) * (chapterHold(current, item) - current.viewport * .4);
+      const reading = continuousPaper ? needed : current.viewport * .15 + (chapterOverflow(current, item) ? needed / chapterOverflow(current, item) : 0) * (chapterHold(current, item) - current.viewport * .4);
       const top = element.getBoundingClientRect().top + window.scrollY + chapterStart(current, item) + reading;
       const restore = () => { window.scrollTo({ top, behavior: 'instant' }); read(); target.focus({ preventScroll: true }); };
       restore();
@@ -125,7 +126,7 @@ export function useMobileChapter(count: number, fixedUnits?: number, tailUnits =
       window.removeEventListener('resize', schedule);
       cancelAnimationFrame(frame); cancelAnimationFrame(focusFrame);
     };
-  }, [count, fixedUnits, tailUnits, distance, visible, approach]);
+  }, [count, fixedUnits, tailUnits, continuousPaper, distance, visible, approach]);
   return { root, stage, content, distance, visible, approach, layout };
 }
 export function mobileMoment(root: HTMLElement | null, moment: number, behavior: ScrollBehavior = 'smooth') {

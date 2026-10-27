@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
-import { clamp, createHomeScore, itemOpacity, itemPhase, scrollToHomeMoment, soften, serviceCompletion, serviceDuration, servicePhase, serviceReadMoment, serviceReading, serviceStart, serviceTiming } from '../utils/homeChoreography.ts';
+import { clamp, createHomeScore, itemOpacity, itemPhase, pricePhase, priceMoment, scrollToHomeMoment, soften, serviceCompletion, serviceDuration, servicePhase, serviceReadMoment, serviceReading, serviceStart, serviceTiming } from '../utils/homeChoreography.ts';
 import { registerHomeScroll } from '../utils/homeScroll.ts';
 
 const score = createHomeScore(10, 5);
-assert.ok(Math.abs(score.total - 27.4) < 1e-10);
+assert.ok(Math.abs(score.total - 24.9) < 1e-10);
 assert.ok(Math.abs(score.hero - score.portal - .75) < 1e-10, 'The original hero duration is preserved after the portal');
 assert.deepEqual(Object.values(score), [...Object.values(score)].sort((a, b) => a - b));
 assert.ok(score.gridReveal < score.gridZoom && score.gridZoom < score.gridContent);
 assert.ok(score.gridContent < score.gridSettle && score.gridSettle < score.gridExit && score.gridExit < score.work);
 
-for (const [count, hold] of [[10, .5], [5, serviceTiming.read], [4, 1]]) {
+for (const [count, hold] of [[10, .5], [5, serviceTiming.read]]) {
   const slot = hold + .25;
   for (let index = 0; index < count; index++) {
     // Reading must be genuinely still, including either edge of the hold.
@@ -32,6 +32,22 @@ for (const [count, hold] of [[10, .5], [5, serviceTiming.read], [4, 1]]) {
   assert.equal(itemPhase(-100, count, hold), 0);
   assert.equal(itemPhase(100, count, hold), count - 1);
 }
+
+// A price sheet must move on the very first pixel and every subsequent wheel increment.
+for (const viewport of [650, 720, 900]) {
+  for (let sheet = 0; sheet < 3; sheet++) {
+    for (const pixels of [1, 8, 24, 60, 120, 240, viewport - 1]) {
+      const phase = pricePhase(priceMoment(sheet) + pixels / viewport);
+      assert.ok(Math.abs(phase - sheet - pixels / viewport) < 1e-10);
+      assert.ok(phase > sheet && phase < sheet + 1, 'partial scrolling keeps the sheet visibly between positions');
+      assert.ok(Math.abs((1 - (phase - sheet)) * viewport - (viewport - pixels)) < 1e-8);
+      assert.ok(pricePhase(sheet + (pixels - 1) / viewport) < phase, 'scrolling back reverses the sheet immediately');
+    }
+  }
+}
+assert.equal(pricePhase(-1), 0);
+assert.equal(pricePhase(9), 3);
+assert.equal(score.total, score.prices + priceMoment(3), 'the final sheet releases directly into normal scrolling');
 
 // Services keep copy steady without swallowing scroll input; the last item
 // exits directly into quality rather than waiting through a nonexistent sixth.

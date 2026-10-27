@@ -1,4 +1,4 @@
-import { createHomeScore, itemPhase, scrollToHomeMoment, servicePhase, serviceReadMoment } from './homeChoreography';
+import { createHomeScore, itemPhase, pricePhase, priceMoment, scrollToHomeMoment, servicePhase, serviceReadMoment } from './homeChoreography';
 import { mobileViewportQuery } from './useMediaQuery';
 import { scrollToSection } from './scrollToSection';
 
@@ -17,7 +17,7 @@ export function rememberHomeMoment(t: number, projectCount: number, serviceCount
   else if (t < score.handoff) spot = { type: 'project', index: Math.min(projectCount - 1, Math.round((t - score.work) / .75)) };
   else if (t < score.quality) spot = { type: 'service', index: Math.round(servicePhase(t - score.services, serviceCount)) };
   else if (t < score.priceEntrance) spot = { type: 'quality' };
-  else spot = { type: 'price', index: Math.round(itemPhase(t - score.prices, 4, 1)) };
+  else spot = { type: 'price', index: Math.round(pricePhase(t - score.prices)) };
 }
 
 /** Cache semantic position while the old tree exists: resize can render before matchMedia fires. */
@@ -68,7 +68,7 @@ export function trackHomeReadingPosition(projectCount: number, serviceCount: num
       else if (t < score.handoff) spot = { type: 'project', index: Math.round(itemPhase(t - score.work, projectCount, .5)) };
       else if (t < score.quality) spot = { type: 'service', index: Math.round(servicePhase(t - score.services, serviceCount)) };
       else if (t < score.priceEntrance) spot = { type: 'quality' };
-      else spot = { type: 'price', index: Math.round(itemPhase(t - score.prices, 4, 1)) };
+      else spot = { type: 'price', index: Math.round(pricePhase(t - score.prices)) };
       return;
     }
     const project = Array.from(document.querySelectorAll<HTMLElement>('[data-mobile-project]')).find(contains);
@@ -98,7 +98,7 @@ export function preserveHomeReadingPosition(nextMobile: boolean, projectCount: n
       const moment = saved.type === 'project' ? score.work + saved.index * .75 + .25
         : saved.type === 'service' ? score.services + serviceReadMoment(saved.index)
         : saved.type === 'quality' ? score.quality + 1
-        : saved.type === 'price' ? score.prices + saved.index * 1.25 + .5
+        : saved.type === 'price' ? score.prices + priceMoment(saved.index)
         : saved.type === 'resultaten' ? score.work + .25 : 0;
       scrollToHomeMoment(sequence, moment, score.total, 'instant');
       return;

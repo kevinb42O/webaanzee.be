@@ -152,3 +152,15 @@
   .title, .groupTitle, .summary, .answer { overflow-wrap: anywhere; }
   .summary { min-width: 0; }
 }
+
+.questionHeading { margin:0; font:inherit; }
+.summary { width:100%; border:0; background:transparent; text-align:left; font-family:inherit; }
+.answerWindow { overflow:hidden; }
+.details[data-open='true'] .summary { color:#a13d28; }
+.details[data-open='true'] .icon { transform:rotate(45deg); color:#fff5e8; background:#a13d28; }
+.icon { transition:transform 280ms cubic-bezier(.16,1,.3,1),background-color 180ms,color 180ms; }
+.summary:focus-visible { outline:2px solid #a13d28; outline-offset:4px; }
+@media(prefers-reduced-motion:reduce) { .icon { transition:none; } }
+
+.groupTitle { color:#a13d28; }
+.footer { color:#655e54; }

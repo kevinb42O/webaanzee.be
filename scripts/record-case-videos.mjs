@@ -8,7 +8,7 @@ import ffmpegPath from 'ffmpeg-static';
 const projects = [
   { name: 'hondaanzee', url: 'https://www.hondaanzee.be/' },
   { name: 'fabrice', url: 'https://www.fabricegoffin.be/standpunten' },
-  { name: 'carabus', url: 'https://www.carabusads.be/' },
+  { name: 'carabus', url: 'https://www.carabusads.com/' },
   { name: 'cozy', url: 'https://www.cozy-moments.be/' },
   { name: 'dailygrind', url: 'https://www.daily-grind.be/' },
   { name: 'vishandel', url: 'https://www.vishandelolivierenkelly.be/' },

@@ -273,3 +273,7 @@ img { display: block; max-width: 100%; height: auto; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+.case-intro { margin: 0 0 clamp(32px, 5vw, 64px); }
+.case-intro video { display: block; height: auto; }
+.case-intro figcaption { margin-top: 12px; font-size: .875rem; line-height: 1.5; }

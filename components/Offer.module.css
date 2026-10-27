@@ -175,3 +175,25 @@
   .section .transparency, .section .costIntro, .section .conditions { min-width: 0; }
   .section .example dl > div { flex-wrap: wrap; row-gap: .25rem; }
 }
+
+/* A complete offer is one sheet; its typography stays still while the paper moves. */
+.priceDeck { position:absolute; inset:0; perspective:1600px; }
+.priceSheet { position:absolute; inset:0; display:flex; flex-direction:column; padding:clamp(6rem,12vh,8rem) clamp(2.5rem,6vw,7rem) clamp(7rem,14vh,10rem); background:var(--price-paper); color:var(--price-ink); transform-origin:50% 85%; box-shadow:0 -18px 50px rgb(30 24 18 / .16); backface-visibility:hidden; }
+.pricingScene > .editorialNav { position:absolute; z-index:6; bottom:0; left:0; right:0; margin:0; padding:1rem clamp(2.5rem,6vw,7rem) 1.5rem; background:var(--price-paper); color:var(--price-ink); }
+.priceSheet .chapterTitleWindow { overflow:visible; perspective:none; }
+.priceSheet .rollingPrice { overflow:visible; }
+@media(min-width:1000px) and (max-height:760px) {
+  .priceSheet { padding-top:5.2rem; padding-bottom:5.8rem; }
+  .pricingScene > .editorialNav { padding-top:.4rem; padding-bottom:.7rem; }
+}
+
+/* The paper edge starts above the fixed navigation, visible from the first scroll pixel. */
+.priceDeck { bottom:6rem; }
+.priceSheet { padding-bottom:1.5rem; }
+.pricingScene { background:var(--price-paper); }
+@media(min-width:1000px) and (max-height:760px) {
+  .priceDeck { bottom:4.6rem; }
+  .priceSheet { padding-bottom:1rem; }
+}
+
+.pricingScene > .editorialNav { padding-inline-end:max(6rem, clamp(2.5rem,6vw,7rem)); }

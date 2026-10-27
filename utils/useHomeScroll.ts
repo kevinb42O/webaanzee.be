@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { registerHomeScroll } from './homeScroll';
+import { isPageScrollLocked, pageScrollLockEvent } from './pageScrollLock';
 import { rememberHomeMoment } from './preserveHomeReadingPosition';
 
 /** One native page position drives every scene, with Lenis smoothing wheel input. */
@@ -20,6 +21,9 @@ export function useHomeScroll(sequence: RefObject<HTMLDivElement | null>, total:
     const unregister = registerHomeScroll((top, behavior) => {
       lenis.scrollTo(top, { immediate: behavior !== 'smooth', force: true });
     });
+    const syncScrollLock = () => { if (isPageScrollLocked()) lenis.stop(); else lenis.start(); };
+    syncScrollLock();
+    window.addEventListener(pageScrollLockEvent, syncScrollLock);
     const update = () => ScrollTrigger.update();
     lenis.on('scroll', update);
     const tick = (seconds: number) => lenis.raf(seconds * 1000);
@@ -62,6 +66,7 @@ export function useHomeScroll(sequence: RefObject<HTMLDivElement | null>, total:
       disposed = true;
       rememberHomeMoment(readingMoment, projectCount, serviceCount);
       unregister();
+      window.removeEventListener(pageScrollLockEvent, syncScrollLock);
       resize.disconnect();
       trigger.kill();
       gsap.ticker.remove(tick);

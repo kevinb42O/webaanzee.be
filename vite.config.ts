@@ -1,9 +1,21 @@
 import path from 'path';
+import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { stat } from 'node:fs/promises';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
+      css: {
+        modules: {
+          generateScopedName(name, filename) {
+            const id = path.relative(projectRoot, filename).replaceAll('\\', '/');
+            return `_${name}_${createHash('sha256').update(id).digest('hex').slice(0, 6)}`;
+          },
+        },
+      },
       server: {
         port: 3000,
         host: '0.0.0.0',

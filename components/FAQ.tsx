@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
+import { Plus } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './FAQ.module.css';
 import { pricingSummary, euro, pricing } from '../data/pricing.mjs';
@@ -26,13 +28,44 @@ const faqGroups = [
   },
 ];
 
+function FAQItem({ faq, expanded, onToggle }: { faq: { id: string; question: string; answer: string }; expanded: boolean; onToggle: () => void }) {
+  const reduced = useReducedMotion();
+  const root = useRef<HTMLDetailsElement>(null);
+  const answer = useRef<HTMLDivElement>(null);
+  const animation = useRef<Animation | null>(null);
+
+  useEffect(() => () => animation.current?.cancel(), []);
+  useEffect(() => {
+    const details = root.current;
+    const panel = answer.current;
+    if (!details || !panel) return;
+    const from = details.open ? panel.getBoundingClientRect().height : 0;
+    animation.current?.cancel();
+    if (reduced || (!details.open && !expanded)) { details.open = expanded; return; }
+    details.open = true;
+    const effect = panel.animate([{ height: `${from}px` }, { height: expanded ? `${panel.scrollHeight}px` : '0px' }], {
+      duration: expanded ? 320 : 220, easing: 'cubic-bezier(.16,1,.3,1)',
+    });
+    animation.current = effect;
+    effect.onfinish = () => { details.open = expanded; animation.current = null; };
+  }, [expanded, reduced]);
+
+  return <details ref={root} className={styles.details} data-open={expanded}>
+    <summary id={`faq-question-${faq.id}`} className={styles.summary} aria-expanded={expanded} aria-controls={`faq-answer-${faq.id}`} onClick={event => { event.preventDefault(); onToggle(); }}>
+      {faq.question}<span className={styles.icon} aria-hidden="true"><Plus size={18} strokeWidth={1.5} /></span>
+    </summary>
+    <div ref={answer} id={`faq-answer-${faq.id}`} className={styles.answerWindow} role="region" aria-labelledby={`faq-question-${faq.id}`}>
+      <div className={styles.answer}><p>{faq.answer}</p></div>
+    </div>
+  </details>;
+}
+
 const FAQ: React.FC = () => {
   const [openFaqId, setOpenFaqId] = useState<string | null>(null);
-
   return (
     <section className={styles.section} id="faq">
-      <div className={`${styles.container} animate-on-scroll`}>
-        <div className={`${styles.header} reveal-up`}>
+      <div className={styles.container}>
+        <div className={styles.header}>
 
           <h2 className={styles.title}>Vragen over<br />je website.</h2>
           <p className={styles.intro}>Van de eerste aanvraag tot het aanpassen van je website na de oplevering.</p>
@@ -44,12 +77,7 @@ const FAQ: React.FC = () => {
               <h3 className={styles.groupTitle}>{group.title}</h3>
               <div className={styles.items}>
                 {group.faqs.map((faq) => (
-                  <details key={faq.id} className={styles.details} open={openFaqId === faq.id}>
-                    <summary className={styles.summary} onClick={(event) => { event.preventDefault(); setOpenFaqId((current) => current === faq.id ? null : faq.id); }}>
-                      {faq.question}<span className={styles.icon} aria-hidden="true">+</span>
-                    </summary>
-                    <div className={styles.answer}><p>{faq.answer}</p></div>
-                  </details>
+                  <FAQItem key={faq.id} faq={faq} expanded={openFaqId === faq.id} onToggle={() => setOpenFaqId(current => current === faq.id ? null : faq.id)} />
                 ))}
               </div>
             </div>

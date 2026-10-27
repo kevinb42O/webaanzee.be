@@ -1,11 +1,14 @@
-import { mobileMotionQuery } from '../utils/useMediaQuery';
-import React, { useEffect, useState } from 'react';
-import { motion, useMotionValueEvent, useTransform, type MotionValue } from 'motion/react';
+import { useMotionState } from '../utils/useMotionState';
+import { useDesktopMotion } from '../utils/useDesktopMotion';
+import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
+import React, { useRef } from 'react';
+import { motion, useTransform, type MotionValue } from 'motion/react';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollToSection';
 import { euro, pricing } from '../data/pricing.mjs';
 import styles from './Offer.module.css';
-import { clamp, desktopMotionQuery, itemOpacity, windowProgress } from '../utils/homeChoreography';
+import { useSectionArrival } from '../utils/useSectionArrival';
+import { clamp, windowProgress } from '../utils/homeChoreography';
 
 const ContactLink = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <a href="#contact" onClick={(event) => scrollToSection(event, 'contact')} className={className}>
@@ -80,84 +83,75 @@ const StaticOffer: React.FC<{ index: number }> = ({ index }) => {
   </article>;
 };
 
-// Each price is a typeset face on a virtual drum. The actual amount never counts up.
-const PriceGlyph: React.FC<{ character: string; chapter: number; time: MotionValue<number> }> = ({ character, chapter, time }) => {
-  const position = useTransform(time, value => clamp(value - chapter, -1, 1));
-  const rotateX = useTransform(position, value => -value * 22);
-  const y = useTransform(position, value => `${-value * 25}%`);
-  return <span className={styles.glyphWindow}><motion.span style={{ rotateX, y }}>{character}</motion.span></span>;
-};
-
-export const PriceChapter: React.FC<{ index: number; time: MotionValue<number>; active: boolean; masked?: boolean }> = ({ index, time, active, masked = false }) => {
+export const PriceChapter: React.FC<{ index: number; active: boolean }> = ({ index, active }) => {
   const offer = offers[index];
-  const local = useTransform(time, value => value - index);
-  const opacity = useTransform(time, value => itemOpacity(value, index));
-  const titleY = useTransform(local, value => `${clamp(-value, -1, 1) * 12}%`);
-  const titleRotate = useTransform(local, value => clamp(-value, -1, 1) * 3);
-  const detailY = useTransform(local, value => clamp(-value, -1, 1) * 12);
-  return <motion.article className={styles.chapter} style={{ opacity: masked ? 1 : opacity }} inert={!active ? true : undefined} aria-hidden={!active} aria-label={offer.label}>
+  return <article className={styles.chapter} inert={!active ? true : undefined} aria-hidden={!active} aria-label={offer.label}>
     <div className={styles.chapterIdentity}>
-      <div className={styles.chapterTitleWindow}><motion.h3 style={{ y: titleY, rotateX: titleRotate }}>{offer.title[0]}<em>{offer.title[1]}</em></motion.h3></div>
+      <div className={styles.chapterTitleWindow}><h3>{offer.title[0]}<em>{offer.title[1]}</em></h3></div>
       <div className={styles.priceSculpture}>
         <span className={styles.priceCaption}>vanaf</span>
-        <div className={styles.rollingPrice} role="img" aria-label={euro(offer.price)}><span aria-hidden="true"><sup className={styles.priceCurrency}>€</sup>{[...euro(offer.price).slice(1)].map((character, glyph) => <PriceGlyph key={glyph} character={character} chapter={index} time={time} />)}</span></div>
+        <div className={styles.rollingPrice} role="img" aria-label={euro(offer.price)}><span aria-hidden="true"><sup className={styles.priceCurrency}>€</sup>{euro(offer.price).slice(1)}</span></div>
         <span className={styles.priceCaption}>eenmalig · excl. btw</span>
       </div>
     </div>
-    <motion.div className={styles.chapterDetails} style={{ y: detailY }}>
+    <div className={styles.chapterDetails}>
       <p className={styles.chapterDescription}>{offer.description}</p>
       <p className={styles.chapterScope}>{offer.scope}</p>
       <ul className={styles.chapterFeatures}>{offer.features.map(text => <li key={text}><FeatureText text={text} /></li>)}</ul>
       <p className={styles.chapterLimit}>{offer.limit}</p>
       <ContactLink className={styles.chapterAction}>{offer.action}</ContactLink>
       <p className={styles.chapterRecurring}>{offer.recurring}</p>
-    </motion.div>
-  </motion.article>;
+    </div>
+  </article>;
 };
 
-export const PricingScene: React.FC<{ progress: MotionValue<number>; phase: MotionValue<number>; onNavigate: (index: number) => void }> = ({ progress, phase: time, onNavigate }) => {
-  const [active, setActive] = useState(0);
-  useMotionValueEvent(time, 'change', value => setActive(current => current === Math.round(value) ? current : Math.round(value)));
+export const pricePalettes = [
+  { paper: '#f3eee4', ink: '#29251f', muted: '#655b50', accent: '#a13d28' },
+  { paper: '#e8e2d5', ink: '#29251f', muted: '#655b50', accent: '#a13d28' },
+  { paper: '#a94732', ink: '#fff5e8', muted: '#f6ddc8', accent: '#ffe1ab' },
+  { paper: '#24221f', ink: '#fff5e8', muted: '#c9beb0', accent: '#f0ae91' },
+];
+
+const PriceSheet: React.FC<{ index: number; phase: MotionValue<number>; active: boolean }> = ({ index, phase, active }) => {
+  const y = useTransform(phase, value => `${Math.max(0, index - value) * 100}%`);
+  const scale = useTransform(phase, value => 1 - clamp(value - index) * .055);
+  const rotateX = useTransform(phase, value => clamp(value - index) * 4);
+  const visibility = useTransform(phase, value => value > index + 1 || value < index - 1 ? 'hidden' : 'visible');
+  const palette = pricePalettes[index];
+  return <motion.div data-price-sheet={index} className={styles.priceSheet} style={{ y, scale, rotateX, visibility, zIndex: index + 1,
+    '--price-paper': palette.paper, '--price-ink': palette.ink, '--price-muted': palette.muted, '--price-accent': palette.accent,
+  } as import('motion/react').MotionStyle} inert={!active ? true : undefined} aria-hidden={!active}>
+    <header className={styles.editorialHeader}>
+      <div className={styles.editorialHeadings}><h2>{index < 2 ? <>Wat kost<em>je website?</em></> : <>Webshop of<em>toepassing.</em></>}</h2></div>
+      <p>Vergelijk de bouwprijs en wat daarin zit.<br />Hosting en beheer staan apart.</p>
+    </header>
+    <div className={styles.editorialRule} aria-hidden="true" />
+    <div className={styles.chapterStage}><PriceChapter index={index} active={active} /></div>
+  </motion.div>;
+};
+
+export const PricingScene: React.FC<{ progress: MotionValue<number>; phase: MotionValue<number>; onNavigate: (index: number) => void }> = ({ progress, phase, onNavigate }) => {
+  const active = useMotionState(phase, Math.round);
   const mask = useTransform(progress, v => `inset(${(1 - windowProgress(v, 0, .75)) * 100}% 0% 0% 0%)`);
   const visible = useTransform(progress, value => value <= 0 ? 'hidden' : 'visible');
-  const contentOpacity = useTransform(progress, v => windowProgress(v, .3, .75));
-  const paper = useTransform(time, [0, 1, 2, 3], ['#f3eee4', '#f3eee4', '#a94732', '#24221f']);
-  const ink = useTransform(time, [1, 2], ['#29251f', '#fff5e8']);
-  const muted = useTransform(time, [1, 2, 3], ['#655b50', '#f6ddc8', '#c9beb0']);
-  const accent = useTransform(time, [1, 2, 3], ['#a13d28', '#ffe1ab', '#f0ae91']);
-  const firstHeader = useTransform(time, v => 1 - windowProgress(v, 1, 1.48));
-  const nextHeader = useTransform(time, v => windowProgress(v, 1.52, 2));
-  const ruleScale = useTransform(progress, v => windowProgress(v, .3, .75));
-  return <motion.section className={styles.pricingScene} style={{ visibility: visible, clipPath: mask, background: paper, '--price-paper': paper, '--price-ink': ink, '--price-muted': muted, '--price-accent': accent } as import('motion/react').MotionStyle} aria-label="Aanbod en prijzen">
-    <motion.div className={styles.priceEditorial} style={{ opacity: contentOpacity }}>
-      <header className={styles.editorialHeader}>
-        <div className={styles.editorialHeadings}>
-          <motion.h2 style={{ opacity: firstHeader }} aria-hidden={active >= 2}>Wat kost<em>je website?</em></motion.h2>
-          <motion.h2 style={{ opacity: nextHeader }} aria-hidden={active < 2}>Webshop of<em>toepassing.</em></motion.h2>
-        </div>
-        <p>Vergelijk de bouwprijs en wat daarin zit.<br />Hosting en beheer staan apart.</p>
-      </header>
-      <motion.div className={styles.editorialRule} style={{ scaleX: ruleScale }} aria-hidden="true" />
-      <div className={styles.chapterStage}>{offers.map((offer, index) => <PriceChapter key={offer.label} index={index} time={time} active={active === index} />)}</div>
-      <nav className={styles.editorialNav} aria-label="Aanbod en prijzen">
-        {offers.map((offer, index) => <button key={offer.label} type="button" onClick={() => onNavigate(index)} aria-current={active === index ? 'step' : undefined}><span>{offer.label}</span><span>{euro(offer.price)}</span></button>)}
-        <a href="#prijsdetails" onClick={event => scrollToSection(event, 'prijsdetails')} aria-label="Bekijk alle kosten en voorwaarden"><ArrowUpRight size={22} strokeWidth={1.3} aria-hidden="true" /></a>
-      </nav>
-    </motion.div>
+  const palette = pricePalettes[active];
+  return <motion.section className={styles.pricingScene} style={{ visibility: visible, clipPath: mask,
+    '--price-paper': palette.paper, '--price-ink': palette.ink, '--price-muted': palette.muted, '--price-accent': palette.accent,
+  } as import('motion/react').MotionStyle} aria-label="Aanbod en prijzen">
+    <div className={styles.priceDeck}>{offers.map((offer, index) => <PriceSheet key={offer.label} index={index} phase={phase} active={active === index} />)}</div>
+    <nav className={styles.editorialNav} aria-label="Aanbod en prijzen">
+      {offers.map((offer, index) => <button key={offer.label} type="button" onClick={() => onNavigate(index)} aria-current={active === index ? 'step' : undefined}><span>{offer.label}</span><span>{euro(offer.price)}</span></button>)}
+      <a href="#prijsdetails" onClick={event => scrollToSection(event, 'prijsdetails')} aria-label="Bekijk alle kosten en voorwaarden"><ArrowUpRight size={22} strokeWidth={1.3} aria-hidden="true" /></a>
+    </nav>
   </motion.section>;
 };
 
 const Offer: React.FC = () => {
-  const [embedded, setEmbedded] = useState(false);
-  useEffect(() => {
-    const media = window.matchMedia(desktopMotionQuery);
-    const mobileMedia = window.matchMedia(mobileMotionQuery);
-    const update = () => setEmbedded(media.matches || mobileMedia.matches);
-    update();
-    media.addEventListener('change', update);
-    mobileMedia.addEventListener('change', update);
-    return () => { media.removeEventListener('change', update); mobileMedia.removeEventListener('change', update); };
-  }, []);
+  const desktop = useDesktopMotion();
+  const mobile = useMediaQuery(mobileMotionQuery);
+  const embedded = desktop || mobile;
+  const exampleRef = useRef<HTMLDivElement>(null);
+  useSectionArrival(exampleRef, 'cost');
   return (
   <section className={styles.section} id={embedded ? 'prijsdetails' : 'prijzen'} aria-label={embedded ? 'Maatwerk en prijsvoorwaarden' : undefined} aria-labelledby={embedded ? undefined : 'pricing-title'}>
     <div className={styles.container}>
@@ -171,10 +165,10 @@ const Offer: React.FC = () => {
       </>}
       <div className={styles.transparency}>
         <div className={styles.costIntro}><h3>Kosten na<br />de oplevering.</h3><p>Naast de bouw betaal je voor het online houden en technisch beheren van je website.</p>
-          <div className={styles.example}>
+          <div ref={exampleRef} className={styles.example}>
             <h4>Rekenvoorbeeld · website + CMS</h4>
             <p>Bij de startprijzen, met beheer via Webaanzee:</p>
-            <dl><div><dt>Bouw website + CMS</dt><dd>{euro(pricing.cms.price)}</dd></div><div><dt>12 maanden hosting & beheer</dt><dd>{euro(pricing.cms.monthly * 12)}</dd></div><div className={styles.total}><dt>Eerste jaar vanaf</dt><dd>{euro(pricing.cms.price + pricing.cms.monthly * 12)}</dd></div></dl>
+            <dl><div data-cost-row><dt>Bouw website + CMS</dt><dd>{euro(pricing.cms.price)}</dd></div><div data-cost-row><dt>12 maanden hosting & beheer</dt><dd>{euro(pricing.cms.monthly * 12)}</dd></div><div data-cost-total className={styles.total}><dt>Eerste jaar vanaf</dt><dd>{euro(pricing.cms.price + pricing.cms.monthly * 12)}</dd></div></dl>
             <p>Excl. btw, domeinnaam en eventuele externe licenties. Daarna vanaf {euro(pricing.cms.monthly * 12)}/jaar voor hosting & beheer, bij gelijkblijvende omvang en tarieven.</p>
           </div>
         </div>

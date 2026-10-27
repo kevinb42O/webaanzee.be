@@ -1,7 +1,10 @@
+import { desktopMotionEnabled, useRootFontSize } from '../utils/useDesktopMotion';
+import { useMediaQuery } from '../utils/useMediaQuery';
 import React, { useState, useEffect } from 'react';
 import { scrollToSection } from '../utils/scrollToSection';
 import styles from './Header.module.css';
 import Logo from './Logo';
+import { lockPageScroll } from '../utils/pageScrollLock';
 
 interface HeaderProps {
   light?: boolean;
@@ -13,6 +16,9 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
   const [hydrated, setHydrated] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const scrolled = phase === 'solid';
+  const rootSize = useRootFontSize();
+  const compactQuery = `(max-width: ${Math.max(1024, rootSize * 64) - .02}px)`;
+  const compact = useMediaQuery(compactQuery);
 
   useEffect(() => {
     setHydrated(true);
@@ -38,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
       }
       // Static and reduced-motion layouts have no passage to wait for.
       // Keep the initial server frame hidden until the desktop sequence has mounted.
-      const enhancedDesktop = window.matchMedia('(min-width: 1000px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)').matches;
+      const enhancedDesktop = desktopMotionEnabled();
       if (enhancedDesktop && !sequence) { setPhase('hidden'); return; }
       const hero = document.querySelector<HTMLElement>('main #home section, main section#home, [data-mobile-opening] section');
       setPhase(hero && hero.getBoundingClientRect().bottom <= 80 ? 'solid' : 'transparent');
@@ -58,8 +64,7 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
   useEffect(() => {
     if (!menuOpen) return;
 
-    const previousOverflow = document.body.style.overflow;
-    const mobile = window.matchMedia('(max-width: 999px)');
+    const mobile = window.matchMedia(compactQuery);
     const trapFocus = mobile.matches;
     const toggle = document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-navigation"]');
     const navigation = document.getElementById('mobile-navigation');
@@ -77,28 +82,32 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
       }
     };
 
-    document.body.style.overflow = 'hidden';
+    const unlockScroll = lockPageScroll(toggle?.closest('header'));
     document.body.classList.add('mobile-menu-open');
     window.addEventListener('keydown', closeOnEscape);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockScroll();
       document.body.classList.remove('mobile-menu-open');
       window.removeEventListener('keydown', closeOnEscape);
       mobile.removeEventListener('change', closeOnResize);
       cancelAnimationFrame(focusFrame);
       if (trapFocus) toggle?.focus({ preventScroll: true });
     };
-  }, [menuOpen]);
+  }, [menuOpen, compactQuery]);
 
   const isHomePage = typeof window === 'undefined' || window.location.pathname === '/' || window.location.pathname === '/index.html';
   const closeMenuAndScroll = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     setMenuOpen(false);
-    if (isHomePage) scrollToSection(event, id);
+    if (isHomePage) {
+      event.preventDefault();
+      // Let closing release the scroll lock before starting the destination animation.
+      requestAnimationFrame(() => scrollToSection(null, id));
+    }
   };
 
   return (
-    <header data-opening-navigation={opening ? phase : undefined} inert={hydrated && phase === 'hidden' ? true : undefined} aria-hidden={hydrated && phase === 'hidden' ? true : undefined} className={`${styles.header} ${scrolled || light ? styles.scrolled : ''} ${phase === 'hidden' ? styles.openingHidden : ''} ${menuOpen ? styles.menuOpen : ''}`}>
+    <header data-opening-navigation={opening ? phase : undefined} inert={hydrated && phase === 'hidden' ? true : undefined} aria-hidden={hydrated && phase === 'hidden' ? true : undefined} className={`${styles.header} ${scrolled || light ? styles.scrolled : ''} ${phase === 'hidden' ? styles.openingHidden : ''} ${menuOpen ? styles.menuOpen : ''} ${compact ? styles.compact : ''}`}>
       {opening && <noscript><style>{`[data-opening-navigation] { opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; }`}</style></noscript>}
       <div className={styles.container}>
         <a href="/#home" onClick={(e) => isHomePage ? scrollToSection(e, 'home') : undefined} className={styles.logo} aria-label="Webaanzee, naar de startpagina">
@@ -128,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({ light = false, opening = false }) => {
           <span />
         </button>
       </div>
-      <nav id="mobile-navigation" className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ''}`} aria-label="Mobiele navigatie" aria-hidden={!menuOpen}>
+      <nav data-lenis-prevent="" inert={!menuOpen ? true : undefined} id="mobile-navigation" className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ''}`} aria-label="Mobiele navigatie" aria-hidden={!menuOpen}>
         <div className={styles.mobileNavInner}>
           <div>
             <p className={styles.mobileNavLabel}>Navigatie</p>

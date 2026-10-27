@@ -1,8 +1,9 @@
-import { mobileMotionQuery } from '../utils/useMediaQuery';
-import React, { useEffect, useState } from 'react';
+import { useDesktopMotion } from '../utils/useDesktopMotion';
+import { mobileMotionQuery, useMediaQuery } from '../utils/useMediaQuery';
+import React from 'react';
 import { motion, useTransform, type MotionValue } from 'motion/react';
 import styles from './Quality.module.css';
-import { desktopMotionQuery, interpolate, windowProgress } from '../utils/homeChoreography';
+import { interpolate, windowProgress } from '../utils/homeChoreography';
 
 const principles = [
   'Je aanbod en contactgegevens zijn makkelijk te vinden.',
@@ -46,16 +47,9 @@ export const QualityScene: React.FC<{ progress: MotionValue<number> }> = ({ prog
 };
 
 const Quality: React.FC = () => {
-  const [embedded, setEmbedded] = useState(false);
-  useEffect(() => {
-    const media = window.matchMedia(desktopMotionQuery);
-    const mobileMedia = window.matchMedia(mobileMotionQuery);
-    const update = () => setEmbedded(media.matches || mobileMedia.matches);
-    update();
-    media.addEventListener('change', update);
-    mobileMedia.addEventListener('change', update);
-    return () => { media.removeEventListener('change', update); mobileMedia.removeEventListener('change', update); };
-  }, []);
+  const desktop = useDesktopMotion();
+  const mobile = useMediaQuery(mobileMotionQuery);
+  const embedded = desktop || mobile;
   if (embedded) return null;
   return <section className={styles.section} aria-labelledby="quality-static-title">
     <div className={styles.container}>

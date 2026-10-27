@@ -79,7 +79,7 @@ const Hero: React.FC<{ progress?: MotionValue<number>; portalProgress?: MotionVa
             <motion.span className={styles.titleLine} variants={revealVariants}>Je kent je vak.</motion.span>
           </span>
           <span className={styles.lineMask}>
-            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Laat het online zien.</motion.span>
+            <motion.span className={`${styles.titleLine} ${styles.accentLine}`} variants={revealVariants}>Laat het<em> online zien.</em></motion.span>
           </span>
         </h1>
         

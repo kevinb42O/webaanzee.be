@@ -87,7 +87,7 @@ export const projects = [
     "title": "Carabus Ads",
     "place": "België",
     "image": "/images/cases/carabus.png",
-    "url": "https://www.carabusads.be",
+    "url": "https://www.carabusads.com",
     "summary": "Website voor Carabus Ads, een bureau voor Google Ads, advertenties op sociale media en online campagnes.",
     "challenge": "Bezoekers moeten kunnen lezen welke advertentiediensten het bureau aanbiedt en hoe ze een samenwerking kunnen bespreken.",
     "solution": "De website beschrijft de diensten van het bureau en verbindt die uitleg met een route naar een aanvraag.",
@@ -120,7 +120,10 @@ export const projects = [
       "Bedrijfswebsite"
     ],
     "casePath": "/cases/carabus-ads/",
-    "videoSrc": "/videos/carabus.mp4",
+    "introVideoSrc": "/videos/carabus-preview.mp4",
+    "introVideoPoster": "/images/cases/carabus-intro.jpg",
+    "videoCaption": "De hero en scrolltransities van Carabus Ads",
+    "videoSrc": "/videos/carabus-preview.mp4",
     "showInGrid": true
   },
   {
@@ -407,7 +410,39 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/welzijnswerking-oostende/",
-    "videoSrc": "",
+    "introVideoSrc": "/videos/welzijnswerking-preview.mp4",
+    "introVideoPoster": "/images/cases/welzijnswerking-intro.jpg",
+    "videoCaption": "De hero en zijn overgang naar de praktische informatie",
+    "videoSrc": "/videos/welzijnswerking-preview.mp4",
+    "showInGrid": false
+  },
+  {
+    "slug": "lothuus",
+    "title": "LOTHUUS",
+    "place": "België",
+    "image": "/images/cases/lothuus.png",
+    "url": "https://www.lothuus.be/",
+    "summary": "Een website voor een huis voor cultuur en ontmoeting, met een visuele vintagecollectie en een persoonlijke selectie.",
+    "challenge": "Het verhaal van het huis en de vintagecollectie vragen elk hun eigen ruimte. Bezoekers moeten tussen de objecten kunnen kijken en hun favoriete stukken terugvinden.",
+    "solution": "Een geanimeerde introductie brengt het huis in beeld en leidt naar de collectie. Categorieën zoals keramiek, glas en textiel helpen bezoekers het aanbod te verkennen. Interessante objecten kunnen ze bewaren in een selectie.",
+    "result": "Bezoekers kunnen de vintagecollectie per categorie bekijken, objecten openen en een eigen selectie samenstellen.",
+    "id": "lothuus",
+    "kind": "Digitale collectie",
+    "headline": "Een huis vol verhalen en vintage.",
+    "challengeTitle": "Het huis en de collectie samenbrengen",
+    "solutionTitle": "Van het verhaal van het huis naar de objecten",
+    "choices": [
+      ["Het huis in beeld", "Een geanimeerde introductie verbindt het huis van vroeger met het huis van vandaag."],
+      ["Visuele collectie", "Objectfoto’s staan centraal, met categorieën om gericht door de vintagecollectie te kijken."],
+      ["Persoonlijke selectie", "Bezoekers kunnen interessante objecten bijhouden in hun eigen selectie."]
+    ],
+    "services": ["webdesign", "website-laten-maken"],
+    "tags": ["Vintage", "Digitale collectie"],
+    "casePath": "/cases/lothuus/",
+    "introVideoSrc": "/videos/lothuus-preview.mp4",
+    "introVideoPoster": "/images/cases/lothuus-intro.jpg",
+    "videoCaption": "Van de intro tot in de vintagecollectie",
+    "videoSrc": "/videos/lothuus-preview.mp4",
     "showInGrid": false
   }
 ];

@@ -229,3 +229,7 @@
 }
 @value hint as portalHint from './CoastalPortal.module.css';
 .hero .portalHint { left: var(--mobile-gutter); right: auto; max-width: calc(100% - 104px); font-size: clamp(11px, .7rem, 14px); }
+
+.prices .readingViewport { perspective:1200px; }
+.prices .readingLayer[data-offer-paper] { transform-origin:50% 90%; box-shadow:0 -12px 32px rgb(30 24 18 / .14); }
+.prices .readingLayer[data-offer-paper] .readingItem { padding-inline:2px; }

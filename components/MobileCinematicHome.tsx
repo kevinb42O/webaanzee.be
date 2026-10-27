@@ -1,5 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { motion, useMotionValueEvent, useTransform, type MotionValue } from 'motion/react';
+import { useMotionState } from '../utils/useMotionState';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { motion, useTransform, type MotionValue } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import type { CaseStudy } from './Proof';
 import Hero from './Hero';
@@ -10,7 +11,7 @@ import offerStyles from './Offer.module.css';
 import { euro } from '../data/pricing.mjs';
 import { QualityScene } from './Quality';
 import qualityStyles from './Quality.module.css';
-import { PriceChapter, offers } from './Offer';
+import { PriceChapter, offers, pricePalettes } from './Offer';
 import { capabilities } from '../data/capabilities';
 import { clamp, itemPhase, soften, windowProgress } from '../utils/homeChoreography';
 import { chapterPosition, chapterStart, mobileReadingOffset, mobileMoment, useMobileChapter, type MobileChapterLayout } from '../utils/useMobileChapter';
@@ -22,13 +23,7 @@ function Anchor({ id, target, moment }: { id?: string; target?: string; moment: 
 }
 
 function useActive(time: MotionValue<number>, getIndex: (value: number) => number) {
-  const [active, setActive] = useState(() => getIndex(time.get()));
-  useMotionValueEvent(time, 'change', value => setActive(current => {
-    const next = getIndex(value);
-    return current === next ? current : next;
-  }));
-  useLayoutEffect(() => setActive(getIndex(time.get())), [getIndex, time]);
-  return active;
+  return useMotionState(time, getIndex);
 }
 
 function MobileWork({ projects }: { projects: CaseStudy[] }) {
@@ -103,12 +98,12 @@ function MobileWork({ projects }: { projects: CaseStudy[] }) {
 }
 
 /** Each item retains its own reading path while the next masked layer enters. */
-function useReadingTrack(count: number, tailUnits = .45) {
-  const chapter = useMobileChapter(count, undefined, tailUnits);
+function useReadingTrack(count: number, tailUnits = .45, paper = false) {
+  const chapter = useMobileChapter(count, undefined, tailUnits, paper);
   const { distance, approach, layout } = chapter;
   const phase = useTransform(distance, value => {
     const position = chapterPosition(value, layout, count);
-    return Math.min(count - 1, position.index + soften(position.changing));
+    return Math.min(count - 1, position.index + (paper ? position.changing : soften(position.changing)));
   });
   const index = useActive(phase, value => Math.round(value));
   const readingY = useTransform(distance, value => mobileReadingOffset(value, layout, 0));
@@ -123,18 +118,21 @@ function useReadingTrack(count: number, tailUnits = .45) {
     const p = chapterPosition(value, layout, 1);
     return .85 + p.reading * .8 + clamp(p.changing / .65) * .6;
   });
-  const navigate = (next: number) => mobileMoment(chapter.root.current, chapterStart(layout, clamp(next, 0, count - 1)) + layout.viewport * .15);
+  const navigate = (next: number) => mobileMoment(chapter.root.current, chapterStart(layout, clamp(next, 0, count - 1)) + (paper ? 0 : layout.viewport * .15));
   return { ...chapter, index, phase, readingY, entrance, serviceDistance, qualityProgress, navigate };
 }
 
-function ReadingPanel({ index, active, distance, phase, layout, children }: {
+function ReadingPanel({ index, active, distance, phase, layout, children, paper = false }: {
   index: number; active: number; distance: MotionValue<number>; phase: MotionValue<number>;
-  layout: MobileChapterLayout; children: React.ReactNode;
+  layout: MobileChapterLayout; children: React.ReactNode; paper?: boolean;
 }) {
   const mask = useTransform(phase, value => `inset(${clamp(index - value) * 100}% 0 0 0)`);
+  const travel = useTransform(phase, value => paper ? `${clamp(index - value) * 100}%` : '0%');
+  const scale = useTransform(phase, value => paper ? 1 - clamp(value - index) * .035 : 1);
+  const palette = pricePalettes[index];
   const visibility = useTransform(phase, value => value >= index - 1 && value < index + 1 ? 'visible' : 'hidden');
-  const y = useTransform(distance, value => mobileReadingOffset(value, layout, index));
-  return <motion.div className={styles.readingLayer} style={{ clipPath: mask, visibility, zIndex: index + 1 }} inert={active !== index ? true : undefined} aria-hidden={active !== index}>
+  const y = useTransform(distance, value => paper ? -clamp(value - chapterStart(layout, index), 0, layout.overflows[index] ?? 0) : mobileReadingOffset(value, layout, index));
+  return <motion.div className={styles.readingLayer} style={{ clipPath: paper ? undefined : mask, y: travel, scale, visibility, zIndex: index + 1, ...(paper ? { background: palette.paper, color: palette.ink, '--price-paper': palette.paper, '--price-ink': palette.ink, '--price-muted': palette.muted, '--price-accent': palette.accent } : {}) } as import('motion/react').MotionStyle} data-offer-paper={paper || undefined} inert={active !== index ? true : undefined} aria-hidden={active !== index}>
     <motion.div className={styles.readingItem} data-mobile-reading-item={index} style={{ y }}>{children}</motion.div>
   </motion.div>;
 }
@@ -193,19 +191,16 @@ function MobileQuality() {
 }
 
 function MobilePrices() {
-  const { root, stage, content, distance, layout, index, phase, navigate } = useReadingTrack(offers.length);
-  const paper = useTransform(phase, [0, 1, 2, 3], ['#f3eee4', '#f3eee4', '#a94732', '#24221f']);
-  const ink = useTransform(phase, [1, 2], ['#29251f', '#fff5e8']);
-  const muted = useTransform(phase, [1, 2, 3], ['#655b50', '#f6ddc8', '#c9beb0']);
-  const accent = useTransform(phase, [1, 2, 3], ['#a13d28', '#ffe1ab', '#f0ae91']);
+  const { root, stage, content, distance, layout, index, phase, navigate } = useReadingTrack(offers.length, 0, true);
+  const { paper, ink, muted, accent } = pricePalettes[index];
   return <div ref={root} data-mobile-sequence data-mobile-kind="price" data-mobile-index={index} data-mobile-first={layout.entrance} data-mobile-slot={layout.hold + layout.change} data-mobile-change={layout.change} data-mobile-starts={JSON.stringify(layout.starts)} data-mobile-holds={JSON.stringify(layout.holds)} className={`${styles.sequence} ${styles.prices}`}>
-    <Anchor id="prijzen" moment={layout.entrance + layout.viewport * .15} />
-    {offers.map((offer, i) => <Anchor key={offer.label} target={`price:${i}`} moment={chapterStart(layout, i) + layout.viewport * .15} />)}
+    <Anchor id="prijzen" moment={layout.entrance} />
+    {offers.map((offer, i) => <Anchor key={offer.label} target={`price:${i}`} moment={chapterStart(layout, i)} />)}
     <motion.div ref={stage} className={styles.stage} data-mobile-stage style={{ background: paper, color: ink, '--price-paper': paper, '--price-ink': ink, '--price-muted': muted, '--price-accent': accent } as import('motion/react').MotionStyle}>
       <section className={styles.priceWorkbench} aria-label="Aanbod en prijzen">
         <header className={styles.sceneHeading}><h2>{index < 2 ? <>Wat kost <em>je website?</em></> : <>Webshop of <em>toepassing.</em></>}</h2><p>Bouwprijs en inbegrepen werk.<br />Hosting en beheer staan apart.</p></header>
         <div ref={content} className={styles.readingViewport} data-mobile-reading-viewport>
-          {offers.map((offer, i) => <ReadingPanel key={offer.label} index={i} active={index} distance={distance} phase={phase} layout={layout}><PriceChapter index={i} time={phase} active={index === i} masked /></ReadingPanel>)}
+          {offers.map((offer, i) => <ReadingPanel paper key={offer.label} index={i} active={index} distance={distance} phase={phase} layout={layout}><PriceChapter index={i} active={index === i} /></ReadingPanel>)}
         </div>
         <nav className={`${offerStyles.editorialNav} ${styles.sceneNavigation}`} aria-label="Aanbod en prijzen">{offers.map((offer, i) => <button key={offer.label} type="button" aria-current={index === i ? 'step' : undefined} aria-label={`${offer.label}, ${euro(offer.price)}`} onClick={() => navigate(i)}><span className={styles.navIndex} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><span className={styles.navLabel}>{offer.label}</span><span className={styles.navAmount}>{euro(offer.price)}</span></button>)}</nav>
       </section>
@@ -215,15 +210,5 @@ function MobilePrices() {
 }
 
 export default function MobileCinematicHome({ projects }: { projects: CaseStudy[] }) {
-  useEffect(() => {
-    let disposed = false, frame = 0;
-    const align = () => { if (window.location.hash) scrollToSection(null, window.location.hash, 'instant'); };
-    window.addEventListener('hashchange', align);
-    document.fonts.ready.then(() => {
-      if (disposed || !window.location.hash) return;
-      frame = requestAnimationFrame(() => { frame = requestAnimationFrame(align); });
-    });
-    return () => { disposed = true; cancelAnimationFrame(frame); window.removeEventListener('hashchange', align); };
-  }, []);
   return <div data-mobile-cinematic className={styles.mobile}><MobileWork projects={projects} /><MobileServices /><MobileQuality /><MobilePrices /></div>;
 }

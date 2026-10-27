@@ -329,3 +329,9 @@
   .mobileExplore a, .mobileContact a { display: inline-flex; align-items: center; min-height: 44px; }
   .mobileExplore a { display: flex; }
 }
+
+/* The menu also takes over when enlarged text outgrows the desktop navigation. */
+.header.compact .nav,.header.compact .cta { display:none; }
+.header.compact .menuButton { display:grid; flex:none; }
+.header.compact .mobileNav { display:block; }
+.header.compact .container { gap:1rem; }
