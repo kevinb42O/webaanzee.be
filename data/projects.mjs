@@ -38,7 +38,7 @@ export const projects = [
       "Praktische gids"
     ],
     "casePath": "/cases/hond-aan-zee/",
-    "videoSrc": "/videos/hondaanzee.mp4",
+    "videoSrc": "/videos/hondaanzee.mp4?v=8e4383e643ef",
     "showInGrid": true
   },
   {
@@ -79,7 +79,7 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/fabrice-goffin-oostende/",
-    "videoSrc": "/videos/fabrice.mp4",
+    "videoSrc": "/videos/fabrice.mp4?v=9e6103045bd8",
     "showInGrid": true
   },
   {
@@ -120,10 +120,10 @@ export const projects = [
       "Bedrijfswebsite"
     ],
     "casePath": "/cases/carabus-ads/",
-    "introVideoSrc": "/videos/carabus-preview.mp4",
+    "introVideoSrc": "/videos/carabus-preview.mp4?v=f2399825bcb9",
     "introVideoPoster": "/images/cases/carabus-intro.jpg",
     "videoCaption": "De hero en scrolltransities van Carabus Ads",
-    "videoSrc": "/videos/carabus-preview.mp4",
+    "videoSrc": "/videos/carabus-preview.mp4?v=f2399825bcb9",
     "showInGrid": true
   },
   {
@@ -164,7 +164,7 @@ export const projects = [
       "Digitale spaarkaart"
     ],
     "casePath": "/cases/cozy-moments-blankenberge/",
-    "videoSrc": "/videos/cozy.mp4",
+    "videoSrc": "/videos/cozy.mp4?v=7941063807e9",
     "showInGrid": true
   },
   {
@@ -205,7 +205,7 @@ export const projects = [
       "Skatecultuur"
     ],
     "casePath": "/cases/daily-grind-blankenberge/",
-    "videoSrc": "/videos/dailygrind.mp4",
+    "videoSrc": "/videos/dailygrind.mp4?v=a28727a1fca9",
     "showInGrid": true
   },
   {
@@ -246,7 +246,7 @@ export const projects = [
       "Winkelwebsite"
     ],
     "casePath": "/cases/de-wulk-blankenberge/",
-    "videoSrc": "",
+    "videoSrc": "/videos/vishandel.mp4?v=f451e7f501e0",
     "previewSrc": "/images/cases/previews/vishandel-2026.jpg",
     "showInGrid": true
   },
@@ -288,7 +288,7 @@ export const projects = [
       "Collectie"
     ],
     "casePath": "/cases/atelier-rembrandt/",
-    "videoSrc": "",
+    "videoSrc": "/videos/atelierrembrandt.mp4?v=b33eff689159",
     "previewSrc": "/images/cases/previews/atelierrembrandt-catalogus.jpg",
     "showInGrid": true
   },
@@ -329,7 +329,7 @@ export const projects = [
       "Kassa & voorraad"
     ],
     "casePath": "/cases/pwayment-pos/",
-    "videoSrc": "/videos/pwayment.mp4",
+    "videoSrc": "/videos/pwayment.mp4?v=9de16fb1efa1",
     "showInGrid": true
   },
   {
@@ -369,7 +369,7 @@ export const projects = [
       "Digitaal platform"
     ],
     "casePath": "/cases/mygrowise/",
-    "videoSrc": "",
+    "videoSrc": "/videos/mygrowise.mp4?v=e07a21b377b5",
     "showInGrid": true
   },
   {
@@ -410,10 +410,10 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/welzijnswerking-oostende/",
-    "introVideoSrc": "/videos/welzijnswerking-preview.mp4",
+    "introVideoSrc": "/videos/welzijnswerking-preview.mp4?v=5228907b734b",
     "introVideoPoster": "/images/cases/welzijnswerking-intro.jpg",
     "videoCaption": "De hero en zijn overgang naar de praktische informatie",
-    "videoSrc": "/videos/welzijnswerking-preview.mp4",
+    "videoSrc": "/videos/welzijnswerking-preview.mp4?v=5228907b734b",
     "showInGrid": false
   },
   {
@@ -439,10 +439,10 @@ export const projects = [
     "services": ["webdesign", "website-laten-maken"],
     "tags": ["Vintage", "Digitale collectie"],
     "casePath": "/cases/lothuus/",
-    "introVideoSrc": "/videos/lothuus-preview.mp4",
+    "introVideoSrc": "/videos/lothuus-preview.mp4?v=8b9138f5d7fe",
     "introVideoPoster": "/images/cases/lothuus-intro.jpg",
     "videoCaption": "Van de intro tot in de vintagecollectie",
-    "videoSrc": "/videos/lothuus-preview.mp4",
+    "videoSrc": "/videos/lothuus-preview.mp4?v=8b9138f5d7fe",
     "showInGrid": false
   }
 ];

@@ -11,6 +11,7 @@
     "build:ssr": "vite build --ssr scripts/entry-server.tsx --outDir dist-ssr",
     "preview": "vite preview",
     "check:seo": "node scripts/check-seo.mjs",
+    "check:project-videos": "node scripts/check-project-video-files.mjs && node scripts/check-project-videos.mjs",
     "check:home-motion": "node --experimental-strip-types scripts/check-home-motion.mjs",
     "check:regions": "node scripts/check-location-pages.mjs && node scripts/check-location-motion.mjs"
   },

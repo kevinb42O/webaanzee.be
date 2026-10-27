@@ -99,6 +99,10 @@ export class PortfolioEngine {
     const playingIndex = this.enabled && !this.disposed && !document.hidden ? this.index : -1;
     for (const [index, entry] of this.videos) {
       if (index === playingIndex) continue;
+      if (entry.frameRequest !== null) {
+        entry.video.cancelVideoFrameCallback(entry.frameRequest);
+        entry.frameRequest = null;
+      }
       entry.video.pause();
       if (entry.video.readyState >= 1) entry.video.currentTime = 0;
       this.restorePoster(index);
@@ -112,28 +116,42 @@ export class PortfolioEngine {
       video.loop = true;
       video.playsInline = true;
       video.preload = 'none';
-      video.hidden = true;
+      // Keep the decoder composited. A hidden video inside the canvas fallback
+      // subtree can advance its clock without delivering frames to WebGL.
+      Object.assign(video.style, { position: 'fixed', top: '0', left: '0', width: '1px', height: '1px', opacity: '.001', pointerEvents: 'none' });
       video.dataset.portfolioVideo = String(playingIndex);
+      video.dataset.portfolioFrameReady = 'false';
       video.setAttribute('aria-hidden', 'true');
       const texture = new THREE.VideoTexture(video);
       texture.colorSpace = THREE.SRGBColorSpace;
-      entry = { video, texture, failed: false, pending: false };
+      entry = { video, texture, failed: false, pending: false, frameRequest: null };
       this.videos.set(playingIndex, entry);
-      video.addEventListener('playing', () => {
-        if (this.disposed || !this.enabled || document.hidden || this.index !== playingIndex) {
-          video.pause();
-          return;
-        }
+      const present = () => {
+        entry.frameRequest = null;
+        if (this.disposed || !this.enabled || document.hidden || this.index !== playingIndex || video.paused || video.seeking || video.readyState < 2) return;
+        // `playing` alone does not guarantee a frame has reached the compositor.
+        // Upload the decoded frame before replacing the known-good poster.
+        texture.needsUpdate = true;
         const plane = this.gallery.planes[playingIndex];
         plane.userData.texture = texture;
         plane.material.map = texture;
         plane.material.needsUpdate = true;
-      });
+        video.dataset.portfolioFrameReady = 'true';
+      };
+      const awaitFrame = () => {
+        if (entry.frameRequest !== null || video.paused || video.seeking) return;
+        if ('requestVideoFrameCallback' in video) entry.frameRequest = video.requestVideoFrameCallback(present);
+        else present();
+      };
+      video.addEventListener('playing', awaitFrame);
+      video.addEventListener('seeked', awaitFrame);
+      video.addEventListener('waiting', () => this.restorePoster(playingIndex));
+      video.addEventListener('seeking', () => this.restorePoster(playingIndex));
       video.addEventListener('error', () => {
         entry.failed = true;
         this.restorePoster(playingIndex);
       });
-      this.canvas.appendChild(video);
+      document.body.appendChild(video);
       video.src = definition.videoSrc;
     }
     if (entry.failed || entry.pending || !entry.video.paused) return;
@@ -145,6 +163,8 @@ export class PortfolioEngine {
 
   restorePoster(index) {
     if (this.disposed) return;
+    const video = this.videos.get(index)?.video;
+    if (video) video.dataset.portfolioFrameReady = 'false';
     const plane = this.gallery.planes[index];
     if (!plane) return;
     const poster = this.textures.get(this.gallery.planeConfig[index].textureSrc);
@@ -186,7 +206,8 @@ export class PortfolioEngine {
 
   dispose() {
     this.disposed = true;
-    for (const { video, texture } of this.videos.values()) {
+    for (const { video, texture, frameRequest } of this.videos.values()) {
+      if (frameRequest !== null) video.cancelVideoFrameCallback(frameRequest);
       video.pause();
       video.removeAttribute('src');
       video.load();

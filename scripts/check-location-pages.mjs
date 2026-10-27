@@ -23,7 +23,7 @@ for (const route of paths) {
   }
   assert.ok(!/geen marketingzin|grotere bureaus|stadspagina’s publiceren|concurrentie is groter|blij[fv] je niet alleen/i.test(html), `${route}: stale editorial claims`);
   for (const match of html.matchAll(/(?:src|data-src)="(\/[^"#]+)"/g)) {
-    assert.ok((await stat(path.join(dist, match[1]))).isFile(), `${route}: missing media ${match[1]}`);
+    assert.ok((await stat(path.join(dist, match[1].split('?')[0]))).isFile(), `${route}: missing media ${match[1]}`);
   }
   const loc = locations.find(l => cityPath(l.slug) === route);
   if (loc) {
