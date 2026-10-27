@@ -8,7 +8,7 @@ import { versionProjectVideos } from './version-project-videos.mjs';
 
 const projects = [
   { name: 'hondaanzee', url: 'https://hondaanzee.be/' },
-  { name: 'fabrice', url: 'https://www.fabricegoffin.be/standpunten' },
+  { name: 'fabrice', url: 'https://www.fabricegoffin.be/', poster: 'images/cases/schepen-digitalisering/homepage-2026-10-27.webp' },
   { name: 'carabus', url: 'https://www.carabusads.com/', seconds: 22, scrollSeconds: 16, travel: 4.5, file: 'carabus-preview.mp4' },
   { name: 'cozy', url: 'https://www.cozy-moments.be/' },
   { name: 'dailygrind', url: 'https://www.daily-grind.be/' },
@@ -149,6 +149,7 @@ try {
         }, project.travel ?? 2.4);
       }
       await pause(2000);
+      if (project.poster) await page.screenshot({ path: join(temp, 'poster.webp'), type: 'webp', quality: 90 });
       await page.mouse.move(1279, 719);
       await page.screenshot({ path: join(root, '.tmp/case-video-review', `${project.name}-start.jpg`), type: 'jpeg', quality: 90 });
       console.log(`Recording ${project.name} from ${page.url()}`);
@@ -165,6 +166,7 @@ try {
           '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', join(temp, 'output.mp4'),
         ]);
         await rename(join(temp, 'output.mp4'), join(root, 'public/videos', project.file ?? `${project.name}.mp4`));
+        if (project.poster) await rename(join(temp, 'poster.webp'), join(root, 'public', project.poster));
         await writeFile(join(root, '.tmp/case-video-review', `${project.name}-capture.json`), JSON.stringify({ ...stats, fps, seconds, url }, null, 2));
         console.log(`Saved ${project.file ?? `${project.name}.mp4`}: ${seconds}s at ${fps} fps`);
       };

@@ -45,7 +45,7 @@ export const projects = [
     "slug": "fabrice-goffin-oostende",
     "title": "Schepen van Digitalisering",
     "place": "Oostende",
-    "image": "/images/cases/schepen-digitalisering/intro.webp",
+    "image": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
     "url": "https://www.fabricegoffin.be",
     "summary": "Ontwerp en ontwikkeling van de persoonlijke website voor de Oostendse schepen van Digitalisering. Een uitgesproken presentatie, met ruimte voor beleidsprioriteiten en contact met inwoners.",
     "challenge": "Een schepen is tegelijk een aanspreekpunt voor inwoners en iemand met een eigen verhaal en beleidsprioriteiten. Die verschillende kanten moeten samen een herkenbare presentatie vormen. Voor deze opdracht komt daar een bijzondere context bij: digitalisering behoort tot zijn bevoegdheden.",
@@ -79,10 +79,10 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/fabrice-goffin-oostende/",
-    "videoSrc": "/videos/fabrice.mp4?v=9e6103045bd8",
+    "videoSrc": "/videos/fabrice.mp4?v=85d686dc30f0",
     "showInGrid": true,
-    "previewSrc": "/images/cases/schepen-digitalisering/intro.webp",
-    "introVideoPoster": "/images/cases/schepen-digitalisering/intro.webp",
+    "previewSrc": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
+    "introVideoPoster": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
     "heroTitle": "Een website voor de schepen van Digitalisering.",
     "heroIntro": "Voor de Oostendse schepen van Digitalisering ontwierp en bouwde ik een persoonlijke website. Met ruimte voor zijn verhaal, zijn beleidsprioriteiten en het contact met inwoners.",
     "heroAside": "Een publieke functie vraagt een herkenbare presentatie. Van de eerste kennismaking tot het lezen van een standpunt en het stellen van een vraag.",
@@ -96,7 +96,7 @@ export const projects = [
       {
         "title": "Een herkenbare introductie.",
         "text": "De openingspagina brengt eerst de persoon in beeld. Het grote letterbeeld, het portret en de rode accenten bepalen samen het karakter. De introductie maakt zijn functie duidelijk en biedt twee vervolgstappen: meer over de persoon lezen of contact opnemen.",
-        "image": "/images/cases/schepen-digitalisering/intro.webp",
+        "image": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
         "alt": "Openingspagina van de persoonlijke website van de Oostendse schepen van Digitalisering",
         "width": 1280,
         "height": 720

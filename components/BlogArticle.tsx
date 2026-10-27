@@ -65,7 +65,7 @@ const BlogArticle: React.FC = () => (
 
             <figure className="journal-example">
               <a href="/cases/fabrice-goffin-oostende/" aria-label="Bekijk de website voor de schepen van Digitalisering">
-                <img src="/images/cases/schepen-digitalisering/intro.webp" alt="De persoonlijke website van de Oostendse schepen van Digitalisering" width="1440" height="900" loading="lazy" />
+                <img src="/images/cases/schepen-digitalisering/homepage-2026-10-27.webp" alt="De persoonlijke website van de Oostendse schepen van Digitalisering" width="1280" height="720" loading="lazy" />
               </a>
               <figcaption><p>Voor de Oostendse schepen van Digitalisering ontwierp en bouwde ik een website die zijn persoonlijke verhaal en beleidswerk samenbrengt. Inwoners kunnen er standpunten lezen, nieuws volgen en contact opnemen.</p><a href="/cases/fabrice-goffin-oostende/">Bekijk het project <ArrowUpRight size={17} aria-hidden="true" /></a></figcaption>
             </figure>
