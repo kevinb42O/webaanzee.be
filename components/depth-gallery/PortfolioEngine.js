@@ -112,6 +112,9 @@ export class PortfolioEngine {
     let entry = this.videos.get(playingIndex);
     if (!entry) {
       const video = document.createElement('video');
+      // The apex domain can redirect media to www. WebGL requires a CORS-enabled
+      // video request even when normal HTML video playback already succeeds.
+      video.crossOrigin = 'anonymous';
       video.muted = true;
       video.loop = true;
       video.playsInline = true;

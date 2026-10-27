@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
 import puppeteer from 'puppeteer';
 import { projects } from '../data/projects.mjs';
 
@@ -7,10 +9,41 @@ const targets = projects;
 assert.ok(targets.every(project => project.videoSrc), 'Every portfolio project must have a video');
 const browser = await puppeteer.launch({ headless: true, executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
 const pause = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+let mediaServer;
+let mediaOrigin;
+if (process.env.REDIRECT_PROJECT_MEDIA) {
+  const paths = new Set(targets.map(project => new URL(project.videoSrc, origin).pathname));
+  mediaServer = createServer(async (request, response) => {
+    const path = new URL(request.url, 'http://localhost').pathname;
+    if (!paths.has(path)) { response.writeHead(404).end(); return; }
+    try {
+      const bytes = await readFile(new URL(`../public${path}`, import.meta.url));
+      response.writeHead(200, { 'Content-Type': 'video/mp4', 'Content-Length': bytes.length, 'Access-Control-Allow-Origin': '*' });
+      response.end(bytes);
+    } catch { response.writeHead(500).end(); }
+  });
+  await new Promise(resolve => mediaServer.listen(0, '127.0.0.1', resolve));
+  mediaOrigin = `http://127.0.0.1:${mediaServer.address().port}`;
+}
 try {
   const page = await browser.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => {
+    if (message.type() === 'error' && /THREE\.WebGL|SecurityError|cross-origin|texImage2D/i.test(message.text())) {
+      const error = message.text().split('\n')[0];
+      if (!errors.includes(error)) errors.push(error);
+    }
+  });
+  if (mediaOrigin) {
+    await page.setRequestInterception(true);
+    page.on('request', request => {
+      const url = new URL(request.url());
+      if (request.resourceType() === 'media' && url.origin === new URL(origin).origin) {
+        void request.respond({ status: 302, headers: { location: mediaOrigin + url.pathname + url.search, 'access-control-allow-origin': '*' } });
+      } else void request.continue();
+    });
+  }
   for (const width of [1440, 390]) {
     await page.setViewport({ width, height: 900, isMobile: width < 1000, hasTouch: width < 1000 });
     for (const project of targets) {
@@ -53,8 +86,8 @@ try {
       assert.ok(others, 'Only the visible card plays');
       const source = await page.$eval(`video[data-portfolio-video="${index}"]`, video => video.currentSrc);
       assert.ok(source.endsWith(project.videoSrc));
-      const decoder = await page.$eval(`video[data-portfolio-video="${index}"]`, video => ({ hidden: video.hidden, inCanvas: video.parentElement.tagName === 'CANVAS' }));
-      assert.deepEqual(decoder, { hidden: false, inCanvas: false }, 'The video decoder must remain outside the hidden canvas fallback subtree');
+      const decoder = await page.$eval(`video[data-portfolio-video="${index}"]`, video => ({ hidden: video.hidden, inCanvas: video.parentElement.tagName === 'CANVAS', crossOrigin: video.crossOrigin }));
+      assert.deepEqual(decoder, { hidden: false, inCanvas: false, crossOrigin: 'anonymous' }, 'The composited video decoder must allow media redirects across origins');
       await pause(500);
       // A running playback clock does not prove the WebGL card contains an image.
       const screenshot = await page.screenshot({ encoding: 'base64' });
@@ -72,6 +105,7 @@ try {
         return total / 256;
       }, screenshot);
       assert.ok(brightness > 8, `${project.id}: the rendered card must contain visible image pixels, got ${brightness}`);
+      assert.deepEqual(errors, [], `${project.id}: no WebGL media security errors`);
       if (process.env.CAPTURE_PROJECT_VIDEOS) await page.screenshot({ path: `.tmp/project-refresh/home-${project.id}-${width}.png` });
     }
     await page.evaluate(() => {
@@ -91,4 +125,7 @@ try {
     console.log(`${width}px: all ${targets.length} 3D video cards render visible frames; inactive cards, hidden tabs and offscreen media pause.`);
   }
   assert.deepEqual(errors, [], 'No browser runtime errors');
-} finally { await browser.close(); }
+} finally {
+  await browser.close();
+  if (mediaServer) await new Promise(resolve => mediaServer.close(resolve));
+}
