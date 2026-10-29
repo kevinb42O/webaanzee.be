@@ -119,7 +119,7 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/fabrice-goffin-oostende/",
-    "videoSrc": "/videos/fabrice.mp4?v=85d686dc30f0",
+    "videoSrc": "/videos/fabrice.mp4?v=4b6aec3667f9",
     "showInGrid": true,
     "previewSrc": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
     "introVideoPoster": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",

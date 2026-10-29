@@ -8,7 +8,7 @@ import { versionProjectVideos } from './version-project-videos.mjs';
 
 const projects = [
   { name: 'hondaanzee', url: 'https://hondaanzee.be/' },
-  { name: 'fabrice', url: 'https://www.fabricegoffin.be/', poster: 'images/cases/schepen-digitalisering/homepage-2026-10-27.webp' },
+  { name: 'fabrice', url: 'https://www.fabricegoffin.be/', seconds: 48, scrollSeconds: 44, fullPage: true, steadyScroll: true, nativeFrames: true, poster: 'images/cases/schepen-digitalisering/homepage-2026-10-27.webp' },
   { name: 'carabus', url: 'https://www.carabusads.com/', seconds: 22, scrollSeconds: 16, travel: 4.5, file: 'carabus-preview.mp4' },
   { name: 'cozy', url: 'https://www.cozy-moments.be/' },
   { name: 'dailygrind', url: 'https://www.daily-grind.be/' },
@@ -54,9 +54,10 @@ const capture = async (page, directory, project) => {
   client.on('Page.screencastFrame', onFrame);
   try {
     await client.send('Page.startScreencast', { format: 'jpeg', quality: 92, everyNthFrame: 1 });
-    await page.evaluate(async ({ seconds, heroOnly, movie, scrollSeconds, travelScreens, steadyScroll }) => {
+    await page.evaluate(async ({ seconds, heroOnly, movie, scrollSeconds, travelScreens, steadyScroll, fullPage }) => {
       document.documentElement.style.scrollBehavior = 'auto';
-      const travel = Math.min(document.documentElement.scrollHeight - innerHeight, innerHeight * travelScreens);
+      const available = document.documentElement.scrollHeight - innerHeight;
+      const travel = fullPage ? available : Math.min(available, innerHeight * travelScreens);
       if (movie) await document.querySelector('.house-entry-movie').play();
       const start = performance.now();
       await new Promise(resolve => {
@@ -76,7 +77,12 @@ const capture = async (page, directory, project) => {
         };
         requestAnimationFrame(frame);
       });
-    }, { seconds, heroOnly, movie, scrollSeconds, travelScreens: travel, steadyScroll: project.steadyScroll });
+    }, { seconds, heroOnly, movie, scrollSeconds, travelScreens: travel, steadyScroll: project.steadyScroll, fullPage: project.fullPage });
+    if (project.fullPage && !await page.evaluate(() => {
+      const footer = document.querySelector('footer');
+      return document.documentElement.scrollHeight - innerHeight - scrollY <= 2
+        && footer && footer.getBoundingClientRect().top < innerHeight;
+    })) throw new Error(`${project.name}: the recording did not reach the footer.`);
     if (movie && !await page.$eval('.house-entry-experience', node => node.classList.contains('house-entry-arrived'))) {
       throw new Error('LOTHUUS did not reach the collection.');
     }
@@ -157,14 +163,16 @@ try {
         await page.evaluate(() => document.fonts.ready);
         await page.waitForSelector('.hero-enhanced', { timeout: 10_000 });
       } else if (!project.heroOnly) {
-        await page.evaluate(async travelScreens => {
-          const travel = Math.min(document.documentElement.scrollHeight - innerHeight, innerHeight * travelScreens);
+        await page.evaluate(async ({ travelScreens, fullPage }) => {
+          const available = document.documentElement.scrollHeight - innerHeight;
+          const travel = fullPage ? available : Math.min(available, innerHeight * travelScreens);
           for (let y = 0; y <= travel; y += 360) {
             window.scrollTo({ top: y, behavior: 'instant' });
-            await new Promise(resolve => setTimeout(resolve, 150));
+            await new Promise(resolve => setTimeout(resolve, fullPage ? 300 : 150));
           }
+          if (fullPage) await new Promise(resolve => setTimeout(resolve, 2000));
           window.scrollTo({ top: 0, behavior: 'instant' });
-        }, project.travel ?? 2.4);
+        }, { travelScreens: project.travel ?? 2.4, fullPage: project.fullPage });
       }
       await pause(2000);
       if (project.poster) await page.screenshot({ path: join(temp, 'poster.webp'), type: 'webp', quality: 90 });
