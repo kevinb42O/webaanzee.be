@@ -1,6 +1,46 @@
 // Shared project descriptions for the homepage and generated case pages.
 export const projects = [
   {
+    "slug": "mygrowise",
+    "title": "MyGrowise",
+    "place": "Online",
+    "image": "/images/cases/mygrowise.png",
+    "url": "https://mygrowise.vercel.app/",
+    "summary": "Een platform voor psychologisch inzicht en online begeleiding, met persoonlijke profielen, modules en routes naar professionals.",
+    "challenge": "Bezoekers zoeken verschillende vormen van ondersteuning en moeten rustig kunnen kiezen tussen zelfstandig inzicht en persoonlijke begeleiding.",
+    "solution": "De homepage onderscheidt zelfstandig verkennen van begeleiding door een professional. Profielen, modules en de presentatie van professionals sluiten op die routes aan.",
+    "result": "Bezoekers kunnen modules verkennen en informatie over professionals bekijken voordat ze een vorm van begeleiding kiezen.",
+    "id": "mygrowise",
+    "kind": "Digitaal platform",
+    "headline": "Modules en professionele begeleiding.",
+    "challengeTitle": "Zelf verkennen of begeleiding zoeken",
+    "solutionTitle": "Twee routes door het aanbod",
+    "choices": [
+      [
+        "Persoonlijke profielen",
+        "Profielen maken deel uit van het platform voor psychologisch inzicht."
+      ],
+      [
+        "Modules",
+        "Het aanbod bevat modules die bezoekers zelfstandig kunnen verkennen."
+      ],
+      [
+        "Professionals",
+        "Een aparte route presenteert de mogelijkheden voor begeleiding."
+      ]
+    ],
+    "services": [
+      "webapplicaties-en-automatisatie"
+    ],
+    "tags": [
+      "Online begeleiding",
+      "Digitaal platform"
+    ],
+    "casePath": "/cases/mygrowise/",
+    "videoSrc": "/videos/mygrowise.mp4?v=06386536bde4",
+    "showInGrid": true
+  },
+  {
     "slug": "hond-aan-zee",
     "title": "Hond aan Zee",
     "place": "Belgische kust",
@@ -368,46 +408,6 @@ export const projects = [
     ],
     "casePath": "/cases/pwayment-pos/",
     "videoSrc": "/videos/pwayment.mp4?v=9de16fb1efa1",
-    "showInGrid": true
-  },
-  {
-    "slug": "mygrowise",
-    "title": "MyGrowise",
-    "place": "Online",
-    "image": "/images/cases/mygrowise.png",
-    "url": "https://mygrowise.vercel.app/",
-    "summary": "Een platform voor psychologisch inzicht en online begeleiding, met persoonlijke profielen, modules en routes naar professionals.",
-    "challenge": "Bezoekers zoeken verschillende vormen van ondersteuning en moeten rustig kunnen kiezen tussen zelfstandig inzicht en persoonlijke begeleiding.",
-    "solution": "De homepage onderscheidt zelfstandig verkennen van begeleiding door een professional. Profielen, modules en de presentatie van professionals sluiten op die routes aan.",
-    "result": "Bezoekers kunnen modules verkennen en informatie over professionals bekijken voordat ze een vorm van begeleiding kiezen.",
-    "id": "mygrowise",
-    "kind": "Digitaal platform",
-    "headline": "Modules en professionele begeleiding.",
-    "challengeTitle": "Zelf verkennen of begeleiding zoeken",
-    "solutionTitle": "Twee routes door het aanbod",
-    "choices": [
-      [
-        "Persoonlijke profielen",
-        "Profielen maken deel uit van het platform voor psychologisch inzicht."
-      ],
-      [
-        "Modules",
-        "Het aanbod bevat modules die bezoekers zelfstandig kunnen verkennen."
-      ],
-      [
-        "Professionals",
-        "Een aparte route presenteert de mogelijkheden voor begeleiding."
-      ]
-    ],
-    "services": [
-      "webapplicaties-en-automatisatie"
-    ],
-    "tags": [
-      "Online begeleiding",
-      "Digitaal platform"
-    ],
-    "casePath": "/cases/mygrowise/",
-    "videoSrc": "/videos/mygrowise.mp4?v=e07a21b377b5",
     "showInGrid": true
   },
   {
