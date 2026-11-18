@@ -106,23 +106,23 @@ export const projects = [
     "place": "Belgische kust",
     "image": "/images/cases/hondaanzee.png",
     "url": "https://www.hondaanzee.be",
-    "summary": "Mijn eigen kustplatform voor hondenbaasjes: van strandregels en kaarten tot accounts en community. Zelf ontworpen, gebouwd en beheerd, met duizenden bezoekers per maand.",
-    "challenge": "Een uitstap met mijn hond Jax begon vaak met zoeken: op welk strand mag hij mee, wanneer moet hij aan de lijn en waar zijn we samen welkom? De antwoorden stonden verspreid over gemeentewebsites en reglementen. Vanuit die eigen ervaring ontstond Hond aan Zee, een platform dat de Belgische kust voor hondenbaasjes overzichtelijker maakt.",
-    "solution": "Ik nam het volledige initiatief en werkte het platform zelf uit: van ontwerp, frontend en backend tot inhoud en beheer. Strandregels per kustgemeente, hondvriendelijke adressen, losloopzones, kaarten en een agenda vormen de publieke gids. Accounts, persoonlijke uitstapjes en communityfuncties breiden die gids uit tot een platform waar bezoekers kunnen terugkeren en bijdragen.",
+    "summary": "Mijn eigen platform om met je hond de Belgische kust te ontdekken: hondvriendelijke zaken met zoekfilters en beoordelingen, losloopweides, dierenartsen en strandinformatie. Zelf ontworpen, gebouwd en beheerd.",
+    "challenge": "Waar kun je iets drinken of eten met je hond, waar kan hij vrij lopen en waar vind je een dierenarts tijdens je verblijf aan zee? Met mijn hond Jax merkte ik hoe verspreid die informatie stond. Hond aan Zee ontstond om die zoektocht eenvoudiger te maken en hondenbaasjes naar hondvriendelijke plekken en lokale zaken aan de Belgische kust te leiden.",
+    "solution": "Ik bedacht, ontwierp en bouwde het volledige platform, van frontend en backend tot inhoud en beheer. De gids bundelt hondvriendelijke zaken, losloopweides en diensten zoals dierenartsen. Bezoekers zoeken op naam, filteren hotspots op kustgemeente en type zaak en bekijken foto’s, beoordelingen en voorzieningen voor hun hond. Adressen, routeknoppen en contactgegevens helpen hen vervolgens op weg. Strandregels, een kustkaart en een agenda vullen die praktische gids aan.",
     "result": "Hond aan Zee bereikt duizenden bezoekers per maand, met extra belangstelling in de hoogseizoenen. Honderden stickers bij zaken aan de kust maken het initiatief ook buiten het scherm zichtbaar. Ik onderhoud het in mijn vrije tijd als een gratis toegankelijk informatieplatform, vanuit mijn betrokkenheid bij de kust en de community die het gebruikt.",
     "id": "hondaanzee",
     "kind": "Eigen communityplatform",
-    "headline": "Zelf bedacht. Zelf gebouwd. Samen gebruikt.",
+    "headline": "Samen op pad, weten waar je welkom bent.",
     "challengeTitle": "Gebouwd vanuit een eigen behoefte.",
-    "solutionTitle": "Van strandgids naar een compleet platform.",
+    "solutionTitle": "Geschikte plekken vinden en je uitstap plannen.",
     "choices": [
       [
-        "Informatie & kaarten",
-        "Strandregels, adressen en uitstapmogelijkheden langs de Belgische kust."
+        "Hondvriendelijke plekken",
+        "Zaken zoeken en filteren, beoordelingen bekijken en zien wat er voor je hond aanwezig is."
       ],
       [
-        "Accounts & community",
-        "Favorieten, persoonlijke uitstapjes, reviews en gedeelde ervaringen."
+        "Alles voor je uitstap",
+        "Losloopweides, dierenartsen, strandinformatie, favorieten en persoonlijke uitstapjes."
       ],
       [
         "Eigen beheeromgeving",
@@ -141,14 +141,30 @@ export const projects = [
     "casePath": "/cases/hond-aan-zee/",
     "videoSrc": "/videos/hondaanzee.mp4?v=8e4383e643ef",
     "showInGrid": true,
-    "heroTitle": "Hond aan Zee: een eigen platform voor de hele kust.",
-    "heroIntro": "Wat begon met de wandelingen met mijn hond Jax, groeide uit tot een informatie- en communityplatform met duizenden bezoekers per maand. Ik bedacht, ontwierp en ontwikkelde Hond aan Zee zelf en verzorg ook de inhoud en het beheer.",
+    "heroTitle": "Hond aan Zee: ontdek waar je samen met je hond welkom bent.",
+    "heroIntro": "Een koffiebar waar je hond mee naar binnen mag, een losloopweide voor de wandeling of een dierenarts in de buurt: Hond aan Zee brengt het samen. Met zoekfilters, beoordelingen en praktische plaatsinformatie helpt mijn eigen platform hondenbaasjes geschikte plekken aan de Belgische kust te vinden én te bezoeken.",
     "heroAsideTitle": "Een initiatief van Kevin.",
-    "heroAside": "Van de eerste vraag op het strand tot een platform met kaarten, accounts, communityfuncties en een eigen beheeromgeving.",
-    "seoTitle": "Hond aan Zee: eigen kust- en communityplatform | Webaanzee",
+    "heroAside": "Zelf bedacht, ontworpen, ontwikkeld en beheerd. Een gratis informatie- en communityplatform met duizenden bezoekers per maand en honderden stickers bij zaken aan de kust.",
+    "seoTitle": "Hond aan Zee: platform voor hondvriendelijke plekken | Webaanzee",
     "updated": "2026-11-18",
-    "designTitle": "Van een praktische vraag naar bruikbare software.",
+    "designTitle": "Van een geschikte plek vinden naar samen op pad.",
     "designDetails": [
+      {
+        "title": "Hondvriendelijke zaken ontdekken en vergelijken.",
+        "text": "Een van de hoofddoelen is mensen met hun hond naar plekken brengen waar ze samen welkom zijn. Het hotspotsoverzicht maakt lokale zaken vindbaar met een zoekfunctie en filters op kustgemeente en type zaak. Zo zoeken bezoekers gericht naar een koffiebar of een andere stop die past bij hun uitstap. Beoordelingen en ervaringen uit de community helpen bij het kiezen.",
+        "image": "/images/cases/hondaanzee/hondvriendelijke-plekken.webp",
+        "alt": "Hotspotsoverzicht van Hond aan Zee met zoekfunctie, filters en hondvriendelijke zaken aan de Belgische kust",
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "title": "Weten wat je hond ter plaatse mag verwachten.",
+        "text": "Elke zaak krijgt een eigen pagina met foto’s, een beschrijving en praktische informatie. Bij Lakaiann in Blankenberge zie je bijvoorbeeld dat er een waterbak en hondensnacks zijn. Bezoekers kunnen beoordelingen lezen of zelf een ervaring delen, een plek bewaren en doorklikken naar de website, de route of het telefoonnummer. De gids helpt zo bij de stap van online ontdekken naar een echt bezoek.",
+        "image": "/images/cases/hondaanzee/hotspot-lakaiann.webp",
+        "alt": "Detailpagina van koffiebar Lakaiann met foto’s, beoordelingen, hondenvoorzieningen, adres en routeknop",
+        "width": 1440,
+        "height": 1000
+      },
       {
         "title": "Plaats en periode bepalen het antwoord.",
         "text": "Strandregels verschillen per gemeente, zone en seizoen. De plaatsgerichte pagina’s brengen die informatie bij elkaar en laten bezoekers een datum kiezen. Ik bouwde de structuur en de logica om algemene reglementen te vertalen naar informatie die tijdens een uitstap bruikbaar is. Bronvermeldingen en controledatums maken zichtbaar waarop de uitleg steunt.",
@@ -167,6 +183,13 @@ export const projects = [
       }
     ],
     "caseSections": [
+      {
+        "title": "Ook losloopweides en dierenartsen horen bij de gids.",
+        "paragraphs": [
+          "Een uitstap met je hond draait om meer dan een horecastop. Hond aan Zee bundelt ook losloopweides en losloopzones, zodat baasjes plekken kunnen ontdekken waar hun hond vrij kan bewegen. De strandgids vult dat aan met informatie per kustgemeente en periode.",
+          "Daarnaast kunnen bezoekers lokale diensten vinden, waaronder dierenartsen. Het dienstenoverzicht heeft eigen filters, zodat ook die praktische informatie binnen hetzelfde platform vindbaar is. Van een koffiestop tot een wandeling of hulp in de buurt: de gids brengt de verschillende behoeften tijdens een dag of verblijf aan zee samen."
+        ]
+      },
       {
         "title": "Een platform waar mensen terugkomen.",
         "paragraphs": [
