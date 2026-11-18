@@ -416,15 +416,15 @@ export const projects = [
     "place": "Oostende",
     "image": "/images/cases/welzijnswerking.png",
     "url": "https://www.welzijnswerking.be/",
-    "summary": "Evenementenwebsite voor het kerstfeest in het Kursaal Oostende, voor alleenstaanden vanaf 50 jaar.",
-    "challenge": "Bezoekers moeten eenvoudig kunnen ontdekken voor wie de avond bedoeld is, wat ze mogen verwachten en waar ze zich kunnen inschrijven. Praktische informatie verdient evenveel aandacht als de feestelijke sfeer.",
-    "solution": "Een sfeervol openingsbeeld brengt de avond dichtbij. Duidelijke informatie over het programma, veelgestelde vragen en de negen ontmoetingscentra helpt bezoekers hun inschrijfroute te vinden. Foto’s van vorige edities tonen het initiatief in de praktijk.",
-    "result": "De website presenteert het kerstfeest en verwijst voor inschrijving naar de Oostendse ontmoetingscentra.",
+    "summary": "Een warme website voor het kerstfeest van Welzijnswerking Oostende. Kosteloos gemaakt door Webaanzee, als bijdrage aan een initiatief dat mensen samenbrengt.",
+    "challenge": "Welzijnswerking Oostende brengt alleenstaande Oostendenaars vanaf 65 jaar samen voor een kerstfeest in het Kursaal. De website moet die uitnodiging voelbaar maken en tegelijk helder vertellen voor wie de avond bedoeld is, wat bezoekers mogen verwachten en hoe ze zich inschrijven.",
+    "solution": "Een warme vormgeving en een feestelijk openingsbeeld zetten de toon. Praktische informatie, antwoorden op veelgestelde vragen en een overzicht van de negen ontmoetingscentra maken de weg naar inschrijving duidelijk. Ook het UiTloket, de aanmelding voor vrijwilligers en foto’s van vorige edities krijgen een eigen plek.",
+    "result": "Webaanzee ontwierp en bouwde deze website kosteloos, uit waardering voor een initiatief dat mensen samenbrengt en eenzaamheid helpt doorbreken. Een vrijwillige bijdrage aan de inzet van Welzijnswerking Oostende en de vele vrijwilligers die van kerstavond een moment van warmte en verbondenheid maken.",
     "id": "welzijnswerking",
     "kind": "Evenementenwebsite",
-    "headline": "Kerst in het Kursaal Oostende.",
+    "headline": "Een website die mee verbindt.",
     "challengeTitle": "Voor wie is het feest en hoe schrijf je in?",
-    "solutionTitle": "Programma en inschrijfinformatie bij elkaar",
+    "solutionTitle": "Met zorg gemaakt, belangeloos bijgedragen",
     "choices": [
       [
         "Programma",
@@ -432,7 +432,7 @@ export const projects = [
       ],
       [
         "Inschrijven",
-        "De informatie verwijst naar de negen ontmoetingscentra."
+        "Een duidelijke inschrijfroute via de negen ontmoetingscentra of het UiTloket."
       ],
       [
         "Vorige edities",
@@ -448,10 +448,10 @@ export const projects = [
       "Oostende"
     ],
     "casePath": "/cases/welzijnswerking-oostende/",
-    "introVideoSrc": "/videos/welzijnswerking-preview.mp4?v=5228907b734b",
-    "introVideoPoster": "/images/cases/welzijnswerking-intro.jpg",
-    "videoCaption": "De hero en zijn overgang naar de praktische informatie",
-    "videoSrc": "/videos/welzijnswerking-preview.mp4?v=5228907b734b",
+    "introVideoSrc": "/videos/welzijnswerking-preview.mp4?v=0f02c4e130e1",
+    "introVideoPoster": "/images/cases/welzijnswerking-intro.webp",
+    "videoCaption": "De vernieuwde website: van een warme uitnodiging naar praktische informatie en inschrijven.",
+    "videoSrc": "/videos/welzijnswerking-preview.mp4?v=0f02c4e130e1",
     "showInGrid": false
   },
   {

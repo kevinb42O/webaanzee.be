@@ -16,7 +16,7 @@ const projects = [
   { name: 'atelierrembrandt', url: 'https://www.atelierrembrandt.com/' },
   { name: 'pwayment', url: 'https://pwayment.vercel.app/', heroOnly: true },
   { name: 'mygrowise', url: 'https://mygrowise.vercel.app/', seconds: 48, scrollSeconds: 44, travel: 15, steadyScroll: true, preloadImages: true, nativeFrames: true, image: 'images/cases/mygrowise.png', preview: 'images/cases/previews/mygrowise.jpg' },
-  { name: 'welzijnswerking', url: 'https://www.welzijnswerking.be/', scrollSeconds: 9, travel: 1.8, file: 'welzijnswerking-preview.mp4' },
+  { name: 'welzijnswerking', url: 'https://www.welzijnswerking.be/', seconds: 22, scrollSeconds: 17, travel: 3.4, steadyScroll: true, file: 'welzijnswerking-preview.mp4', poster: 'images/cases/welzijnswerking-intro.webp', image: 'images/cases/welzijnswerking.png', preview: 'images/cases/previews/welzijnswerking.jpg' },
   { name: 'lothuus', url: 'https://www.lothuus.be/', seconds: 23, movie: true, file: 'lothuus-preview.mp4' },
 ];
 const requestedNames = process.argv.slice(2);

@@ -28,7 +28,7 @@ export const locations = [
     workIntro: 'Deze twee projecten uit Oostende laten zien hoe je verschillende soorten informatie overzichtelijk presenteert: van nieuws en standpunten tot een evenement en inschrijving.',
     cases: [
       ['fabrice-goffin-oostende', 'De persoonlijke website voor de Oostendse schepen van Digitalisering. Ik ontwierp en bouwde de presentatie, van de eerste kennismaking tot de beleidsprioriteiten en het contact met inwoners.'],
-      ['welzijnswerking-oostende', 'Een evenementensite voor het kerstfeest in het Kursaal Oostende. Voor wie is de avond, wat staat er op het programma en hoe schrijf je in? De praktische vragen sturen de opbouw.'],
+      ['welzijnswerking-oostende', 'Een warme website voor het kerstfeest in het Kursaal Oostende. Webaanzee maakte de website kosteloos, als vrijwillige bijdrage aan een lokaal initiatief dat mensen samenbrengt.'],
     ],
     needTitle: 'Niet iedere bezoeker komt voor hetzelfde.',
     needIntro: 'De ene klant wil je aanbod vergelijken, de andere zoekt je adres of heeft al een concrete vraag. We maken die routes herkenbaar, zonder je hele verhaal in één lang tekstblok te stoppen.',
