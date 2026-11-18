@@ -27,7 +27,7 @@ export const locations = [
     workTitle: 'Een eigen plek voor je verhaal.',
     workIntro: 'Deze twee projecten uit Oostende laten zien hoe je verschillende soorten informatie overzichtelijk presenteert: van nieuws en standpunten tot een evenement en inschrijving.',
     cases: [
-      ['fabrice-goffin-oostende', 'De persoonlijke website voor de Oostendse schepen van Digitalisering. Ik ontwierp en bouwde de presentatie, van de eerste kennismaking tot de beleidsprioriteiten en het contact met inwoners.'],
+      ['fabrice-goffin-oostende', 'De persoonlijke website voor Fabrice Goffin, schepen van Digitalisering in Oostende. Ik ontwierp en bouwde de presentatie, van de eerste kennismaking tot de beleidsprioriteiten en het contact met inwoners.'],
       ['welzijnswerking-oostende', 'Een warme website voor het kerstfeest in het Kursaal Oostende. Webaanzee maakte de website kosteloos, als vrijwillige bijdrage aan een lokaal initiatief dat mensen samenbrengt.'],
     ],
     needTitle: 'Niet iedere bezoeker komt voor hetzelfde.',

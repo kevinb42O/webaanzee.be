@@ -297,6 +297,19 @@ img { display: block; max-width: 100%; height: auto; }
 .case-design-portrait figure { width: min(100%, 330px); justify-self: center; }
 .case-design-portrait img { border: 1px solid var(--line); }
 .case-hero a:focus-visible, .case-design a:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 5px; }
+.case-depth-list { display: grid; gap: clamp(56px, 7vw, 96px); }
+.case-depth-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 6vw, 88px); padding-top: 32px; border-top: 1px solid var(--line); }
+.case-depth-section h2, .case-services h2 { font-size: clamp(2.1rem, 4vw, 3.7rem); line-height: 1.05; letter-spacing: -.03em; overflow-wrap: anywhere; }
+.case-depth-section p { max-width: 70ch; margin: 0 0 20px; color: var(--muted); }
+.case-depth-section p:last-child { margin-bottom: 0; }
+.case-references ul { margin: 0; padding: 0; list-style: none; }
+.case-references li { padding: 28px 0; border-top: 1px solid var(--line); }
+.case-references li p { margin: 0 0 8px; color: var(--muted); font-size: .875rem; }
+.case-references li a { display: inline-block; max-width: 44ch; font: 400 clamp(1.4rem, 2.5vw, 2.2rem)/1.2 var(--serif); text-underline-offset: 5px; }
+.case-services p { max-width: 70ch; color: var(--muted); }
+.case-services nav { display: flex; flex-wrap: wrap; gap: 20px 36px; margin-top: 28px; }
+.case-services a { max-width: 100%; text-underline-offset: 5px; }
+.case-references a:focus-visible, .case-services a:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 5px; }
 @media (max-width: 1000px) {
   .case-hero { grid-template-columns: minmax(0, 1fr); }
   .case-hero .hero-aside { min-height: 0; }
@@ -305,5 +318,6 @@ img { display: block; max-width: 100%; height: auto; }
   .case-hero { min-height: 0; padding-top: 56px; padding-bottom: 56px; gap: 36px; }
   .case-hero h1 { font-size: clamp(2.55rem, 10.5vw, 4.2rem); }
   .case-design-detail { grid-template-columns: minmax(0, 1fr); }
+  .case-depth-section { grid-template-columns: minmax(0, 1fr); }
   .case-design-portrait figure { width: min(100%, 330px); }
 }

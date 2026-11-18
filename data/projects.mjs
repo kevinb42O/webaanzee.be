@@ -6,39 +6,99 @@ export const projects = [
     "place": "Online",
     "image": "/images/cases/mygrowise.png",
     "url": "https://mygrowise.vercel.app/",
-    "summary": "Een platform voor psychologisch inzicht en online begeleiding, met persoonlijke profielen, modules en routes naar professionals.",
-    "challenge": "Bezoekers zoeken verschillende vormen van ondersteuning en moeten rustig kunnen kiezen tussen zelfstandig inzicht en persoonlijke begeleiding.",
-    "solution": "De homepage onderscheidt zelfstandig verkennen van begeleiding door een professional. Profielen, modules en de presentatie van professionals sluiten op die routes aan.",
-    "result": "Bezoekers kunnen modules verkennen en informatie over professionals bekijken voordat ze een vorm van begeleiding kiezen.",
+    "summary": "Een volledig platform voor online begeleiding: website, cliëntomgeving, praktijkdashboard en backend. Ontworpen en ontwikkeld door Webaanzee en live in gebruik.",
+    "challenge": "MyGrowise brengt psychologisch inzicht en persoonlijke begeleiding samen. Bezoekers moeten hun weg vinden naar het aanbod, cliënten willen hun afspraken en materialen terugvinden en professionals hebben overzicht nodig over hun werkdag. De opdracht omvatte daarom zowel de publieke website als de omgevingen en systemen erachter.",
+    "solution": "Ik ontwierp en ontwikkelde het volledige platform: de visuele identiteit van de website, de frontend, de backend en de verschillende gebruikersomgevingen. Agenda, boekingen, cliëntendossiers, digitaal aanbod en berichten krijgen elk een eigen plek, met verbindingen tussen de onderdelen en toegangsrechten op basis van de gebruikersrol.",
+    "result": "MyGrowise is live en wordt in de praktijk gebruikt. Voor dit project kwamen ontwerp, ontwikkeling en systeeminrichting volledig uit één hand. Het resultaat laat zien hoe ik een publieke website en uitgebreide maatwerksoftware samenbreng in één product, met aandacht voor zowel de eerste kennismaking als het dagelijkse gebruik.",
     "id": "mygrowise",
-    "kind": "Digitaal platform",
-    "headline": "Modules en professionele begeleiding.",
-    "challengeTitle": "Zelf verkennen of begeleiding zoeken",
-    "solutionTitle": "Twee routes door het aanbod",
+    "kind": "Platform & praktijksoftware",
+    "headline": "Van eerste bezoek tot dagelijks praktijkbeheer.",
+    "challengeTitle": "Eén platform, verschillende gebruikers.",
+    "solutionTitle": "De volledige ontwikkeling in één hand.",
     "choices": [
       [
-        "Persoonlijke profielen",
-        "Profielen maken deel uit van het platform voor psychologisch inzicht."
+        "Publieke website",
+        "Een eigen visuele presentatie en routes naar het aanbod en begeleiding."
       ],
       [
-        "Modules",
-        "Het aanbod bevat modules die bezoekers zelfstandig kunnen verkennen."
+        "Praktijksoftware",
+        "Agenda, boekingen en cliëntendossiers voor het dagelijkse werk."
       ],
       [
-        "Professionals",
-        "Een aparte route presenteert de mogelijkheden voor begeleiding."
+        "Backend & gebruikersrollen",
+        "De verwerking, gegevensopslag en toegang achter de verschillende omgevingen."
       ]
     ],
     "services": [
-      "webapplicaties-en-automatisatie"
+      "webapplicaties-en-automatisatie",
+      "webdesign"
     ],
     "tags": [
-      "Online begeleiding",
-      "Digitaal platform"
+      "Maatwerksoftware",
+      "Praktijkdashboard"
     ],
     "casePath": "/cases/mygrowise/",
     "videoSrc": "/videos/mygrowise.mp4?v=06386536bde4",
-    "showInGrid": true
+    "showInGrid": true,
+    "heroTitle": "MyGrowise: van website tot praktijkdashboard.",
+    "heroIntro": "Voor MyGrowise ontwierp en bouwde ik het volledige platform. De publieke website, cliëntomgeving, praktijksoftware en backend vormen samen een toepassing die live wordt gebruikt voor online begeleiding en dagelijks beheer.",
+    "heroAsideTitle": "Van ontwerp tot systeem.",
+    "heroAside": "Webdesign, frontend, backend en de verbindingen tussen de verschillende omgevingen: volledig ontworpen en ontwikkeld door Kevin bij Webaanzee.",
+    "seoTitle": "MyGrowise: platform en praktijkdashboard op maat | Webaanzee",
+    "updated": "2026-11-18",
+    "designTitle": "De website en het systeem erachter.",
+    "designDetails": [
+      {
+        "title": "Een rustige start voor bezoekers.",
+        "text": "De publieke website maakt onderscheid tussen zelfstandig aan de slag gaan en begeleiding zoeken. Ik werkte het ontwerp en de navigatie uit rond die verschillende behoeften. Informatie over profielen, modules en professionals helpt bezoekers een volgende stap te kiezen zonder dat zij eerst de achterliggende organisatie hoeven te kennen.",
+        "image": "/images/cases/mygrowise/website.webp",
+        "alt": "Publieke website van MyGrowise, ontworpen en ontwikkeld door Webaanzee",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "title": "Overzicht over de werkdag.",
+        "text": "Afspraken en beschikbaarheid komen samen in een eigen agenda. Professionals kunnen hun planning raadplegen en afspraken beheren; de beheeromgeving biedt daarnaast overzicht over boekingen en de organisatie. Ik bouwde de interface én de achterliggende verwerking, zodat een agendafunctie onderdeel is van de praktijkwerking.",
+        "image": "/images/cases/mygrowise/agenda.webp",
+        "alt": "De echte MyGrowise-agenda met uitsluitend fictieve afspraken en voorbeeldnamen",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "title": "Het dossier naast de begeleiding.",
+        "text": "Het cliëntendossier brengt verslagen, afspraken, cliëntgegevens en toegangsbeheer bij elkaar. De interface houdt die onderdelen afzonderlijk raadpleegbaar, terwijl de context van de cliënt behouden blijft. Het afgebeelde dossier gebruikt uitsluitend fictieve voorbeeldgegevens in de echte MyGrowise-interface.",
+        "image": "/images/cases/mygrowise/dossier.webp",
+        "alt": "De echte MyGrowise-dossierinterface met fictieve cliënt Emma Voorbeeld en een synthetisch verslag",
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "caseSections": [
+      {
+        "title": "Cliëntendossiers met samenhang.",
+        "paragraphs": [
+          "Een cliëntendossier brengt gegevens, afspraken en verslagen bij elkaar. Vanuit die context kunnen professionals hun begeleiding opvolgen. Toewijzingen en rollen bepalen welke informatie en handelingen voor een gebruiker beschikbaar zijn.",
+          "Ik ontwikkelde zowel de schermen als de backend voor deze werking. Ook het onderscheid tussen conceptverslagen en definitieve verslagen, correcties en de historiek maakt deel uit van het systeem. Dat vraagt andere ontwerpkeuzes dan een gewone informatieve website."
+        ]
+      },
+      {
+        "title": "Een eigen omgeving voor cliënten en beheerders.",
+        "paragraphs": [
+          "Cliënten krijgen een accountomgeving voor onder meer hun begeleiding, afspraken en digitale materialen. De organisatie beheert daarnaast het aanbod, professionals, boekingen en berichten vanuit de beheeromgeving.",
+          "De technische basis verbindt de verschillende omgevingen: van authenticatie en gegevensopslag tot serverfuncties en meldingen. Daardoor blijft het publieke aanbod verbonden met het werk dat achter de schermen gebeurt."
+        ]
+      },
+      {
+        "title": "De technische basis van het platform.",
+        "paragraphs": [
+          "De website is gebouwd met Astro; interactieve werkruimtes, zoals de agenda, gebruiken React. De backend steunt op Supabase en PostgreSQL voor accounts en gegevens. Serverfuncties verbinden de schermen met de verwerking erachter.",
+          "Toegang wordt ook aan de serverkant gecontroleerd. Een cliënt, professional en beheerder hebben elk een andere rol in hetzelfde platform. Die verschillen zijn meegenomen in zowel de interface als de verwerking van gegevens en acties."
+        ]
+      }
+    ],
+    "ctaTitle": "Een dashboard dat aansluit op jouw werk?",
+    "ctaText": "Vertel welke gebruikers en processen je wilt samenbrengen. Ik ontwerp en ontwikkel de website, de werkruimte en de systemen erachter.",
+    "ctaAction": "Bespreek je platform"
   },
   {
     "slug": "hond-aan-zee",
@@ -46,49 +106,115 @@ export const projects = [
     "place": "Belgische kust",
     "image": "/images/cases/hondaanzee.png",
     "url": "https://www.hondaanzee.be",
-    "summary": "Een praktisch kustplatform dat hondenbezitters naar strandregels, wandelingen, losloopzones en adressen leidt.",
-    "challenge": "Lokale regels en nuttige adressen zijn verspreid en veranderen per plaats en periode. Bezoekers moeten onderweg snel het juiste antwoord kunnen vinden.",
-    "solution": "De gids bundelt strandregels, wandelingen, losloopzones en adressen per plaats. Bezoekers kunnen de informatie ook op hun telefoon raadplegen.",
-    "result": "Bezoekers kunnen strandregels, losloopzones, wandelingen en adressen opzoeken binnen dezelfde gids.",
+    "summary": "Mijn eigen kustplatform voor hondenbaasjes: van strandregels en kaarten tot accounts en community. Zelf ontworpen, gebouwd en beheerd, met duizenden bezoekers per maand.",
+    "challenge": "Een uitstap met mijn hond Jax begon vaak met zoeken: op welk strand mag hij mee, wanneer moet hij aan de lijn en waar zijn we samen welkom? De antwoorden stonden verspreid over gemeentewebsites en reglementen. Vanuit die eigen ervaring ontstond Hond aan Zee, een platform dat de Belgische kust voor hondenbaasjes overzichtelijker maakt.",
+    "solution": "Ik nam het volledige initiatief en werkte het platform zelf uit: van ontwerp, frontend en backend tot inhoud en beheer. Strandregels per kustgemeente, hondvriendelijke adressen, losloopzones, kaarten en een agenda vormen de publieke gids. Accounts, persoonlijke uitstapjes en communityfuncties breiden die gids uit tot een platform waar bezoekers kunnen terugkeren en bijdragen.",
+    "result": "Hond aan Zee bereikt duizenden bezoekers per maand, met extra belangstelling in de hoogseizoenen. Honderden stickers bij zaken aan de kust maken het initiatief ook buiten het scherm zichtbaar. Ik onderhoud het in mijn vrije tijd als een gratis toegankelijk informatieplatform, vanuit mijn betrokkenheid bij de kust en de community die het gebruikt.",
     "id": "hondaanzee",
-    "kind": "Kustplatform",
-    "headline": "Met je hond naar de Belgische kust.",
-    "challengeTitle": "Andere regels per plaats en seizoen",
-    "solutionTitle": "Praktische informatie per kustgemeente",
+    "kind": "Eigen communityplatform",
+    "headline": "Zelf bedacht. Zelf gebouwd. Samen gebruikt.",
+    "challengeTitle": "Gebouwd vanuit een eigen behoefte.",
+    "solutionTitle": "Van strandgids naar een compleet platform.",
     "choices": [
       [
-        "Plaatsgerichte inhoud",
-        "Strandregels en wandelinformatie zijn gekoppeld aan de plaats die de bezoeker wil verkennen."
+        "Informatie & kaarten",
+        "Strandregels, adressen en uitstapmogelijkheden langs de Belgische kust."
       ],
       [
-        "Onderweg raadplegen",
-        "De gids bundelt antwoorden op praktische vragen tijdens een bezoek aan de kust."
+        "Accounts & community",
+        "Favorieten, persoonlijke uitstapjes, reviews en gedeelde ervaringen."
       ],
       [
-        "Van regel naar uitstap",
-        "Naast regels vinden bezoekers wandelingen, losloopzones en adressen."
+        "Eigen beheeromgeving",
+        "Content, publicatie, moderatie en ledenbeheer."
       ]
     ],
     "services": [
       "webdesign",
-      "website-laten-maken"
+      "website-laten-maken",
+      "webapplicaties-en-automatisatie"
     ],
     "tags": [
-      "Kustplatform",
-      "Praktische gids"
+      "Eigen initiatief",
+      "Communityplatform"
     ],
     "casePath": "/cases/hond-aan-zee/",
     "videoSrc": "/videos/hondaanzee.mp4?v=8e4383e643ef",
-    "showInGrid": true
+    "showInGrid": true,
+    "heroTitle": "Hond aan Zee: een eigen platform voor de hele kust.",
+    "heroIntro": "Wat begon met de wandelingen met mijn hond Jax, groeide uit tot een informatie- en communityplatform met duizenden bezoekers per maand. Ik bedacht, ontwierp en ontwikkelde Hond aan Zee zelf en verzorg ook de inhoud en het beheer.",
+    "heroAsideTitle": "Een initiatief van Kevin.",
+    "heroAside": "Van de eerste vraag op het strand tot een platform met kaarten, accounts, communityfuncties en een eigen beheeromgeving.",
+    "seoTitle": "Hond aan Zee: eigen kust- en communityplatform | Webaanzee",
+    "updated": "2026-11-18",
+    "designTitle": "Van een praktische vraag naar bruikbare software.",
+    "designDetails": [
+      {
+        "title": "Plaats en periode bepalen het antwoord.",
+        "text": "Strandregels verschillen per gemeente, zone en seizoen. De plaatsgerichte pagina’s brengen die informatie bij elkaar en laten bezoekers een datum kiezen. Ik bouwde de structuur en de logica om algemene reglementen te vertalen naar informatie die tijdens een uitstap bruikbaar is. Bronvermeldingen en controledatums maken zichtbaar waarop de uitleg steunt.",
+        "image": "/images/cases/hondaanzee/strandgids.webp",
+        "alt": "Strandgids voor Blankenberge op Hond aan Zee met datumkeuze en lokale strandinformatie",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "title": "De kust als geheel verkennen.",
+        "text": "De interactieve kustkaart maakt de verschillende gemeenten verkenbaar. Daarnaast vinden bezoekers losloopzones en hondvriendelijke adressen in de gids. De informatie blijft gekoppeld aan de plaats en het soort uitstap. Zo leidt een praktische vraag over een strand ook naar plekken om te wandelen, iets te drinken of samen te verblijven.",
+        "image": "/images/cases/hondaanzee/kaart.webp",
+        "alt": "Interactieve kustkaart van Hond aan Zee met strandtoegang per kustgemeente",
+        "width": 1440,
+        "height": 820
+      }
+    ],
+    "caseSections": [
+      {
+        "title": "Een platform waar mensen terugkomen.",
+        "paragraphs": [
+          "Gratis accounts geven bezoekers een eigen plek voor favorieten, hondenprofielen en persoonlijke uitstapjes. Ze kunnen gemeenten volgen en uitstapjes delen. Reviews en likes voegen ervaringen uit de community toe aan de gids.",
+          "Die functies vragen meer dan een verzameling pagina’s. Ik ontwikkelde ook de accounts, de gegevensstructuur, de toegangsrechten en de verbindingen tussen de publieke informatie en persoonlijke keuzes."
+        ]
+      },
+      {
+        "title": "Ook achter de schermen zelf gebouwd.",
+        "paragraphs": [
+          "De beheeromgeving ondersteunt het bewerken van inhoud, werken met concepten en publiceren. Daarnaast zijn er onderdelen voor moderatie, leden, statistieken en pushmeldingen. Een meldpunt maakt meldingen over gif en overlast mogelijk.",
+          "Ik bouwde de publieke website en deze beheerfuncties als één geheel. Dat helpt mij het platform te onderhouden en nieuwe informatie te verwerken terwijl de gids verder groeit."
+        ]
+      },
+      {
+        "title": "Online gevonden, zichtbaar aan de kust.",
+        "paragraphs": [
+          "De duizenden maandelijkse bezoekers, de stickers bij kustzaken en de aandacht in de regionale pers laten zien dat het oorspronkelijke probleem door veel hondenbaasjes wordt herkend. Het project blijft mijn eigen initiatief, dat ik naast mijn opdrachten onderhoud.",
+          "Voor Webaanzee is dit een concreet voorbeeld van wat ik van begin tot eind kan realiseren: een idee onderzoeken, inhoud structureren, een herkenbaar ontwerp maken en een platform ontwikkelen dat door een community wordt gebruikt."
+        ]
+      }
+    ],
+    "referencesTitle": "Hond aan Zee in de pers.",
+    "referencesIntro": "Twee regionale redacties brachten het verhaal achter het initiatief en de eerste belangstelling voor de gids.",
+    "references": [
+      {
+        "label": "Het Nieuwsblad · 3 februari 2026",
+        "title": "Website van Kevin met gids voor honden aan kust blijkt schot in de roos",
+        "url": "https://www.nieuwsblad.be/regio/west-vlaanderen/regio-brugge/blankenberge/website-van-kevin-36-met-gids-voor-honden-aan-kust-blijkt-schot-in-de-roos-duizenden-bezoekers-na-een-week/128590643.html"
+      },
+      {
+        "label": "Krant van West-Vlaanderen · 9 februari 2026",
+        "title": "Kevin ontwikkelt een website voor hondenbaasjes aan zee",
+        "url": "https://kw.be/nieuws/milieu/dieren/kevin-36-ontwikkelt-unieke-website-voor-hondenbaasjes-aan-zee-alle-info-handig-op-een-plaats/"
+      }
+    ],
+    "ctaTitle": "Een eigen platformidee uitwerken?",
+    "ctaText": "Van de eerste inhoudsstructuur tot accounts, kaarten of een beheeromgeving: ik help je de functies bepalen en bouw het platform dat daarbij past.",
+    "ctaAction": "Bespreek je idee"
   },
   {
     "slug": "fabrice-goffin-oostende",
-    "title": "Schepen van Digitalisering",
+    "title": "Fabrice Goffin",
     "place": "Oostende",
     "image": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
     "url": "https://www.fabricegoffin.be",
-    "summary": "Ontwerp en ontwikkeling van de persoonlijke website voor de Oostendse schepen van Digitalisering. Een uitgesproken presentatie, met ruimte voor beleidsprioriteiten en contact met inwoners.",
-    "challenge": "Een schepen is tegelijk een aanspreekpunt voor inwoners en iemand met een eigen verhaal en beleidsprioriteiten. Die verschillende kanten moeten samen een herkenbare presentatie vormen. Voor deze opdracht komt daar een bijzondere context bij: digitalisering behoort tot zijn bevoegdheden.",
+    "summary": "Persoonlijke website voor Fabrice Goffin, schepen van Digitalisering in Oostende. Ontwerp en ontwikkeling door Webaanzee, met beleidsprioriteiten, nieuws en contact met inwoners.",
+    "challenge": "Fabrice Goffin is als schepen in Oostende een aanspreekpunt voor inwoners en iemand met een eigen verhaal en beleidsprioriteiten. Zijn persoonlijke website moet die kanten verbinden. Digitalisering behoort tot zijn bevoegdheden; ook daardoor verdient de digitale presentatie aandacht voor inhoud, gebruik en uitstraling.",
     "solution": "Ik ontwierp en bouwde een website met een uitgesproken introductie: grote typografie, portretfotografie en een herkenbaar rood accent. De standpunten krijgen een eigen visuele indeling. Nieuws en realisaties laten zien waarmee de schepen bezig is; een aparte contactpagina geeft inwoners ruimte voor hun vraag.",
     "result": "Zo komen de persoon en zijn publieke werk samen op één website. Bezoekers kunnen kennismaken, zich in een onderwerp verdiepen en contact opnemen.",
     "id": "fabrice",
@@ -123,12 +249,12 @@ export const projects = [
     "showInGrid": true,
     "previewSrc": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
     "introVideoPoster": "/images/cases/schepen-digitalisering/homepage-2026-10-27.webp",
-    "heroTitle": "Een website voor de schepen van Digitalisering.",
-    "heroIntro": "Voor de Oostendse schepen van Digitalisering ontwierp en bouwde ik een persoonlijke website. Met ruimte voor zijn verhaal, zijn beleidsprioriteiten en het contact met inwoners.",
+    "heroTitle": "Een website voor Fabrice Goffin, schepen in Oostende.",
+    "heroIntro": "Voor Fabrice Goffin, de Oostendse schepen van onder meer Digitalisering, ontwierp en bouwde ik zijn persoonlijke website. Een uitgesproken presentatie met ruimte voor zijn verhaal, beleidsprioriteiten, nieuws en contact met inwoners.",
     "heroAside": "Een publieke functie vraagt een herkenbare presentatie. Van de eerste kennismaking tot het lezen van een standpunt en het stellen van een vraag.",
-    "videoCaption": "De persoonlijke website van de Oostendse schepen van Digitalisering",
-    "seoTitle": "Website voor de schepen van Digitalisering in Oostende | Webaanzee",
-    "updated": "2026-10-27",
+    "videoCaption": "De persoonlijke website van Fabrice Goffin, schepen van Digitalisering in Oostende",
+    "seoTitle": "Website Fabrice Goffin, schepen in Oostende | Webaanzee",
+    "updated": "2026-11-18",
     "ctaTitle": "Een publieke rol verdient een doordachte website.",
     "ctaText": "Voor je onderneming, organisatie of publieke functie ontwerp en bouw ik een website die je verhaal en je werk laat zien. Vertel me wat je wilt overbrengen en wie je wilt bereiken.",
     "ctaAction": "Bespreek je website",
@@ -157,6 +283,16 @@ export const projects = [
         "width": 390,
         "height": 844,
         "portrait": true
+      }
+    ],
+    "heroAsideTitle": "Persoonlijk én publiek.",
+    "caseSections": [
+      {
+        "title": "Van publieke functie naar een persoonlijke website.",
+        "paragraphs": [
+          "Mijn opdracht bestond uit het ontwerp en de ontwikkeling van de persoonlijke website van Fabrice Goffin. De pagina’s voor kennismaking, standpunten, nieuws en contact geven elk een eigen ingang tot zijn verhaal en werk.",
+          "Ik bracht de vormgeving en technische bouw samen: de grote typografie en portretbeelden trekken de aandacht, terwijl de paginaopbouw ruimte maakt om onderwerpen te lezen en een vraag te stellen. De inhoud is ook bij het rechtstreeks openen van een pagina als HTML beschikbaar."
+        ]
       }
     ]
   },
