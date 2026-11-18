@@ -1,0 +1,86 @@
+[
+  {
+    "name": "pwayment-kassa",
+    "title": "Kassaverkoop",
+    "capturedAt": "2026-11-18T22:35:55.009Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-voorraad",
+    "title": "Voorraadbeheer",
+    "capturedAt": "2026-11-18T22:35:56.517Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-klanten",
+    "title": "Klantbeheer",
+    "capturedAt": "2026-11-18T22:35:57.839Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-inzichten",
+    "title": "Verkoopinzichten",
+    "capturedAt": "2026-11-18T22:35:59.134Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-integraties",
+    "title": "Integration Hub",
+    "capturedAt": "2026-11-18T22:36:00.397Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-instellingen",
+    "title": "Modules en instellingen",
+    "capturedAt": "2026-11-18T22:36:01.800Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  },
+  {
+    "name": "pwayment-kassatoegang",
+    "title": "Kassatoegang en rollen",
+    "capturedAt": "2026-11-18T22:36:02.786Z",
+    "width": 2400,
+    "height": 1500,
+    "viewport": {
+      "width": 1600,
+      "height": 1000
+    },
+    "fixture": "Isolated local demo data; external HTTP requests blocked"
+  }
+]

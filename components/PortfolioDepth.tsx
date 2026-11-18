@@ -182,7 +182,7 @@ const PortfolioDepth: React.FC<{ projects: CaseStudy[] }> = ({ projects }) => {
     let disposed = false, frame = 0;
     const align = () => {
       const id = window.location.hash.slice(1);
-      if (['home', 'projecten', 'resultaten', 'werkwijze', 'prijzen', 'prijsdetails', 'over-ons', 'faq', 'contact'].includes(id)) scrollToSection(null, id, 'instant');
+      if (['home', 'projecten', 'resultaten', 'werkwijze', 'prijzen', 'prijsdetails', 'over-ons', 'eigen-projecten', 'faq', 'contact'].includes(id)) scrollToSection(null, id, 'instant');
     };
     const schedule = () => {
       cancelAnimationFrame(frame);

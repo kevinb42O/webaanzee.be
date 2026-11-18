@@ -10,7 +10,7 @@ import styles from './ServiceWorkbench.module.css';
 export const serviceExamples = [
   { image: '/images/cases/cozy.png', detail: '/images/services/cozy-mobile.webp', domain: 'cozy-moments.be', path: '/cases/cozy-moments-blankenberge/', label: 'Een eigen gezicht. Op ieder scherm.', detailLabel: 'Mobiele website', kind: 'mobile' },
   { image: '/images/cases/dailygrind.png', detail: '/images/services/dailygrind-products.webp', domain: 'daily-grind.be', path: '/cases/daily-grind-blankenberge/', label: 'Van je winkel naar je webshop.', detailLabel: 'Het assortiment online', kind: 'products' },
-  { image: '/images/services/pwayment-pos.jpg', detail: '', domain: 'PWAYMENT POS', path: '/cases/pwayment-pos/', label: 'Je dagelijkse werk, in één toepassing.', detailLabel: 'Voorbeeldscherm van de kassa', kind: 'pos' },
+  { image: '/images/eigen-projecten/pwayment/pwayment-kassa-1440.webp', detail: '', domain: 'PWAYMENT POS', path: '/cases/pwayment-pos/', label: 'Je dagelijkse werk, in één toepassing.', detailLabel: 'Huidige kassa met demogegevens', kind: 'pos' },
   { image: '/images/services/atelier-rembrandt-cms.webp', detail: '/images/services/atelier-rembrandt-collectie.webp', domain: 'Atelier Rembrandt · collectiebeheer', path: '/cases/atelier-rembrandt/', label: 'Je collectie. Zelf in beheer.', detailLabel: 'De collectie op de website', kind: 'dashboard' },
   { image: '/images/cases/hondaanzee.png', detail: '/images/services/hondaanzee-de-haan.webp', domain: 'hondaanzee.be', path: '/cases/hond-aan-zee/', label: 'Dicht bij de mensen die je zoeken.', detailLabel: 'Een eigen pagina voor De Haan', kind: 'local' },
 ];

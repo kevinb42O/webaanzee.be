@@ -6,6 +6,7 @@ import Offer from './components/Offer';
 import Quality from './components/Quality';
 import FAQ from './components/FAQ';
 import About from './components/About';
+import IndependentProjects from './components/IndependentProjects';
 import ContactFooter from './components/ContactFooter';
 import CrispChat from './components/CrispChat';
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Quality />
         <Offer />
         <About />
+        <IndependentProjects />
         <FAQ />
         <ContactFooter />
       </main>

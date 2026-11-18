@@ -19,7 +19,7 @@ export function regionNav() {
 }
 
 export function regionFooter() {
-  return `<footer class="rg-footer"><div class="rg-wrap"><div class="rg-footer-top"><a class="rg-brand" href="/" aria-label="Webaanzee startpagina">${logoMarkup()}</a><p>Ontworpen en gebouwd door Kevin.<br>Vanuit Blankenberge, voor ondernemers aan de kust.</p><a class="rg-inline" href="mailto:kevin@webaanzee.be">kevin@webaanzee.be ${diagonal}</a></div><nav aria-label="Footernavigatie"><a href="/diensten/webdesign/">Webdesign</a><a href="/diensten/webshops/">Webshops</a><a href="/cases/">Alle projecten</a><a href="/webdesign-belgische-kust/">Werkgebied</a><a href="/privacy.html">Privacy</a></nav><div class="rg-footer-bottom"><span>© ${new Date().getFullYear()} Webaanzee</span><a href="tel:+32494816714">0494 81 67 14</a><a href="#inhoud">Terug naar boven ↑</a></div></div></footer>`;
+  return `<footer class="rg-footer"><div class="rg-wrap"><div class="rg-footer-top"><a class="rg-brand" href="/" aria-label="Webaanzee startpagina">${logoMarkup()}</a><p>Ontworpen en gebouwd door Kevin.<br>Vanuit Blankenberge, voor ondernemers aan de kust.</p><a class="rg-inline" href="mailto:kevin@webaanzee.be">kevin@webaanzee.be ${diagonal}</a></div><nav aria-label="Footernavigatie"><a href="/diensten/webdesign/">Webdesign</a><a href="/diensten/webshops/">Webshops</a><a href="/cases/">Alle projecten</a><a href="/#eigen-projecten">Eigen projecten</a><a href="/webdesign-belgische-kust/">Werkgebied</a><a href="/privacy.html">Privacy</a></nav><div class="rg-footer-bottom"><span>© ${new Date().getFullYear()} Webaanzee</span><a href="tel:+32494816714">0494 81 67 14</a><a href="#inhoud">Terug naar boven ↑</a></div></div></footer>`;
 }
 
 function crumbs(loc) {

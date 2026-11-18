@@ -1,0 +1,71 @@
+/* Personal project stories inherit the Webaanzee shell and coastal palette. */
+.ip-page { --ip-ink: #171815; --ip-muted: #41423c; --ip-accent: #8e402b; background: #f5f2eb; color: var(--ip-ink); }
+.ip-page ::selection { background: #dfc2ae; color: #171815; }
+.ip-page a:focus-visible, .ip-page summary:focus-visible { outline: 3px solid var(--ip-accent); outline-offset: 5px; }
+.ip-page a { text-underline-offset: .25em; }
+.ip-wrap { width: min(1320px, calc(100% - 96px)); margin-inline: auto; }
+.ip-page .breadcrumbs { width: min(1320px, calc(100% - 96px)); color: #5d5e58; font-family: var(--sans); font-size: .78rem; }
+.ip-opening { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); padding-block: clamp(48px, 6vw, 90px) 56px; align-items: start; }
+.ip-heading h1 { font: 500 clamp(4rem, 8vw, 6rem)/1 var(--sans); letter-spacing: -.04em; margin: 0 0 22px; }
+.ip-status { color: #5d5e58; font-size: .82rem; margin: 0; }
+.ip-introduction > p { margin: 0; max-width: 52ch; color: var(--ip-muted); }
+.ip-introduction .ip-headline { color: var(--ip-ink); font-size: clamp(1.6rem, 2.7vw, 2.3rem); font-weight: 400; line-height: 1.2; letter-spacing: -.025em; margin-bottom: 24px; text-wrap: balance; }
+.ip-meta { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .78rem; color: #5d5e58; }
+.ip-meta a { display: inline-flex; align-items: center; min-height: 44px; gap: 10px; color: var(--ip-ink); text-decoration: none; }
+.ip-meta a:hover { color: var(--ip-accent); }
+.ip-figure { margin: 0; min-width: 0; }
+.ip-image-link { display: block; position: relative; background: #211b29; overflow: hidden; }
+.ip-sunline .ip-image-link { background: #dde5df; }
+.ip-image-link img { display: block; width: 100%; height: auto; }
+.ip-figure-hero .ip-image-link { padding: clamp(12px, 2.2vw, 32px); }
+.ip-sunline .ip-figure-hero .ip-image-link { padding: 0; }
+.ip-figure figcaption { display: flex; justify-content: space-between; margin-top: 14px; color: #5d5e58; font-size: .78rem; line-height: 1.6; }
+.ip-enlarge { position: absolute; right: 12px; bottom: 12px; display: inline-flex; gap: 12px; align-items: center; min-height: 44px; padding: 8px 14px; color: #fff; background: #211b29; font-size: .75rem; opacity: 0; transition: opacity 180ms ease-out; }
+.ip-image-link:hover .ip-enlarge, .ip-image-link:focus-visible .ip-enlarge { opacity: 1; }
+.ip-story { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); padding-block: clamp(64px, 9vw, 128px); }
+.ip-story h2, .ip-feature h2, .ip-closing h2 { max-width: 20ch; margin: 0; font: 400 clamp(2rem, 3.5vw, 3.2rem)/1.08 var(--sans); letter-spacing: -.035em; text-wrap: balance; }
+.ip-story > p { max-width: 60ch; margin: 0; color: var(--ip-muted); font-size: 1.08rem; }
+.ip-feature { padding-bottom: clamp(64px, 9vw, 128px); }
+.ip-feature-copy { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); align-items: start; gap: clamp(32px, 6vw, 100px); padding-top: 32px; margin-bottom: 36px; border-top: 1px solid var(--line); }
+.ip-feature-copy p { margin: 0; max-width: 60ch; color: var(--ip-muted); }
+.ip-engineering { background: #ebe7dd; }
+.ip-engineering .ip-story { padding-bottom: 48px; }
+.ip-systems { margin: 0; }
+.ip-systems > div { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); padding-block: 28px; border-top: 1px solid var(--line); }
+.ip-systems dt { font-size: 1.15rem; font-weight: 500; }
+.ip-systems dd { max-width: 60ch; margin: 0; color: var(--ip-muted); }
+.ip-foundation { margin-top: 32px; padding-bottom: clamp(64px, 8vw, 104px); }
+.ip-foundation h3 { margin: 0 0 16px; font-size: 1rem; font-weight: 500; }
+.ip-foundation ul { display: flex; flex-wrap: wrap; padding: 0; margin: 0 0 24px; gap: 10px 24px; list-style: none; font-size: .85rem; }
+.ip-foundation > p { max-width: 75ch; color: var(--ip-muted); margin: 0; font-size: .88rem; }
+.ip-closing { padding-block: clamp(72px, 9vw, 128px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 80px; }
+.ip-closing h2 { max-width: 18ch; }
+.ip-closing p { margin-block: 24px; max-width: 55ch; color: var(--ip-muted); }
+.ip-action { min-height: 52px; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 20px; background: var(--ip-ink); color: #fff; text-decoration: none; font-size: .85rem; font-weight: 500; }
+.ip-action:hover { background: var(--ip-accent); }
+.ip-next { align-self: end; display: flex; flex-direction: column; gap: 14px; padding-block: 24px; border-block: 1px solid var(--line); text-decoration: none; }
+.ip-next > span { display: flex; align-items: center; justify-content: space-between; font-size: .85rem; color: var(--ip-muted); }
+.ip-next strong { font-size: 2.5rem; font-weight: 400; letter-spacing: -.03em; }
+.ip-next:hover strong { color: var(--ip-accent); }
+.ip-back { padding-bottom: 40px; font-size: .85rem; }
+.ip-back a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (hover: none) { .ip-enlarge { opacity: 1; } }
+@media (max-width: 760px) {
+  .ip-wrap, .ip-page .breadcrumbs { width: calc(100% - 40px); }
+  .ip-opening, .ip-story, .ip-feature-copy, .ip-systems > div, .ip-closing { grid-template-columns: 1fr; gap: 24px; }
+  .ip-opening { padding-block: 40px 32px; gap: 32px; }
+  .ip-heading h1 { font-size: clamp(3.5rem, 16vw, 5rem); margin-bottom: 14px; }
+  .ip-introduction .ip-headline { font-size: 1.65rem; }
+  .ip-figure figcaption { font-size: .75rem; }
+  .ip-enlarge { position: static; opacity: 1; justify-content: flex-end; width: 100%; }
+  .ip-figure-hero .ip-image-link { padding: 10px 10px 0; }
+  .ip-sunline .ip-figure-hero .ip-image-link { padding: 0; }
+  .ip-feature-copy { margin-bottom: 24px; }
+  .ip-systems > div { gap: 12px; }
+  .ip-closing { gap: 48px; }
+  .ip-action { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ip-page { scroll-behavior: auto; }
+  .ip-page *, .ip-page *::before, .ip-page *::after { transition: none; scroll-behavior: auto; }
+}

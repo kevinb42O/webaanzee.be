@@ -1,0 +1,15 @@
+{
+  "sourceProject": "/Users/kevin/PROJECTS/pwayment RETAIL",
+  "gitRevision": "e997a05e803aac6dbdd4123d5cd79157d65a5aae",
+  "workingTreeModified": true,
+  "sourceFiles": {
+    "src/components/Layout.tsx": "151fc6914bcdf6c6a8b9a08806dbab9d14e5102f47d92b3f981e1c938be63343",
+    "src/components/Menu.tsx": "58e513801cf35535fbe276afdf4de2515cfa607b905aad735cf33845d1136581",
+    "src/components/Profile.tsx": "bbed3fc8336559625f093f1dc01f732d158e564b5c0ff1a9aa529134cf2be72c",
+    "src/components/InventoryWorkspace.tsx": "a4f6bb3a2b98887d57ecf0619f7f55b6b63d10191ba48f96034cc7cc34fe3d7f",
+    "src/components/Insights.tsx": "95e23c069867c5ba66092457b406906fa889d64007b6748b8e54e6c016cca651",
+    "src/styles/pos-workspace.css": "76a7d9fc711f8dfc82f141caa4d8251f790b892482ff1ffce3351c78e0f0922d"
+  },
+  "captureScript": "scripts/capture-pwayment-ui.mjs",
+  "note": "Fresh screenshots of local source with isolated synthetic data. External browser HTTP requests blocked. No source edits or real transactions."
+}

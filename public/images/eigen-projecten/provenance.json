@@ -1,0 +1,105 @@
+[
+  {
+    "source": "design-experiments/eigen-projecten/sources/velvet/velvet-arrangement-automation.png",
+    "name": "velvet-arrangement-automation",
+    "crop": null,
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/velvet/velvet-pattern.png",
+    "name": "velvet-pattern",
+    "crop": [
+      0,
+      0,
+      2880,
+      940
+    ],
+    "width": 2880,
+    "height": 940
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/velvet/velvet-serein.png",
+    "name": "velvet-serein",
+    "crop": null,
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/velvet/velvet-copperhead.png",
+    "name": "velvet-copperhead",
+    "crop": null,
+    "width": 2034,
+    "height": 1362
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/sunline/sunline-pier.png",
+    "name": "sunline-pier",
+    "crop": null,
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/sunline/sunline-boot.png",
+    "name": "sunline-boot",
+    "crop": null,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/sunline/sunline-kampvuur.png",
+    "name": "sunline-kampvuur",
+    "crop": null,
+    "width": 1280,
+    "height": 900
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-kassa.png",
+    "name": "pwayment-kassa",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-inzichten.png",
+    "name": "pwayment-inzichten",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-instellingen.png",
+    "name": "pwayment-instellingen",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-voorraad.png",
+    "name": "pwayment-voorraad",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-klanten.png",
+    "name": "pwayment-klanten",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-integraties.png",
+    "name": "pwayment-integraties",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  },
+  {
+    "source": "design-experiments/eigen-projecten/sources/pwayment/pwayment-kassatoegang.png",
+    "name": "pwayment-kassatoegang",
+    "crop": null,
+    "width": 2400,
+    "height": 1500
+  }
+]

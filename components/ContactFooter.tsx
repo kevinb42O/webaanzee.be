@@ -189,6 +189,7 @@ const ContactFooter: React.FC = () => {
               <a href="/diensten/webdesign/" className={styles.footerLink}>Webdesign</a>
               <a href="/webdesign-belgische-kust/" className={styles.footerLink}>Webdesign aan de kust</a>
               <a href="/cases/" className={styles.footerLink}>Projecten</a>
+              <a href="/#eigen-projecten" onClick={(e) => scrollOnHomePage(e, 'eigen-projecten')} className={styles.footerLink}>Eigen projecten</a>
               <a href="/klantenkaart.html" className={styles.footerLink}>Digitale klantenkaart</a>
               <a href="/pwayment.html" className={styles.footerLink}>PWAYMENT POS</a>
               <a href="/inzichten/" className={styles.footerLink}>Uitleg en aanpak</a>

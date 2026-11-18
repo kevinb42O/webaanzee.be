@@ -26,3 +26,31 @@
 .heroCopy > .heroNote { display: flex; align-items: flex-start; margin-top: 1.5rem; margin-bottom: .75rem; font-size: .85rem; }
 .heroNote svg { flex-shrink: 0; margin-top: .25rem; }
 .exampleCaption { margin: .75rem 0 0; color: #c6d8d4; font-size: .8rem; }
+
+/* Current product captures: ordinary image links keep details available. */
+.screenLink { display: block; color: inherit; text-decoration: none; }
+.screenLink:focus-visible { outline: 3px solid #087e8b; outline-offset: 6px; }
+.hero .screenLink:focus-visible { outline-color: var(--mint); }
+.currentInsights { min-width: 0; }
+.currentInsights img { border: 1px solid var(--line); }
+.captureNote { margin: 14px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.workspaceGallery { max-width: 1240px; margin: auto; padding: 6rem 0 7rem; }
+.workspaceIntro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+.workspaceIntro h2 { margin: 0; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 500; line-height: 1.05; letter-spacing: -.035em; }
+.workspaceIntro p { max-width: 52ch; margin: 0; color: var(--muted); line-height: 1.7; }
+.workspaceScreens { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem 2rem; }
+.workspaceFigure { min-width: 0; margin: 0; }
+.workspaceFigure:first-child, .workspaceFigure:nth-child(2), .workspaceFigure:last-child { grid-column: 1 / -1; }
+.workspaceFigure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.workspaceFigure .screenLink > span { display: flex; align-items: center; justify-content: flex-end; gap: 12px; min-height: 44px; padding-block: 10px; color: #275858; font-size: .8rem; }
+.workspaceFigure figcaption { max-width: 65ch; padding-top: 12px; border-top: 1px solid var(--line); }
+.workspaceFigure h3 { margin: 0 0 10px; color: var(--ink); font-size: 1.4rem; font-weight: 500; letter-spacing: -.025em; }
+.workspaceFigure p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+@media (max-width: 1320px) { .workspaceGallery { margin-inline: 2rem; } }
+@media (max-width: 720px) {
+  .workspaceGallery { margin-inline: 1.25rem; padding-block: 4rem; }
+  .workspaceIntro, .workspaceScreens { grid-template-columns: 1fr; gap: 2rem; }
+  .workspaceScreens { gap: 3rem; }
+  .workspaceFigure { grid-column: auto; }
+  .workspaceFigure h3 { font-size: 1.25rem; }
+}

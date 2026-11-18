@@ -13,6 +13,7 @@
     "check:seo": "node scripts/check-seo.mjs",
     "check:project-videos": "node scripts/check-project-video-files.mjs && node scripts/check-project-videos.mjs",
     "check:home-motion": "node --experimental-strip-types scripts/check-home-motion.mjs",
+    "check:independent-projects": "node scripts/check-independent-projects.mjs",
     "check:regions": "node scripts/check-location-pages.mjs && node scripts/check-location-motion.mjs"
   },
   "dependencies": {

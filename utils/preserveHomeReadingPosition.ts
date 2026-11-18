@@ -36,7 +36,7 @@ export function trackHomeReadingPosition(projectCount: number, serviceCount: num
       const rect = node?.getBoundingClientRect();
       return !!rect && rect.top <= center && rect.bottom >= center;
     };
-    for (const id of ['over-ons', 'faq', 'contact', 'prijsdetails']) {
+    for (const id of ['over-ons', 'eigen-projecten', 'faq', 'contact', 'prijsdetails']) {
       if (contains(document.getElementById(id))) { spot = { type: 'section', id }; return; }
     }
     const cinematic = Array.from(document.querySelectorAll<HTMLElement>('[data-mobile-sequence]')).find(contains);

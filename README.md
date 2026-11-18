@@ -32,6 +32,16 @@ De exacte generatie- en verfijningsprompts staan in `design-experiments/wordmark
 
 Zet de variabelen uit `.env.example` in Vercel. `CONTACT_FROM_EMAIL` moet een door de mailprovider geverifieerde afzender op `webaanzee.be` zijn. Zonder deze configuratie toont het formulier bewust een rechtstreekse e-maillink in plaats van een vals succesbericht.
 
+## Eigen projecten: PWAYMENT, Velvet en Sunline
+
+De homepage toont PWAYMENT POS, Velvet en Sunline in die volgorde na Over mij. PWAYMENT gebruikt een nieuwe opname van de huidige lokale RETAIL-code en linkt naar `/pwayment.html`. De productpagina toont zeven actuele schermen; ook de PWAYMENT-case gebruikt het nieuwe kassabeeld. De statische detailpagina's van Velvet en Sunline staan op `/eigen-projecten/velvet/` en `/eigen-projecten/sunline/` en werken zonder JavaScript. `data/independent-projects.mjs` bevat de gedeelde inhoud, beeldinformatie en ontwikkelstatus; `independentProjectPreviews` bepaalt de homepagevolgorde. `data/pwayment-screens.mjs` deelt de nieuwe beelden tussen de homepage en productpagina.
+
+De goedgekeurde originelen en bronselectie staan in `design-experiments/eigen-projecten/`. `python3 scripts/prepare-independent-project-images.py` maakt met Pillow de responsieve WebP-bestanden, deelafbeeldingen en uitsnedemetadata in `public/images/eigen-projecten/`. Het script schaalt beelden niet op. Na een inhouds- of beeldwijziging genereert `npm run build` de detailpagina's en sitemap opnieuw.
+
+Nieuwe PWAYMENT-opnames maak je met `node scripts/capture-pwayment-ui.mjs`, terwijl de huidige RETAIL-bron lokaal draait op `127.0.0.1:4191` met `VITE_E2E_BUILD=true VITE_SEED_DEMO_PRODUCTS=true`. `PWAYMENT_ORIGIN` kan die lokale oorsprong wijzigen. Het script gebruikt een nieuw browserprofiel, blokkeert externe HTTP-verzoeken en werkt uitsluitend met lokale demogegevens; het rondt geen verkopen af. De originelen, opnamegegevens en gecontroleerde bronversie staan in `design-experiments/eigen-projecten/sources/pwayment/`. De oude remote productbeelden worden niet meer gebruikt op de PWAYMENT-productpagina.
+
+Controleer de productie-output met `npm run preview -- --host 127.0.0.1 --port 4178 --strictPort` en in een tweede terminal `npm run check:independent-projects`. De browsercontrole test beide detailpagina's zonder JavaScript op drie breedtes, beeldbestanden, homepageplaatsing, rechtstreekse ankerlinks, behoud van leespositie bij formaatwissels en reduced motion. Schermbeelden worden lokaal opgeslagen in `.tmp/independent-projects/`. Een andere preview-URL kan als argument mee; `CHROME_PATH` selecteert zo nodig een geïnstalleerde Chrome.
+
 ## SEO na deployment
 
 - Controleer dat apex, HTTP en `/index.html` in één hop naar `https://www.webaanzee.be/` redirecten.

@@ -549,7 +549,7 @@ export const projects = [
     "slug": "pwayment-pos",
     "title": "PWAYMENT POS",
     "place": "België",
-    "image": "/images/cases/pwayment.png",
+    "image": "/images/eigen-projecten/pwayment/pwayment-kassa-1440.webp",
     "url": "https://pwayment.vercel.app/",
     "summary": "Een eigen softwareproduct voor winkels: kassa, productbeheer, klanten en voorraad in één toepassing.",
     "challenge": "Winkeliers werken vaak met losse schermen en handelingen. Een kassa moet snel blijven op de winkelvloer en tegelijk bruikbare informatie opleveren.",
@@ -582,7 +582,7 @@ export const projects = [
       "Kassa & voorraad"
     ],
     "casePath": "/cases/pwayment-pos/",
-    "videoSrc": "/videos/pwayment.mp4?v=9de16fb1efa1",
+    "previewSrc": "/images/eigen-projecten/pwayment/pwayment-kassa-800.webp",
     "showInGrid": true
   },
   {
