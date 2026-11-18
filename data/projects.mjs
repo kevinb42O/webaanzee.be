@@ -180,6 +180,22 @@ export const projects = [
         "alt": "Interactieve kustkaart van Hond aan Zee met strandtoegang per kustgemeente",
         "width": 1440,
         "height": 820
+      },
+      {
+        "title": "Eén superadmin-dashboard voor het dagelijkse beheer.",
+        "text": "Naast de publieke gids ontwierp en ontwikkelde ik de volledige backend en een eigen superadmin-dashboard. Vanuit die werkomgeving beheer ik zaken, de agenda en losloopzones, volg ik likes en reviews op en regel ik de publicatie. Het zakenoverzicht combineert zoeken, filters en publicatiestatus met het aantal keren dat een plek is bewaard, geliket of beoordeeld. Ook leden, meldingen, een logboek en notificaties maken deel uit van de beheeromgeving.",
+        "image": "/images/cases/hondaanzee/superadmin-zaken.png",
+        "alt": "Superadmin-dashboard van Hond aan Zee met zakenbeheer, zoekfilters, publicatiestatus en aantallen favorieten, likes en reviews",
+        "width": 2880,
+        "height": 1626
+      },
+      {
+        "title": "Zicht op het gebruik van de gids.",
+        "text": "Het dashboard brengt ook de opvolging van het platform samen. De analytics geven inzicht in paginaweergaven, geschatte bezoekers en contactkliks, met aparte onderdelen voor de website en de agenda. Een eigen meting en de bewaarde Vercel-historiek worden afzonderlijk weergegeven, zodat overlappende weergaven niet dubbel meetellen. De getoonde historiek is een bewaarde export van 2 oktober 2026; de cijfers zijn geen live teller.",
+        "image": "/images/cases/hondaanzee/superadmin-analytics.png",
+        "alt": "Analytics in het Hond aan Zee-dashboard met historische Vercel-cijfers, bezoekers en een grafiek voor september tot begin oktober 2026",
+        "width": 2880,
+        "height": 1630
       }
     ],
     "caseSections": [
@@ -200,8 +216,8 @@ export const projects = [
       {
         "title": "Ook achter de schermen zelf gebouwd.",
         "paragraphs": [
-          "De beheeromgeving ondersteunt het bewerken van inhoud, werken met concepten en publiceren. Daarnaast zijn er onderdelen voor moderatie, leden, statistieken en pushmeldingen. Een meldpunt maakt meldingen over gif en overlast mogelijk.",
-          "Ik bouwde de publieke website en deze beheerfuncties als één geheel. Dat helpt mij het platform te onderhouden en nieuwe informatie te verwerken terwijl de gids verder groeit."
+          "Ik ontwikkelde de backend en het superadmin-dashboard zelf, net als het ontwerp en de frontend van de publieke website. Vanuit die centrale werkomgeving bestuur en volg ik Hond aan Zee op: inhoud beheren, publiceren, modereren en het gebruik van het platform bekijken.",
+          "De beheeromgeving bevat ook ledenbeheer, een logboek en notificaties. Een meldpunt maakt meldingen over gif en overlast mogelijk. Ik bouwde die beheerfuncties en de publieke gids als één geheel, zodat ik het platform kan onderhouden terwijl de inhoud en de community verder groeien."
         ]
       },
       {
